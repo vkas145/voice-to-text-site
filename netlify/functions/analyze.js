@@ -1,15 +1,19 @@
 const { OpenAI } = require("openai");
 
-exports.handler = async function (event, context) {
+exports.handler = async function (event) {
   try {
     const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     });
 
-    const body = JSON.parse(event.body);
+    // Get base64 audio from frontend
+    const { file } = JSON.parse(event.body);
+
+    // Convert base64 to Buffer
+    const buffer = Buffer.from(file.split(",")[1], "base64");
 
     const response = await openai.audio.transcriptions.create({
-      file: body.file,
+      file: buffer,
       model: "gpt-4o-mini-transcribe",
     });
 
@@ -18,6 +22,7 @@ exports.handler = async function (event, context) {
       body: JSON.stringify({ text: response.text }),
     };
   } catch (error) {
+    console.error(error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
