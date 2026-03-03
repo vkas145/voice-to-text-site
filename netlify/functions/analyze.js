@@ -6,11 +6,10 @@ exports.handler = async function (event) {
       apiKey: process.env.OPENAI_API_KEY,
     });
 
-    // Get base64 audio from frontend
-    const { file } = JSON.parse(event.body);
+    // event.body is already base64 string
+    const base64Data = event.body;
 
-    // Convert base64 to Buffer
-    const buffer = Buffer.from(file.split(",")[1], "base64");
+    const buffer = Buffer.from(base64Data, "base64");
 
     const response = await openai.audio.transcriptions.create({
       file: buffer,
@@ -22,7 +21,7 @@ exports.handler = async function (event) {
       body: JSON.stringify({ text: response.text }),
     };
   } catch (error) {
-    console.error(error);
+    console.error("ERROR:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
