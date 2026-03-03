@@ -6,13 +6,19 @@ exports.handler = async function (event) {
       apiKey: process.env.OPENAI_API_KEY,
     });
 
-    // event.body is already base64 string
+    // Base64 string from frontend
     const base64Data = event.body;
 
+    // Convert base64 to buffer
     const buffer = Buffer.from(base64Data, "base64");
 
+    // Create file-like object
+    const file = new File([buffer], "audio.mp3", {
+      type: "audio/mpeg",
+    });
+
     const response = await openai.audio.transcriptions.create({
-      file: buffer,
+      file: file,
       model: "gpt-4o-mini-transcribe",
     });
 
@@ -21,7 +27,7 @@ exports.handler = async function (event) {
       body: JSON.stringify({ text: response.text }),
     };
   } catch (error) {
-    console.error("ERROR:", error);
+    console.error(error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
