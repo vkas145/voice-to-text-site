@@ -4,24 +4,25 @@ const fs = require("fs");
 exports.handler = async function (event) {
   let tmpPath = null;
   try {
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    });
+    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-    const base64Data = event.isBase64Encoded
-      ? event.body
-      : Buffer.from(event.body, "utf8").toString("base64");
+    // Netlify sends binary as base64 when isBase64Encoded is true
+    const buffer = event.isBase64Encoded
+      ? Buffer.from(event.body, "base64")
+      : Buffer.from(event.body, "binary");
 
-    const buffer = Buffer.from(base64Data, "base64");
+    console.log("Buffer size:", buffer.length);
+    console.log("First 4 bytes:", buffer[0], buffer[1], buffer[2], buffer[3]);
 
-    // Detect real file type from magic bytes
     const { ext, mime } = detectFileType(buffer);
+    console.log("Detected type:", ext, mime);
 
-    // Save to /tmp with correct extension
     tmpPath = `/tmp/audio_${Date.now()}.${ext}`;
     fs.writeFileSync(tmpPath, buffer);
 
-    // toFile is the correct way with openai SDK v6+
+    const stats = fs.statSync(tmpPath);
+    console.log("File written, size:", stats.size);
+
     const audioFile = await toFile(
       fs.createReadStream(tmpPath),
       `audio.${ext}`,
@@ -35,51 +36,35 @@ exports.handler = async function (event) {
 
     return {
       statusCode: 200,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text: response.text }),
     };
   } catch (error) {
-    console.error("Transcription error:", error);
+    console.error("Full error:", JSON.stringify(error, null, 2));
     return {
       statusCode: 500,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ error: error.message }),
     };
   } finally {
-    if (tmpPath) {
-      try { fs.unlinkSync(tmpPath); } catch (e) {}
-    }
+    if (tmpPath) try { fs.unlinkSync(tmpPath); } catch (e) {}
   }
 };
 
 function detectFileType(buffer) {
-  // OGG — WhatsApp PTT voice messages are OGG/OPUS internally
-  if (buffer[0] === 0x4F && buffer[1] === 0x67 && buffer[2] === 0x67 && buffer[3] === 0x53) {
+  if (buffer[0] === 0x4F && buffer[1] === 0x67 && buffer[2] === 0x67 && buffer[3] === 0x53)
     return { ext: "ogg", mime: "audio/ogg" };
-  }
-  // MP3 with ID3 tag
-  if (buffer[0] === 0x49 && buffer[1] === 0x44 && buffer[2] === 0x33) {
+  if (buffer[0] === 0x49 && buffer[1] === 0x44 && buffer[2] === 0x33)
     return { ext: "mp3", mime: "audio/mpeg" };
-  }
-  // MP3 sync frame (no ID3 header)
-  if (buffer[0] === 0xFF && (buffer[1] & 0xE0) === 0xE0) {
+  if (buffer[0] === 0xFF && (buffer[1] & 0xE0) === 0xE0)
     return { ext: "mp3", mime: "audio/mpeg" };
-  }
-  // WAV — RIFF header
-  if (buffer[0] === 0x52 && buffer[1] === 0x49 && buffer[2] === 0x46 && buffer[3] === 0x46) {
+  if (buffer[0] === 0x52 && buffer[1] === 0x49 && buffer[2] === 0x46 && buffer[3] === 0x46)
     return { ext: "wav", mime: "audio/wav" };
-  }
-  // M4A/MP4 — ftyp box at offset 4
-  if (buffer.length > 8 &&
-      buffer[4] === 0x66 && buffer[5] === 0x74 && buffer[6] === 0x79 && buffer[7] === 0x70) {
+  if (buffer.length > 8 && buffer[4] === 0x66 && buffer[5] === 0x74 && buffer[6] === 0x79 && buffer[7] === 0x70)
     return { ext: "m4a", mime: "audio/mp4" };
-  }
-  // WebM
-  if (buffer[0] === 0x1A && buffer[1] === 0x45 && buffer[2] === 0xDF && buffer[3] === 0xA3) {
+  if (buffer[0] === 0x1A && buffer[1] === 0x45 && buffer[2] === 0xDF && buffer[3] === 0xA3)
     return { ext: "webm", mime: "audio/webm" };
-  }
-  // FLAC
-  if (buffer[0] === 0x66 && buffer[1] === 0x4C && buffer[2] === 0x61 && buffer[3] === 0x43) {
+  if (buffer[0] === 0x66 && buffer[1] === 0x4C && buffer[2] === 0x61 && buffer[3] === 0x43)
     return { ext: "flac", mime: "audio/flac" };
-  }
-  // Default fallback
   return { ext: "mp3", mime: "audio/mpeg" };
 }
