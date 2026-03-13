@@ -1,115 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Voice to Text</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f8f9fa;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
+<script>
+  async function upload() {
+    const fileInput = document.getElementById("audioFile");
+    const loading = document.getElementById("loading");
+    const result = document.getElementById("result");
+
+    if (!fileInput.files.length) {
+      alert("Please upload an audio file");
+      return;
     }
 
-    h1 {
-      font-size: 40px;
-      margin-bottom: 40px;
-      color: #202124;
-    }
+    // Convert file to base64
+    const file = fileInput.files[0];
+    const reader = new FileReader();
 
-    .box {
-      background: white;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      width: 400px;
-      text-align: center;
-    }
-
-    input {
-      margin: 20px 0;
-    }
-
-    button {
-      padding: 10px 20px;
-      border: none;
-      background: #1a73e8;
-      color: white;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #1558b0;
-    }
-
-    #result {
-      margin-top: 30px;
-      white-space: pre-wrap;
-      font-size: 14px;
-      text-align: left;
-      max-height: 300px;
-      overflow-y: auto;
-    }
-
-    #loading {
-      margin-top: 15px;
-      color: gray;
-      display: none;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>🎙 Voice to Text</h1>
-
-  <div class="box">
-    <input type="file" id="audioFile" accept=".wav,.mp3">
-    <br>
-    <button onclick="upload()">Transcribe</button>
-
-    <div id="loading">Processing... Please wait.</div>
-    <div id="result"></div>
-  </div>
-
-  <script>
-    async function upload() {
-      const fileInput = document.getElementById("audioFile");
-      const loading = document.getElementById("loading");
-      const result = document.getElementById("result");
-
-      if (!fileInput.files.length) {
-        alert("Please upload an audio file");
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append("file", fileInput.files[0]);
+    reader.onload = async function () {
+      const base64 = reader.result.split(",")[1]; // strip the data:audio/...;base64, prefix
 
       loading.style.display = "block";
       result.innerText = "";
 
       const response = await fetch("/.netlify/functions/analyze", {
         method: "POST",
-        body: formData
+        headers: { "Content-Type": "text/plain" },
+        body: base64  // send raw base64 string
       });
 
       const data = await response.json();
-
       loading.style.display = "none";
 
       if (data.error) {
         result.innerText = "Error: " + data.error;
       } else {
-        result.innerText = data.transcript;
+        result.innerText = data.text;  // ← your function returns "text" not "transcript"
       }
-    }
-  </script>
+    };
 
-</body>
-</html>
+    reader.readAsDataURL(file); // triggers onload with base64
+  }
+</script>

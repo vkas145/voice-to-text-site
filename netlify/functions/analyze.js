@@ -6,20 +6,20 @@ exports.handler = async function (event) {
       apiKey: process.env.OPENAI_API_KEY,
     });
 
-    // Base64 string from frontend
-    const base64Data = event.body;
+    // Handle both raw base64 string and Netlify's auto base64 encoding
+    const base64Data = event.isBase64Encoded
+      ? event.body
+      : Buffer.from(event.body, "utf8").toString("base64");
 
-    // Convert base64 to buffer
     const buffer = Buffer.from(base64Data, "base64");
 
-    // Create file-like object
     const file = new File([buffer], "audio.mp3", {
       type: "audio/mpeg",
     });
 
     const response = await openai.audio.transcriptions.create({
       file: file,
-      model: "gpt-4o-mini-transcribe",
+      model: "gpt-4o-mini-transcribe",  // ✅ keeping your model
     });
 
     return {
