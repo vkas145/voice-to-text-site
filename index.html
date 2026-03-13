@@ -75,8 +75,30 @@
     .signin-prompt-text strong { font-weight: 600; }
     .btn-signin-small { font-size: 13px; font-weight: 600; padding: 7px 16px; background: #6366f1; color: white; border: none; border-radius: 8px; cursor: pointer; font-family: inherit; white-space: nowrap; }
 
-    /* UPLOAD */
-    .upload-zone { border: 2px dashed #c7d2fe; border-radius: 16px; padding: 28px 24px; text-align: center; cursor: pointer; transition: all 0.2s; background: #fafbff; position: relative; }
+    /* INPUT TABS */
+    .input-tabs { display: flex; background: #f1f5f9; border-radius: 12px; padding: 3px; margin-bottom: 14px; }
+    .input-tab { flex: 1; padding: 9px; text-align: center; font-size: 13px; font-weight: 500; color: #64748b; border-radius: 9px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .input-tab svg { width: 14px; height: 14px; }
+    .input-tab.active { background: white; color: #6366f1; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+
+    /* RECORD UI */
+    .record-zone { display: none; border: 2px dashed #c7d2fe; border-radius: 16px; padding: 28px 24px; text-align: center; background: #fafbff; }
+    .record-zone.visible { display: block; }
+    .record-btn { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #8b5cf6); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; transition: all 0.2s; box-shadow: 0 4px 16px rgba(99,102,241,0.35); }
+    .record-btn:hover { transform: scale(1.06); }
+    .record-btn.recording { background: linear-gradient(135deg, #ef4444, #dc2626); animation: recpulse 1.2s infinite; }
+    @keyframes recpulse { 0%,100%{box-shadow:0 4px 16px rgba(239,68,68,0.4)} 50%{box-shadow:0 4px 28px rgba(239,68,68,0.7)} }
+    .record-btn svg { width: 28px; height: 28px; }
+    .record-status { font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 4px; }
+    .record-time { font-size: 24px; font-weight: 700; color: #6366f1; font-variant-numeric: tabular-nums; margin-bottom: 8px; }
+    .record-hint { font-size: 12px; color: #94a3b8; }
+    .record-actions { display: none; gap: 8px; justify-content: center; margin-top: 14px; }
+    .record-actions.visible { display: flex; }
+    .btn-rec-action { padding: 8px 18px; border-radius: 20px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.15s; }
+    .btn-rec-discard { background: #f1f5f9; color: #64748b; }
+    .btn-rec-discard:hover { background: #fee2e2; color: #dc2626; }
+    .btn-rec-use { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; }
+    .btn-rec-use:hover { opacity: 0.9; }
     .upload-zone:hover, .upload-zone.dragging { border-color: #6366f1; background: #eef2ff; }
     .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
     .upload-icon { width: 48px; height: 48px; background: #eef2ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; }
@@ -229,6 +251,18 @@
     <!-- TRANSCRIBE CARD -->
     <div class="card">
 
+      <!-- INPUT TABS -->
+      <div class="input-tabs">
+        <div class="input-tab active" id="tabUpload" onclick="switchInput('upload')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+          Upload File
+        </div>
+        <div class="input-tab" id="tabRecord" onclick="switchInput('record')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+          Record Audio
+        </div>
+      </div>
+
     <!-- UPLOAD -->
       <div class="upload-zone" id="dropZone">
         <input type="file" id="audioFile" accept=".wav,.mp3,.mpeg,.m4a,.ogg,.webm,.flac,.mp4,.mov,.avi,.mkv,.m4v">
@@ -248,6 +282,25 @@
           <span class="file-name" id="fileName">audio.mp3</span>
         </div>
         <span class="file-size" id="fileSize"></span>
+      </div>
+
+      <!-- RECORD ZONE -->
+      <div class="record-zone" id="recordZone">
+        <button class="record-btn" id="recordBtn" onclick="toggleRecord()">
+          <svg id="recordIcon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round">
+            <rect x="9" y="2" width="6" height="12" rx="3"/>
+            <path d="M19 10v1a7 7 0 0 1-14 0v-1"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+            <line x1="8" y1="22" x2="16" y2="22"/>
+          </svg>
+        </button>
+        <div class="record-status" id="recordStatus">Tap to start recording</div>
+        <div class="record-time" id="recordTime">0:00</div>
+        <div class="record-hint" id="recordHint">Your audio is processed privately</div>
+        <div class="record-actions" id="recordActions">
+          <button class="btn-rec-action btn-rec-discard" onclick="discardRecording()">✕ Discard</button>
+          <button class="btn-rec-action btn-rec-use" onclick="useRecording()">✓ Use Recording</button>
+        </div>
       </div>
 
       <div class="lang-row">
@@ -566,8 +619,8 @@
   const btnIconHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>`;
 
   async function upload() {
-    if (!fileInput.files[0]) { alert('Please select an audio file first.'); return; }
-    const file = fileInput.files[0];
+    const file = window._recordedFile || fileInput.files[0];
+    if (!file) { alert('Please select or record an audio file first.'); return; }
     if (file.size > 25 * 1024 * 1024) { showError('File too large. Max 25MB.'); return; }
 
     const btn = document.getElementById('transcribeBtn');
@@ -638,7 +691,85 @@
     }
   }
 
-  function formatDuration(s) { if (s < 60) return s + 's'; return Math.floor(s/60) + 'm ' + (s%60) + 's'; }
+  // ── INPUT TAB SWITCHER ──
+  function switchInput(tab) {
+    const uploadZone = document.getElementById('dropZone');
+    const recordZone = document.getElementById('recordZone');
+    const fileInfoRow = document.getElementById('fileInfoRow');
+    document.getElementById('tabUpload').classList.toggle('active', tab === 'upload');
+    document.getElementById('tabRecord').classList.toggle('active', tab === 'record');
+    if (tab === 'upload') {
+      uploadZone.style.display = ''; recordZone.classList.remove('visible');
+    } else {
+      uploadZone.style.display = 'none'; fileInfoRow.classList.remove('visible');
+      recordZone.classList.add('visible');
+    }
+  }
+
+  // ── RECORDER ──
+  let mediaRecorder = null, recordedChunks = [], recordTimer = null, recordSeconds = 0, recordedBlob = null;
+
+  async function toggleRecord() {
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+      mediaRecorder.stop();
+    } else {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        recordedChunks = []; recordSeconds = 0;
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.ondataavailable = e => { if (e.data.size > 0) recordedChunks.push(e.data); };
+        mediaRecorder.onstop = () => {
+          stream.getTracks().forEach(t => t.stop());
+          recordedBlob = new Blob(recordedChunks, { type: 'audio/webm' });
+          clearInterval(recordTimer);
+          document.getElementById('recordBtn').classList.remove('recording');
+          document.getElementById('recordBtn').innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>`;
+          document.getElementById('recordStatus').textContent = 'Recording complete!';
+          document.getElementById('recordHint').textContent = 'Use it or discard and record again';
+          document.getElementById('recordActions').classList.add('visible');
+        };
+        mediaRecorder.start();
+        document.getElementById('recordBtn').classList.add('recording');
+        document.getElementById('recordBtn').innerHTML = `<svg viewBox="0 0 24 24" fill="white"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>`;
+        document.getElementById('recordStatus').textContent = 'Recording... tap to stop';
+        document.getElementById('recordHint').textContent = 'Speak clearly into your microphone';
+        document.getElementById('recordActions').classList.remove('visible');
+        recordTimer = setInterval(() => {
+          recordSeconds++;
+          const m = Math.floor(recordSeconds / 60), s = recordSeconds % 60;
+          document.getElementById('recordTime').textContent = m + ':' + String(s).padStart(2, '0');
+        }, 1000);
+      } catch(e) {
+        showError('Microphone access denied. Please allow mic permissions.');
+      }
+    }
+  }
+
+  function useRecording() {
+    if (!recordedBlob) return;
+    const file = new File([recordedBlob], 'recording.webm', { type: 'audio/webm' });
+    document.getElementById('fileName').textContent = 'recording.webm';
+    document.getElementById('fileSize').textContent = formatBytes(file.size);
+    document.getElementById('fileInfoRow').classList.add('visible');
+    // Override upload to use recorded blob
+    window._recordedFile = file;
+    document.getElementById('recordStatus').textContent = 'Ready to transcribe!';
+    document.getElementById('recordActions').classList.remove('visible');
+    document.getElementById('recordHint').textContent = 'Click "Bolo Aur Likho" below to transcribe';
+  }
+
+  function discardRecording() {
+    recordedBlob = null; window._recordedFile = null;
+    recordSeconds = 0;
+    document.getElementById('recordTime').textContent = '0:00';
+    document.getElementById('recordStatus').textContent = 'Tap to start recording';
+    document.getElementById('recordHint').textContent = 'Your audio is processed privately';
+    document.getElementById('recordActions').classList.remove('visible');
+    document.getElementById('recordBtn').innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>`;
+    document.getElementById('fileInfoRow').classList.remove('visible');
+  }
+
+ if (s < 60) return s + 's'; return Math.floor(s/60) + 'm ' + (s%60) + 's'; }
   function escHtml(str) { return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   function timeAgo(iso) {
     const s = Math.floor((Date.now() - new Date(iso)) / 1000);
