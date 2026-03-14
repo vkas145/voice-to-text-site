@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bolo Aur Likho — AI Transcription</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%236366f1'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial,sans-serif' font-weight='900' font-style='italic' font-size='28' fill='white'>b</text></svg>">
+  <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%236366f1'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial,sans-serif' font-weight='900' font-style='italic' font-size='28' fill='white'>b</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -222,7 +224,7 @@
           </svg>
         </div>
         <div class="upload-title">Drop your file here or click to browse</div>
-        <div class="upload-sub">MP3, MPEG, WAV, M4A, OGG, WEBM, MP4, MOV, MKV · Max 25MB</div>
+        <div class="upload-sub">MP3, WAV, M4A, OGG, MP4, MOV, MKV, WEBM · Up to 500MB</div>
       </div>
 
       <!-- FILE INFO -->
@@ -493,8 +495,8 @@
       showError('Please select a file or record audio first.');
       return;
     }
-    if (file.size > 25 * 1024 * 1024) {
-      showError('File too large. Maximum size is 25MB.');
+    if (file.size > 500 * 1024 * 1024) {
+      showError('File too large. Maximum size is 500MB.');
       return;
     }
 
