@@ -380,7 +380,7 @@
   </div>
 </section>
 
-<footer>© 2026 Bolo Aur Likho &nbsp;·&nbsp; Designed &amp; Developed by Vikas Omprakash Goyal</footer>
+<footer>© 2026 Bolo Aur Likho &nbsp;·&nbsp; Designed &amp; Developed by Vikas Omprakash Goyal &nbsp;·&nbsp; <a href="/privacy.html" style="color:#94a3b8;text-decoration:underline;">Privacy Policy</a></footer>
 
 <script>
   // ── STATE ──
@@ -594,6 +594,18 @@
       }
 
       document.getElementById('results').classList.add('visible');
+
+      // Track transcription in Google Analytics
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'transcription_complete', {
+          'file_format': file.name.split('.').pop().toLowerCase(),
+          'word_count': data.wordCount || 0,
+          'duration_seconds': data.duration || 0,
+          'language': data.language || 'auto',
+          'used_timestamps': activeOptions.optTimestamps,
+          'used_summary': activeOptions.optSummary,
+        });
+      }
 
     } catch(err) {
       clearInterval(timerInterval);
