@@ -1,8 +1,11 @@
 const { OpenAI, toFile } = require("openai");
 const fs = require("fs");
+const { execSync } = require("child_process");
+const path = require("path");
 
 exports.handler = async function (event) {
-  let tmpPath = null;
+  const tmpFiles = [];
+
   try {
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -10,82 +13,130 @@ exports.handler = async function (event) {
     const language = params.language || "auto";
     const wantTimestamps = params.timestamps === "true";
     const wantSummary = params.summary === "true";
-    const clientFilename = params.filename || "";  // filename sent from frontend
+    const clientFilename = params.filename || "audio.mp3";
 
-    // Decode body
-    const buffer = event.isBase64Encoded
-      ? Buffer.from(event.body, "base64")
-      : Buffer.from(event.body, "binary");
+    // Decode base64 body from frontend
+    const body = event.body || "";
+    const buffer = Buffer.from(body, "base64");
 
-    // Validate file size (Whisper limit = 25MB)
-    const MAX_BYTES = 25 * 1024 * 1024;
-    if (buffer.length > MAX_BYTES) {
-      return json(400, { error: "File too large. Maximum size is 25MB." });
+    console.log(`Received: ${clientFilename}, size: ${(buffer.length / 1024 / 1024).toFixed(2)} MB`);
+
+    // Write original file to /tmp
+    const ext = clientFilename.split(".").pop().toLowerCase();
+    const ts = Date.now();
+    const inputPath = `/tmp/input_${ts}.${ext}`;
+    fs.writeFileSync(inputPath, buffer);
+    tmpFiles.push(inputPath);
+
+    // Convert to compressed mono MP3 using ffmpeg
+    // -vn = no video, -ac 1 = mono, -ar 16000 = 16kHz (Whisper works great at this)
+    // A 100MB MP4 video becomes ~8MB MP3 audio
+    const audioPath = `/tmp/audio_${ts}.mp3`;
+    tmpFiles.push(audioPath);
+
+    try {
+      execSync(
+        `ffmpeg -y -i "${inputPath}" -vn -ac 1 -ar 16000 -q:a 5 -f mp3 "${audioPath}"`,
+        { timeout: 120000, stdio: "pipe" }
+      );
+      const audioMB = (fs.statSync(audioPath).size / 1024 / 1024).toFixed(2);
+      console.log(`FFmpeg done. Compressed audio: ${audioMB} MB`);
+    } catch (ffErr) {
+      console.error("FFmpeg error:", ffErr.message);
+      return json(400, { error: "Could not process this file. Please try MP3, MP4, WAV, M4A, or OGG." });
     }
 
-    // Detect format — prefer client filename extension, fallback to magic bytes
-    const { ext, mime } = detectFileType(buffer, clientFilename);
+    const audioSize = fs.statSync(audioPath).size;
+    const CHUNK_LIMIT = 20 * 1024 * 1024; // 20MB — safe under Whisper's 25MB cap
 
-    // Write to /tmp with correct extension
-    tmpPath = `/tmp/audio_${Date.now()}.${ext}`;
-    fs.writeFileSync(tmpPath, buffer);
+    let fullText = "";
+    let allSegments = [];
+    let totalDuration = 0;
+    let detectedLanguage = language;
 
-    console.log(`Processing: ${clientFilename || "unknown"} detected as .${ext} (${mime}), size: ${(buffer.length/1024).toFixed(1)}KB`);
+    if (audioSize <= CHUNK_LIMIT) {
+      // ── Single shot ──
+      const result = await transcribeFile(openai, audioPath, language);
+      fullText = result.text;
+      allSegments = result.segments;
+      totalDuration = result.duration || 0;
+      detectedLanguage = result.language || language;
 
-    // Build Whisper request — always use verbose_json to get ALL segments
-    const whisperParams = {
-      file: await toFile(fs.createReadStream(tmpPath), `audio.${ext}`, { type: mime }),
-      model: "whisper-1",
-      response_format: "verbose_json",
-    };
+    } else {
+      // ── Split into 10-min chunks ──
+      console.log(`Audio ${(audioSize/1024/1024).toFixed(1)}MB — splitting into chunks`);
 
-    if (language !== "auto") whisperParams.language = language;
+      let totalSecs = 3600;
+      try {
+        totalSecs = parseFloat(
+          execSync(`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "${audioPath}"`, { timeout: 15000 }).toString().trim()
+        ) || 3600;
+      } catch(e) {}
 
-    const transcription = await openai.audio.transcriptions.create(whisperParams);
+      const CHUNK_SECS = 600; // 10 min per chunk
+      let offset = 0;
+      let chunkIdx = 0;
 
-    // Build full transcript from ALL segments — never truncate
+      while (offset < totalSecs) {
+        const chunkPath = `/tmp/chunk_${ts}_${chunkIdx}.mp3`;
+        tmpFiles.push(chunkPath);
+
+        try {
+          execSync(
+            `ffmpeg -y -ss ${offset} -i "${audioPath}" -t ${CHUNK_SECS} -c copy "${chunkPath}"`,
+            { timeout: 30000, stdio: "pipe" }
+          );
+        } catch(e) { break; }
+
+        const chunkSize = fs.statSync(chunkPath).size;
+        if (chunkSize < 2000) break;
+
+        console.log(`Chunk ${chunkIdx + 1}: offset=${offset}s size=${(chunkSize/1024).toFixed(0)}KB`);
+        const result = await transcribeFile(openai, chunkPath, language);
+
+        // Offset all segment timestamps
+        result.segments.forEach(seg => {
+          allSegments.push({
+            start: formatTime(parseTime(seg.start) + offset),
+            end:   formatTime(parseTime(seg.end)   + offset),
+            text:  seg.text,
+          });
+        });
+
+        fullText += (fullText ? " " : "") + result.text;
+        totalDuration = offset + (result.duration || CHUNK_SECS);
+        detectedLanguage = result.language || detectedLanguage;
+        offset += CHUNK_SECS;
+        chunkIdx++;
+      }
+    }
+
+    // Build final output
     let transcriptText = "";
     let segments = [];
 
-    if (transcription.segments && transcription.segments.length > 0) {
-      if (wantTimestamps) {
-        segments = transcription.segments.map(seg => ({
-          start: formatTime(seg.start),
-          end: formatTime(seg.end),
-          text: seg.text.trim(),
-        }));
-        transcriptText = segments.map(s => `[${s.start}] ${s.text}`).join("\n");
-      } else {
-        // Join ALL segment texts — transcription.text can sometimes be truncated
-        transcriptText = transcription.segments.map(s => s.text.trim()).join(" ");
-      }
+    if (wantTimestamps && allSegments.length > 0) {
+      segments = allSegments;
+      transcriptText = segments.map(s => `[${s.start}] ${s.text}`).join("\n");
     } else {
-      transcriptText = transcription.text || "";
+      transcriptText = fullText;
     }
 
     const wordCount = transcriptText.replace(/\[.*?\]/g, "").trim().split(/\s+/).filter(Boolean).length;
-    const duration = transcription.duration ? Math.round(transcription.duration) : null;
 
-    // Optional AI summary — use full transcript up to 12000 chars
+    // Optional AI summary
     let summary = null;
     if (wantSummary && transcriptText.length > 100) {
-      const summaryResp = await openai.chat.completions.create({
+      const resp = await openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [
-          {
-            role: "system",
-            content: "You are a concise summarizer. Given a transcript, produce: 1) A 2-3 sentence summary. 2) Up to 5 bullet-point key points. Format as JSON: { summary: string, keyPoints: string[] }. Respond with JSON only, no markdown."
-          },
+          { role: "system", content: 'Summarize the transcript as JSON: { "summary": "2-3 sentences", "keyPoints": ["point1","point2",...] }. JSON only, no markdown.' },
           { role: "user", content: `Transcript:\n${transcriptText.slice(0, 12000)}` }
         ],
         max_tokens: 600,
       });
-
-      try {
-        summary = JSON.parse(summaryResp.choices[0].message.content);
-      } catch {
-        summary = { summary: summaryResp.choices[0].message.content, keyPoints: [] };
-      }
+      try { summary = JSON.parse(resp.choices[0].message.content); }
+      catch { summary = { summary: resp.choices[0].message.content, keyPoints: [] }; }
     }
 
     return json(200, {
@@ -93,70 +144,49 @@ exports.handler = async function (event) {
       segments: wantTimestamps ? segments : undefined,
       summary: summary || undefined,
       wordCount,
-      duration,
-      language: transcription.language || language,
+      duration: Math.round(totalDuration),
+      language: detectedLanguage,
       detectedFormat: ext,
-      segmentCount: transcription.segments ? transcription.segments.length : 0,
     });
 
   } catch (error) {
-    console.error("Error:", error.message, error.stack);
+    console.error("Error:", error.message);
     return json(500, { error: error.message });
   } finally {
-    if (tmpPath) try { fs.unlinkSync(tmpPath); } catch (_) {}
+    tmpFiles.forEach(f => { try { fs.unlinkSync(f); } catch (_) {} });
   }
 };
 
-function json(statusCode, obj) {
-  return {
-    statusCode,
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
-    body: JSON.stringify(obj),
+async function transcribeFile(openai, filePath, language) {
+  const params = {
+    file: await toFile(fs.createReadStream(filePath), path.basename(filePath), { type: "audio/mpeg" }),
+    model: "whisper-1",
+    response_format: "verbose_json",
   };
+  if (language !== "auto") params.language = language;
+
+  const t = await openai.audio.transcriptions.create(params);
+  const segments = (t.segments || []).map(s => ({
+    start: formatTime(s.start),
+    end:   formatTime(s.end),
+    text:  s.text.trim(),
+  }));
+  const text = segments.length > 0
+    ? segments.map(s => s.text).join(" ")
+    : (t.text || "");
+
+  return { text, segments, duration: t.duration || 0, language: t.language };
 }
 
-function formatTime(seconds) {
-  const m = Math.floor(seconds / 60).toString().padStart(2, "0");
-  const s = Math.floor(seconds % 60).toString().padStart(2, "0");
-  return `${m}:${s}`;
+function json(code, obj) {
+  return { statusCode: code, headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }, body: JSON.stringify(obj) };
 }
 
-function detectFileType(buffer, clientFilename) {
-  // Priority 1: use client filename extension — most reliable
-  if (clientFilename) {
-    const ext = clientFilename.split(".").pop().toLowerCase();
-    const mimeMap = {
-      mp3:  "audio/mpeg",
-      mpeg: "audio/mpeg",
-      wav:  "audio/wav",
-      m4a:  "audio/mp4",
-      ogg:  "audio/ogg",
-      webm: "audio/webm",
-      flac: "audio/flac",
-      mp4:  "video/mp4",
-      mov:  "video/quicktime",
-      avi:  "video/x-msvideo",
-      mkv:  "video/x-matroska",
-      m4v:  "video/mp4",
-    };
-    if (mimeMap[ext]) return { ext, mime: mimeMap[ext] };
-  }
+function formatTime(s) {
+  return `${Math.floor(s/60).toString().padStart(2,"0")}:${Math.floor(s%60).toString().padStart(2,"0")}`;
+}
 
-  // Priority 2: magic bytes
-  if (buffer[0] === 0x4F && buffer[1] === 0x67 && buffer[2] === 0x67 && buffer[3] === 0x53)
-    return { ext: "ogg", mime: "audio/ogg" };
-  if (buffer[0] === 0x49 && buffer[1] === 0x44 && buffer[2] === 0x33)
-    return { ext: "mp3", mime: "audio/mpeg" };
-  if (buffer[0] === 0xFF && (buffer[1] & 0xE0) === 0xE0)
-    return { ext: "mp3", mime: "audio/mpeg" };
-  if (buffer[0] === 0x52 && buffer[1] === 0x49 && buffer[2] === 0x46 && buffer[3] === 0x46)
-    return { ext: "wav", mime: "audio/wav" };
-  if (buffer[0] === 0x1A && buffer[1] === 0x45 && buffer[2] === 0xDF && buffer[3] === 0xA3)
-    return { ext: "webm", mime: "audio/webm" };
-  if (buffer[0] === 0x66 && buffer[1] === 0x4C && buffer[2] === 0x61 && buffer[3] === 0x43)
-    return { ext: "flac", mime: "audio/flac" };
-  if (buffer.length > 8 && buffer[4] === 0x66 && buffer[5] === 0x74 && buffer[6] === 0x79 && buffer[7] === 0x70)
-    return { ext: "mp4", mime: "video/mp4" };
-
-  return { ext: "mp3", mime: "audio/mpeg" };
+function parseTime(str) {
+  const [m, s] = str.split(":").map(Number);
+  return m * 60 + s;
 }

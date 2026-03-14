@@ -1,0 +1,10 @@
+[functions]
+  node_bundler = "esbuild"
+
+[functions."analyze"]
+  timeout = 300
+
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
