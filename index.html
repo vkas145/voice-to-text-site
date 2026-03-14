@@ -1,21 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Bolo Aur Likho – AI Transcription</title>
-
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RP1XXXX"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'G-RP14TND3FS');
-</script>
-
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bolo Aur Likho — AI Transcription</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -150,6 +138,17 @@ gtag('config', 'G-RP14TND3FS');
     .transcript-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; font-size: 13px; line-height: 1.8; color: #334155; max-height: 320px; overflow-y: auto; white-space: pre-wrap; }
     .timestamp-pill { display: inline-block; font-size: 11px; font-weight: 600; color: #6366f1; background: #eef2ff; padding: 1px 5px; border-radius: 4px; margin-right: 4px; }
 
+    /* TRUST BADGES */
+    .trust-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
+    .trust-badge { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: #1e293b; background: white; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 9px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .trust-badge svg { width: 15px; height: 15px; }
+    .trust-badge.green { border-color: #bbf7d0; background: #f0fdf4; color: #166534; }
+    .trust-badge.green svg { stroke: #16a34a; }
+    .trust-badge.purple { border-color: #ddd6fe; background: #f5f3ff; color: #5b21b6; }
+    .trust-badge.purple svg { stroke: #7c3aed; }
+    .trust-badge.blue { border-color: #bfdbfe; background: #eff6ff; color: #1e40af; }
+    .trust-badge.blue svg { stroke: #2563eb; }
+
     /* FEATURES */
     .features { display: flex; gap: 10px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
     .feature-pill { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #64748b; background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 7px 14px; }
@@ -174,14 +173,29 @@ gtag('config', 'G-RP14TND3FS');
     </div>
   </div>
   <div class="nav-right">
-    <span class="nav-badge">🇮🇳 Built for Bharat</span>
+    <span class="nav-badge">✦ Free &amp; No Sign Up</span>
   </div>
 </nav>
 
 <section class="hero">
-  <div class="hero-tag"><span class="dot"></span> AI-Powered · Built for Bharat 🇮🇳</div>
-  <h1><span class="accent">Bolo Aap,</span> Likhenge Hum</h1>
-  <p class="subtitle">Koi bhi audio ya video upload karein — ya seedha record karein — aur accurate transcript paayein seconds mein.</p>
+  <div class="hero-tag"><span class="dot"></span> AI-Powered Speech &amp; Video Transcription</div>
+  <h1>Upload or Speak.<br><span class="accent">We'll Transcribe it.</span></h1>
+  <p class="subtitle">Upload any audio or video — or record live — and get a precise transcript in seconds. 99+ languages. No sign up. Completely free.</p>
+
+  <div class="trust-row">
+    <div class="trust-badge green">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      100% Free
+    </div>
+    <div class="trust-badge purple">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+      No Sign Up Required
+    </div>
+    <div class="trust-badge blue">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download Your Script
+    </div>
+  </div>
 
   <div class="main-layout">
     <div class="card">
@@ -284,7 +298,7 @@ gtag('config', 'G-RP14TND3FS');
           <line x1="12" y1="19" x2="12" y2="23"/>
           <line x1="8" y1="23" x2="16" y2="23"/>
         </svg>
-        Bolo Aur Likho
+        Transcribe Now
       </button>
 
       <!-- PROGRESS -->
@@ -334,14 +348,16 @@ gtag('config', 'G-RP14TND3FS');
   </div>
 
   <div class="features">
-    <div class="feature-pill"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Lightning fast</div>
-    <div class="feature-pill"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>99+ languages</div>
-    <div class="feature-pill"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secure & private</div>
+    <div class="feature-pill"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>100% Free</div>
+    <div class="feature-pill"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/></svg>No Sign Up</div>
+    <div class="feature-pill"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download Script</div>
+    <div class="feature-pill"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>99+ Languages</div>
+    <div class="feature-pill"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Private & Secure</div>
     <div class="feature-pill"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Timestamps</div>
   </div>
 </section>
 
-<footer>© 2025 Bolo Aur Likho · Built for Bharat 🇮🇳</footer>
+<footer>© 2026 Bolo Aur Likho &nbsp;·&nbsp; Designed &amp; Developed by Vikas Omprakash Goyal</footer>
 
 <script>
   // ── STATE ──
@@ -446,7 +462,7 @@ gtag('config', 'G-RP14TND3FS');
     document.getElementById('fileName').textContent = name;
     document.getElementById('fileSize').textContent = formatBytes(selectedFile.size);
     document.getElementById('fileInfoRow').classList.add('visible');
-    document.getElementById('recordStatus').textContent = 'Ready! Click Bolo Aur Likho below ↓';
+    document.getElementById('recordStatus').textContent = 'Ready! Click Transcribe Now below ↓';
     document.getElementById('recordActions').classList.remove('visible');
     document.getElementById('recordHint').textContent = '';
   }
@@ -497,7 +513,14 @@ gtag('config', 'G-RP14TND3FS');
     }, 1000);
 
     try {
-      const arrayBuffer = await file.arrayBuffer();
+      // Base64 encode — Netlify reliably handles base64 up to 25MB
+      const base64 = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+
       const lang = document.getElementById('langSelect').value;
       const params = new URLSearchParams();
       if (lang !== 'auto') params.set('language', lang);
@@ -505,19 +528,10 @@ gtag('config', 'G-RP14TND3FS');
       if (activeOptions.optSummary) params.set('summary', 'true');
       params.set('filename', file.name);
 
-      const mimeMap = {
-        mp3:'audio/mpeg', mpeg:'audio/mpeg', wav:'audio/wav', m4a:'audio/mp4',
-        ogg:'audio/ogg', webm:'audio/webm', flac:'audio/flac',
-        mp4:'video/mp4', mov:'video/quicktime', avi:'video/x-msvideo',
-        mkv:'video/x-matroska', m4v:'video/mp4'
-      };
-      const ext = file.name.split('.').pop().toLowerCase();
-      const contentType = mimeMap[ext] || file.type || 'application/octet-stream';
-
       const response = await fetch('/.netlify/functions/analyze?' + params, {
         method: 'POST',
-        headers: { 'Content-Type': contentType },
-        body: arrayBuffer,
+        headers: { 'Content-Type': 'text/plain' },
+        body: base64,
       });
 
       const data = await response.json();
@@ -525,7 +539,7 @@ gtag('config', 'G-RP14TND3FS');
       clearInterval(timerInterval);
       document.getElementById('progressWrap').classList.remove('visible');
       btn.disabled = false;
-      btn.innerHTML = BTN_ICON + ' Bolo Aur Likho';
+      btn.innerHTML = BTN_ICON + ' Transcribe Now';
 
       if (data.error) { showError('Error: ' + data.error); return; }
 
@@ -562,7 +576,7 @@ gtag('config', 'G-RP14TND3FS');
       clearInterval(timerInterval);
       document.getElementById('progressWrap').classList.remove('visible');
       btn.disabled = false;
-      btn.innerHTML = BTN_ICON + ' Bolo Aur Likho';
+      btn.innerHTML = BTN_ICON + ' Transcribe Now';
       showError('Error: ' + err.message);
     }
   }
