@@ -8,3 +8,54 @@
   for = "/.netlify/functions/*"
   [headers.values]
     Access-Control-Allow-Origin = "*"
+
+# Clean URLs for SEO pages
+[[redirects]]
+  from = "/audio-to-text"
+  to = "/audio-to-text.html"
+  status = 200
+
+[[redirects]]
+  from = "/speech-to-text"
+  to = "/speech-to-text.html"
+  status = 200
+
+[[redirects]]
+  from = "/transcribe-audio"
+  to = "/transcribe-audio.html"
+  status = 200
+
+[[redirects]]
+  from = "/free-transcription"
+  to = "/free-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/mp3-to-text"
+  to = "/mp3-to-text.html"
+  status = 200
+
+[[redirects]]
+  from = "/voice-to-text"
+  to = "/voice-to-text.html"
+  status = 200
+
+[[redirects]]
+  from = "/podcast-transcription"
+  to = "/podcast-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/interview-transcription"
+  to = "/interview-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/lecture-transcription"
+  to = "/lecture-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/meeting-transcription"
+  to = "/meeting-transcription.html"
+  status = 200
