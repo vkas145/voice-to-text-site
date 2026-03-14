@@ -156,6 +156,11 @@
     .feature-pill { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #64748b; background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 7px 14px; }
     .feature-pill svg { width: 13px; height: 13px; stroke: #6366f1; }
     footer { text-align: center; padding: 40px; font-size: 13px; color: #94a3b8; }
+    .coming-soon { background: linear-gradient(135deg, #f0fdf4, #eff6ff); border: 1px solid #bbf7d0; border-radius: 14px; padding: 14px 18px; margin-top: 20px; display: flex; align-items: flex-start; gap: 12px; }
+    .coming-soon-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .coming-soon-text { font-size: 13px; color: #1e293b; line-height: 1.6; }
+    .coming-soon-text strong { color: #6366f1; font-weight: 600; }
+    .coming-soon-text span { color: #64748b; }
 
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
@@ -180,9 +185,9 @@
 </nav>
 
 <section class="hero">
-  <div class="hero-tag"><span class="dot"></span> AI-Powered Speech &amp; Video Transcription</div>
+  <div class="hero-tag"><span class="dot"></span> AI-Powered Audio Transcription</div>
   <h1>Upload or Speak.<br><span class="accent">We'll Transcribe it.</span></h1>
-  <p class="subtitle">Upload any audio or video — or record live — and get a precise transcript in seconds. 99+ languages. No sign up. Completely free.</p>
+  <p class="subtitle">Upload any audio file or record live — and get a precise, accurate transcript in seconds. 99+ languages. No sign up. Completely free.</p>
 
   <div class="trust-row">
     <div class="trust-badge green">
@@ -216,14 +221,14 @@
 
       <!-- UPLOAD ZONE -->
       <div class="upload-zone" id="dropZone">
-        <input type="file" id="audioFile" accept=".wav,.mp3,.mpeg,.m4a,.ogg,.webm,.flac,.mp4,.mov,.avi,.mkv,.m4v" onchange="onFileChange(this)">
+        <input type="file" id="audioFile" accept=".mp3,.mpeg,.wav,.m4a,.ogg,.webm,.flac" onchange="onFileChange(this)">
         <div class="upload-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
             <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
           </svg>
         </div>
-        <div class="upload-title">Drop your file here or click to browse</div>
+        <div class="upload-title">Drop your audio file here or click to browse</div>
         <div class="upload-sub">MP3, WAV, M4A, OGG, MP4, MOV, MKV, WEBM · Up to 500MB</div>
       </div>
 
@@ -495,8 +500,8 @@
       showError('Please select a file or record audio first.');
       return;
     }
-    if (file.size > 500 * 1024 * 1024) {
-      showError('File too large. Maximum size is 500MB.');
+    if (file.size > 24 * 1024 * 1024) {
+      showError('Audio too long. Please keep recordings under 20 minutes.');
       return;
     }
 

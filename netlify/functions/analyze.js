@@ -1,31 +1,13 @@
 const { OpenAI, toFile } = require("openai");
 const fs = require("fs");
-const path = require("path");
-
-// Try to load ffmpeg-static — optional, only needed for video files
-let ffmpegPath = null;
-let execSync = null;
-try {
-  ffmpegPath = require("ffmpeg-static");
-  execSync = require("child_process").execSync;
-  console.log("ffmpeg-static loaded:", ffmpegPath);
-} catch(e) {
-  console.log("ffmpeg-static not available — audio-only mode");
-}
-
-// Video extensions that need ffmpeg
-const VIDEO_EXTS = ["mp4", "mov", "avi", "mkv", "m4v", "webm"];
-const AUDIO_EXTS = ["mp3", "mpeg", "wav", "m4a", "ogg", "flac"];
 
 const MIME_MAP = {
   mp3: "audio/mpeg", mpeg: "audio/mpeg", wav: "audio/wav",
-  m4a: "audio/mp4", ogg: "audio/ogg", flac: "audio/flac",
-  webm: "audio/webm", mp4: "video/mp4", mov: "video/quicktime",
-  avi: "video/x-msvideo", mkv: "video/x-matroska", m4v: "video/mp4",
+  m4a: "audio/mp4", ogg: "audio/ogg", flac: "audio/flac", webm: "audio/webm",
 };
 
 exports.handler = async function (event) {
-  const tmpFiles = [];
+  let tmpPath = null;
 
   try {
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -41,53 +23,23 @@ exports.handler = async function (event) {
     const fileSizeMB = (buffer.length / 1024 / 1024).toFixed(2);
     console.log(`File: ${clientFilename}, ${fileSizeMB} MB`);
 
+    // 24MB ≈ 20 min of high-quality audio
+    if (buffer.length > 24 * 1024 * 1024) {
+      return json(400, { error: "Audio too long. Please keep recordings under 20 minutes." });
+    }
+
     const ext = clientFilename.split(".").pop().toLowerCase();
-    const ts = Date.now();
-    const inputPath = `/tmp/input_${ts}.${ext}`;
-    fs.writeFileSync(inputPath, buffer);
-    tmpFiles.push(inputPath);
-
-    // Decide which file to send to Whisper
-    let whisperPath = inputPath;
-    let whisperExt = ext;
-
-    const isVideo = VIDEO_EXTS.includes(ext);
-    const needsConversion = isVideo || buffer.length > 20 * 1024 * 1024;
-
-    if (needsConversion) {
-      if (!ffmpegPath || !execSync) {
-        // ffmpeg not available — reject video, try raw audio anyway
-        if (isVideo) {
-          return json(400, { error: "Video files require ffmpeg. Please upload MP3, WAV, M4A, or OGG audio instead." });
-        }
-        // For large audio, just try sending directly (Whisper handles up to 25MB)
-      } else {
-        // Convert with ffmpeg
-        const audioPath = `/tmp/audio_${ts}.mp3`;
-        tmpFiles.push(audioPath);
-        try {
-          execSync(
-            `"${ffmpegPath}" -y -i "${inputPath}" -vn -ac 1 -ar 16000 -q:a 5 -f mp3 "${audioPath}"`,
-            { timeout: 120000, stdio: "pipe" }
-          );
-          whisperPath = audioPath;
-          whisperExt = "mp3";
-          console.log(`Converted: ${(fs.statSync(audioPath).size / 1024 / 1024).toFixed(2)} MB`);
-        } catch(ffErr) {
-          return json(400, { error: "Could not convert this file. Please try MP3, WAV, or M4A." });
-        }
-      }
+    if (!MIME_MAP[ext]) {
+      return json(400, { error: `Unsupported format: .${ext}. Please use MP3, WAV, M4A, OGG, WEBM, or FLAC.` });
     }
 
-    // Whisper 25MB hard limit
-    if (fs.statSync(whisperPath).size > 25 * 1024 * 1024) {
-      return json(400, { error: "File too large for transcription (max 25MB). Please use a shorter recording." });
-    }
+    // Write to /tmp
+    tmpPath = `/tmp/audio_${Date.now()}.${ext}`;
+    fs.writeFileSync(tmpPath, buffer);
 
     // Send to Whisper
-    const mime = MIME_MAP[whisperExt] || "audio/mpeg";
     const whisperParams = {
-      file: await toFile(fs.createReadStream(whisperPath), `audio.${whisperExt}`, { type: mime }),
+      file: await toFile(fs.createReadStream(tmpPath), `audio.${ext}`, { type: MIME_MAP[ext] }),
       model: "whisper-1",
       response_format: "verbose_json",
     };
@@ -95,15 +47,13 @@ exports.handler = async function (event) {
 
     const transcription = await openai.audio.transcriptions.create(whisperParams);
 
-    // Build transcript from ALL segments
+    // Build transcript from ALL segments — never truncate
     const segs = transcription.segments || [];
     let transcriptText = "";
     let segments = [];
 
     if (wantTimestamps && segs.length > 0) {
-      segments = segs.map(s => ({
-        start: fmt(s.start), end: fmt(s.end), text: s.text.trim()
-      }));
+      segments = segs.map(s => ({ start: fmt(s.start), end: fmt(s.end), text: s.text.trim() }));
       transcriptText = segments.map(s => `[${s.start}] ${s.text}`).join("\n");
     } else {
       transcriptText = segs.length > 0
@@ -143,7 +93,7 @@ exports.handler = async function (event) {
     console.error("Error:", error.message);
     return json(500, { error: error.message });
   } finally {
-    tmpFiles.forEach(f => { try { fs.unlinkSync(f); } catch(_) {} });
+    if (tmpPath) try { fs.unlinkSync(tmpPath); } catch(_) {}
   }
 };
 
