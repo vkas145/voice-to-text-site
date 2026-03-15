@@ -9,7 +9,42 @@
   [headers.values]
     Access-Control-Allow-Origin = "*"
 
-# Clean URLs for SEO pages
+# Blog index
+[[redirects]]
+  from = "/blog"
+  to = "/blog.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/how-to-transcribe-podcast-free"
+  to = "/blog/how-to-transcribe-podcast-free.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/best-free-transcription-tools-2026"
+  to = "/blog/best-free-transcription-tools-2026.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/how-to-convert-whatsapp-voice-to-text"
+  to = "/blog/how-to-convert-whatsapp-voice-to-text.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/how-to-transcribe-zoom-meetings"
+  to = "/blog/how-to-transcribe-zoom-meetings.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/lecture-transcription-student-guide"
+  to = "/blog/lecture-transcription-student-guide.html"
+  status = 200
+
+[[redirects]]
+  from = "/blog/what-is-openai-whisper"
+  to = "/blog/what-is-openai-whisper.html"
+  status = 200
+
 [[redirects]]
   from = "/audio-to-text"
   to = "/audio-to-text.html"
@@ -58,4 +93,174 @@
 [[redirects]]
   from = "/meeting-transcription"
   to = "/meeting-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/wav-to-text"
+  to = "/wav-to-text.html"
+  status = 200
+
+[[redirects]]
+  from = "/m4a-to-text"
+  to = "/m4a-to-text.html"
+  status = 200
+
+[[redirects]]
+  from = "/ogg-to-text"
+  to = "/ogg-to-text.html"
+  status = 200
+
+[[redirects]]
+  from = "/hindi-speech-to-text"
+  to = "/hindi-speech-to-text.html"
+  status = 200
+
+[[redirects]]
+  from = "/spanish-transcription"
+  to = "/spanish-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/french-transcription"
+  to = "/french-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/zoom-transcription"
+  to = "/zoom-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/google-meet-transcription"
+  to = "/google-meet-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/teams-transcription"
+  to = "/teams-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/whatsapp-voice-to-text"
+  to = "/whatsapp-voice-to-text.html"
+  status = 200
+
+[[redirects]]
+  from = "/legal-transcription"
+  to = "/legal-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/medical-transcription"
+  to = "/medical-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/research-transcription"
+  to = "/research-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/journalist-transcription"
+  to = "/journalist-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/youtube-transcription"
+  to = "/youtube-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/content-creator-transcription"
+  to = "/content-creator-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/webinar-transcription"
+  to = "/webinar-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/student-transcription"
+  to = "/student-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/class-recording-transcription"
+  to = "/class-recording-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/transcription-for-deaf"
+  to = "/transcription-for-deaf.html"
+  status = 200
+
+[[redirects]]
+  from = "/otter-ai-alternative"
+  to = "/otter-ai-alternative.html"
+  status = 200
+
+[[redirects]]
+  from = "/rev-alternative"
+  to = "/rev-alternative.html"
+  status = 200
+
+[[redirects]]
+  from = "/temi-alternative"
+  to = "/temi-alternative.html"
+  status = 200
+
+[[redirects]]
+  from = "/hr-transcription"
+  to = "/hr-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/sales-call-transcription"
+  to = "/sales-call-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/customer-service-transcription"
+  to = "/customer-service-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/sermon-transcription"
+  to = "/sermon-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/court-hearing-transcription"
+  to = "/court-hearing-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/arabic-transcription"
+  to = "/arabic-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/portuguese-transcription"
+  to = "/portuguese-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/german-transcription"
+  to = "/german-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/ai-transcription"
+  to = "/ai-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/automatic-transcription"
+  to = "/automatic-transcription.html"
+  status = 200
+
+[[redirects]]
+  from = "/online-transcription"
+  to = "/online-transcription.html"
   status = 200
