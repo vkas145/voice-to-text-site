@@ -7,6 +7,19 @@ const MIME_MAP = {
 };
 
 exports.handler = async function (event) {
+  // Handle CORS preflight
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 204,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+      body: "",
+    };
+  }
+
   let tmpPath = null;
 
   try {
@@ -18,10 +31,27 @@ exports.handler = async function (event) {
     const wantSummary = params.summary === "true";
     const clientFilename = params.filename || "audio.mp3";
 
-    // Decode base64 body
-    const buffer = Buffer.from(event.body || "", "base64");
+    // FIX: The frontend sends raw base64 text (Content-Type: text/plain).
+    // Netlify may deliver this as-is (isBase64Encoded=false) or re-encode it
+    // (isBase64Encoded=true). We need to handle both cases correctly.
+    let buffer;
+    if (event.isBase64Encoded) {
+      // Netlify re-encoded the body — decode Netlify's layer first, then
+      // the result IS the original base64 string from the browser, decode again.
+      const bodyStr = Buffer.from(event.body, "base64").toString("utf8");
+      buffer = Buffer.from(bodyStr, "base64");
+    } else {
+      // Body arrived as plain text — it is already the base64 string from the browser.
+      buffer = Buffer.from(event.body || "", "base64");
+    }
+
     const fileSizeMB = (buffer.length / 1024 / 1024).toFixed(2);
-    console.log(`File: ${clientFilename}, ${fileSizeMB} MB`);
+    console.log(`File: ${clientFilename}, ${fileSizeMB} MB, isBase64Encoded: ${event.isBase64Encoded}`);
+
+    // Sanity check: if buffer is tiny the decode likely went wrong
+    if (buffer.length < 100) {
+      return json(400, { error: "Could not read audio data. Please try again." });
+    }
 
     // 24MB ≈ 20 min of high-quality audio
     if (buffer.length > 24 * 1024 * 1024) {
@@ -100,7 +130,12 @@ exports.handler = async function (event) {
 function json(code, obj) {
   return {
     statusCode: code,
-    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+    },
     body: JSON.stringify(obj),
   };
 }
