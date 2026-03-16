@@ -519,6 +519,55 @@
     activeOptions[id] = el.classList.contains('active');
   }
 
+  // Compress audio to mono 16kHz WebM/Opus (~5x smaller) before uploading
+  async function compressAudio(file) {
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      const ctx = new AudioContext();
+      const arrayBuffer = await file.arrayBuffer();
+      const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
+
+      // Resample to 16kHz mono via OfflineAudioContext
+      const targetSampleRate = 16000;
+      const duration = audioBuffer.duration;
+      const offlineCtx = new OfflineAudioContext(1, Math.ceil(targetSampleRate * duration), targetSampleRate);
+      const source = offlineCtx.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(offlineCtx.destination);
+      source.start();
+      const rendered = await offlineCtx.startRendering();
+
+      // Encode as WebM/Opus using MediaRecorder
+      const streamCtx = new AudioContext({ sampleRate: targetSampleRate });
+      const compressedBuffer = streamCtx.createBuffer(1, rendered.length, targetSampleRate);
+      compressedBuffer.copyToChannel(rendered.getChannelData(0), 0);
+
+      const dest = streamCtx.createMediaStreamDestination();
+      const bufferSource = streamCtx.createBufferSource();
+      bufferSource.buffer = compressedBuffer;
+      bufferSource.connect(dest);
+
+      const chunks = [];
+      const recorder = new MediaRecorder(dest.stream, { mimeType: 'audio/webm;codecs=opus', audioBitsPerSecond: 32000 });
+      recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+
+      await new Promise(resolve => {
+        recorder.onstop = resolve;
+        recorder.start();
+        bufferSource.start();
+        bufferSource.onended = () => recorder.stop();
+      });
+
+      await streamCtx.close();
+      const blob = new Blob(chunks, { type: 'audio/webm' });
+      console.log(`Compressed: ${(file.size/1024/1024).toFixed(2)}MB → ${(blob.size/1024/1024).toFixed(2)}MB`);
+      return { blob, filename: file.name.replace(/\.[^.]+$/, '') + '.webm' };
+    } catch (e) {
+      console.warn('Compression failed, using original:', e.message);
+      return { blob: file, filename: file.name };
+    }
+  }
+
   async function upload() {
     const file = selectedFile;
     if (!file) { showError('Please select a file or record audio first.'); return; }
@@ -526,7 +575,7 @@
 
     const btn = document.getElementById('transcribeBtn');
     btn.disabled = true;
-    btn.innerHTML = BTN_ICON + ' Processing...';
+    btn.innerHTML = BTN_ICON + ' Compressing...';
     document.getElementById('progressWrap').classList.add('visible');
     document.getElementById('results').classList.remove('visible');
     document.getElementById('errorBox').classList.remove('visible');
@@ -538,11 +587,15 @@
     }, 1000);
 
     try {
+      // Compress audio before sending to reduce timeout risk
+      const { blob: audioBlob, filename: audioFilename } = await compressAudio(file);
+      btn.innerHTML = BTN_ICON + ' Transcribing...';
+
       const base64 = await new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => resolve(reader.result.split(',')[1]);
         reader.onerror = reject;
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(audioBlob);
       });
 
       const lang = document.getElementById('langSelect').value;
@@ -550,7 +603,7 @@
       if (lang !== 'auto') params.set('language', lang);
       if (activeOptions.optTimestamps) params.set('timestamps', 'true');
       if (activeOptions.optSummary) params.set('summary', 'true');
-      params.set('filename', file.name);
+      params.set('filename', audioFilename);
 
       const response = await fetch('/.netlify/functions/analyze?' + params, {
         method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: base64,

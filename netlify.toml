@@ -2,14 +2,7 @@
   functions = "netlify/functions"
 
 [functions]
-  # Allow up to 26MB request body (audio files can be large)
-  # and extend timeout to 60s for Whisper API calls
-  included_files = []
-
-[[redirects]]
-  from = "/.netlify/functions/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
+  node_bundler = "nft"
 
 [functions."analyze"]
-  node_bundler = "nft"
+  timeout = 26
