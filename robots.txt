@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://boloaurlikho.com/sitemap.xml
