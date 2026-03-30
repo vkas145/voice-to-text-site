@@ -562,8 +562,8 @@
       const rendered = await offlineCtx.startRendering();
 
       const pcm = rendered.getChannelData(0);
-      // 30s chunks: safe margin for Whisper + network within Netlify's 26s timeout
-      const MAX_SAMPLES = 30 * targetSampleRate;
+      // 20s chunks: small enough to upload quickly on slow mobile connections
+      const MAX_SAMPLES = 20 * targetSampleRate;
       const baseName = file.name.replace(/\.[^.]+$/, '');
       const chunks = [];
       for (let start = 0; start < pcm.length; start += MAX_SAMPLES) {
@@ -611,34 +611,39 @@
 
       btn.innerHTML = BOLT_ICON + (chunks.length > 1 ? ' Transcribing 0%...' : ' Transcribing...');
 
-      // Transcribe all chunks in parallel — reduces total time from N×T to ~T
-      const chunkResults = await Promise.all(chunks.map(async ({ blob: audioBlob, filename: audioFilename, startSec }) => {
-        const base64 = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve(reader.result.split(',')[1]);
-          reader.onerror = reject;
-          reader.readAsDataURL(audioBlob);
-        });
-
-        const params = new URLSearchParams();
-        if (lang !== 'auto') params.set('language', lang);
-        if (wantTimestamps) params.set('timestamps', 'true');
-        if (wantSummary && chunks.length === 1) params.set('summary', 'true');
-        params.set('filename', audioFilename);
-
-        const response = await fetch('/.netlify/functions/analyze?' + params, {
-          method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: base64,
-        });
-
-        let data;
-        try { data = await response.json(); }
-        catch { const t = await response.text().catch(() => ''); throw new Error(`Server error (${response.status})${t ? ': ' + t.slice(0, 120) : ''}`); }
-        if (data.error) throw new Error(data.error);
-
-        completed++;
-        if (chunks.length > 1) btn.innerHTML = BOLT_ICON + ` Transcribing ${Math.round(completed / chunks.length * 100)}%...`;
-        return { data, startSec };
-      }));
+      // Transcribe chunks with max 3 concurrent requests — fast on desktop,
+      // safe on slow mobile connections (avoids 408 upload timeouts)
+      const CONCURRENCY = 3;
+      const chunkResults = new Array(chunks.length);
+      const queue = chunks.map((chunk, i) => ({ chunk, i }));
+      async function runWorker() {
+        while (queue.length) {
+          const { chunk, i } = queue.shift();
+          const { blob: audioBlob, filename: audioFilename, startSec } = chunk;
+          const base64 = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.onerror = reject;
+            reader.readAsDataURL(audioBlob);
+          });
+          const params = new URLSearchParams();
+          if (lang !== 'auto') params.set('language', lang);
+          if (wantTimestamps) params.set('timestamps', 'true');
+          if (wantSummary && chunks.length === 1) params.set('summary', 'true');
+          params.set('filename', audioFilename);
+          const response = await fetch('/.netlify/functions/analyze?' + params, {
+            method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: base64,
+          });
+          let data;
+          try { data = await response.json(); }
+          catch { const t = await response.text().catch(() => ''); throw new Error(`Server error (${response.status})${t ? ': ' + t.slice(0, 120) : ''}`); }
+          if (data.error) throw new Error(data.error);
+          chunkResults[i] = { data, startSec };
+          completed++;
+          if (chunks.length > 1) btn.innerHTML = BOLT_ICON + ` Transcribing ${Math.round(completed / chunks.length * 100)}%...`;
+        }
+      }
+      await Promise.all(Array.from({ length: Math.min(CONCURRENCY, chunks.length) }, runWorker));
 
       // Combine results in original chunk order
       for (const { data, startSec } of chunkResults) {
