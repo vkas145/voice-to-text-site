@@ -600,8 +600,7 @@
       const chunks = await compressAudio(file);
       const lang = document.getElementById('langSelect').value;
       const wantTimestamps = activeOptions.optTimestamps;
-      // Summary only supported on single-chunk files (multi-chunk would summarise only last segment)
-      const wantSummary = activeOptions.optSummary && chunks.length === 1;
+      const wantSummary = activeOptions.optSummary;
 
       let allText = '', allSegments = [], totalWordCount = 0, totalDuration = 0;
       let detectedLanguage = 'auto', summary = null;
@@ -620,7 +619,8 @@
         const params = new URLSearchParams();
         if (lang !== 'auto') params.set('language', lang);
         if (wantTimestamps) params.set('timestamps', 'true');
-        if (wantSummary) params.set('summary', 'true');
+        // For single-chunk, request summary inline; multi-chunk gets a separate call after
+        if (wantSummary && chunks.length === 1) params.set('summary', 'true');
         params.set('filename', audioFilename);
 
         const response = await fetch('/.netlify/functions/analyze?' + params, {
@@ -654,6 +654,16 @@
         totalDuration += data.duration || 0;
         detectedLanguage = data.language || detectedLanguage;
         if (data.summary) summary = data.summary;
+      }
+
+      // For multi-chunk files, summarize the full combined transcript
+      if (wantSummary && chunks.length > 1 && allText.length >= 50) {
+        btn.innerHTML = BTN_ICON + ' Summarizing...';
+        const sResp = await fetch('/.netlify/functions/analyze?mode=summarize', {
+          method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: allText,
+        });
+        const sData = await sResp.json().catch(() => ({}));
+        if (sData.summary) summary = sData.summary;
       }
 
       clearInterval(timerInterval);
