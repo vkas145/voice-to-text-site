@@ -519,14 +519,10 @@
     activeOptions[id] = el.classList.contains('active');
   }
 
-  // Encode AudioBuffer as WAV in memory (instant, no real-time playback needed)
-  function encodeWAV(audioBuffer) {
-    const numChannels = 1;
-    const sampleRate = audioBuffer.sampleRate;
-    const pcmData = audioBuffer.getChannelData(0);
-    const numSamples = pcmData.length;
-    const int16Data = new Int16Array(numSamples);
-    for (let i = 0; i < numSamples; i++) {
+  // Encode raw Float32 PCM as a mono 16-bit WAV blob (instant, in-memory)
+  function encodeWAV(pcmData, sampleRate) {
+    const int16Data = new Int16Array(pcmData.length);
+    for (let i = 0; i < pcmData.length; i++) {
       const s = Math.max(-1, Math.min(1, pcmData[i]));
       int16Data[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
     }
@@ -536,18 +532,16 @@
     const writeStr = (off, str) => { for (let i = 0; i < str.length; i++) view.setUint8(off + i, str.charCodeAt(i)); };
     writeStr(0, 'RIFF'); view.setUint32(4, 36 + dataLength, true); writeStr(8, 'WAVE');
     writeStr(12, 'fmt '); view.setUint32(16, 16, true); view.setUint16(20, 1, true);
-    view.setUint16(22, numChannels, true); view.setUint32(24, sampleRate, true);
-    view.setUint32(28, sampleRate * numChannels * 2, true); view.setUint16(32, numChannels * 2, true);
+    view.setUint16(22, 1, true); view.setUint32(24, sampleRate, true);
+    view.setUint32(28, sampleRate * 2, true); view.setUint16(32, 2, true);
     view.setUint16(34, 16, true); writeStr(36, 'data'); view.setUint32(40, dataLength, true);
     new Uint8Array(buffer, 44).set(new Uint8Array(int16Data.buffer));
     return new Blob([buffer], { type: 'audio/wav' });
   }
 
-  // Compress audio to mono WAV before uploading (instant — no real-time encoding).
-  // Netlify Lambda has a 6MB request body limit; base64 adds ~33% overhead,
-  // so the raw WAV must stay under ~4MB.
-  //   16kHz mono 16-bit: 32 000 B/s → max ~125 s (≈2 min)
-  //    8kHz mono 16-bit: 16 000 B/s → max ~250 s (≈4 min)
+  // Decode + resample to 16kHz mono, then split into ~2-min chunks (≤4MB each)
+  // so every chunk fits within Netlify Lambda's 6MB request body limit.
+  // Returns [{blob, filename, startSec}]
   async function compressAudio(file) {
     try {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -556,42 +550,38 @@
       const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
       await ctx.close();
 
-      const duration = audioBuffer.duration;
-      // Choose sample rate so raw WAV stays under 4 MB
-      const MAX_BYTES = 4 * 1024 * 1024;
-      const bytesPerSec16k = 16000 * 2;
-      const bytesPerSec8k  =  8000 * 2;
-      let targetSampleRate;
-      if (duration * bytesPerSec16k <= MAX_BYTES) {
-        targetSampleRate = 16000;
-      } else if (duration * bytesPerSec8k <= MAX_BYTES) {
-        targetSampleRate = 8000;
-      } else {
-        throw new Error(`Audio is too long (${Math.round(duration)}s). Please use files under 4 minutes.`);
-      }
-
-      const offlineCtx = new OfflineAudioContext(1, Math.ceil(targetSampleRate * duration), targetSampleRate);
+      const targetSampleRate = 16000;
+      const offlineCtx = new OfflineAudioContext(1, Math.ceil(targetSampleRate * audioBuffer.duration), targetSampleRate);
       const source = offlineCtx.createBufferSource();
       source.buffer = audioBuffer;
       source.connect(offlineCtx.destination);
       source.start();
       const rendered = await offlineCtx.startRendering();
 
-      const blob = encodeWAV(rendered);
-      console.log(`Compressed: ${(file.size/1024/1024).toFixed(2)}MB → ${(blob.size/1024/1024).toFixed(2)}MB (${targetSampleRate/1000}kHz)`);
-      return { blob, filename: file.name.replace(/\.[^.]+$/, '') + '.wav' };
+      const pcm = rendered.getChannelData(0);
+      // 4MB raw WAV / 2 bytes per sample = 2M samples ≈ 131s at 16kHz
+      const MAX_SAMPLES = Math.floor(4 * 1024 * 1024 / 2);
+      const baseName = file.name.replace(/\.[^.]+$/, '');
+      const chunks = [];
+      for (let start = 0; start < pcm.length; start += MAX_SAMPLES) {
+        chunks.push({
+          blob: encodeWAV(pcm.slice(start, start + MAX_SAMPLES), targetSampleRate),
+          filename: baseName + '.wav',
+          startSec: start / targetSampleRate,
+        });
+      }
+      console.log(`Compressed: ${(file.size/1024/1024).toFixed(2)}MB → ${chunks.length} chunk(s) × ~${(chunks[0].blob.size/1024/1024).toFixed(1)}MB at 16kHz`);
+      return chunks;
     } catch (e) {
-      // Re-throw user-facing duration errors; fall back to original for other failures
-      if (e.message.startsWith('Audio is too long')) throw e;
       console.warn('Compression failed, using original:', e.message);
-      return { blob: file, filename: file.name };
+      return [{ blob: file, filename: file.name, startSec: 0 }];
     }
   }
 
   async function upload() {
     const file = selectedFile;
     if (!file) { showError('Please select a file or record audio first.'); return; }
-    if (file.size > 24 * 1024 * 1024) { showError('Audio too long. Please keep recordings under 20 minutes.'); return; }
+    if (file.size > 200 * 1024 * 1024) { showError('File too large. Please use files under 200MB.'); return; }
 
     const btn = document.getElementById('transcribeBtn');
     btn.disabled = true;
@@ -607,65 +597,97 @@
     }, 1000);
 
     try {
-      // Compress audio before sending to reduce timeout risk
-      const { blob: audioBlob, filename: audioFilename } = await compressAudio(file);
-      btn.innerHTML = BTN_ICON + ' Transcribing...';
-
-      const base64 = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result.split(',')[1]);
-        reader.onerror = reject;
-        reader.readAsDataURL(audioBlob);
-      });
-
+      const chunks = await compressAudio(file);
       const lang = document.getElementById('langSelect').value;
-      const params = new URLSearchParams();
-      if (lang !== 'auto') params.set('language', lang);
-      if (activeOptions.optTimestamps) params.set('timestamps', 'true');
-      if (activeOptions.optSummary) params.set('summary', 'true');
-      params.set('filename', audioFilename);
+      const wantTimestamps = activeOptions.optTimestamps;
+      // Summary only supported on single-chunk files (multi-chunk would summarise only last segment)
+      const wantSummary = activeOptions.optSummary && chunks.length === 1;
 
-      const response = await fetch('/.netlify/functions/analyze?' + params, {
-        method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: base64,
-      });
+      let allText = '', allSegments = [], totalWordCount = 0, totalDuration = 0;
+      let detectedLanguage = 'auto', summary = null;
 
-      let data;
-      try { data = await response.json(); }
-      catch { const t = await response.text().catch(() => ''); throw new Error(`Server error (${response.status})${t ? ': ' + t.slice(0, 120) : ''}`); }
+      for (let i = 0; i < chunks.length; i++) {
+        btn.innerHTML = BTN_ICON + (chunks.length > 1 ? ` Transcribing ${i + 1}/${chunks.length}...` : ' Transcribing...');
+
+        const { blob: audioBlob, filename: audioFilename, startSec } = chunks[i];
+        const base64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result.split(',')[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(audioBlob);
+        });
+
+        const params = new URLSearchParams();
+        if (lang !== 'auto') params.set('language', lang);
+        if (wantTimestamps) params.set('timestamps', 'true');
+        if (wantSummary) params.set('summary', 'true');
+        params.set('filename', audioFilename);
+
+        const response = await fetch('/.netlify/functions/analyze?' + params, {
+          method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: base64,
+        });
+
+        let data;
+        try { data = await response.json(); }
+        catch { const t = await response.text().catch(() => ''); throw new Error(`Server error (${response.status})${t ? ': ' + t.slice(0, 120) : ''}`); }
+
+        if (data.error) {
+          clearInterval(timerInterval);
+          document.getElementById('progressWrap').classList.remove('visible');
+          btn.disabled = false; btn.innerHTML = BTN_ICON + ' Transcribe Now';
+          showError('Error: ' + data.error); return;
+        }
+
+        if (wantTimestamps && data.segments && data.segments.length) {
+          const offsetSegs = data.segments.map(s => ({
+            ...s,
+            start: addTsOffset(s.start, startSec),
+            end: addTsOffset(s.end, startSec),
+          }));
+          allSegments.push(...offsetSegs);
+          allText += (allText ? '\n' : '') + offsetSegs.map(s => `[${s.start}] ${s.text}`).join('\n');
+        } else {
+          allText += (allText ? ' ' : '') + (data.text || '');
+        }
+
+        totalWordCount += data.wordCount || 0;
+        totalDuration += data.duration || 0;
+        detectedLanguage = data.language || detectedLanguage;
+        if (data.summary) summary = data.summary;
+      }
+
       clearInterval(timerInterval);
       document.getElementById('progressWrap').classList.remove('visible');
       btn.disabled = false;
       btn.innerHTML = BTN_ICON + ' Transcribe Now';
 
-      if (data.error) { showError('Error: ' + data.error); return; }
-
-      document.getElementById('statWords').textContent = data.wordCount || '—';
-      document.getElementById('statDuration').textContent = data.duration ? formatDur(data.duration) : '—';
-      document.getElementById('statLang').textContent = (data.language || 'auto').toUpperCase();
+      document.getElementById('statWords').textContent = totalWordCount || '—';
+      document.getElementById('statDuration').textContent = totalDuration ? formatDur(totalDuration) : '—';
+      document.getElementById('statLang').textContent = (detectedLanguage || 'auto').toUpperCase();
 
       const ss = document.getElementById('summarySection');
-      if (data.summary) {
-        document.getElementById('summaryText').textContent = data.summary.summary || '';
+      if (summary) {
+        document.getElementById('summaryText').textContent = summary.summary || '';
         const kp = document.getElementById('keyPoints'); kp.innerHTML = '';
-        (data.summary.keyPoints || []).forEach(p => { const li = document.createElement('li'); li.textContent = p; kp.appendChild(li); });
+        (summary.keyPoints || []).forEach(p => { const li = document.createElement('li'); li.textContent = p; kp.appendChild(li); });
         ss.style.display = '';
       } else { ss.style.display = 'none'; }
 
       const box = document.getElementById('transcriptBox');
-      if (activeOptions.optTimestamps && data.segments && data.segments.length) {
-        box.innerHTML = data.segments.map(s => `<span class="timestamp-pill">${s.start}</span>${escHtml(s.text)}\n`).join('');
-      } else { box.textContent = data.text || ''; }
+      if (wantTimestamps && allSegments.length) {
+        box.innerHTML = allSegments.map(s => `<span class="timestamp-pill">${s.start}</span>${escHtml(s.text)}\n`).join('');
+      } else { box.textContent = allText || ''; }
 
       document.getElementById('results').classList.add('visible');
 
       if (typeof gtag !== 'undefined') {
         gtag('event', 'transcription_complete', {
           'file_format': file.name.split('.').pop().toLowerCase(),
-          'word_count': data.wordCount || 0,
-          'duration_seconds': data.duration || 0,
-          'language': data.language || 'auto',
-          'used_timestamps': activeOptions.optTimestamps,
-          'used_summary': activeOptions.optSummary,
+          'word_count': totalWordCount || 0,
+          'duration_seconds': totalDuration || 0,
+          'language': detectedLanguage || 'auto',
+          'used_timestamps': wantTimestamps,
+          'used_summary': wantSummary,
         });
       }
 
@@ -682,6 +704,7 @@
   function hideError() { document.getElementById('errorBox').classList.remove('visible'); }
   function formatBytes(b) { if (b < 1024) return b + ' B'; if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB'; return (b/1024/1024).toFixed(1) + ' MB'; }
   function formatDur(s) { if (s < 60) return s + 's'; return Math.floor(s/60) + 'm ' + (s%60) + 's'; }
+  function addTsOffset(mmss, offsetSec) { const [m,s]=mmss.split(':').map(Number),t=m*60+s+Math.round(offsetSec); return String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0'); }
   function escHtml(str) { return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   function copyText() {
     navigator.clipboard.writeText(document.getElementById('transcriptBox').textContent).then(() => {
