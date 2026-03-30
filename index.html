@@ -603,12 +603,12 @@
       const wantSummary = activeOptions.optSummary;
 
       let allText = '', allSegments = [], totalWordCount = 0, totalDuration = 0;
-      let detectedLanguage = 'auto', summary = null, prevChunkTail = '';
+      let detectedLanguage = 'auto', summary = null, completed = 0;
 
-      for (let i = 0; i < chunks.length; i++) {
-        btn.innerHTML = BTN_ICON + (chunks.length > 1 ? ` Transcribing ${i + 1}/${chunks.length}...` : ' Transcribing...');
+      btn.innerHTML = BTN_ICON + (chunks.length > 1 ? ` Transcribing 0/${chunks.length}...` : ' Transcribing...');
 
-        const { blob: audioBlob, filename: audioFilename, startSec } = chunks[i];
+      // Transcribe all chunks in parallel — reduces total time from N×T to ~T
+      const chunkResults = await Promise.all(chunks.map(async ({ blob: audioBlob, filename: audioFilename, startSec }) => {
         const base64 = await new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.onload = () => resolve(reader.result.split(',')[1]);
@@ -619,11 +619,8 @@
         const params = new URLSearchParams();
         if (lang !== 'auto') params.set('language', lang);
         if (wantTimestamps) params.set('timestamps', 'true');
-        // For single-chunk, request summary inline; multi-chunk gets a separate call after
         if (wantSummary && chunks.length === 1) params.set('summary', 'true');
         params.set('filename', audioFilename);
-        // Pass tail of previous chunk so Whisper stays in the right language/context
-        if (prevChunkTail) params.set('prompt', prevChunkTail);
 
         const response = await fetch('/.netlify/functions/analyze?' + params, {
           method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: base64,
@@ -632,14 +629,15 @@
         let data;
         try { data = await response.json(); }
         catch { const t = await response.text().catch(() => ''); throw new Error(`Server error (${response.status})${t ? ': ' + t.slice(0, 120) : ''}`); }
+        if (data.error) throw new Error(data.error);
 
-        if (data.error) {
-          clearInterval(timerInterval);
-          document.getElementById('progressWrap').classList.remove('visible');
-          btn.disabled = false; btn.innerHTML = BTN_ICON + ' Transcribe Now';
-          showError('Error: ' + data.error); return;
-        }
+        completed++;
+        if (chunks.length > 1) btn.innerHTML = BTN_ICON + ` Transcribing ${completed}/${chunks.length}...`;
+        return { data, startSec };
+      }));
 
+      // Combine results in original chunk order
+      for (const { data, startSec } of chunkResults) {
         if (wantTimestamps && data.segments && data.segments.length) {
           const offsetSegs = data.segments.map(s => ({
             ...s,
@@ -656,8 +654,6 @@
         totalDuration += data.duration || 0;
         detectedLanguage = data.language || detectedLanguage;
         if (data.summary) summary = data.summary;
-        // Keep last ~200 chars as context prompt for the next chunk
-        prevChunkTail = (data.text || '').split(' ').slice(-30).join(' ').slice(-200);
       }
 
       // For multi-chunk files, summarize the full combined transcript
