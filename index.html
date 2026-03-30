@@ -603,7 +603,7 @@
       const wantSummary = activeOptions.optSummary;
 
       let allText = '', allSegments = [], totalWordCount = 0, totalDuration = 0;
-      let detectedLanguage = 'auto', summary = null;
+      let detectedLanguage = 'auto', summary = null, prevChunkTail = '';
 
       for (let i = 0; i < chunks.length; i++) {
         btn.innerHTML = BTN_ICON + (chunks.length > 1 ? ` Transcribing ${i + 1}/${chunks.length}...` : ' Transcribing...');
@@ -622,6 +622,8 @@
         // For single-chunk, request summary inline; multi-chunk gets a separate call after
         if (wantSummary && chunks.length === 1) params.set('summary', 'true');
         params.set('filename', audioFilename);
+        // Pass tail of previous chunk so Whisper stays in the right language/context
+        if (prevChunkTail) params.set('prompt', prevChunkTail);
 
         const response = await fetch('/.netlify/functions/analyze?' + params, {
           method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: base64,
@@ -654,6 +656,8 @@
         totalDuration += data.duration || 0;
         detectedLanguage = data.language || detectedLanguage;
         if (data.summary) summary = data.summary;
+        // Keep last ~200 chars as context prompt for the next chunk
+        prevChunkTail = (data.text || '').split(' ').slice(-30).join(' ').slice(-200);
       }
 
       // For multi-chunk files, summarize the full combined transcript
