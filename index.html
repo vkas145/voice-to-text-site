@@ -519,49 +519,52 @@
     activeOptions[id] = el.classList.contains('active');
   }
 
-  // Compress audio to mono 16kHz WebM/Opus (~5x smaller) before uploading
+  // Encode AudioBuffer as WAV in memory (instant, no real-time playback needed)
+  function encodeWAV(audioBuffer) {
+    const numChannels = 1;
+    const sampleRate = audioBuffer.sampleRate;
+    const pcmData = audioBuffer.getChannelData(0);
+    const numSamples = pcmData.length;
+    const int16Data = new Int16Array(numSamples);
+    for (let i = 0; i < numSamples; i++) {
+      const s = Math.max(-1, Math.min(1, pcmData[i]));
+      int16Data[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+    }
+    const dataLength = int16Data.byteLength;
+    const buffer = new ArrayBuffer(44 + dataLength);
+    const view = new DataView(buffer);
+    const writeStr = (off, str) => { for (let i = 0; i < str.length; i++) view.setUint8(off + i, str.charCodeAt(i)); };
+    writeStr(0, 'RIFF'); view.setUint32(4, 36 + dataLength, true); writeStr(8, 'WAVE');
+    writeStr(12, 'fmt '); view.setUint32(16, 16, true); view.setUint16(20, 1, true);
+    view.setUint16(22, numChannels, true); view.setUint32(24, sampleRate, true);
+    view.setUint32(28, sampleRate * numChannels * 2, true); view.setUint16(32, numChannels * 2, true);
+    view.setUint16(34, 16, true); writeStr(36, 'data'); view.setUint32(40, dataLength, true);
+    new Uint8Array(buffer, 44).set(new Uint8Array(int16Data.buffer));
+    return new Blob([buffer], { type: 'audio/wav' });
+  }
+
+  // Compress audio to mono 16kHz WAV before uploading (instant — no real-time encoding)
   async function compressAudio(file) {
     try {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       const ctx = new AudioContext();
       const arrayBuffer = await file.arrayBuffer();
       const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
+      await ctx.close();
 
       // Resample to 16kHz mono via OfflineAudioContext
       const targetSampleRate = 16000;
-      const duration = audioBuffer.duration;
-      const offlineCtx = new OfflineAudioContext(1, Math.ceil(targetSampleRate * duration), targetSampleRate);
+      const offlineCtx = new OfflineAudioContext(1, Math.ceil(targetSampleRate * audioBuffer.duration), targetSampleRate);
       const source = offlineCtx.createBufferSource();
       source.buffer = audioBuffer;
       source.connect(offlineCtx.destination);
       source.start();
       const rendered = await offlineCtx.startRendering();
 
-      // Encode as WebM/Opus using MediaRecorder
-      const streamCtx = new AudioContext({ sampleRate: targetSampleRate });
-      const compressedBuffer = streamCtx.createBuffer(1, rendered.length, targetSampleRate);
-      compressedBuffer.copyToChannel(rendered.getChannelData(0), 0);
-
-      const dest = streamCtx.createMediaStreamDestination();
-      const bufferSource = streamCtx.createBufferSource();
-      bufferSource.buffer = compressedBuffer;
-      bufferSource.connect(dest);
-
-      const chunks = [];
-      const recorder = new MediaRecorder(dest.stream, { mimeType: 'audio/webm;codecs=opus', audioBitsPerSecond: 32000 });
-      recorder.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
-
-      await new Promise(resolve => {
-        recorder.onstop = resolve;
-        recorder.start();
-        bufferSource.start();
-        bufferSource.onended = () => recorder.stop();
-      });
-
-      await streamCtx.close();
-      const blob = new Blob(chunks, { type: 'audio/webm' });
+      // Encode as WAV instantly (no real-time playback)
+      const blob = encodeWAV(rendered);
       console.log(`Compressed: ${(file.size/1024/1024).toFixed(2)}MB → ${(blob.size/1024/1024).toFixed(2)}MB`);
-      return { blob, filename: file.name.replace(/\.[^.]+$/, '') + '.webm' };
+      return { blob, filename: file.name.replace(/\.[^.]+$/, '') + '.wav' };
     } catch (e) {
       console.warn('Compression failed, using original:', e.message);
       return { blob: file, filename: file.name };
