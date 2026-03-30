@@ -94,6 +94,8 @@ exports.handler = async function (event) {
       response_format: "verbose_json",
     };
     if (language !== "auto") whisperParams.language = language;
+    // Prompt from previous chunk anchors language/context and prevents hallucination
+    if (params.prompt) whisperParams.prompt = decodeURIComponent(params.prompt).slice(0, 224);
 
     const transcription = await openai.audio.transcriptions.create(whisperParams);
 
