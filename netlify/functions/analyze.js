@@ -26,6 +26,26 @@ exports.handler = async function (event) {
     const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
     const params = event.queryStringParameters || {};
+
+    // Text-only summarization mode (used after multi-chunk transcription)
+    if (params.mode === 'summarize') {
+      const text = event.isBase64Encoded
+        ? Buffer.from(event.body, 'base64').toString('utf8')
+        : (event.body || '');
+      if (text.length < 50) return json(400, { error: 'No text provided for summary.' });
+      const resp = await openai.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: 'Return JSON only: { "summary": "2-3 sentences", "keyPoints": ["..."] }' },
+          { role: 'user', content: `Transcript:\n${text.slice(0, 12000)}` },
+        ],
+        max_tokens: 600,
+      });
+      let summary;
+      try { summary = JSON.parse(resp.choices[0].message.content); }
+      catch { summary = { summary: resp.choices[0].message.content, keyPoints: [] }; }
+      return json(200, { summary });
+    }
     const language = params.language || "auto";
     const wantTimestamps = params.timestamps === "true";
     const wantSummary = params.summary === "true";
