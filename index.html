@@ -543,7 +543,11 @@
     return new Blob([buffer], { type: 'audio/wav' });
   }
 
-  // Compress audio to mono 16kHz WAV before uploading (instant — no real-time encoding)
+  // Compress audio to mono WAV before uploading (instant — no real-time encoding).
+  // Netlify Lambda has a 6MB request body limit; base64 adds ~33% overhead,
+  // so the raw WAV must stay under ~4MB.
+  //   16kHz mono 16-bit: 32 000 B/s → max ~125 s (≈2 min)
+  //    8kHz mono 16-bit: 16 000 B/s → max ~250 s (≈4 min)
   async function compressAudio(file) {
     try {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -552,20 +556,33 @@
       const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
       await ctx.close();
 
-      // Resample to 16kHz mono via OfflineAudioContext
-      const targetSampleRate = 16000;
-      const offlineCtx = new OfflineAudioContext(1, Math.ceil(targetSampleRate * audioBuffer.duration), targetSampleRate);
+      const duration = audioBuffer.duration;
+      // Choose sample rate so raw WAV stays under 4 MB
+      const MAX_BYTES = 4 * 1024 * 1024;
+      const bytesPerSec16k = 16000 * 2;
+      const bytesPerSec8k  =  8000 * 2;
+      let targetSampleRate;
+      if (duration * bytesPerSec16k <= MAX_BYTES) {
+        targetSampleRate = 16000;
+      } else if (duration * bytesPerSec8k <= MAX_BYTES) {
+        targetSampleRate = 8000;
+      } else {
+        throw new Error(`Audio is too long (${Math.round(duration)}s). Please use files under 4 minutes.`);
+      }
+
+      const offlineCtx = new OfflineAudioContext(1, Math.ceil(targetSampleRate * duration), targetSampleRate);
       const source = offlineCtx.createBufferSource();
       source.buffer = audioBuffer;
       source.connect(offlineCtx.destination);
       source.start();
       const rendered = await offlineCtx.startRendering();
 
-      // Encode as WAV instantly (no real-time playback)
       const blob = encodeWAV(rendered);
-      console.log(`Compressed: ${(file.size/1024/1024).toFixed(2)}MB → ${(blob.size/1024/1024).toFixed(2)}MB`);
+      console.log(`Compressed: ${(file.size/1024/1024).toFixed(2)}MB → ${(blob.size/1024/1024).toFixed(2)}MB (${targetSampleRate/1000}kHz)`);
       return { blob, filename: file.name.replace(/\.[^.]+$/, '') + '.wav' };
     } catch (e) {
+      // Re-throw user-facing duration errors; fall back to original for other failures
+      if (e.message.startsWith('Audio is too long')) throw e;
       console.warn('Compression failed, using original:', e.message);
       return { blob: file, filename: file.name };
     }
@@ -612,7 +629,9 @@
         method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: base64,
       });
 
-      const data = await response.json();
+      let data;
+      try { data = await response.json(); }
+      catch { const t = await response.text().catch(() => ''); throw new Error(`Server error (${response.status})${t ? ': ' + t.slice(0, 120) : ''}`); }
       clearInterval(timerInterval);
       document.getElementById('progressWrap').classList.remove('visible');
       btn.disabled = false;
