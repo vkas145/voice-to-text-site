@@ -196,9 +196,20 @@ const LANG_NAME_TO_ISO = {
   welsh:"cy",yiddish:"yi",yoruba:"yo",
 };
 
+// Languages the Whisper API actually accepts as a language parameter
+const WHISPER_SUPPORTED = new Set([
+  "af","sq","am","ar","hy","as","az","ba","eu","be","bn","bs","br","bg","my",
+  "ca","hr","cs","da","nl","en","et","fo","fi","fr","gl","ka","de","el","gu",
+  "ht","ha","he","hi","hu","is","id","it","ja","jw","kn","kk","km","ko","lo",
+  "lv","ln","lt","lb","mk","mg","ms","ml","mt","mi","mr","mn","ne","no","nn",
+  "oc","ps","fa","pl","pt","pa","ro","ru","sr","sn","sd","si","sk","sl","so",
+  "es","su","sw","sv","tl","tg","ta","tt","te","th","tr","tk","uk","ur","uz",
+  "vi","cy","yi","yo",
+]);
+
 function toIsoCode(lang) {
   if (!lang) return null;
-  // Already a short code (2-3 chars)
-  if (lang.length <= 3) return lang.toLowerCase();
-  return LANG_NAME_TO_ISO[lang.toLowerCase()] || null;
+  const code = lang.length <= 3 ? lang.toLowerCase() : (LANG_NAME_TO_ISO[lang.toLowerCase()] || null);
+  // Only return the code if Whisper actually accepts it as a language param
+  return (code && WHISPER_SUPPORTED.has(code)) ? code : null;
 }
