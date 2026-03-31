@@ -33,10 +33,14 @@ exports.handler = async function (event) {
         ? Buffer.from(event.body, 'base64').toString('utf8')
         : (event.body || '');
       if (text.length < 50) return json(400, { error: 'No text provided for summary.' });
+      const wantSentiment = params.sentiment === 'true';
+      const systemContent = wantSentiment
+        ? 'Return JSON only: {"summary":"2-3 sentence overview","keyPoints":["concise bullet point"],"sentiment":"positive|neutral|negative","tone":"one descriptive word (e.g. professional, casual, tense)","emotions":["2-3 key emotions detected in the audio"]}'
+        : 'Return JSON only: { "summary": "2-3 sentences", "keyPoints": ["..."] }';
       const resp = await openai.chat.completions.create({
         model: 'gpt-4o-mini',
         messages: [
-          { role: 'system', content: 'Return JSON only: { "summary": "2-3 sentences", "keyPoints": ["..."] }' },
+          { role: 'system', content: systemContent },
           { role: 'user', content: `Transcript:\n${text.slice(0, 12000)}` },
         ],
         max_tokens: 600,
@@ -116,13 +120,17 @@ exports.handler = async function (event) {
     const wordCount = transcriptText.replace(/\[.*?\]/g, "").trim().split(/\s+/).filter(Boolean).length;
     const duration = transcription.duration ? Math.round(transcription.duration) : null;
 
-    // Optional summary
+    // Optional summary + sentiment
+    const wantSentiment = params.sentiment === 'true';
     let summary = null;
     if (wantSummary && transcriptText.length > 100) {
+      const systemContent = wantSentiment
+        ? 'Return JSON only: {"summary":"2-3 sentence overview","keyPoints":["concise bullet point"],"sentiment":"positive|neutral|negative","tone":"one descriptive word (e.g. professional, casual, tense)","emotions":["2-3 key emotions detected in the audio"]}'
+        : 'Return JSON only: { "summary": "2-3 sentences", "keyPoints": ["..."] }';
       const resp = await openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [
-          { role: "system", content: 'Return JSON only: { "summary": "2-3 sentences", "keyPoints": ["..."] }' },
+          { role: "system", content: systemContent },
           { role: "user", content: `Transcript:\n${transcriptText.slice(0, 12000)}` }
         ],
         max_tokens: 600,

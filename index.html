@@ -186,7 +186,8 @@
     .lang-label { font-size: 13px; font-weight: 500; color: #475569; flex-shrink: 0; }
     .lang-select { flex: 1; padding: 9px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 13px; color: #1e293b; font-family: inherit; outline: none; }
     .lang-select:focus { border-color: #6366f1; }
-    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .options-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+    @media (max-width: 520px) { .options-grid { grid-template-columns: 1fr 1fr; } .options-grid .opt-card:last-child { grid-column: span 2; } }
     .opt-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 11px 12px; display: flex; align-items: flex-start; gap: 9px; cursor: pointer; transition: all 0.15s; }
     .opt-card:hover { border-color: #a5b4fc; background: #eef2ff; }
     .opt-card.active { border-color: #6366f1; background: #eef2ff; }
@@ -235,6 +236,16 @@
     .key-points { list-style: none; text-align: left; }
     .key-points li { font-size: 12px; color: #4c1d95; line-height: 1.5; padding: 3px 0 3px 18px; position: relative; text-align: left; }
     .key-points li::before { content:''; position:absolute; left:4px; top:10px; width:5px; height:5px; background:#7c3aed; border-radius:50%; }
+    /* SENTIMENT */
+    .sentiment-section { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+    .sentiment-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+    .sentiment-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .chip-sentiment-positive { background: #dcfce7; color: #166534; }
+    .chip-sentiment-neutral  { background: #f1f5f9; color: #475569; }
+    .chip-sentiment-negative { background: #fee2e2; color: #991b1b; }
+    .chip-tone    { background: #ede9fe; color: #5b21b6; }
+    .chip-emotion { background: #fff7ed; color: #9a3412; }
+
     .transcript-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
     .transcript-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: #94a3b8; }
     .action-btns { display: flex; gap: 6px; }
@@ -409,6 +420,10 @@
           <div class="opt-toggle"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></div>
           <div><div class="opt-label">AI Summary</div><div class="opt-sub">Key points extracted</div></div>
         </div>
+        <div class="opt-card" id="optSentiment" onclick="toggleOpt('optSentiment')">
+          <div class="opt-toggle"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></div>
+          <div><div class="opt-label">Sentiment</div><div class="opt-sub">Tone &amp; emotion analysis</div></div>
+        </div>
       </div>
 
       <!-- CTA -->
@@ -448,6 +463,13 @@
           </div>
           <p class="summary-text" id="summaryText"></p>
           <ul class="key-points" id="keyPoints"></ul>
+        </div>
+        <div class="sentiment-section" id="sentimentSection" style="display:none">
+          <div class="section-head" style="color:#0369a1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0369a1" stroke-width="2" stroke-linecap="round" style="width:13px;height:13px"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            Sentiment Analysis
+          </div>
+          <div class="sentiment-row" id="sentimentRow"></div>
         </div>
         <div class="transcript-header">
           <span class="transcript-label">Transcript</span>
@@ -517,7 +539,7 @@
 </footer>
 
 <script>
-  let activeOptions = { optTimestamps: false, optSummary: false };
+  let activeOptions = { optTimestamps: false, optSummary: false, optSentiment: false };
   let timerInterval = null;
   let mediaRecorder = null, recordedChunks = [], recordTimer = null, recordSeconds = 0, recordedBlob = null, selectedFile = null;
 
@@ -694,17 +716,46 @@
       const lang = document.getElementById('langSelect').value;
       const wantTimestamps = activeOptions.optTimestamps;
       const wantSummary = activeOptions.optSummary;
+      const wantSentiment = activeOptions.optSentiment;
 
       let allText = '', allSegments = [], totalWordCount = 0, totalDuration = 0;
-      let detectedLanguage = 'auto', summary = null, completed = 0;
+      let detectedLanguage = lang !== 'auto' ? lang : null, summary = null, completed = 0;
 
       btn.innerHTML = BOLT_ICON + (chunks.length > 1 ? ' Transcribing 0%...' : ' Transcribing...');
 
-      // Transcribe chunks with max 3 concurrent requests — fast on desktop,
-      // safe on slow mobile connections (avoids 408 upload timeouts)
-      const CONCURRENCY = 3;
+      // All chunk results stored here in order
       const chunkResults = new Array(chunks.length);
-      const queue = chunks.map((chunk, i) => ({ chunk, i }));
+
+      // Step 1: transcribe chunk 0 first to lock in language detection.
+      // This prevents parallel chunks from each detecting a different language
+      // in code-switched audio (e.g. Hindi+Telugu+English), which causes garbled output.
+      if (chunks.length > 1 && lang === 'auto') {
+        const firstChunk = chunks[0];
+        const base64first = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result.split(',')[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(firstChunk.blob);
+        });
+        const p0 = new URLSearchParams();
+        p0.set('filename', firstChunk.filename);
+        if (wantTimestamps) p0.set('timestamps', 'true');
+        const r0 = await fetch('/.netlify/functions/analyze?' + p0, {
+          method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: base64first,
+        });
+        let d0;
+        try { d0 = await r0.json(); }
+        catch { const t = await r0.text().catch(() => ''); throw new Error(`Server error (${r0.status})${t ? ': ' + t.slice(0, 120) : ''}`); }
+        if (d0.error) throw new Error(d0.error);
+        chunkResults[0] = { data: d0, startSec: firstChunk.startSec };
+        detectedLanguage = d0.language || null;
+        completed++;
+        btn.innerHTML = BOLT_ICON + ` Transcribing ${Math.round(completed / chunks.length * 100)}%...`;
+      }
+
+      // Step 2: process remaining chunks in parallel, language now locked
+      const CONCURRENCY = 3;
+      const queue = chunks.map((chunk, i) => ({ chunk, i })).filter(({ i }) => chunkResults[i] === undefined);
       async function runWorker() {
         while (queue.length) {
           const { chunk, i } = queue.shift();
@@ -716,9 +767,12 @@
             reader.readAsDataURL(audioBlob);
           });
           const params = new URLSearchParams();
-          if (lang !== 'auto') params.set('language', lang);
+          // Use locked language (either user-selected or detected from chunk 0)
+          const langToUse = detectedLanguage || lang;
+          if (langToUse && langToUse !== 'auto') params.set('language', langToUse);
           if (wantTimestamps) params.set('timestamps', 'true');
           if (wantSummary && chunks.length === 1) params.set('summary', 'true');
+          if (wantSentiment && chunks.length === 1) params.set('sentiment', 'true');
           params.set('filename', audioFilename);
           const response = await fetch('/.netlify/functions/analyze?' + params, {
             method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: base64,
@@ -755,9 +809,11 @@
       }
 
       // For multi-chunk files, summarize the full combined transcript
-      if (wantSummary && chunks.length > 1 && allText.length >= 50) {
-        btn.innerHTML = BOLT_ICON + ' Summarizing...';
-        const sResp = await fetch('/.netlify/functions/analyze?mode=summarize', {
+      if ((wantSummary || wantSentiment) && chunks.length > 1 && allText.length >= 50) {
+        btn.innerHTML = BOLT_ICON + ' Analyzing...';
+        const sParams = new URLSearchParams({ mode: 'summarize' });
+        if (wantSentiment) sParams.set('sentiment', 'true');
+        const sResp = await fetch('/.netlify/functions/analyze?' + sParams, {
           method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: allText,
         });
         const sData = await sResp.json().catch(() => ({}));
@@ -775,12 +831,38 @@
       document.getElementById('statLang').textContent = (detectedLanguage || 'auto').toUpperCase();
 
       const ss = document.getElementById('summarySection');
+      const sentSec = document.getElementById('sentimentSection');
       if (summary) {
         document.getElementById('summaryText').textContent = summary.summary || '';
         const kp = document.getElementById('keyPoints'); kp.innerHTML = '';
         (summary.keyPoints || []).forEach(p => { const li = document.createElement('li'); li.textContent = p; kp.appendChild(li); });
-        ss.style.display = '';
-      } else { ss.style.display = 'none'; }
+        ss.style.display = summary.summary ? '' : 'none';
+
+        // Render sentiment chips if present
+        if (summary.sentiment || summary.tone || summary.emotions) {
+          const row = document.getElementById('sentimentRow'); row.innerHTML = '';
+          if (summary.sentiment) {
+            const s = summary.sentiment.toLowerCase();
+            const chip = document.createElement('span');
+            chip.className = 'sentiment-chip chip-sentiment-' + (s === 'positive' ? 'positive' : s === 'negative' ? 'negative' : 'neutral');
+            chip.textContent = (s === 'positive' ? '😊 ' : s === 'negative' ? '😟 ' : '😐 ') + s.charAt(0).toUpperCase() + s.slice(1);
+            row.appendChild(chip);
+          }
+          if (summary.tone) {
+            const chip = document.createElement('span');
+            chip.className = 'sentiment-chip chip-tone';
+            chip.textContent = '🎯 ' + summary.tone.charAt(0).toUpperCase() + summary.tone.slice(1);
+            row.appendChild(chip);
+          }
+          (summary.emotions || []).forEach(em => {
+            const chip = document.createElement('span');
+            chip.className = 'sentiment-chip chip-emotion';
+            chip.textContent = '💬 ' + em;
+            row.appendChild(chip);
+          });
+          sentSec.style.display = '';
+        } else { sentSec.style.display = 'none'; }
+      } else { ss.style.display = 'none'; sentSec.style.display = 'none'; }
 
       const box = document.getElementById('transcriptBox');
       if (wantTimestamps && allSegments.length) {
