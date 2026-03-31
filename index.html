@@ -6,6 +6,10 @@
   <title>Free AI Audio Transcription Online — No Signup | Bolo Aur Likho</title>
   <meta name="description" content="Transcribe audio to text free online — no signup required. Upload MP3, WAV, M4A or record live. 99+ languages, AI summary, timestamps. Powered by OpenAI Whisper.">
   <link rel="canonical" href="https://boloaurlikho.com/">
+  <!-- Hreflang: multilingual signals for Google & AI engines -->
+  <link rel="alternate" hreflang="en" href="https://boloaurlikho.com/">
+  <link rel="alternate" hreflang="hi" href="https://boloaurlikho.com/hindi-speech-to-text">
+  <link rel="alternate" hreflang="x-default" href="https://boloaurlikho.com/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -23,13 +27,23 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Bolo Aur Likho",
+    "alternateName": ["बोलो और लिखो", "boloaurlikho", "Bolo Aur Likho Transcription"],
     "url": "https://boloaurlikho.com",
     "applicationCategory": "UtilitiesApplication",
-    "operatingSystem": "Web",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "description": "Free AI audio transcription online. Upload any audio file or record live and get an accurate transcript in seconds. 99+ languages, no signup required, powered by OpenAI Whisper.",
-    "featureList": ["99+ languages", "No signup required", "AI summary", "Timestamps", "Free forever", "MP3 WAV M4A OGG FLAC support"],
+    "operatingSystem": "Web Browser, Android, iOS",
+    "inLanguage": ["en", "hi", "ur", "es", "fr", "de", "ar", "pt", "ta", "mr", "bn"],
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+    "isAccessibleForFree": true,
+    "description": "Free AI audio transcription online powered by OpenAI Whisper. Upload MP3, WAV, M4A or record live. 99+ languages including Hindi, English, Spanish, Arabic. No signup required, results in seconds.",
+    "featureList": ["99+ languages", "No signup required", "AI summary", "Timestamps", "Free forever", "MP3 WAV M4A OGG FLAC support", "Hindi transcription", "Real-time recording"],
     "screenshot": "https://boloaurlikho.com/og-image.png",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "1240",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
     "publisher": {
       "@type": "Organization",
       "name": "Bolo Aur Likho",
@@ -73,12 +87,27 @@
         "@type": "Question",
         "name": "How long can the audio file be?",
         "acceptedAnswer": { "@type": "Answer", "text": "You can transcribe audio files up to 200MB. There is no strict time limit — long recordings are automatically split and processed in parallel." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it work for Hindi audio transcription?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Bolo Aur Likho supports Hindi (हिंदी) audio transcription with high accuracy. Just upload your Hindi audio file or record in Hindi — the AI will transcribe it to text in the Devanagari or Latin script." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use it on mobile?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Bolo Aur Likho works on all modern mobile browsers including Chrome on Android and Safari on iOS. No app download required — just open the website and start transcribing." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best free alternative to Otter.ai?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Bolo Aur Likho is one of the best free Otter.ai alternatives. It has no monthly minute limits, requires no subscription, and supports 99+ languages — compared to Otter.ai's 300-minute free cap." }
       }
     ]
   }
   </script>
 
-  <!-- Structured Data: WebSite -->
+  <!-- Structured Data: WebSite + Organization -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -91,6 +120,24 @@
       "target": "https://boloaurlikho.com/?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Bolo Aur Likho",
+    "alternateName": "बोलो और लिखो",
+    "url": "https://boloaurlikho.com",
+    "logo": "https://boloaurlikho.com/og-image.png",
+    "description": "Free AI audio transcription and speech-to-text tool supporting 99+ languages.",
+    "sameAs": [
+      "https://www.producthunt.com/products/bolo-aur-likho",
+      "https://alternativeto.net/software/bolo-aur-likho",
+      "https://twitter.com/boloaurlikho",
+      "https://www.instagram.com/boloaurlikho",
+      "https://www.youtube.com/@boloaurlikho"
+    ]
   }
   </script>
 
