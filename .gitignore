@@ -1,2 +1,4 @@
 client_secret*
-.env
+.env.claude/
+generate-pages.js
+generate-question-pages.js
