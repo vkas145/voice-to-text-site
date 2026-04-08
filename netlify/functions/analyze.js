@@ -27,6 +27,52 @@ exports.handler = async function (event) {
 
     const params = event.queryStringParameters || {};
 
+    // Score a transcript against a rubric (used by bulk-audit tool)
+    if (params.mode === 'score') {
+      const raw = event.isBase64Encoded
+        ? Buffer.from(event.body, 'base64').toString('utf8')
+        : (event.body || '');
+      let payload;
+      try { payload = JSON.parse(raw); }
+      catch { return json(400, { error: 'Invalid JSON body for score mode.' }); }
+      const transcript = (payload.transcript || '').toString();
+      const rubric = Array.isArray(payload.rubric) ? payload.rubric : [];
+      if (transcript.length < 30) return json(400, { error: 'Transcript too short to score.' });
+      if (rubric.length === 0) return json(400, { error: 'No rubric criteria provided.' });
+
+      const rubricList = rubric.map((r, i) =>
+        `${i + 1}. [${r.category || 'standard'}] ${r.name}: ${r.description || ''}`
+      ).join('\n');
+
+      const sys = `You are an expert call quality auditor for Indian tele-sales teams. Score the transcript against each rubric criterion on a 0-10 scale (10 = excellent, 0 = absent/poor). Be strict and evidence-based. Return JSON ONLY in this exact shape:
+{
+  "overallScore": <0-10 number, average of criteria>,
+  "summary": "<2-3 sentence audit summary>",
+  "sentiment": "positive|neutral|negative",
+  "outcome": "<one of: converted, follow-up, not-interested, unclear>",
+  "criteria": [
+    {"name": "<criterion name>", "category": "<category>", "score": <0-10>, "rationale": "<one sentence why>", "evidence": "<short quote or 'not present'>"}
+  ],
+  "strengths": ["<bullet>", "<bullet>"],
+  "improvements": ["<actionable bullet>", "<actionable bullet>"],
+  "complianceFlags": ["<flag or empty array>"]
+}`;
+
+      const resp = await openai.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: sys },
+          { role: 'user', content: `Rubric:\n${rubricList}\n\nTranscript:\n${transcript.slice(0, 14000)}` },
+        ],
+        max_tokens: 1400,
+        response_format: { type: 'json_object' },
+      });
+      let scored;
+      try { scored = JSON.parse(resp.choices[0].message.content); }
+      catch { return json(500, { error: 'Scoring model returned invalid JSON.' }); }
+      return json(200, { scored });
+    }
+
     // Text-only summarization mode (used after multi-chunk transcription)
     if (params.mode === 'summarize') {
       const text = event.isBase64Encoded

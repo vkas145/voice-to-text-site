@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bulk Call Audit Demo - Bolo Aur Likho Enterprise</title>
+<meta name="description" content="Upload up to 10 call recordings, define your quality guidelines, and get a full audit dashboard in minutes. Free demo from Bolo Aur Likho Enterprise.">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --primary: #6366f1;
+    --primary-deep: #4f46e5;
+    --secondary: #7c3aed;
+    --accent: #8b5cf6;
+    --ink: #1a1a2e;
+    --ink-soft: #2d2b55;
+    --body: #64748b;
+    --muted: #94a3b8;
+    --line: #e2e8f0;
+    --line-soft: #c7d2fe;
+    --bg: #f8fafc;
+    --bg-alt: #f1f5f9;
+    --bg-deep: #eef2ff;
+    --card: #ffffff;
+    --success: #22c55e;
+    --warn: #f59e0b;
+    --danger: #ef4444;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+  body {
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    font-size:15px; line-height:1.6; color:var(--body); background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+  }
+  .container { max-width:1200px; margin:0 auto; padding:0 28px; }
+  a { color:var(--primary); text-decoration:none; transition:color .2s; }
+  a:hover { color:var(--primary-deep); }
+
+  /* NAV */
+  nav {
+    padding:18px 0; border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:100;
+    backdrop-filter:blur(12px); background:rgba(248,250,252,.92);
+  }
+  .nav-inner { display:flex; justify-content:space-between; align-items:center; }
+  .logo { font-weight:800; font-size:22px; letter-spacing:-.5px; color:var(--ink); }
+  .logo .dot { background:linear-gradient(135deg,var(--primary),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .logo-sub { font-size:11px; font-weight:700; color:var(--primary); letter-spacing:1.2px; text-transform:uppercase; margin-top:2px; display:block; }
+  .nav-links { display:flex; gap:28px; align-items:center; }
+  .nav-links a { color:var(--body); font-size:14px; font-weight:500; }
+  .nav-links a:hover { color:var(--primary); }
+
+  /* HEADER */
+  .page-head { padding:60px 0 30px; }
+  .eyebrow {
+    display:inline-block; background:var(--bg-deep); color:var(--primary);
+    padding:6px 14px; border-radius:20px; font-size:12px; font-weight:700;
+    letter-spacing:1.4px; text-transform:uppercase; margin-bottom:20px;
+    border:1px solid var(--line-soft);
+  }
+  h1 {
+    font-weight:800; font-size:clamp(30px,4.5vw,46px); line-height:1.1;
+    letter-spacing:-1px; color:var(--ink); margin-bottom:18px; max-width:880px;
+  }
+  h1 em { font-style:normal; background:linear-gradient(135deg,var(--primary),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:800; }
+  .lede { font-size:17px; color:var(--body); max-width:760px; margin-bottom:14px; }
+  .demo-note {
+    display:inline-block; background:#fff7ed; color:#9a3412; border:1px solid #fed7aa;
+    padding:8px 14px; border-radius:8px; font-size:13px; font-weight:500; margin-top:6px;
+  }
+
+  /* WIZARD CARD */
+  .wizard { padding:30px 0 90px; }
+  .card {
+    background:var(--card); border:1px solid var(--line); border-radius:18px;
+    padding:36px; margin-bottom:24px;
+    box-shadow:0 1px 3px rgba(15,23,42,.04);
+  }
+  .step-head { display:flex; align-items:center; gap:14px; margin-bottom:6px; }
+  .step-num {
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    color:#fff; width:32px; height:32px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:14px; flex-shrink:0;
+  }
+  .step-head h2 { font-size:22px; font-weight:800; color:var(--ink); letter-spacing:-.4px; }
+  .step-sub { font-size:14px; color:var(--muted); margin-bottom:24px; padding-left:46px; }
+
+  /* DROPZONE */
+  .dropzone {
+    border:2px dashed var(--line-soft); border-radius:14px;
+    padding:48px 24px; text-align:center; cursor:pointer;
+    transition:all .2s; background:var(--bg-deep);
+  }
+  .dropzone:hover, .dropzone.drag-over { border-color:var(--primary); background:#e0e7ff; }
+  .dropzone-icon { font-size:42px; margin-bottom:12px; }
+  .dropzone-title { font-size:16px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+  .dropzone-hint { font-size:13px; color:var(--muted); }
+  input[type="file"] { display:none; }
+
+  .file-list { margin-top:20px; display:none; }
+  .file-list.has-files { display:block; }
+  .file-row {
+    display:flex; align-items:center; gap:12px;
+    padding:12px 14px; background:var(--bg-alt); border-radius:10px;
+    margin-bottom:8px; font-size:13px;
+  }
+  .file-row .name { flex:1; color:var(--ink); font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .file-row .meta { color:var(--muted); font-size:12px; }
+  .file-row .remove { background:none; border:none; color:var(--danger); cursor:pointer; font-size:18px; padding:0 6px; }
+  .file-summary {
+    margin-top:14px; font-size:13px; color:var(--body); display:flex; gap:18px; flex-wrap:wrap;
+  }
+  .file-summary span strong { color:var(--ink); }
+  .file-summary span.warn { color:var(--danger); font-weight:600; }
+
+  /* RUBRIC */
+  .rubric-block { margin-bottom:28px; }
+  .rubric-block h3 {
+    font-size:14px; font-weight:700; color:var(--ink); text-transform:uppercase;
+    letter-spacing:1px; margin-bottom:14px;
+  }
+  .standard-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .check-row {
+    display:flex; align-items:flex-start; gap:12px; padding:12px 14px;
+    border:1px solid var(--line); border-radius:10px; cursor:pointer; transition:all .15s;
+    background:var(--card);
+  }
+  .check-row:hover { border-color:var(--line-soft); background:var(--bg-alt); }
+  .check-row input { margin-top:3px; accent-color:var(--primary); width:16px; height:16px; }
+  .check-row .label { font-size:14px; color:var(--ink); font-weight:600; }
+  .check-row .desc { font-size:12px; color:var(--muted); margin-top:2px; }
+
+  .custom-list { display:flex; flex-direction:column; gap:10px; }
+  .custom-row {
+    display:grid; grid-template-columns:170px 130px 1fr auto; gap:10px;
+    align-items:start;
+  }
+  .custom-row input, .custom-row select, .custom-row textarea {
+    font-family:inherit; font-size:13px; padding:10px 12px;
+    border:1px solid var(--line); border-radius:8px; background:#fff;
+    color:var(--ink); width:100%; resize:vertical;
+  }
+  .custom-row textarea { min-height:38px; }
+  .custom-row input:focus, .custom-row select:focus, .custom-row textarea:focus {
+    outline:none; border-color:var(--primary);
+  }
+  .custom-row .del-btn {
+    background:var(--bg-alt); border:1px solid var(--line); border-radius:8px;
+    color:var(--danger); cursor:pointer; padding:8px 12px; font-size:16px;
+  }
+  .add-row-btn {
+    margin-top:12px; background:transparent; color:var(--primary);
+    border:1px dashed var(--line-soft); padding:10px 16px; border-radius:8px;
+    font-weight:600; cursor:pointer; font-size:13px;
+  }
+  .add-row-btn:hover { background:var(--bg-deep); border-color:var(--primary); }
+
+  /* RUN BUTTON */
+  .run-bar { display:flex; gap:14px; align-items:center; flex-wrap:wrap; padding-top:8px; }
+  .btn-run {
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+    color:#fff; border:none; padding:16px 32px; border-radius:12px;
+    font-weight:700; font-size:15px; cursor:pointer;
+    box-shadow:0 4px 16px rgba(99,102,241,.3); transition:all .2s;
+    font-family:inherit;
+  }
+  .btn-run:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 8px 24px rgba(99,102,241,.4); }
+  .btn-run:disabled { opacity:.5; cursor:not-allowed; }
+  .btn-secondary {
+    color:var(--ink); padding:14px 22px; border:1px solid var(--line);
+    border-radius:10px; font-weight:600; font-size:14px; background:#fff;
+    cursor:pointer; font-family:inherit;
+  }
+  .btn-secondary:hover { border-color:var(--primary); background:var(--bg-deep); }
+
+  /* PROGRESS */
+  .progress { margin-top:20px; display:none; }
+  .progress.active { display:block; }
+  .progress-bar {
+    height:8px; background:var(--bg-alt); border-radius:99px; overflow:hidden;
+  }
+  .progress-fill {
+    height:100%; background:linear-gradient(90deg,var(--primary),var(--accent));
+    width:0%; transition:width .4s;
+  }
+  .progress-log {
+    margin-top:14px; font-size:13px; color:var(--body); max-height:160px; overflow-y:auto;
+    padding:12px; background:var(--bg-alt); border-radius:8px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  .progress-log .ok { color:var(--success); }
+  .progress-log .err { color:var(--danger); }
+
+  /* DASHBOARD */
+  .dashboard { display:none; }
+  .dashboard.active { display:block; }
+  .dash-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; gap:16px; flex-wrap:wrap; }
+  .dash-head h2 { font-size:26px; font-weight:800; color:var(--ink); letter-spacing:-.5px; }
+  .download-btns { display:flex; gap:10px; }
+
+  .kpi-grid {
+    display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-bottom:30px;
+  }
+  .kpi {
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:22px 18px; text-align:center;
+  }
+  .kpi .num {
+    font-size:32px; font-weight:800; color:var(--ink); letter-spacing:-1px;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1;
+  }
+  .kpi .label {
+    font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase;
+    letter-spacing:1.2px; margin-top:8px;
+  }
+
+  .panel {
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:26px; margin-bottom:20px;
+  }
+  .panel h3 { font-size:16px; font-weight:800; color:var(--ink); margin-bottom:18px; }
+
+  .param-bars { display:flex; flex-direction:column; gap:14px; }
+  .param-bar .row { display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px; }
+  .param-bar .row .name { color:var(--ink); font-weight:600; }
+  .param-bar .row .name .cat {
+    font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px;
+    background:var(--bg-deep); color:var(--primary); margin-left:6px; text-transform:uppercase;
+  }
+  .param-bar .row .score { color:var(--body); font-weight:600; }
+  .bar { height:8px; background:var(--bg-alt); border-radius:99px; overflow:hidden; }
+  .bar-fill { height:100%; border-radius:99px; transition:width .6s; }
+  .bar-fill.good { background:linear-gradient(90deg,#22c55e,#16a34a); }
+  .bar-fill.mid { background:linear-gradient(90deg,#f59e0b,#d97706); }
+  .bar-fill.bad { background:linear-gradient(90deg,#ef4444,#dc2626); }
+
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th, td { padding:12px 10px; text-align:left; border-bottom:1px solid var(--line); }
+  th { font-weight:700; color:var(--ink); font-size:12px; text-transform:uppercase; letter-spacing:.6px; background:var(--bg-alt); }
+  tbody tr { cursor:pointer; transition:background .15s; }
+  tbody tr:hover { background:var(--bg-deep); }
+  .pill {
+    display:inline-block; padding:3px 10px; border-radius:99px; font-size:11px; font-weight:700;
+  }
+  .pill.good { background:#dcfce7; color:#166534; }
+  .pill.mid { background:#fef3c7; color:#92400e; }
+  .pill.bad { background:#fee2e2; color:#991b1b; }
+
+  /* DRILL-DOWN */
+  .drill { display:none; padding:24px; background:var(--bg-alt); border-radius:12px; margin-top:14px; }
+  .drill.active { display:block; }
+  .drill h4 { font-size:15px; color:var(--ink); margin-bottom:10px; font-weight:700; }
+  .drill .summary-text { font-size:14px; color:var(--body); margin-bottom:16px; padding:12px; background:#fff; border-radius:8px; border-left:3px solid var(--primary); }
+  .drill .lists { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+  .drill ul { padding-left:20px; font-size:13px; color:var(--body); }
+  .drill ul li { margin-bottom:5px; }
+  .drill .crit-list { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+  .drill .crit-row {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:10px 14px; background:#fff; border-radius:8px; font-size:13px;
+  }
+  .drill .crit-row .crit-name { color:var(--ink); font-weight:600; }
+  .drill .crit-row .crit-rationale { color:var(--muted); font-size:12px; margin-top:2px; }
+  .drill .transcript {
+    background:#fff; padding:14px; border-radius:8px; font-size:13px; line-height:1.7;
+    color:var(--body); max-height:240px; overflow-y:auto; white-space:pre-wrap;
+  }
+
+  /* FOOTER */
+  footer { padding:50px 0; border-top:1px solid var(--line); background:var(--bg); margin-top:60px; }
+  .footer-inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; font-size:13px; color:var(--muted); }
+
+  @media (max-width:900px) {
+    .standard-grid { grid-template-columns:1fr; }
+    .custom-row { grid-template-columns:1fr 1fr; }
+    .custom-row textarea, .custom-row .del-btn { grid-column:1 / -1; }
+    .kpi-grid { grid-template-columns:repeat(2,1fr); }
+    .drill .lists { grid-template-columns:1fr; }
+    table th:nth-child(2), table td:nth-child(2) { display:none; }
+    .card { padding:24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <div>
+      <div class="logo">bolo aur likho<span class="dot">.</span></div>
+      <span class="logo-sub">Bulk Audit Demo</span>
+    </div>
+    <div class="nav-links">
+      <a href="enterprise.html">← Enterprise</a>
+      <a href="sample-report.html">Sample report</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <span class="eyebrow">Free Demo</span>
+    <h1>Upload up to 10 calls. Define your guidelines. Get a <em>full audit dashboard</em>.</h1>
+    <p class="lede">This is the same pipeline we run for enterprise clients, packaged as a self-serve demo. Drop in recordings, set your quality criteria, and we transcribe and score every call against your standards in minutes.</p>
+    <div class="demo-note">Demo limits: max 10 files, 60 minutes total. Supported formats: MP3, WAV, M4A, OGG, WEBM, FLAC.</div>
+  </div>
+</header>
+
+<section class="wizard">
+  <div class="container">
+
+    <!-- STEP 1: UPLOAD -->
+    <div class="card">
+      <div class="step-head">
+        <div class="step-num">1</div>
+        <h2>Upload call recordings</h2>
+      </div>
+      <p class="step-sub">Drop files or click to browse. We process them sequentially in your browser - nothing is stored on our servers.</p>
+
+      <label class="dropzone" id="dropzone">
+        <div class="dropzone-icon">🎙️</div>
+        <div class="dropzone-title">Drop audio files here or click to browse</div>
+        <div class="dropzone-hint">MP3, WAV, M4A, OGG, WEBM, FLAC · max 10 files · 60 min total</div>
+        <input type="file" id="fileInput" multiple accept="audio/*,.mp3,.wav,.m4a,.ogg,.webm,.flac">
+      </label>
+
+      <div class="file-list" id="fileList"></div>
+      <div class="file-summary" id="fileSummary" style="display:none;">
+        <span><strong id="countN">0</strong> files</span>
+        <span><strong id="totalMin">0</strong> min total</span>
+        <span><strong id="totalSize">0</strong> MB</span>
+      </div>
+    </div>
+
+    <!-- STEP 2: GUIDELINES -->
+    <div class="card">
+      <div class="step-head">
+        <div class="step-num">2</div>
+        <h2>Quality guidelines</h2>
+      </div>
+      <p class="step-sub">Standard parameters are applied by default. Add custom criteria for product, price, or process rules specific to your team.</p>
+
+      <div class="rubric-block">
+        <h3>Standard parameters</h3>
+        <div class="standard-grid" id="standardGrid"></div>
+      </div>
+
+      <div class="rubric-block">
+        <h3>Custom parameters (optional)</h3>
+        <div class="custom-list" id="customList"></div>
+        <button type="button" class="add-row-btn" id="addCustomBtn">+ Add custom parameter</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: RUN -->
+    <div class="card">
+      <div class="step-head">
+        <div class="step-num">3</div>
+        <h2>Run the audit</h2>
+      </div>
+      <p class="step-sub">We transcribe each call, score it against your guidelines, then build the dashboard. Roughly 30-60 seconds per call.</p>
+
+      <div class="run-bar">
+        <button class="btn-run" id="runBtn" disabled>Run audit →</button>
+        <button class="btn-secondary" id="resetBtn">Reset</button>
+      </div>
+
+      <div class="progress" id="progress">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-log" id="progressLog"></div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="dashboard" id="dashboard">
+      <div class="dash-head">
+        <h2>Audit Dashboard</h2>
+        <div class="download-btns">
+          <button class="btn-secondary" id="dlJson">Download JSON</button>
+          <button class="btn-secondary" id="dlCsv">Download CSV</button>
+        </div>
+      </div>
+
+      <div class="kpi-grid" id="kpiGrid"></div>
+
+      <div class="panel">
+        <h3>Quality parameter averages</h3>
+        <div class="param-bars" id="paramBars"></div>
+      </div>
+
+      <div class="panel">
+        <h3>Per-call audit</h3>
+        <table id="callTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>File</th>
+              <th>Duration</th>
+              <th>Score</th>
+              <th>Outcome</th>
+              <th>Sentiment</th>
+            </tr>
+          </thead>
+          <tbody id="callTbody"></tbody>
+        </table>
+        <div class="drill" id="drill"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <div>© 2026 Bolo Aur Likho Enterprise · Built by Vikas Goyal</div>
+    <div><a href="enterprise.html">← Back to enterprise page</a></div>
+  </div>
+</footer>
+
+<script>
+  // ===== STATE =====
+  const MAX_FILES = 10;
+  const MAX_TOTAL_SECS = 60 * 60; // 60 min
+  const ENDPOINT = '/.netlify/functions/analyze';
+
+  const STANDARD_PARAMS = [
+    { id:'greeting',   name:'Greeting & introduction',  category:'standard', description:'Agent greeted the customer professionally and introduced themselves and the company.', default:true },
+    { id:'tone',       name:'Tone & empathy',           category:'standard', description:'Agent maintained a respectful, empathetic, and professional tone throughout the call.', default:true },
+    { id:'listening',  name:'Active listening',         category:'standard', description:'Agent listened to the customer, did not interrupt, and acknowledged concerns.', default:true },
+    { id:'objection',  name:'Objection handling',       category:'standard', description:'Agent addressed customer objections clearly and confidently without dismissing them.', default:true },
+    { id:'closing',    name:'Closing & next step',      category:'standard', description:'Agent ended the call with a clear next step, summary, or call-to-action.', default:true },
+    { id:'compliance', name:'Compliance & disclosure',  category:'standard', description:'Agent made required disclosures and avoided mis-selling, false promises, or pressure tactics.', default:true },
+  ];
+
+  let files = [];   // {file, durationSec, sizeMB, name}
+  let results = []; // {filename, durationSec, transcript, scored, error}
+  let customRows = [];
+
+  // ===== DOM REFS =====
+  const $ = id => document.getElementById(id);
+  const dropzone = $('dropzone');
+  const fileInput = $('fileInput');
+  const fileList = $('fileList');
+  const fileSummary = $('fileSummary');
+  const standardGrid = $('standardGrid');
+  const customList = $('customList');
+  const runBtn = $('runBtn');
+  const resetBtn = $('resetBtn');
+  const progress = $('progress');
+  const progressFill = $('progressFill');
+  const progressLog = $('progressLog');
+  const dashboard = $('dashboard');
+
+  // ===== STANDARD RUBRIC RENDER =====
+  STANDARD_PARAMS.forEach(p => {
+    const lbl = document.createElement('label');
+    lbl.className = 'check-row';
+    lbl.innerHTML = `
+      <input type="checkbox" data-id="${p.id}" ${p.default ? 'checked' : ''}>
+      <div>
+        <div class="label">${p.name}</div>
+        <div class="desc">${p.description}</div>
+      </div>`;
+    standardGrid.appendChild(lbl);
+  });
+
+  // ===== CUSTOM ROWS =====
+  function renderCustomRows() {
+    customList.innerHTML = '';
+    customRows.forEach((row, idx) => {
+      const div = document.createElement('div');
+      div.className = 'custom-row';
+      div.innerHTML = `
+        <input type="text" placeholder="Parameter name" value="${escapeHtml(row.name)}" data-field="name" data-idx="${idx}">
+        <select data-field="category" data-idx="${idx}">
+          <option value="product" ${row.category==='product'?'selected':''}>Product</option>
+          <option value="price"   ${row.category==='price'?'selected':''}>Price</option>
+          <option value="process" ${row.category==='process'?'selected':''}>Process</option>
+          <option value="other"   ${row.category==='other'?'selected':''}>Other</option>
+        </select>
+        <textarea placeholder="What should the agent do? (used for scoring)" data-field="description" data-idx="${idx}">${escapeHtml(row.description)}</textarea>
+        <button type="button" class="del-btn" data-idx="${idx}">×</button>`;
+      customList.appendChild(div);
+    });
+    customList.querySelectorAll('input,select,textarea').forEach(el => {
+      el.addEventListener('input', e => {
+        const i = +e.target.dataset.idx;
+        customRows[i][e.target.dataset.field] = e.target.value;
+      });
+    });
+    customList.querySelectorAll('.del-btn').forEach(b => {
+      b.addEventListener('click', e => {
+        customRows.splice(+e.target.dataset.idx, 1);
+        renderCustomRows();
+      });
+    });
+  }
+  $('addCustomBtn').addEventListener('click', () => {
+    customRows.push({ name:'', category:'product', description:'' });
+    renderCustomRows();
+  });
+
+  // ===== FILE UPLOAD =====
+  dropzone.addEventListener('click', () => fileInput.click());
+  ['dragover','dragenter'].forEach(ev => dropzone.addEventListener(ev, e => {
+    e.preventDefault(); dropzone.classList.add('drag-over');
+  }));
+  ['dragleave','drop'].forEach(ev => dropzone.addEventListener(ev, e => {
+    e.preventDefault(); dropzone.classList.remove('drag-over');
+  }));
+  dropzone.addEventListener('drop', e => handleFiles(e.dataTransfer.files));
+  fileInput.addEventListener('change', e => handleFiles(e.target.files));
+
+  async function handleFiles(fileListInput) {
+    const incoming = Array.from(fileListInput);
+    for (const f of incoming) {
+      if (files.length >= MAX_FILES) {
+        log(`Skipped "${f.name}" - max ${MAX_FILES} files reached.`, 'err');
+        continue;
+      }
+      const dur = await getAudioDuration(f).catch(() => 0);
+      files.push({ file:f, durationSec:dur, sizeMB:(f.size/1024/1024), name:f.name });
+    }
+    renderFileList();
+    fileInput.value = '';
+  }
+
+  function getAudioDuration(file) {
+    return new Promise((resolve, reject) => {
+      const audio = document.createElement('audio');
+      audio.preload = 'metadata';
+      audio.onloadedmetadata = () => { URL.revokeObjectURL(audio.src); resolve(audio.duration || 0); };
+      audio.onerror = () => { URL.revokeObjectURL(audio.src); reject(new Error('cannot read')); };
+      audio.src = URL.createObjectURL(file);
+    });
+  }
+
+  function renderFileList() {
+    fileList.innerHTML = '';
+    if (files.length === 0) {
+      fileList.classList.remove('has-files');
+      fileSummary.style.display = 'none';
+      runBtn.disabled = true;
+      return;
+    }
+    fileList.classList.add('has-files');
+    files.forEach((f, i) => {
+      const row = document.createElement('div');
+      row.className = 'file-row';
+      const mins = (f.durationSec/60).toFixed(1);
+      row.innerHTML = `
+        <span class="name">${escapeHtml(f.name)}</span>
+        <span class="meta">${mins} min · ${f.sizeMB.toFixed(1)} MB</span>
+        <button type="button" class="remove" data-i="${i}">×</button>`;
+      fileList.appendChild(row);
+    });
+    fileList.querySelectorAll('.remove').forEach(b => b.addEventListener('click', e => {
+      files.splice(+e.target.dataset.i, 1); renderFileList();
+    }));
+
+    const totalSec = files.reduce((s,f) => s + (f.durationSec||0), 0);
+    const totalMB = files.reduce((s,f) => s + f.sizeMB, 0);
+    fileSummary.style.display = 'flex';
+    $('countN').textContent = files.length;
+    $('totalMin').textContent = (totalSec/60).toFixed(1);
+    $('totalSize').textContent = totalMB.toFixed(1);
+
+    const overLimit = totalSec > MAX_TOTAL_SECS;
+    $('totalMin').parentElement.classList.toggle('warn', overLimit);
+    if (overLimit) {
+      $('totalMin').parentElement.innerHTML = `<strong>${(totalSec/60).toFixed(1)}</strong> min total — exceeds 60 min limit`;
+    }
+    runBtn.disabled = overLimit || files.length === 0;
+  }
+
+  // ===== RUN =====
+  resetBtn.addEventListener('click', () => {
+    files = []; results = []; customRows = [];
+    renderFileList(); renderCustomRows();
+    progress.classList.remove('active'); progressLog.innerHTML = ''; progressFill.style.width = '0%';
+    dashboard.classList.remove('active');
+    STANDARD_PARAMS.forEach(p => {
+      const cb = standardGrid.querySelector(`[data-id="${p.id}"]`);
+      if (cb) cb.checked = p.default;
+    });
+  });
+
+  runBtn.addEventListener('click', runAudit);
+
+  function getRubric() {
+    const std = STANDARD_PARAMS.filter(p => standardGrid.querySelector(`[data-id="${p.id}"]`).checked)
+      .map(p => ({ name:p.name, category:p.category, description:p.description }));
+    const custom = customRows
+      .filter(r => r.name && r.name.trim().length > 0)
+      .map(r => ({ name:r.name.trim(), category:r.category, description:(r.description||'').trim() }));
+    return [...std, ...custom];
+  }
+
+  async function runAudit() {
+    const rubric = getRubric();
+    if (rubric.length === 0) { alert('Select at least one quality parameter.'); return; }
+
+    runBtn.disabled = true; resetBtn.disabled = true;
+    progress.classList.add('active'); progressLog.innerHTML = ''; progressFill.style.width = '0%';
+    dashboard.classList.remove('active');
+    results = [];
+
+    const total = files.length;
+    for (let i = 0; i < total; i++) {
+      const f = files[i];
+      log(`[${i+1}/${total}] Transcribing ${f.name}...`);
+      try {
+        const tx = await transcribeFile(f.file);
+        log(`[${i+1}/${total}] ✓ Transcribed (${tx.wordCount || 0} words). Scoring...`, 'ok');
+        const sc = await scoreTranscript(tx.text, rubric);
+        log(`[${i+1}/${total}] ✓ Scored (overall ${sc.overallScore?.toFixed(1) || '?'}/10)`, 'ok');
+        results.push({ filename:f.name, durationSec:f.durationSec, transcript:tx.text, scored:sc });
+      } catch (err) {
+        log(`[${i+1}/${total}] ✗ ${f.name}: ${err.message}`, 'err');
+        results.push({ filename:f.name, durationSec:f.durationSec, error:err.message });
+      }
+      progressFill.style.width = `${((i+1)/total)*100}%`;
+    }
+
+    runBtn.disabled = false; resetBtn.disabled = false;
+    log(`Done. ${results.filter(r => !r.error).length}/${total} calls audited.`, 'ok');
+    renderDashboard(rubric);
+  }
+
+  function log(msg, cls='') {
+    const div = document.createElement('div');
+    if (cls) div.className = cls;
+    div.textContent = msg;
+    progressLog.appendChild(div);
+    progressLog.scrollTop = progressLog.scrollHeight;
+  }
+
+  // ===== API CALLS =====
+  function fileToBase64(file) {
+    return new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onload = () => res(r.result.split(',')[1]);
+      r.onerror = rej;
+      r.readAsDataURL(file);
+    });
+  }
+
+  async function transcribeFile(file) {
+    const b64 = await fileToBase64(file);
+    const url = `${ENDPOINT}?filename=${encodeURIComponent(file.name)}&summary=false`;
+    const resp = await fetch(url, {
+      method:'POST',
+      headers:{ 'Content-Type':'text/plain' },
+      body:b64,
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || `HTTP ${resp.status}`);
+    if (!data.text || data.text.length < 20) throw new Error('Empty or unreadable transcript');
+    return data;
+  }
+
+  async function scoreTranscript(transcript, rubric) {
+    const resp = await fetch(`${ENDPOINT}?mode=score`, {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ transcript, rubric }),
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || `HTTP ${resp.status}`);
+    return data.scored;
+  }
+
+  // ===== DASHBOARD RENDER =====
+  function renderDashboard(rubric) {
+    const ok = results.filter(r => !r.error && r.scored);
+    if (ok.length === 0) {
+      dashboard.classList.add('active');
+      $('kpiGrid').innerHTML = '<div class="kpi"><div class="num">0</div><div class="label">No calls audited</div></div>';
+      $('paramBars').innerHTML = '<div style="color:var(--muted);font-size:13px">No data.</div>';
+      $('callTbody').innerHTML = '';
+      return;
+    }
+
+    // KPIs
+    const teamScore = avg(ok.map(r => r.scored.overallScore || 0));
+    const totalMin = (results.reduce((s,r) => s + (r.durationSec||0), 0) / 60).toFixed(0);
+    const flagged = ok.filter(r => (r.scored.overallScore || 0) < 5).length;
+    const conversions = ok.filter(r => r.scored.outcome === 'converted').length;
+    const followups = ok.filter(r => r.scored.outcome === 'follow-up').length;
+
+    $('kpiGrid').innerHTML = `
+      <div class="kpi"><div class="num">${ok.length}</div><div class="label">Calls Audited</div></div>
+      <div class="kpi"><div class="num">${teamScore.toFixed(1)}</div><div class="label">Team Score /10</div></div>
+      <div class="kpi"><div class="num">${totalMin}</div><div class="label">Minutes Audited</div></div>
+      <div class="kpi"><div class="num">${flagged}</div><div class="label">Calls Flagged</div></div>
+      <div class="kpi"><div class="num">${conversions + followups}</div><div class="label">Conv + Follow-ups</div></div>`;
+
+    // Parameter averages
+    const paramMap = {};
+    ok.forEach(r => (r.scored.criteria || []).forEach(c => {
+      if (!paramMap[c.name]) paramMap[c.name] = { name:c.name, category:c.category, scores:[] };
+      paramMap[c.name].scores.push(c.score || 0);
+    }));
+    const params = Object.values(paramMap).map(p => ({ ...p, avg:avg(p.scores) }));
+    $('paramBars').innerHTML = params.map(p => {
+      const cls = p.avg >= 7 ? 'good' : p.avg >= 5 ? 'mid' : 'bad';
+      return `
+        <div class="param-bar">
+          <div class="row">
+            <div class="name">${escapeHtml(p.name)}<span class="cat">${escapeHtml(p.category||'')}</span></div>
+            <div class="score">${p.avg.toFixed(1)} / 10</div>
+          </div>
+          <div class="bar"><div class="bar-fill ${cls}" style="width:${p.avg*10}%"></div></div>
+        </div>`;
+    }).join('');
+
+    // Per-call table
+    $('callTbody').innerHTML = results.map((r, i) => {
+      if (r.error) {
+        return `<tr><td>${i+1}</td><td>${escapeHtml(r.filename)}</td><td>${(r.durationSec/60).toFixed(1)} min</td><td colspan="3" style="color:var(--danger)">Failed: ${escapeHtml(r.error)}</td></tr>`;
+      }
+      const s = r.scored.overallScore || 0;
+      const cls = s >= 7 ? 'good' : s >= 5 ? 'mid' : 'bad';
+      return `
+        <tr data-i="${i}">
+          <td>${i+1}</td>
+          <td>${escapeHtml(r.filename)}</td>
+          <td>${(r.durationSec/60).toFixed(1)} min</td>
+          <td><span class="pill ${cls}">${s.toFixed(1)}</span></td>
+          <td>${escapeHtml(r.scored.outcome||'-')}</td>
+          <td>${escapeHtml(r.scored.sentiment||'-')}</td>
+        </tr>`;
+    }).join('');
+
+    $('callTbody').querySelectorAll('tr[data-i]').forEach(tr => {
+      tr.addEventListener('click', () => showDrill(+tr.dataset.i));
+    });
+
+    dashboard.classList.add('active');
+    dashboard.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  function showDrill(i) {
+    const r = results[i];
+    if (!r || !r.scored) return;
+    const s = r.scored;
+    const drill = $('drill');
+    drill.innerHTML = `
+      <h4>${escapeHtml(r.filename)} · ${s.overallScore?.toFixed(1) || '?'}/10</h4>
+      <div class="summary-text">${escapeHtml(s.summary||'')}</div>
+      <div class="lists">
+        <div>
+          <h4 style="font-size:13px;color:var(--success);">Strengths</h4>
+          <ul>${(s.strengths||[]).map(x => `<li>${escapeHtml(x)}</li>`).join('') || '<li>—</li>'}</ul>
+        </div>
+        <div>
+          <h4 style="font-size:13px;color:var(--danger);">Improvements</h4>
+          <ul>${(s.improvements||[]).map(x => `<li>${escapeHtml(x)}</li>`).join('') || '<li>—</li>'}</ul>
+        </div>
+      </div>
+      ${(s.complianceFlags && s.complianceFlags.length > 0)
+        ? `<div style="margin-bottom:14px;"><h4 style="font-size:13px;color:var(--danger);">Compliance flags</h4><ul>${s.complianceFlags.map(x => `<li>${escapeHtml(x)}</li>`).join('')}</ul></div>`
+        : ''}
+      <h4 style="font-size:13px;">Per-criterion scores</h4>
+      <div class="crit-list">
+        ${(s.criteria||[]).map(c => {
+          const cls = (c.score||0) >= 7 ? 'good' : (c.score||0) >= 5 ? 'mid' : 'bad';
+          return `
+            <div class="crit-row">
+              <div>
+                <div class="crit-name">${escapeHtml(c.name)}</div>
+                <div class="crit-rationale">${escapeHtml(c.rationale||'')}</div>
+              </div>
+              <span class="pill ${cls}">${(c.score||0).toFixed(1)}</span>
+            </div>`;
+        }).join('')}
+      </div>
+      <h4 style="font-size:13px;">Transcript</h4>
+      <div class="transcript">${escapeHtml(r.transcript||'')}</div>
+    `;
+    drill.classList.add('active');
+    drill.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }
+
+  // ===== DOWNLOADS =====
+  $('dlJson').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(results, null, 2)], { type:'application/json' });
+    triggerDl(blob, 'bulk-audit-results.json');
+  });
+  $('dlCsv').addEventListener('click', () => {
+    const rows = [['#','filename','duration_min','overall_score','outcome','sentiment','summary']];
+    results.forEach((r, i) => {
+      if (r.error) {
+        rows.push([i+1, r.filename, (r.durationSec/60).toFixed(1), '', '', '', `ERROR: ${r.error}`]);
+      } else {
+        const s = r.scored;
+        rows.push([i+1, r.filename, (r.durationSec/60).toFixed(1), s.overallScore||'', s.outcome||'', s.sentiment||'', (s.summary||'').replace(/\n/g,' ')]);
+      }
+    });
+    // Per-criterion columns
+    const allParams = [...new Set(results.flatMap(r => (r.scored?.criteria||[]).map(c => c.name)))];
+    rows[0].push(...allParams);
+    for (let i = 1; i < rows.length; i++) {
+      const r = results[i-1];
+      if (r.error || !r.scored) { allParams.forEach(() => rows[i].push('')); continue; }
+      allParams.forEach(p => {
+        const c = r.scored.criteria.find(c => c.name === p);
+        rows[i].push(c ? c.score : '');
+      });
+    }
+    const csv = rows.map(r => r.map(csvCell).join(',')).join('\n');
+    triggerDl(new Blob([csv], { type:'text/csv' }), 'bulk-audit-results.csv');
+  });
+
+  function csvCell(v) {
+    const s = (v == null ? '' : String(v));
+    return /[",\n]/.test(s) ? `"${s.replace(/"/g,'""')}"` : s;
+  }
+  function triggerDl(blob, name) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = name; a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  // ===== UTILS =====
+  function avg(arr) { return arr.length ? arr.reduce((a,b) => a+b, 0) / arr.length : 0; }
+  function escapeHtml(s) {
+    return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+</script>
+
+</body>
+</html>
