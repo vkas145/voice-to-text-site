@@ -143,11 +143,16 @@ exports.handler = async function (event) {
       model: "whisper-1",
       response_format: "verbose_json",
     };
-    if (language !== "auto") whisperParams.language = language;
+    // Translation mode: always outputs English regardless of source language.
+    // This avoids Whisper mis-detecting Hindi/regional accents and producing gibberish.
+    const translateMode = params.translate === "true";
+    if (!translateMode && language !== "auto") whisperParams.language = language;
     // Prompt from previous chunk anchors language/context and prevents hallucination
     if (params.prompt) whisperParams.prompt = decodeURIComponent(params.prompt).slice(0, 224);
 
-    const transcription = await openai.audio.transcriptions.create(whisperParams);
+    const transcription = translateMode
+      ? await openai.audio.translations.create(whisperParams)
+      : await openai.audio.transcriptions.create(whisperParams);
 
     // Build transcript from ALL segments — never truncate
     const segs = transcription.segments || [];
