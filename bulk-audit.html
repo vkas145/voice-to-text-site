@@ -219,6 +219,39 @@
   }
   .btn-secondary:hover { border-color:var(--primary); background:var(--bg-deep); }
 
+  /* FOUNDER CONTACT */
+  .founder-contact {
+    margin-top:28px; padding:22px 24px;
+    background:linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%);
+    border:1px solid var(--line-soft); border-radius:14px;
+    display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .founder-avatar {
+    width:54px; height:54px; border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    color:#fff; display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:20px; flex-shrink:0;
+    box-shadow:0 4px 14px rgba(99,102,241,.25);
+  }
+  .founder-text { flex:1; min-width:220px; }
+  .founder-text .tag {
+    font-size:11px; font-weight:700; color:var(--primary);
+    text-transform:uppercase; letter-spacing:1.2px; margin-bottom:4px;
+  }
+  .founder-text h4 { font-size:15px; color:var(--ink); font-weight:700; margin-bottom:2px; }
+  .founder-text p { font-size:13px; color:var(--body); }
+  .founder-links { display:flex; gap:10px; flex-wrap:wrap; }
+  .founder-link {
+    display:inline-flex; align-items:center; gap:8px;
+    background:#fff; color:var(--ink-soft);
+    padding:10px 16px; border-radius:10px;
+    font-size:13px; font-weight:600;
+    border:1px solid var(--line);
+    transition:all .15s;
+  }
+  .founder-link:hover { border-color:var(--primary); color:var(--primary); transform:translateY(-1px); }
+  .founder-link .ico { font-size:15px; }
+
   /* PROGRESS */
   .progress { margin-top:26px; display:none; }
   .progress.active { display:block; }
@@ -370,7 +403,7 @@
   <div class="container">
     <span class="eyebrow">Speech &amp; Text Analytics Platform</span>
     <h1>Turn every call into a <em>coaching insight</em>, a <em>compliance flag</em>, and a <em>revenue signal</em>.</h1>
-    <p class="lede">Purpose-built for <strong>BPOs, KPOs and call centres</strong>. Upload recordings from any dialer, any language, any accent &mdash; we transcribe, translate to English, score against your quality guidelines, and deliver a complete analytics dashboard. No integration. No SaaS onboarding. Just answers.</p>
+    <p class="lede">Purpose-built for <strong>BPOs, KPOs and call centres</strong>. Upload recordings from any dialer, any language, any accent. We transcribe, translate to English, score against your quality guidelines, and deliver a complete analytics dashboard. No integration. No SaaS onboarding. Just answers.</p>
     <div class="hero-pills">
       <span class="hero-pill">🎯 Text analytics</span>
       <span class="hero-pill">🎙️ Speech quality scoring</span>
@@ -390,12 +423,12 @@
         <div class="step-num">1</div>
         <h2>Upload call recordings</h2>
       </div>
-      <p class="step-sub">Any language in, English analytics out. We transcribe and translate every call in your browser session &mdash; nothing is stored on our servers.</p>
+      <p class="step-sub">Any language in, English analytics out. We transcribe and translate every call in your browser session. Nothing is stored on our servers.</p>
 
       <div class="dropzone" id="dropzone" role="button" tabindex="0">
         <div class="dropzone-icon">🎙️</div>
         <div class="dropzone-title">Drop audio files here or click to browse</div>
-        <div class="dropzone-hint">Select <strong>multiple files at once</strong> &mdash; MP3 recommended for best results</div>
+        <div class="dropzone-hint">Select <strong>multiple files at once</strong>. MP3 recommended for best results.</div>
       </div>
       <input type="file" id="fileInput" multiple accept="audio/*,.mp3,.wav,.m4a,.ogg,.webm,.flac">
 
@@ -454,6 +487,19 @@
         </div>
         <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
         <div class="progress-log" id="progressLog"></div>
+      </div>
+
+      <div class="founder-contact">
+        <div class="founder-avatar">VG</div>
+        <div class="founder-text">
+          <div class="tag">Need help or a custom audit?</div>
+          <h4>Talk to Vikas Goyal, Founder</h4>
+          <p>Stuck on a file, want to audit 10,000+ calls, or need custom rubrics? Reach out directly.</p>
+        </div>
+        <div class="founder-links">
+          <a class="founder-link" href="mailto:vikas@boloaurlikho.com?subject=Bulk%20Audit%20Demo%20Query"><span class="ico">✉️</span> vikas@boloaurlikho.com</a>
+          <a class="founder-link" href="tel:+919560732111"><span class="ico">📞</span> +91 9560 732 111</a>
+        </div>
       </div>
     </div>
 
@@ -670,7 +716,7 @@
     const overLimit = totalSec > MAX_TOTAL_SECS;
     $('totalMin').parentElement.classList.toggle('warn', overLimit);
     if (overLimit) {
-      $('totalMin').parentElement.innerHTML = `<strong>${(totalSec/60).toFixed(1)}</strong> min total — exceeds 60 min limit`;
+      $('totalMin').parentElement.innerHTML = `<strong>${(totalSec/60).toFixed(1)}</strong> min total. Exceeds 60 min limit.`;
     }
     runBtn.disabled = overLimit || files.length === 0;
   }
@@ -726,11 +772,14 @@
         const sc = await scoreTranscript(tx.text, rubric);
         done++;
         log(`[${i+1}/${total}] ✓ Scored (overall ${sc.overallScore?.toFixed(1) || '?'}/10)`, 'ok');
-        results.push({ filename:f.name, durationSec:f.durationSec, transcript:tx.text, scored:sc });
+        // Prefer Whisper's duration (authoritative) over client-side metadata,
+        // which can return 0/Infinity for some WAV or streaming files.
+        const dur = safeDuration(tx.duration) || safeDuration(f.durationSec) || 0;
+        results.push({ filename:f.name, durationSec:dur, transcript:tx.text, scored:sc });
       } catch (err) {
         done += 2; // count both steps as done so the bar still progresses
         log(`[${i+1}/${total}] ✗ ${f.name}: ${err.message}`, 'err');
-        results.push({ filename:f.name, durationSec:f.durationSec, error:err.message });
+        results.push({ filename:f.name, durationSec:safeDuration(f.durationSec)||0, error:err.message });
       }
       setProgress((done / totalSteps) * 100);
     }
@@ -896,11 +945,11 @@
       <div class="lists">
         <div>
           <h4 style="font-size:13px;color:var(--success);">Strengths</h4>
-          <ul>${(s.strengths||[]).map(x => `<li>${escapeHtml(x)}</li>`).join('') || '<li>—</li>'}</ul>
+          <ul>${(s.strengths||[]).map(x => `<li>${escapeHtml(x)}</li>`).join('') || '<li>None</li>'}</ul>
         </div>
         <div>
           <h4 style="font-size:13px;color:var(--danger);">Improvements</h4>
-          <ul>${(s.improvements||[]).map(x => `<li>${escapeHtml(x)}</li>`).join('') || '<li>—</li>'}</ul>
+          <ul>${(s.improvements||[]).map(x => `<li>${escapeHtml(x)}</li>`).join('') || '<li>None</li>'}</ul>
         </div>
       </div>
       ${(s.complianceFlags && s.complianceFlags.length > 0)
@@ -970,6 +1019,10 @@
 
   // ===== UTILS =====
   function avg(arr) { return arr.length ? arr.reduce((a,b) => a+b, 0) / arr.length : 0; }
+  function safeDuration(d) {
+    const n = Number(d);
+    return (Number.isFinite(n) && n > 0) ? n : 0;
+  }
   function escapeHtml(s) {
     return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   }
