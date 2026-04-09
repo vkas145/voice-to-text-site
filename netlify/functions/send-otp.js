@@ -25,7 +25,6 @@ exports.handler = async (event) => {
   try {
     const body = JSON.parse(event.body);
     const email = (body.email || '').trim().toLowerCase();
-    const rawMobile = (body.mobile || '').replace(/[\s\-\(\)\+]/g, '');
 
     // ---- Validate email ----
     if (!email || !email.includes('@')) {
@@ -36,19 +35,8 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers: CORS, body: JSON.stringify({ error: 'Please use your corporate email address. Personal email domains are not accepted.' }) };
     }
 
-    // ---- Validate mobile (Indian) ----
-    let mobile = rawMobile.replace(/^0+/, '');
-    if (mobile.startsWith('91') && mobile.length === 12) {
-      mobile = mobile; // already has country code
-    } else if (mobile.length === 10 && /^[6-9]/.test(mobile)) {
-      mobile = '91' + mobile;
-    } else {
-      return { statusCode: 400, headers: CORS, body: JSON.stringify({ error: 'Please enter a valid 10-digit Indian mobile number.' }) };
-    }
-
-    // ---- Generate OTPs ----
+    // ---- Generate OTP ----
     const emailOtp = crypto.randomInt(100000, 999999).toString();
-    const smsOtp = crypto.randomInt(100000, 999999).toString();
     const expiry = Date.now() + 10 * 60 * 1000; // 10 minutes
 
     const secret = process.env.OTP_HMAC_SECRET;
@@ -59,10 +47,6 @@ exports.handler = async (event) => {
 
     const emailSig = crypto.createHmac('sha256', secret)
       .update(`email:${email}:${emailOtp}:${expiry}`)
-      .digest('hex');
-
-    const smsSig = crypto.createHmac('sha256', secret)
-      .update(`sms:${mobile}:${smsOtp}:${expiry}`)
       .digest('hex');
 
     // ---- Send email via Resend ----
@@ -93,50 +77,25 @@ exports.handler = async (event) => {
         if (!res.ok) {
           const errBody = await res.text();
           console.error('Resend error:', res.status, errBody);
+          return { statusCode: 502, headers: CORS, body: JSON.stringify({ error: 'Failed to send verification email. Please try again.' }) };
         }
       } catch (e) {
         console.error('Resend fetch error:', e.message);
+        return { statusCode: 502, headers: CORS, body: JSON.stringify({ error: 'Failed to send verification email. Please try again.' }) };
       }
     } else {
       console.warn('RESEND_API_KEY not set, skipping email OTP');
     }
 
-    // ---- Send SMS via MSG91 ----
-    const msg91Key = process.env.MSG91_AUTH_KEY;
-    const msg91Template = process.env.MSG91_TEMPLATE_ID;
-    if (msg91Key && msg91Template) {
-      try {
-        const res = await fetch('https://control.msg91.com/api/v5/flow/', {
-          method: 'POST',
-          headers: { 'authkey': msg91Key, 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            template_id: msg91Template,
-            short_url: '0',
-            recipients: [{ mobiles: mobile, otp: smsOtp }],
-          }),
-        });
-        if (!res.ok) {
-          const errBody = await res.text();
-          console.error('MSG91 error:', res.status, errBody);
-        }
-      } catch (e) {
-        console.error('MSG91 fetch error:', e.message);
-      }
-    } else {
-      console.warn('MSG91_AUTH_KEY or MSG91_TEMPLATE_ID not set, skipping SMS OTP');
-    }
-
-    // ---- Return signatures to client ----
+    // ---- Return signature to client ----
     return {
       statusCode: 200,
       headers: CORS,
       body: JSON.stringify({
         ok: true,
         emailSig,
-        smsSig,
         expiry,
         email,
-        mobile,
       }),
     };
 

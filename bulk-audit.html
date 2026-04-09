@@ -455,43 +455,30 @@
   <div class="login-card">
     <div class="login-logo">
       <div class="logo">bolo aur likho<span class="dot">.</span></div>
-      <p>Enter your corporate email and mobile number to access the Bulk Quality Audit tool.</p>
+      <p>Enter your corporate email to access the Bulk Quality Audit tool.</p>
     </div>
 
-    <!-- Step 1: Email + Mobile -->
+    <!-- Step 1: Email -->
     <div id="loginStep1">
       <div class="login-field">
         <label for="gateEmail">Corporate email</label>
         <input type="email" id="gateEmail" placeholder="you@yourcompany.com" autocomplete="email">
       </div>
-      <div class="login-field">
-        <label for="gateMobile">Mobile number</label>
-        <div class="mobile-row">
-          <span class="mobile-prefix">+91</span>
-          <input type="tel" id="gateMobile" placeholder="9560732111" maxlength="10" inputmode="numeric" autocomplete="tel">
-        </div>
-      </div>
       <div class="login-error" id="loginError1"></div>
-      <button class="login-btn" id="sendOtpBtn">Send verification codes</button>
+      <button class="login-btn" id="sendOtpBtn">Send verification code</button>
     </div>
 
     <!-- Step 2: OTP verification -->
     <div id="loginStep2" style="display:none;">
       <div class="login-info" id="sentToInfo"></div>
-      <div class="otp-group" style="margin-top:16px;">
-        <div class="login-field">
-          <label for="gateEmailOtp">Email OTP</label>
-          <input type="text" id="gateEmailOtp" maxlength="6" inputmode="numeric" placeholder="6 digits" autocomplete="one-time-code">
-        </div>
-        <div class="login-field">
-          <label for="gateSmsOtp">Mobile OTP</label>
-          <input type="text" id="gateSmsOtp" maxlength="6" inputmode="numeric" placeholder="6 digits" autocomplete="one-time-code">
-        </div>
+      <div class="login-field" style="margin-top:16px;">
+        <label for="gateEmailOtp">Verification code</label>
+        <input type="text" id="gateEmailOtp" maxlength="6" inputmode="numeric" placeholder="6-digit code from your email" autocomplete="one-time-code">
       </div>
       <div class="login-error" id="loginError2"></div>
       <button class="login-btn" id="verifyOtpBtn">Verify &amp; access audit</button>
       <div class="login-timer" id="otpTimer"></div>
-      <button type="button" class="resend-btn" id="resendBtn">Resend codes</button>
+      <button type="button" class="resend-btn" id="resendBtn">Resend code</button>
     </div>
   </div>
 </div>
@@ -676,7 +663,7 @@
     'outlook.in','googlemail.com','fastmail.com','tutanota.com',
   ];
 
-  let otpState = {}; // stores emailSig, smsSig, expiry, email, mobile between steps
+  let otpState = {}; // stores emailSig, expiry, email between steps
   let otpTimerInterval = null;
   let verifyAttempts = 0;
 
@@ -706,7 +693,6 @@
     sessionStorage.removeItem('bal_session');
     document.getElementById('loginGate').classList.remove('hidden');
     document.getElementById('userBadge').style.display = 'none';
-    // Reset to step 1
     document.getElementById('loginStep1').style.display = 'block';
     document.getElementById('loginStep2').style.display = 'none';
     document.getElementById('loginError1').textContent = '';
@@ -716,11 +702,9 @@
   // ---- Send OTP ----
   document.getElementById('sendOtpBtn').addEventListener('click', async () => {
     const email = document.getElementById('gateEmail').value.trim().toLowerCase();
-    const mobile = document.getElementById('gateMobile').value.trim().replace(/\D/g, '');
     const err1 = document.getElementById('loginError1');
     err1.textContent = '';
 
-    // Client-side validation
     if (!email || !email.includes('@')) {
       err1.textContent = 'Please enter a valid email address.';
       return;
@@ -728,10 +712,6 @@
     const domain = email.split('@')[1];
     if (PERSONAL_DOMAINS.includes(domain)) {
       err1.textContent = 'Please use your corporate email. Personal email domains are not accepted.';
-      return;
-    }
-    if (!/^[6-9]\d{9}$/.test(mobile)) {
-      err1.textContent = 'Please enter a valid 10-digit mobile number.';
       return;
     }
 
@@ -743,34 +723,24 @@
       const resp = await fetch('/.netlify/functions/send-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, mobile }),
+        body: JSON.stringify({ email }),
       });
       const data = await resp.json();
       if (!resp.ok || !data.ok) {
         err1.textContent = data.error || 'Failed to send OTP. Please try again.';
         btn.disabled = false;
-        btn.textContent = 'Send verification codes';
+        btn.textContent = 'Send verification code';
         return;
       }
 
-      // Store state for verification
-      otpState = {
-        emailSig: data.emailSig,
-        smsSig: data.smsSig,
-        expiry: data.expiry,
-        email: data.email,
-        mobile: data.mobile,
-      };
+      otpState = { emailSig: data.emailSig, expiry: data.expiry, email: data.email };
 
-      // Switch to step 2
       document.getElementById('loginStep1').style.display = 'none';
       document.getElementById('loginStep2').style.display = 'block';
       const maskedEmail = email.replace(/(.{2})(.*)(@.*)/, '$1***$3');
-      const maskedMobile = mobile.replace(/(\d{2})\d{4}(\d{4})/, '$1****$2');
       document.getElementById('sentToInfo').innerHTML =
-        `We sent verification codes to <strong>${maskedEmail}</strong> and <strong>+91 ${maskedMobile}</strong>`;
+        `We sent a verification code to <strong>${maskedEmail}</strong>`;
       document.getElementById('gateEmailOtp').value = '';
-      document.getElementById('gateSmsOtp').value = '';
       document.getElementById('loginError2').textContent = '';
       document.getElementById('resendBtn').style.display = 'none';
       verifyAttempts = 0;
@@ -780,22 +750,17 @@
     }
 
     btn.disabled = false;
-    btn.textContent = 'Send verification codes';
+    btn.textContent = 'Send verification code';
   });
 
   // ---- Verify OTP ----
   document.getElementById('verifyOtpBtn').addEventListener('click', async () => {
     const emailOtp = document.getElementById('gateEmailOtp').value.trim();
-    const smsOtp = document.getElementById('gateSmsOtp').value.trim();
     const err2 = document.getElementById('loginError2');
     err2.textContent = '';
 
     if (!/^\d{6}$/.test(emailOtp)) {
-      err2.textContent = 'Please enter the 6-digit email code.';
-      return;
-    }
-    if (!/^\d{6}$/.test(smsOtp)) {
-      err2.textContent = 'Please enter the 6-digit mobile code.';
+      err2.textContent = 'Please enter the 6-digit code from your email.';
       return;
     }
 
@@ -809,11 +774,8 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: otpState.email,
-          mobile: otpState.mobile,
           emailOtp,
-          smsOtp,
           emailSig: otpState.emailSig,
-          smsSig: otpState.smsSig,
           expiry: otpState.expiry,
         }),
       });
@@ -821,7 +783,7 @@
       if (!resp.ok || !data.ok) {
         verifyAttempts++;
         if (verifyAttempts >= 3) {
-          err2.textContent = 'Too many failed attempts. Please request new codes.';
+          err2.textContent = 'Too many failed attempts. Please request a new code.';
           btn.disabled = true;
           document.getElementById('resendBtn').style.display = 'block';
         } else {
@@ -832,7 +794,6 @@
         return;
       }
 
-      // Success - store session and unlock
       sessionStorage.setItem('bal_session', JSON.stringify(data.session));
       document.getElementById('loginGate').classList.add('hidden');
       showUserBadge(data.session.email);
