@@ -6,3 +6,9 @@
 
 [functions."analyze"]
   timeout = 26
+
+[functions."send-otp"]
+  timeout = 10
+
+[functions."verify-otp"]
+  timeout = 10
