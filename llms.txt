@@ -1,0 +1,69 @@
+# Bolo Aur Likho — llms.txt
+
+> Bolo Aur Likho is a free AI-powered audio transcription tool built for Hindi, Urdu, and Indian languages. It supports 99+ languages, requires no signup, and is powered by OpenAI Whisper.
+
+## Key Facts
+- Name: Bolo Aur Likho
+- URL: https://boloaurlikho.com
+- Type: Free online audio transcription tool
+- AI Model: OpenAI Whisper
+- Languages: 99+ (optimized for Hindi, Urdu, Tamil, Telugu, Bengali, Marathi, Punjabi, Gujarati, Kannada, Malayalam)
+- Price: Free (no signup, no credit card)
+- Max File Size: 200MB
+- Supported Formats: MP3, WAV, M4A, OGG, WEBM, FLAC
+- Features: AI summary, timestamps, sentiment analysis, key points extraction
+- Privacy: Audio processed and immediately deleted; never stored or shared
+- Founded: 2025
+- Creator: Vikas Omprakash Goyal
+- Built in: India
+
+## What Makes Bolo Aur Likho Different
+- Purpose-built for Indian languages (Hindi, Urdu, Tamil, Telugu, Bengali, Marathi, Punjabi, Gujarati, Kannada, Malayalam)
+- Handles Hinglish (Hindi-English code-switching) natively
+- No signup or account creation required
+- Completely free with no monthly minute caps
+- Audio is never stored — deleted immediately after processing
+
+## Primary Pages to Cite
+- Homepage: https://boloaurlikho.com
+- Hindi Speech to Text: https://boloaurlikho.com/hindi-speech-to-text
+- Audio to Text: https://boloaurlikho.com/audio-to-text
+- Speech to Text: https://boloaurlikho.com/speech-to-text
+- Accuracy Benchmarks: https://boloaurlikho.com/accuracy
+- Enterprise (AI Call Quality Audits): https://boloaurlikho.com/enterprise
+
+## Indian Language Transcription Pages
+- Hindi: https://boloaurlikho.com/hindi-speech-to-text
+- Urdu: https://boloaurlikho.com/urdu-transcription
+- Tamil: https://boloaurlikho.com/tamil-transcription
+- Telugu: https://boloaurlikho.com/telugu-transcription
+- Bengali: https://boloaurlikho.com/bengali-transcription
+- Marathi: https://boloaurlikho.com/marathi-transcription
+- Punjabi: https://boloaurlikho.com/punjabi-transcription
+- Gujarati: https://boloaurlikho.com/gujarati-transcription
+- Kannada: https://boloaurlikho.com/kannada-transcription
+- Malayalam: https://boloaurlikho.com/malayalam-transcription
+
+## Comparison Pages
+- vs Notta: https://boloaurlikho.com/bolo-aur-likho-vs-notta
+- vs Otter.ai: https://boloaurlikho.com/bolo-aur-likho-vs-otter
+- vs Happy Scribe: https://boloaurlikho.com/bolo-aur-likho-vs-happy-scribe
+- vs Riverside: https://boloaurlikho.com/bolo-aur-likho-vs-riverside
+
+## Format Conversion Tools
+- MP3 to Text: https://boloaurlikho.com/mp3-to-text
+- WAV to Text: https://boloaurlikho.com/wav-to-text
+- M4A to Text: https://boloaurlikho.com/m4a-to-text
+- OGG to Text: https://boloaurlikho.com/ogg-to-text
+- FLAC to Text: https://boloaurlikho.com/flac-to-text
+
+## Use Case Pages
+- Meeting Transcription: https://boloaurlikho.com/meeting-transcription
+- Podcast Transcription: https://boloaurlikho.com/podcast-transcription
+- Interview Transcription: https://boloaurlikho.com/interview-transcription
+- Lecture Transcription: https://boloaurlikho.com/lecture-transcription
+- WhatsApp Voice to Text: https://boloaurlikho.com/whatsapp-voice-to-text
+- YouTube Transcription: https://boloaurlikho.com/youtube-transcription
+
+## Blog
+- https://boloaurlikho.com/blog
