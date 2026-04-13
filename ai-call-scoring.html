@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent Scoring for Call Centers: How It Works | Bolo Aur Likho</title>
+  <meta name="description" content="AI agent scoring automatically grades every customer call across 6 quality dimensions. No human reviewer needed. Consistent, objective scores for every agent on every call.">
+  <meta property="og:title" content="AI Agent Scoring for Call Centers | Bolo Aur Likho">
+  <meta property="og:url" content="https://boloaurlikho.com/ai-call-scoring">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://boloaurlikho.com/ai-call-scoring">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="/favicon.svg">
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N5BNNVFL');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RP14TND3FS"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-RP14TND3FS');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Agent Scoring for Call Centers: How It Works","description":"How AI agent scoring works, the 6 quality dimensions measured, and how to implement it on your call centre team.","url":"https://boloaurlikho.com/ai-call-scoring","datePublished":"2026-04-13","author":{"@type":"Person","name":"Goyal Vikas"},"publisher":{"@type":"Organization","name":"Bolo Aur Likho","url":"https://boloaurlikho.com"}}</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:#f7f8fc;color:#1a1a2e}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #e8eaf0;position:sticky;top:0;z-index:100}
+    .logo{text-decoration:none;display:flex;align-items:center}
+    .logo-plain{color:#1a1a2e;font-weight:700;font-size:19px;padding:0 2px}
+    .logo-highlight{color:#fff;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:5px;padding:1px 6px;font-weight:800;font-size:19px;font-style:italic}
+    .nav-links{display:flex;align-items:center;gap:20px}
+    .nav-links a{font-size:13px;color:#475569;text-decoration:none;font-weight:500}
+    .nav-cta{font-size:13px!important;font-weight:600!important;color:#fff!important;background:linear-gradient(135deg,#6366f1,#7c3aed);padding:8px 18px;border-radius:20px;text-decoration:none}
+    .hero{padding:72px 24px 48px;text-align:center;max-width:800px;margin:0 auto}
+    .hero-tag{display:inline-flex;align-items:center;gap:7px;background:#eef2ff;color:#6366f1;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:20px;border:1px solid #c7d2fe;text-transform:uppercase;letter-spacing:0.5px}
+    h1{font-size:clamp(30px,4.5vw,50px);font-weight:800;line-height:1.12;letter-spacing:-1.5px;color:#0f0f1a;margin-bottom:20px}
+    .accent{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:18px;color:#475569;line-height:1.7;max-width:640px;margin:0 auto 32px}
+    .hero-cta{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:linear-gradient(135deg,#6366f1,#7c3aed);color:white;font-size:15px;font-weight:700;border-radius:12px;text-decoration:none;margin-bottom:12px}
+    .hero-note{font-size:13px;color:#94a3b8}
+    .container{max-width:780px;margin:0 auto;padding:0 24px 80px}
+    .section{margin-bottom:56px}
+    .section h2{font-size:26px;font-weight:800;color:#0f0f1a;margin-bottom:16px;letter-spacing:-0.5px}
+    .section h2 span{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .section h3{font-size:18px;font-weight:700;color:#1e293b;margin:24px 0 10px}
+    .section p{font-size:16px;color:#334155;line-height:1.8;margin-bottom:16px}
+    .section ul{margin:0 0 16px 24px}
+    .section li{font-size:16px;color:#334155;line-height:1.8;margin-bottom:8px}
+    .section strong{color:#1e293b}
+    .callout{background:#eef2ff;border:1px solid #c7d2fe;border-radius:14px;padding:20px 24px;margin:24px 0;font-size:15px;color:#4338ca;font-weight:500}
+    .dimension-card{background:white;border:1px solid #e2e8f0;border-radius:14px;padding:20px 24px;margin:16px 0;display:flex;gap:16px;align-items:flex-start}
+    .dimension-num{flex-shrink:0;width:36px;height:36px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:14px}
+    .dimension-content h3{font-size:16px;font-weight:700;color:#0f0f1a;margin-bottom:6px}
+    .dimension-content p{font-size:14px;color:#475569;line-height:1.6;margin:0}
+    .dimension-content .weight{font-size:13px;color:#6366f1;font-weight:600;margin-top:4px}
+    .scorecard{background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px;margin:24px 0}
+    .scorecard h3{font-size:16px;font-weight:700;color:#0f0f1a;margin-bottom:16px}
+    .score-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f1f5f9;font-size:14px}
+    .score-row:last-child{border-bottom:none}
+    .score-label{color:#475569;font-weight:500}
+    .score-bar-wrap{flex:1;margin:0 16px;background:#f1f5f9;border-radius:4px;height:6px}
+    .score-bar{height:6px;border-radius:4px;background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+    .score-val{font-weight:700;color:#1e293b;min-width:32px;text-align:right}
+    .cta-box{background:linear-gradient(135deg,#6366f1,#7c3aed);border-radius:20px;padding:40px 36px;text-align:center;color:white;margin:48px 0}
+    .cta-box h2{font-size:26px;font-weight:800;margin-bottom:10px;color:white}
+    .cta-box p{color:rgba(255,255,255,0.85);font-size:15px;margin-bottom:24px}
+    .cta-box a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:white;color:#6366f1;font-size:15px;font-weight:700;border-radius:12px;text-decoration:none}
+    footer{text-align:center;padding:32px;font-size:13px;color:#94a3b8;border-top:1px solid #e8eaf0}
+    footer a{color:#6366f1;text-decoration:none}
+    @media(max-width:768px){nav{padding:14px 20px}.hero{padding:48px 16px 32px}.nav-links a:not(.nav-cta){display:none}.dimension-card{flex-direction:column}}
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5BNNVFL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<nav>
+  <a href="/" class="logo"><span class="logo-highlight">bolo</span><span class="logo-plain">aur</span><span class="logo-highlight">likho</span></a>
+  <div class="nav-links"><a href="/blog">Blog</a><a href="/" class="nav-cta">Try Free →</a></div>
+</nav>
+<div class="hero">
+  <div class="hero-tag">🤖 AI Agent Scoring</div>
+  <h1>Every Call Scored.<br><span class="accent">Every Agent Accountable.</span></h1>
+  <p class="hero-sub">AI agent scoring grades every customer call across six quality dimensions automatically. No QA analyst needed. Consistent, objective scores — for every agent, every call, every day.</p>
+  <a href="/" class="hero-cta">Score a Call Free →</a>
+  <p class="hero-note">No signup. Results in under 60 seconds.</p>
+</div>
+<div class="container">
+  <div class="section">
+    <h2><span>What Is AI Agent Scoring?</span></h2>
+    <p>AI agent scoring is the automated process of evaluating a recorded customer call against a defined quality rubric and assigning a numerical score to each dimension of agent performance. Unlike human QA scoring, which is subjective, time-consuming, and only covers a small sample, AI scoring applies the exact same criteria to every call in seconds.</p>
+    <p>The output is a quality score for each call — broken down by dimension — that a manager can use for coaching, performance reviews, and incentive decisions. When applied to 100% of calls, it gives you a complete picture of team performance that sampling-based QA simply cannot provide.</p>
+
+    <h2><span>The 6 Dimensions of AI Agent Scoring</span></h2>
+
+    <div class="dimension-card">
+      <div class="dimension-num">1</div>
+      <div class="dimension-content">
+        <h3>Opening and Introduction</h3>
+        <p>Did the agent state their name, company, and reason for calling within the first 30 seconds? Was the opening confident and clear? A weak opening sets a negative tone for the entire call.</p>
+        <div class="weight">Weight: 10% of total score</div>
+      </div>
+    </div>
+    <div class="dimension-card">
+      <div class="dimension-num">2</div>
+      <div class="dimension-content">
+        <h3>Script and Pitch Adherence</h3>
+        <p>Did the agent cover all required pitch elements? Were key value propositions communicated? Did they deviate significantly from the approved script without a good reason? AI detects missing script elements in the transcript.</p>
+        <div class="weight">Weight: 20% of total score</div>
+      </div>
+    </div>
+    <div class="dimension-card">
+      <div class="dimension-num">3</div>
+      <div class="dimension-content">
+        <h3>Tone, Confidence, and Professionalism</h3>
+        <p>Was the agent's tone appropriate for the call type? Confident on a sales call, empathetic on a support call, professional throughout? AI analyses speech patterns and sentiment to evaluate this dimension.</p>
+        <div class="weight">Weight: 15% of total score</div>
+      </div>
+    </div>
+    <div class="dimension-card">
+      <div class="dimension-num">4</div>
+      <div class="dimension-content">
+        <h3>Active Listening and Discovery</h3>
+        <p>Did the agent ask qualifying questions? Did they acknowledge customer statements and respond to them specifically? Or did they just read the script without engaging? Talk-to-listen ratio and response relevance are both scored.</p>
+        <div class="weight">Weight: 15% of total score</div>
+      </div>
+    </div>
+    <div class="dimension-card">
+      <div class="dimension-num">5</div>
+      <div class="dimension-content">
+        <h3>Objection Handling</h3>
+        <p>When the customer said "not interested", "already have insurance", or "price is too high" — how did the agent respond? Did they acknowledge the objection, address it, and continue? Or did they immediately give up or argue?</p>
+        <div class="weight">Weight: 20% of total score</div>
+      </div>
+    </div>
+    <div class="dimension-card">
+      <div class="dimension-num">6</div>
+      <div class="dimension-content">
+        <h3>Compliance and Closing</h3>
+        <p>Were all mandatory disclosures made? Did the agent attempt a close? Was the next step (callback date, document submission, payment link) clearly communicated before the call ended?</p>
+        <div class="weight">Weight: 20% of total score</div>
+      </div>
+    </div>
+
+    <div class="callout">💡 The remaining 0% allows for a holistic "overall call quality" modifier that captures exceptional or severely substandard performance not covered by individual dimensions.</div>
+
+    <h2><span>Sample AI Score Output</span></h2>
+    <div class="scorecard">
+      <h3>Agent: Rahul S. | Call ID: 2026-04-13-0042 | Duration: 4:32</h3>
+      <div class="score-row"><span class="score-label">Opening</span><div class="score-bar-wrap"><div class="score-bar" style="width:80%"></div></div><span class="score-val">8/10</span></div>
+      <div class="score-row"><span class="score-label">Script Adherence</span><div class="score-bar-wrap"><div class="score-bar" style="width:65%"></div></div><span class="score-val">13/20</span></div>
+      <div class="score-row"><span class="score-label">Tone and Confidence</span><div class="score-bar-wrap"><div class="score-bar" style="width:87%"></div></div><span class="score-val">13/15</span></div>
+      <div class="score-row"><span class="score-label">Active Listening</span><div class="score-bar-wrap"><div class="score-bar" style="width:60%"></div></div><span class="score-val">9/15</span></div>
+      <div class="score-row"><span class="score-label">Objection Handling</span><div class="score-bar-wrap"><div class="score-bar" style="width:55%"></div></div><span class="score-val">11/20</span></div>
+      <div class="score-row"><span class="score-label">Compliance and Closing</span><div class="score-bar-wrap"><div class="score-bar" style="width:75%"></div></div><span class="score-val">15/20</span></div>
+      <div class="score-row" style="padding-top:12px"><span class="score-label" style="font-weight:700;color:#0f0f1a">Total Score</span><div class="score-bar-wrap"><div class="score-bar" style="width:69%"></div></div><span class="score-val" style="color:#6366f1;font-size:16px">69/100</span></div>
+    </div>
+
+    <h2><span>Why Consistent Scoring Matters</span></h2>
+    <p>When a human QA analyst reviews a call in the morning versus the afternoon, after a coffee break versus after five difficult calls, their scores are not the same. AI applies the identical rubric to every call, removing reviewer fatigue, bias, and inconsistency from the equation.</p>
+    <p>This matters for two reasons. First, agents trust scores that are demonstrably consistent — there is no "he always marks me harshly" complaint when the same algorithm evaluates everyone. Second, managers can track genuine performance trends without worrying whether score changes reflect actual improvement or just a different reviewer's mood.</p>
+
+    <h2><span>How to Implement AI Agent Scoring</span></h2>
+    <p>Start today without any software purchase or integration:</p>
+    <ul>
+      <li>Upload a call recording to <a href="/" style="color:#6366f1;font-weight:600">Bolo Aur Likho</a></li>
+      <li>Get instant transcription, sentiment analysis, and quality flags</li>
+      <li>Use the output to score the call against the 6-dimension rubric above</li>
+      <li>Build a weekly scoring cadence across 20 to 30 calls per agent</li>
+    </ul>
+  </div>
+  <div class="cta-box">
+    <h2>Score Your First Call. Free.</h2>
+    <p>Upload a call recording and see AI quality scoring in action. No signup, no setup.</p>
+    <a href="/">Try AI Scoring Free →</a>
+  </div>
+</div>
+<footer><p><a href="/">Call Audit Tool</a> · <a href="/blog">Blog</a> · <a href="/privacy.html">Privacy</a></p><p style="margin-top:8px">© 2026 Bolo Aur Likho</p></footer>
+</body>
+</html>

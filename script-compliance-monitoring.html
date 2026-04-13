@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Script Compliance Monitoring: Ensure Every Agent Follows the Script | Bolo Aur Likho</title>
+  <meta name="description" content="Script compliance monitoring uses AI to check whether agents are following approved call scripts and mandatory disclosures. Works on Hindi, Hinglish, and multilingual calls.">
+  <meta property="og:title" content="Script Compliance Monitoring for Sales Calls | Bolo Aur Likho">
+  <meta property="og:url" content="https://boloaurlikho.com/script-compliance-monitoring">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://boloaurlikho.com/script-compliance-monitoring">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="/favicon.svg">
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N5BNNVFL');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RP14TND3FS"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-RP14TND3FS');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Script Compliance Monitoring: Ensure Every Agent Follows the Script","description":"How AI-powered script compliance monitoring helps sales and support teams verify mandatory disclosures and script adherence on every call.","url":"https://boloaurlikho.com/script-compliance-monitoring","datePublished":"2026-04-13","author":{"@type":"Person","name":"Goyal Vikas"},"publisher":{"@type":"Organization","name":"Bolo Aur Likho","url":"https://boloaurlikho.com"}}</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:#f7f8fc;color:#1a1a2e}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #e8eaf0;position:sticky;top:0;z-index:100}
+    .logo{text-decoration:none;display:flex;align-items:center}
+    .logo-plain{color:#1a1a2e;font-weight:700;font-size:19px;padding:0 2px}
+    .logo-highlight{color:#fff;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:5px;padding:1px 6px;font-weight:800;font-size:19px;font-style:italic}
+    .nav-links{display:flex;align-items:center;gap:20px}
+    .nav-links a{font-size:13px;color:#475569;text-decoration:none;font-weight:500}
+    .nav-cta{font-size:13px!important;font-weight:600!important;color:#fff!important;background:linear-gradient(135deg,#6366f1,#7c3aed);padding:8px 18px;border-radius:20px;text-decoration:none}
+    .hero{padding:64px 24px 40px;text-align:center;max-width:800px;margin:0 auto}
+    .hero-tag{display:inline-flex;align-items:center;gap:7px;background:#eef2ff;color:#6366f1;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:20px;border:1px solid #c7d2fe;text-transform:uppercase;letter-spacing:0.5px}
+    h1{font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1.12;letter-spacing:-1px;color:#0f0f1a;margin-bottom:20px}
+    .accent{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:17px;color:#475569;line-height:1.7;max-width:640px;margin:0 auto 24px}
+    .container{max-width:780px;margin:0 auto;padding:0 24px 80px}
+    .section{margin-bottom:52px}
+    .section h2{font-size:24px;font-weight:800;color:#0f0f1a;margin-bottom:16px;letter-spacing:-0.5px}
+    .section h2 span{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .section h3{font-size:18px;font-weight:700;color:#1e293b;margin:24px 0 10px}
+    .section p{font-size:16px;color:#334155;line-height:1.8;margin-bottom:16px}
+    .section ul{margin:0 0 16px 24px}
+    .section li{font-size:16px;color:#334155;line-height:1.8;margin-bottom:8px}
+    .section strong{color:#1e293b}
+    .callout{background:#eef2ff;border:1px solid #c7d2fe;border-radius:14px;padding:20px 24px;margin:24px 0;font-size:15px;color:#4338ca;font-weight:500}
+    .script-example{background:#1e293b;border-radius:12px;padding:20px 24px;margin:20px 0;font-family:monospace;font-size:14px;line-height:1.8}
+    .script-example .label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;color:#94a3b8}
+    .script-example .required{color:#86efac}
+    .script-example .violation{color:#fca5a5;text-decoration:line-through}
+    .script-example .agent{color:#93c5fd}
+    .compliance-levels{display:flex;gap:12px;margin:24px 0;flex-wrap:wrap}
+    .level-card{flex:1;min-width:200px;border-radius:12px;padding:16px;text-align:center}
+    .level-card.green{background:#f0fdf4;border:1px solid #bbf7d0}
+    .level-card.yellow{background:#fefce8;border:1px solid #fef08a}
+    .level-card.red{background:#fff1f2;border:1px solid #fecdd3}
+    .level-card .pct{font-size:28px;font-weight:800;margin-bottom:4px}
+    .level-card.green .pct{color:#15803d}
+    .level-card.yellow .pct{color:#b45309}
+    .level-card.red .pct{color:#be123c}
+    .level-card .desc{font-size:13px;color:#475569}
+    .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:24px 0}
+    .feature-card{background:white;border:1px solid #e2e8f0;border-radius:14px;padding:20px}
+    .feature-card .icon{font-size:24px;margin-bottom:10px;display:block}
+    .feature-card h3{font-size:15px;font-weight:700;color:#0f0f1a;margin-bottom:8px}
+    .feature-card p{font-size:14px;color:#475569;line-height:1.6;margin:0}
+    .cta-box{background:linear-gradient(135deg,#6366f1,#7c3aed);border-radius:20px;padding:40px 36px;text-align:center;color:white;margin:48px 0}
+    .cta-box h2{font-size:24px;font-weight:800;margin-bottom:10px;color:white}
+    .cta-box p{color:rgba(255,255,255,0.85);font-size:15px;margin-bottom:24px}
+    .cta-box a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:white;color:#6366f1;font-size:15px;font-weight:700;border-radius:12px;text-decoration:none}
+    footer{text-align:center;padding:32px;font-size:13px;color:#94a3b8;border-top:1px solid #e8eaf0}
+    footer a{color:#6366f1;text-decoration:none}
+    @media(max-width:768px){nav{padding:14px 20px}.hero{padding:40px 16px 28px}.feature-grid{grid-template-columns:1fr}.compliance-levels{flex-direction:column}.nav-links a:not(.nav-cta){display:none}}
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5BNNVFL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<nav>
+  <a href="/" class="logo"><span class="logo-highlight">bolo</span><span class="logo-plain">aur</span><span class="logo-highlight">likho</span></a>
+  <div class="nav-links"><a href="/blog">Blog</a><a href="/" class="nav-cta">Try Free →</a></div>
+</nav>
+<div class="hero">
+  <div class="hero-tag">📜 Script Compliance</div>
+  <h1>Script Compliance Monitoring:<br><span class="accent">Know Who Follows the Script</span></h1>
+  <p class="hero-sub">You trained your agents. You approved the script. But do you know how many calls follow it? AI script compliance monitoring checks every call against your required disclosures and script elements — automatically.</p>
+</div>
+<div class="container">
+  <div class="section">
+    <h2><span>What Is Script Compliance Monitoring?</span></h2>
+    <p>Script compliance monitoring is the process of verifying that agents on customer calls cover all required elements — disclosures, legal statements, product information — in the approved manner. Traditionally done through manual spot-checks, AI makes it possible to check every call.</p>
+    <p>There are two types of script compliance:</p>
+    <ul>
+      <li><strong>Mandatory compliance:</strong> Legally required disclosures (e.g., interest rate in APR terms, free look period for insurance, recording disclosure) that must appear on every applicable call.</li>
+      <li><strong>Quality compliance:</strong> Preferred script elements (opening format, needs discovery questions, objection handling phrases) that improve conversion and consistency but are not legally mandated.</li>
+    </ul>
+    <p>Both types can be monitored by AI, but they are treated differently in the audit output — violations of mandatory compliance are flagged as high-risk, while quality compliance gaps become coaching inputs.</p>
+
+    <h2><span>How AI Checks Script Compliance on a Call</span></h2>
+    <p>After a call is transcribed, the AI analyses the transcript for the presence, absence, and accuracy of specified script elements. This works in three ways:</p>
+    <h3>Keyword and Phrase Detection</h3>
+    <p>The most straightforward approach: the AI checks whether required phrases appear in the transcript. "Yeh call quality ke liye record ki ja rahi hai" — if this phrase or its semantic equivalent does not appear within the first 60 seconds, the call is flagged as a recording disclosure miss.</p>
+    <h3>Semantic Equivalence Checking</h3>
+    <p>Agents naturally vary their phrasing. "Processing fee 2% lagegi" and "Do percent fee cut hoga" and "Ek chota sa processing charge hai" all communicate the same information in different ways. Semantic checking catches disclosures made in varied language, reducing false positives compared to exact-match keyword checking.</p>
+    <h3>Sequence and Placement Analysis</h3>
+    <p>Some disclosures must occur at specific points in the call — not just anywhere. A recording disclosure at the end of a call is not compliant. AI can check whether required elements appear in the correct sequence and within appropriate time windows.</p>
+
+    <div class="script-example">
+      <div class="label">AI Script Compliance Output — Example</div>
+      <div class="agent">Agent: "Main Rahul bol raha hoon, FinServ se. Aapka time hai?"</div>
+      <div class="required">✓ Agent name — PRESENT</div>
+      <div class="required">✓ Company name — PRESENT</div>
+      <div class="violation">✗ Recording disclosure — MISSING (required within first 30 seconds)</div>
+      <div class="agent">Agent: [6 minutes into call] "Sir, interest rate 18% APR hoga..."</div>
+      <div class="required">✓ APR disclosure — PRESENT</div>
+      <div class="violation">✗ Processing fee — MISSING (mentioned EMI only, no processing fee disclosed)</div>
+    </div>
+
+    <h2><span>Compliance Score Distribution — What Teams Typically Find</span></h2>
+    <p>When teams first run AI script compliance monitoring, the initial distribution typically looks like this:</p>
+    <div class="compliance-levels">
+      <div class="level-card green"><div class="pct">35%</div><div class="desc">Full compliance — all mandatory elements present</div></div>
+      <div class="level-card yellow"><div class="pct">42%</div><div class="desc">Partial compliance — 1 to 2 elements missing</div></div>
+      <div class="level-card red"><div class="pct">23%</div><div class="desc">High risk — 3 or more mandatory elements missing</div></div>
+    </div>
+    <p>These numbers improve significantly within 30 days once agents know their calls are being monitored. The improvement is not primarily from management action — it is from agents self-correcting when they know every call is reviewed.</p>
+
+    <h2><span>Key Features of AI Script Compliance Monitoring</span></h2>
+    <div class="feature-grid">
+      <div class="feature-card"><span class="icon">🌐</span><h3>Multilingual Support</h3><p>Works on Hindi, Hinglish, Tamil, Telugu, and 90+ other languages. The script can include Hindi phrases and the AI checks for them natively.</p></div>
+      <div class="feature-card"><span class="icon">⚡</span><h3>100% Call Coverage</h3><p>Every call gets checked, not just 2 to 5%. Systematic failures get caught immediately, not after dozens of violations have accumulated.</p></div>
+      <div class="feature-card"><span class="icon">🎯</span><h3>Element-Level Reporting</h3><p>The output shows which specific elements were missing on each call — not just a pass/fail score. Coaching becomes targeted.</p></div>
+      <div class="feature-card"><span class="icon">📈</span><h3>Agent-Level Trending</h3><p>Track each agent's script compliance rate over time. Identify whether compliance improves after training or reverts after a few weeks.</p></div>
+    </div>
+
+    <div class="callout">💡 In regulated industries, maintaining evidence that you checked for script compliance is itself a compliance requirement. AI call auditing creates an automatic audit trail of every call reviewed — something manual spot-checks cannot provide.</div>
+  </div>
+  <div class="cta-box">
+    <h2>Check Script Compliance on Every Call</h2>
+    <p>Upload any call recording. Get instant transcript and compliance element analysis. Free, no signup.</p>
+    <a href="/">Start Free →</a>
+  </div>
+</div>
+<footer><p><a href="/">Call Audit Tool</a> · <a href="/blog">Blog</a> · <a href="/privacy.html">Privacy</a></p><p style="margin-top:8px">© 2026 Bolo Aur Likho</p></footer>
+</body>
+</html>

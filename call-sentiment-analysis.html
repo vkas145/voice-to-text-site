@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Call Sentiment Analysis Tool: Detect Customer Emotions in Every Call | Bolo Aur Likho</title>
+  <meta name="description" content="Call sentiment analysis automatically detects customer emotions — frustration, satisfaction, confusion — on every call. Better than CSAT surveys. Works on Hindi and Hinglish calls.">
+  <meta property="og:title" content="Call Sentiment Analysis Tool | Bolo Aur Likho">
+  <meta property="og:url" content="https://boloaurlikho.com/call-sentiment-analysis">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://boloaurlikho.com/call-sentiment-analysis">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="/favicon.svg">
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N5BNNVFL');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RP14TND3FS"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-RP14TND3FS');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Bolo Aur Likho","url":"https://boloaurlikho.com","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"description":"Free call sentiment analysis tool. Detect customer emotions on every sales and support call automatically."}</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:#f7f8fc;color:#1a1a2e}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #e8eaf0;position:sticky;top:0;z-index:100}
+    .logo{text-decoration:none;display:flex;align-items:center}
+    .logo-plain{color:#1a1a2e;font-weight:700;font-size:19px;padding:0 2px}
+    .logo-highlight{color:#fff;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:5px;padding:1px 6px;font-weight:800;font-size:19px;font-style:italic}
+    .nav-links{display:flex;align-items:center;gap:20px}
+    .nav-links a{font-size:13px;color:#475569;text-decoration:none;font-weight:500}
+    .nav-cta{font-size:13px!important;font-weight:600!important;color:#fff!important;background:linear-gradient(135deg,#6366f1,#7c3aed);padding:8px 18px;border-radius:20px;text-decoration:none}
+    .hero{padding:72px 24px 48px;text-align:center;max-width:800px;margin:0 auto}
+    .hero-tag{display:inline-flex;align-items:center;gap:7px;background:#eef2ff;color:#6366f1;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:20px;border:1px solid #c7d2fe;text-transform:uppercase;letter-spacing:0.5px}
+    h1{font-size:clamp(30px,4.5vw,50px);font-weight:800;line-height:1.12;letter-spacing:-1.5px;color:#0f0f1a;margin-bottom:20px}
+    .accent{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:18px;color:#475569;line-height:1.7;max-width:640px;margin:0 auto 32px}
+    .hero-cta{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:linear-gradient(135deg,#6366f1,#7c3aed);color:white;font-size:15px;font-weight:700;border-radius:12px;text-decoration:none;margin-bottom:12px}
+    .hero-note{font-size:13px;color:#94a3b8}
+    .container{max-width:780px;margin:0 auto;padding:0 24px 80px}
+    .section{margin-bottom:56px}
+    .section h2{font-size:26px;font-weight:800;color:#0f0f1a;margin-bottom:16px;letter-spacing:-0.5px}
+    .section h2 span{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .section h3{font-size:18px;font-weight:700;color:#1e293b;margin:24px 0 10px}
+    .section p{font-size:16px;color:#334155;line-height:1.8;margin-bottom:16px}
+    .section ul{margin:0 0 16px 24px}
+    .section li{font-size:16px;color:#334155;line-height:1.8;margin-bottom:8px}
+    .section strong{color:#1e293b}
+    .callout{background:#eef2ff;border:1px solid #c7d2fe;border-radius:14px;padding:20px 24px;margin:24px 0;font-size:15px;color:#4338ca;font-weight:500}
+    .sentiment-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:24px 0}
+    .sentiment-card{background:white;border:1px solid #e2e8f0;border-radius:14px;padding:20px}
+    .sentiment-card .emoji{font-size:28px;margin-bottom:10px;display:block}
+    .sentiment-card h3{font-size:15px;font-weight:700;color:#0f0f1a;margin-bottom:8px}
+    .sentiment-card p{font-size:14px;color:#475569;line-height:1.6;margin:0}
+    .vs-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px}
+    .vs-table th{background:#0f0f1a;color:white;padding:12px 16px;text-align:left;font-weight:700}
+    .vs-table td{padding:12px 16px;border-bottom:1px solid #e2e8f0;background:white;color:#334155}
+    .vs-table tr:last-child td{border-bottom:none}
+    .good{color:#059669;font-weight:600}
+    .bad{color:#dc2626}
+    .cta-box{background:linear-gradient(135deg,#6366f1,#7c3aed);border-radius:20px;padding:40px 36px;text-align:center;color:white;margin:48px 0}
+    .cta-box h2{font-size:26px;font-weight:800;margin-bottom:10px;color:white}
+    .cta-box p{color:rgba(255,255,255,0.85);font-size:15px;margin-bottom:24px}
+    .cta-box a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:white;color:#6366f1;font-size:15px;font-weight:700;border-radius:12px;text-decoration:none}
+    footer{text-align:center;padding:32px;font-size:13px;color:#94a3b8;border-top:1px solid #e8eaf0}
+    footer a{color:#6366f1;text-decoration:none}
+    @media(max-width:768px){nav{padding:14px 20px}.hero{padding:48px 16px 32px}.sentiment-grid{grid-template-columns:1fr}.nav-links a:not(.nav-cta){display:none}}
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5BNNVFL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<nav>
+  <a href="/" class="logo"><span class="logo-highlight">bolo</span><span class="logo-plain">aur</span><span class="logo-highlight">likho</span></a>
+  <div class="nav-links"><a href="/blog">Blog</a><a href="/" class="nav-cta">Try Free →</a></div>
+</nav>
+<div class="hero">
+  <div class="hero-tag">😊 Sentiment Analysis</div>
+  <h1>Know How Your Customers<br><span class="accent">Really Feel on Every Call</span></h1>
+  <p class="hero-sub">Call sentiment analysis detects frustration, confusion, satisfaction, and buying intent automatically — on 100% of calls. No survey. No guesswork. Just signal from the conversation itself.</p>
+  <a href="/" class="hero-cta">Analyse a Call Free →</a>
+  <p class="hero-note">Upload any call recording. Instant results.</p>
+</div>
+<div class="container">
+  <div class="section">
+    <h2><span>What Call Sentiment Analysis Actually Detects</span></h2>
+    <p>Sentiment analysis on customer calls goes far beyond "positive" and "negative". A well-trained model identifies distinct emotional states throughout the conversation, mapped to specific moments in the transcript. Here is what it surfaces:</p>
+
+    <div class="sentiment-grid">
+      <div class="sentiment-card"><span class="emoji">😤</span><h3>Customer Frustration</h3><p>Detected through raised voice, repeated questions, phrases like "main pehle bhi bata chuka hoon" or "aap sun nahi rahe". Flags calls that need immediate follow-up.</p></div>
+      <div class="sentiment-card"><span class="emoji">😕</span><h3>Confusion and Uncertainty</h3><p>Long pauses, clarifying questions, hedging language like "lekin mujhe pata nahi" indicate a customer who has not understood the product. Conversion is unlikely without more information.</p></div>
+      <div class="sentiment-card"><span class="emoji">😊</span><h3>Positive Engagement</h3><p>Affirmative responses, questions about next steps, and forward-looking language ("toh kab se start hoga?") signal a customer moving toward a decision.</p></div>
+      <div class="sentiment-card"><span class="emoji">😰</span><h3>Pressure and Discomfort</h3><p>Short responses, monosyllabic answers, and phrases like "theek hai, okay, haan haan" without genuine engagement may indicate a coerced sale — a compliance risk in regulated industries.</p></div>
+    </div>
+
+    <h2><span>Why Sentiment Analysis Beats CSAT Surveys</span></h2>
+    <table class="vs-table">
+      <thead><tr><th>Factor</th><th>CSAT Surveys</th><th>Call Sentiment Analysis</th></tr></thead>
+      <tbody>
+        <tr><td>Response rate</td><td class="bad">5 to 15% typical</td><td class="good">100% coverage</td></tr>
+        <tr><td>When data is available</td><td class="bad">Hours or days later</td><td class="good">Immediately after upload</td></tr>
+        <tr><td>Granularity</td><td class="bad">Single overall score</td><td class="good">Per-segment emotion tracking</td></tr>
+        <tr><td>Actionability</td><td class="bad">Tells you what, not why</td><td class="good">Points to the exact moment things went wrong</td></tr>
+        <tr><td>Bias</td><td class="bad">Response bias (unhappy customers over-respond)</td><td class="good">Based on actual conversation signals</td></tr>
+        <tr><td>Cost</td><td class="bad">Survey platform + incentives</td><td class="good">Free with Bolo Aur Likho</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span>How Sentiment Analysis Works on Hindi and Hinglish Calls</span></h2>
+    <p>Sentiment analysis on Indian sales calls is more complex than English-only tools can handle. Indian agents and customers frequently switch between Hindi, English, and regional languages mid-sentence. Emotional expression in Hindi uses different idioms, intensity markers, and indirect communication styles that a purely English-trained model misses.</p>
+    <p>Bolo Aur Likho's sentiment analysis is built on top of OpenAI Whisper and processes transcripts in their native language, preserving Hinglish expressions and their emotional context rather than forcing translation first.</p>
+
+    <h2><span>Practical Uses for Sales Managers</span></h2>
+    <ul>
+      <li><strong>Churn prediction:</strong> Customers who sound frustrated on retention calls are far more likely to churn. Flagging these calls for immediate supervisor callback can save the relationship.</li>
+      <li><strong>Conversion coaching:</strong> Agents whose calls show high confusion in the middle of the pitch need product knowledge training, not a different closing technique.</li>
+      <li><strong>Compliance risk identification:</strong> Calls where customer sentiment shifts negative after a pricing or disclosure discussion may indicate mis-selling language was used.</li>
+      <li><strong>Recognition:</strong> Identifying calls with consistently positive customer sentiment helps you understand what your top performers are doing differently.</li>
+    </ul>
+  </div>
+  <div class="cta-box">
+    <h2>Analyse Your First Call. Free.</h2>
+    <p>Upload a call recording and get instant sentiment analysis across the full conversation. No signup required.</p>
+    <a href="/">Try Sentiment Analysis →</a>
+  </div>
+</div>
+<footer><p><a href="/">Call Audit Tool</a> · <a href="/blog">Blog</a> · <a href="/privacy.html">Privacy</a></p><p style="margin-top:8px">© 2026 Bolo Aur Likho</p></footer>
+</body>
+</html>

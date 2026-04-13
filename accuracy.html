@@ -8,7 +8,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-N5BNNVFL');</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Indic Language Transcription Accuracy Benchmarks — Hindi, Tamil, Telugu, Urdu | Bolo Aur Likho</title>
+  <title>Indic Language Transcription Accuracy Benchmarks Hindi, Tamil, Telugu, Urdu | Bolo Aur Likho</title>
   <meta name="description" content="Original accuracy benchmarks for AI transcription of Hindi, Tamil, Telugu, Bengali, Urdu, Marathi, and other Indian languages. Word Error Rate (WER) data across audio types including news, podcasts, noisy calls, and WhatsApp voice notes.">
   <link rel="canonical" href="https://boloaurlikho.com/accuracy">
   <meta property="og:title" content="Indic Language Transcription Accuracy Benchmarks | Bolo Aur Likho">
@@ -19,7 +19,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%236366f1'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial,sans-serif' font-weight='900' font-style='italic' font-size='28' fill='white'>b</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="/favicon.svg">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RP14TND3FS"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-RP14TND3FS');</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How accurate is Hindi transcription with Bolo Aur Likho?","acceptedAnswer":{"@type":"Answer","text":"Bolo Aur Likho achieves approximately 4.2% Word Error Rate (WER) on clean Hindi news audio and 7.8% WER on casual Hindi podcasts. For Hinglish (mixed Hindi-English) meetings, WER is approximately 9.5%. These benchmarks use OpenAI Whisper large-v3 on our internal test set of 20 audio samples."}},{"@type":"Question","name":"What is Word Error Rate (WER)?","acceptedAnswer":{"@type":"Answer","text":"Word Error Rate (WER) is the standard metric for measuring transcription accuracy. It calculates the percentage of words that were incorrectly transcribed (substitutions, insertions, deletions) compared to a human-verified reference transcript. Lower WER means higher accuracy. A WER of 5% means 95 out of 100 words were transcribed correctly."}},{"@type":"Question","name":"Which Indian language has the best transcription accuracy?","acceptedAnswer":{"@type":"Answer","text":"Hindi has the highest accuracy among Indian languages on Whisper, with approximately 4.2% WER on clean audio. Tamil and Bengali follow closely. Accuracy varies significantly based on audio quality, speaker clarity, and background noise rather than just the language."}},{"@type":"Question","name":"How does Bolo Aur Likho compare to Google Speech-to-Text for Hindi?","acceptedAnswer":{"@type":"Answer","text":"OpenAI Whisper (used by Bolo Aur Likho) and Google Speech-to-Text have comparable accuracy for Hindi. Whisper tends to perform better on Hinglish code-switching and produces cleaner Devanagari output. Google has an edge on real-time streaming transcription. Both are significantly more accurate than older speech recognition systems."}}]}</script>
@@ -35,12 +35,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div class="hero">
   <div class="post-tag">Benchmarks</div>
   <h1>Indic Language Transcription Accuracy Benchmarks</h1>
-  <p class="sub">Original Word Error Rate (WER) data for Hindi, Tamil, Telugu, Bengali, Urdu, and more — across real-world audio types.</p>
+  <p class="sub">Original Word Error Rate (WER) data for Hindi, Tamil, Telugu, Bengali, Urdu, and more across real-world audio types.</p>
 </div>
 
 <div class="container"><div class="article">
 
-  <p><strong>Bolo Aur Likho uses OpenAI Whisper large-v3 for transcription. We tested it against 20 audio samples across 7 Indian languages and 5 audio conditions to measure real-world accuracy.</strong> These are original benchmarks — no other tool has published comparable Indic-language WER data at this level of detail.</p>
+  <p><strong>Bolo Aur Likho uses OpenAI Whisper large-v3 for transcription. We tested it against 20 audio samples across 7 Indian languages and 5 audio conditions to measure real-world accuracy.</strong> These are original benchmarks no other tool has published comparable Indic-language WER data at this level of detail.</p>
 
   <div class="callout"><p>Word Error Rate (WER) measures the percentage of words incorrectly transcribed compared to a human-verified reference. Lower is better. A 5% WER means 95 out of 100 words were correct.</p></div>
 
@@ -83,13 +83,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <h2><span class="a">Key Findings</span></h2>
 
   <h3>1. Audio quality matters more than language</h3>
-  <p>The difference between clean Hindi audio (4.2% WER) and noisy BPO Hindi audio (15.8% WER) is far larger than the difference between Hindi and any other Indian language on clean audio. Investing in better recording conditions — even just using a closer microphone — improves accuracy more than any model improvement.</p>
+  <p>The difference between clean Hindi audio (4.2% WER) and noisy BPO Hindi audio (15.8% WER) is far larger than the difference between Hindi and any other Indian language on clean audio. Investing in better recording conditions even just using a closer microphone improves accuracy more than any model improvement.</p>
 
   <h3>2. Hinglish code-switching works well</h3>
   <p>At 9.5% WER, Hinglish meetings are transcribed accurately enough to be useful without heavy editing. Hindi words appear in Devanagari and English words in Latin script, producing natural-looking transcripts that mirror how people actually speak.</p>
 
   <h3>3. Hindi leads, South Indian languages are close</h3>
-  <p>Hindi has the most training data in Whisper's dataset, which shows in its 4.2% WER. Tamil (5.8%) and Bengali (6.1%) follow closely. Telugu, Kannada, and Malayalam are in the 7-9% range — still very usable, and improving with each Whisper model update.</p>
+  <p>Hindi has the most training data in Whisper's dataset, which shows in its 4.2% WER. Tamil (5.8%) and Bengali (6.1%) follow closely. Telugu, Kannada, and Malayalam are in the 7-9% range still very usable, and improving with each Whisper model update.</p>
 
   <h3>4. Phone audio is the hardest challenge</h3>
   <p>WhatsApp voice notes (11.2%) and BPO call recordings (15.8%) are the most challenging due to compression artifacts, background noise, and variable microphone quality. For call center transcription at scale, our <a href="/enterprise">enterprise solution</a> applies noise reduction and adaptive processing to improve these numbers.</p>
@@ -113,12 +113,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <li><strong>Google Speech-to-Text:</strong> Does not publish Hindi WER numbers publicly; independent tests suggest 5-8% on clean audio</li>
     <li><strong>Otter.ai, Notta, Happy Scribe:</strong> Do not publish any Indic-language accuracy data</li>
   </ul>
-  <p>The absence of published Indic benchmarks from competitors is itself informative. We believe publishing honest accuracy data — including where we struggle (noisy call center audio) — builds more trust than vague claims of "99% accuracy."</p>
+  <p>The absence of published Indic benchmarks from competitors is itself informative. We believe publishing honest accuracy data including where we struggle (noisy call center audio) builds more trust than vague claims of "99% accuracy."</p>
 
   <div class="cta-inline">
     <h3>Test It on Your Own Audio</h3>
     <p>Upload any Hindi, Tamil, Telugu, Bengali, or Urdu audio and see the accuracy yourself. Free, no signup.</p>
-    <a href="/">Try Now — Free →</a>
+    <a href="/">Try Now Free →</a>
   </div>
 
   <h2><span class="a">Frequently Asked Questions</span></h2>

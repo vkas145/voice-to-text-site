@@ -8,12 +8,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-N5BNNVFL');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Audio Transcription — 99 Languages, No Signup | Bolo Aur Likho</title>
+  <title>Free Audio Transcription 99 Languages, No Signup | Bolo Aur Likho</title>
   <meta name="description" content="Free AI audio transcription tool. Upload MP3, WAV, M4A or record live and get accurate text in seconds. 99+ languages including Hindi, Urdu, Tamil, Telugu. No signup required. Powered by OpenAI Whisper.">
   <link rel="canonical" href="https://boloaurlikho.com/transcribe">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://boloaurlikho.com/transcribe">
-  <meta property="og:title" content="Free Audio Transcription — 99 Languages, No Signup | Bolo Aur Likho">
+  <meta property="og:title" content="Free Audio Transcription 99 Languages, No Signup | Bolo Aur Likho">
   <meta property="og:description" content="Free AI audio transcription. Upload any audio file or record live. 99+ languages, AI summary, timestamps. No signup.">
   <meta property="og:image" content="https://boloaurlikho.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -51,7 +51,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   </script>
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%236366f1'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial,sans-serif' font-weight='900' font-style='italic' font-size='28' fill='white'>b</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RP14TND3FS"></script>
@@ -199,7 +199,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <section class="hero">
   <div class="hero-tag"><span class="dot"></span> Free Audio Transcription</div>
   <h1>Upload or Speak.<br><span class="accent">We'll Transcribe it.</span></h1>
-  <p class="subtitle"><strong>Bolo Aur Likho</strong> is a free AI transcription tool powered by OpenAI Whisper. Upload any audio file or record live — and get a precise, accurate transcript in seconds. 99+ languages. No signup. Completely free.</p>
+  <p class="subtitle"><strong>Bolo Aur Likho</strong> is a free AI transcription tool powered by OpenAI Whisper. Upload any audio file or record live and get a precise, accurate transcript in seconds. 99+ languages. No signup. Completely free.</p>
 
   <div class="trust-row">
     <div class="trust-badge green"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>100% Free</div>
@@ -308,9 +308,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <div class="results" id="results">
         <div class="stats-row">
-          <div class="stat-card"><div class="stat-val" id="statWords">—</div><div class="stat-lbl">Words</div></div>
-          <div class="stat-card"><div class="stat-val" id="statDuration">—</div><div class="stat-lbl">Duration</div></div>
-          <div class="stat-card"><div class="stat-val" id="statLang">—</div><div class="stat-lbl">Language</div></div>
+          <div class="stat-card"><div class="stat-val" id="statWords"> </div><div class="stat-lbl">Words</div></div>
+          <div class="stat-card"><div class="stat-val" id="statDuration"> </div><div class="stat-lbl">Duration</div></div>
+          <div class="stat-card"><div class="stat-val" id="statLang"> </div><div class="stat-lbl">Language</div></div>
         </div>
         <div class="summary-section" id="summarySection" style="display:none">
           <div class="section-head">
@@ -567,8 +567,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
       clearInterval(timerInterval); document.getElementById('progressWrap').classList.remove('visible');
       btn.disabled = false; btn.classList.remove('processing'); btn.innerHTML = BTN_ICON + ' Transcribe Now';
-      document.getElementById('statWords').textContent = totalWordCount || '—';
-      document.getElementById('statDuration').textContent = totalDuration ? formatDur(totalDuration) : '—';
+      document.getElementById('statWords').textContent = totalWordCount || ' ';
+      document.getElementById('statDuration').textContent = totalDuration ? formatDur(totalDuration) : ' ';
       document.getElementById('statLang').textContent = (detectedLanguage || 'auto').toUpperCase();
       const ss = document.getElementById('summarySection'), sentSec = document.getElementById('sentimentSection');
       if (summary) {
