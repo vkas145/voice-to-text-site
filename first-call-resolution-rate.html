@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>First Call Resolution Rate: What It Is, How to Measure and Improve FCR | Bolo Aur Likho</title>
+  <meta name="description" content="First Call Resolution (FCR) is the most impactful call center metric. Learn the formula, industry benchmarks, why FCR drops, and how AI call auditing improves it.">
+  <meta property="og:title" content="First Call Resolution Rate: Measure and Improve FCR | Bolo Aur Likho">
+  <meta property="og:url" content="https://boloaurlikho.com/first-call-resolution-rate">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://boloaurlikho.com/first-call-resolution-rate">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="/favicon.svg">
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N5BNNVFL');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RP14TND3FS"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-RP14TND3FS');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"First Call Resolution Rate: What It Is, How to Measure and Improve FCR","description":"FCR explained — formula, benchmarks, why it drops, and how AI auditing improves first call resolution rates.","url":"https://boloaurlikho.com/first-call-resolution-rate","datePublished":"2026-04-13","author":{"@type":"Person","name":"Goyal Vikas"},"publisher":{"@type":"Organization","name":"Bolo Aur Likho","url":"https://boloaurlikho.com"}}</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:#f7f8fc;color:#1a1a2e}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #e8eaf0;position:sticky;top:0;z-index:100}
+    .logo{text-decoration:none;display:flex;align-items:center}
+    .logo-plain{color:#1a1a2e;font-weight:700;font-size:19px;padding:0 2px}
+    .logo-highlight{color:#fff;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:5px;padding:1px 6px;font-weight:800;font-size:19px;font-style:italic}
+    .nav-links{display:flex;align-items:center;gap:20px}
+    .nav-links a{font-size:13px;color:#475569;text-decoration:none;font-weight:500}
+    .nav-cta{font-size:13px!important;font-weight:600!important;color:#fff!important;background:linear-gradient(135deg,#6366f1,#7c3aed);padding:8px 18px;border-radius:20px;text-decoration:none}
+    .hero{padding:64px 24px 40px;text-align:center;max-width:800px;margin:0 auto}
+    .hero-tag{display:inline-flex;align-items:center;gap:7px;background:#ecfdf5;color:#059669;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:20px;border:1px solid #a7f3d0;text-transform:uppercase;letter-spacing:0.5px}
+    h1{font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1.12;letter-spacing:-1px;color:#0f0f1a;margin-bottom:20px}
+    .accent{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:17px;color:#475569;line-height:1.7;max-width:640px;margin:0 auto 24px}
+    .container{max-width:780px;margin:0 auto;padding:0 24px 80px}
+    .section{margin-bottom:52px}
+    .section h2{font-size:24px;font-weight:800;color:#0f0f1a;margin-bottom:16px;letter-spacing:-0.5px}
+    .section h2 span{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .section h3{font-size:18px;font-weight:700;color:#1e293b;margin:24px 0 10px}
+    .section p{font-size:16px;color:#334155;line-height:1.8;margin-bottom:16px}
+    .section ul{margin:0 0 16px 24px}
+    .section li{font-size:16px;color:#334155;line-height:1.8;margin-bottom:8px}
+    .section strong{color:#1e293b}
+    .callout{background:#eef2ff;border:1px solid #c7d2fe;border-radius:14px;padding:20px 24px;margin:24px 0;font-size:15px;color:#4338ca;font-weight:500}
+    .formula-box{background:#0f0f1a;border-radius:14px;padding:24px 28px;margin:24px 0;text-align:center}
+    .formula-box .label{font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+    .formula-box .formula{font-size:20px;font-weight:800;color:white;font-family:monospace;line-height:1.5}
+    .formula-box .formula span{color:#a5b4fc}
+    .benchmark-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+    .benchmark-card{background:white;border:1px solid #e2e8f0;border-radius:14px;padding:20px;text-align:center}
+    .benchmark-card .metric{font-size:32px;font-weight:800;color:#6366f1;margin-bottom:6px}
+    .benchmark-card .label{font-size:13px;color:#475569;font-weight:600}
+    .reason-card{background:white;border:1px solid #e2e8f0;border-radius:12px;padding:18px 20px;margin:12px 0;border-left:4px solid #f59e0b}
+    .reason-card h3{font-size:15px;font-weight:700;color:#b45309;margin-bottom:6px}
+    .reason-card p{font-size:14px;color:#475569;line-height:1.6;margin:0}
+    .cta-box{background:linear-gradient(135deg,#6366f1,#7c3aed);border-radius:20px;padding:40px 36px;text-align:center;color:white;margin:48px 0}
+    .cta-box h2{font-size:24px;font-weight:800;margin-bottom:10px;color:white}
+    .cta-box p{color:rgba(255,255,255,0.85);font-size:15px;margin-bottom:24px}
+    .cta-box a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:white;color:#6366f1;font-size:15px;font-weight:700;border-radius:12px;text-decoration:none}
+    footer{text-align:center;padding:32px;font-size:13px;color:#94a3b8;border-top:1px solid #e8eaf0}
+    footer a{color:#6366f1;text-decoration:none}
+    @media(max-width:768px){nav{padding:14px 20px}.hero{padding:40px 16px 28px}.benchmark-grid{grid-template-columns:1fr 1fr}.nav-links a:not(.nav-cta){display:none}}
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5BNNVFL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<nav>
+  <a href="/" class="logo"><span class="logo-highlight">bolo</span><span class="logo-plain">aur</span><span class="logo-highlight">likho</span></a>
+  <div class="nav-links"><a href="/blog">Blog</a><a href="/" class="nav-cta">Try Free →</a></div>
+</nav>
+<div class="hero">
+  <div class="hero-tag">📊 Call Center Metric</div>
+  <h1>First Call Resolution Rate:<br><span class="accent">The Metric That Matters Most</span></h1>
+  <p class="hero-sub">FCR measures whether customer issues are resolved in a single contact — no callbacks, no escalations, no repeat contacts. It is the most powerful predictor of both customer satisfaction and contact centre cost efficiency.</p>
+</div>
+<div class="container">
+  <div class="section">
+    <h2><span>What is First Call Resolution (FCR)?</span></h2>
+    <p>First Call Resolution (also called First Contact Resolution) is the percentage of customer calls in which the issue is fully resolved during the first interaction — without the customer needing to call back, follow up via another channel, or be transferred to a different department.</p>
+    <p>A customer who calls with a billing query and has it resolved in one call is an FCR. A customer who calls about the same billing query three times before it is fixed represents three calls — but zero FCR events.</p>
+
+    <div class="formula-box">
+      <div class="label">FCR Formula</div>
+      <div class="formula">FCR = <span>(Calls Resolved on First Contact</span> ÷ <span>Total Calls)</span> × 100</div>
+    </div>
+
+    <h2><span>FCR Benchmarks by Industry</span></h2>
+    <div class="benchmark-grid">
+      <div class="benchmark-card"><div class="metric">70–75%</div><div class="label">Industry Average (All Sectors)</div></div>
+      <div class="benchmark-card"><div class="metric">80%+</div><div class="label">Top Quartile Performers</div></div>
+      <div class="benchmark-card"><div class="metric">65–70%</div><div class="label">BFSI and Insurance (India)</div></div>
+    </div>
+    <p>A 1% improvement in FCR typically reduces operating costs by approximately 1% — because every repeat call is an incremental cost. For a 100-agent contact centre handling 5,000 calls per day, moving FCR from 70% to 75% means 250 fewer repeat calls per day.</p>
+
+    <h2><span>The Business Impact of Low FCR</span></h2>
+    <ul>
+      <li><strong>Direct cost:</strong> Every repeat contact for the same issue doubles the handling cost for that customer's problem.</li>
+      <li><strong>Customer churn:</strong> Customers who experience repeat contacts for the same issue are significantly more likely to churn. Telecom and banking data consistently show a 3x higher churn rate for customers with 3+ contacts for the same issue.</li>
+      <li><strong>Agent morale:</strong> Agents handling the same unresolved issues repeatedly burn out faster. FCR is a leading indicator of agent attrition.</li>
+      <li><strong>Escalation volume:</strong> Unresolved first contacts often escalate to supervisors, complaints, or regulators — each more costly than the original call.</li>
+    </ul>
+
+    <h2><span>Why FCR Drops: The 5 Most Common Causes</span></h2>
+
+    <div class="reason-card">
+      <h3>Agent Knowledge Gaps</h3>
+      <p>The agent does not know the answer and either gives incorrect information (leading to a repeat call) or transfers the customer unnecessarily. Call QA on FCR-failed calls reveals which knowledge gaps are most common.</p>
+    </div>
+    <div class="reason-card">
+      <h3>Insufficient Authority to Resolve</h3>
+      <p>The agent knows the solution but cannot implement it without manager approval. Waiver limits, refund thresholds, and plan change permissions that are too restrictive force unnecessary escalations.</p>
+    </div>
+    <div class="reason-card">
+      <h3>Process Complexity</h3>
+      <p>The resolution process requires steps that cannot all be completed in one call — document submission, verification delays, multi-department approvals. FCR fails that are process-driven need process redesign, not agent coaching.</p>
+    </div>
+    <div class="reason-card">
+      <h3>Incomplete Issue Identification</h3>
+      <p>The agent resolved the stated issue but missed a related underlying issue that the customer calls back about the next day. AI analysis of FCR-failed call transcripts shows what secondary issues were not probed.</p>
+    </div>
+    <div class="reason-card">
+      <h3>Inaccurate Information Given</h3>
+      <p>The customer received incorrect information on the first call — wrong timelines, wrong amounts, wrong process steps. This is a call quality failure detectable through transcript review of repeat callers' first contacts.</p>
+    </div>
+
+    <h2><span>How AI Call Auditing Improves FCR</span></h2>
+    <p>The most effective way to improve FCR is to audit the calls that failed — specifically the first call for customers who called back within 7 days for the same issue. Transcript analysis of these calls reveals exactly where the first interaction broke down.</p>
+    <p>Without AI, reviewing these calls manually is time-intensive. With call transcription and AI analysis, a QA manager can review 20 to 30 FCR-failed calls in an hour and identify the 3 to 4 systemic failure patterns driving the issue.</p>
+
+    <div class="callout">💡 Upload your repeat-caller calls to Bolo Aur Likho. Get instant transcripts and identify why the first call failed to resolve the issue — free, no signup required.</div>
+  </div>
+  <div class="cta-box">
+    <h2>Diagnose Your FCR Failures. Free.</h2>
+    <p>Upload any call recording and get instant transcript analysis. Find the patterns behind low FCR.</p>
+    <a href="/">Start Free Audit →</a>
+  </div>
+</div>
+<footer><p><a href="/">Call Audit Tool</a> · <a href="/blog">Blog</a> · <a href="/privacy.html">Privacy</a></p><p style="margin-top:8px">© 2026 Bolo Aur Likho</p></footer>
+</body>
+</html>

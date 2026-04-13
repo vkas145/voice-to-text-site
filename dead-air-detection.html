@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dead Air Detection on Calls: What It Is and How AI Catches It | Bolo Aur Likho</title>
+  <meta name="description" content="Dead air — extended silence on a call — signals agent hesitation, system delays, or poor call flow. AI dead air detection flags these moments automatically on every call.">
+  <meta property="og:title" content="Dead Air Detection on Calls | Bolo Aur Likho">
+  <meta property="og:url" content="https://boloaurlikho.com/dead-air-detection">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://boloaurlikho.com/dead-air-detection">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="/favicon.svg">
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N5BNNVFL');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RP14TND3FS"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-RP14TND3FS');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Dead Air Detection on Calls: What It Is and How AI Catches It","description":"Dead air explained — what causes it, what it costs, and how AI automatically detects and flags silent gaps in call recordings.","url":"https://boloaurlikho.com/dead-air-detection","datePublished":"2026-04-13","author":{"@type":"Person","name":"Goyal Vikas"},"publisher":{"@type":"Organization","name":"Bolo Aur Likho","url":"https://boloaurlikho.com"}}</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:#f7f8fc;color:#1a1a2e}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #e8eaf0;position:sticky;top:0;z-index:100}
+    .logo{text-decoration:none;display:flex;align-items:center}
+    .logo-plain{color:#1a1a2e;font-weight:700;font-size:19px;padding:0 2px}
+    .logo-highlight{color:#fff;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:5px;padding:1px 6px;font-weight:800;font-size:19px;font-style:italic}
+    .nav-links{display:flex;align-items:center;gap:20px}
+    .nav-links a{font-size:13px;color:#475569;text-decoration:none;font-weight:500}
+    .nav-cta{font-size:13px!important;font-weight:600!important;color:#fff!important;background:linear-gradient(135deg,#6366f1,#7c3aed);padding:8px 18px;border-radius:20px;text-decoration:none}
+    .hero{padding:64px 24px 40px;text-align:center;max-width:800px;margin:0 auto}
+    .hero-tag{display:inline-flex;align-items:center;gap:7px;background:#faf5ff;color:#7c3aed;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:20px;border:1px solid #e9d5ff;text-transform:uppercase;letter-spacing:0.5px}
+    h1{font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1.12;letter-spacing:-1px;color:#0f0f1a;margin-bottom:20px}
+    .accent{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:17px;color:#475569;line-height:1.7;max-width:640px;margin:0 auto 24px}
+    .container{max-width:780px;margin:0 auto;padding:0 24px 80px}
+    .section{margin-bottom:52px}
+    .section h2{font-size:24px;font-weight:800;color:#0f0f1a;margin-bottom:16px;letter-spacing:-0.5px}
+    .section h2 span{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .section h3{font-size:18px;font-weight:700;color:#1e293b;margin:24px 0 10px}
+    .section p{font-size:16px;color:#334155;line-height:1.8;margin-bottom:16px}
+    .section ul{margin:0 0 16px 24px}
+    .section li{font-size:16px;color:#334155;line-height:1.8;margin-bottom:8px}
+    .section strong{color:#1e293b}
+    .callout{background:#eef2ff;border:1px solid #c7d2fe;border-radius:14px;padding:20px 24px;margin:24px 0;font-size:15px;color:#4338ca;font-weight:500}
+    .cause-card{background:white;border:1px solid #e2e8f0;border-radius:12px;padding:18px 20px;margin:12px 0}
+    .cause-card .type{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#7c3aed;margin-bottom:6px}
+    .cause-card h3{font-size:15px;font-weight:700;color:#0f0f1a;margin-bottom:8px}
+    .cause-card p{font-size:14px;color:#475569;line-height:1.6;margin:0}
+    .threshold-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:20px 24px;margin:24px 0}
+    .threshold-box h3{font-size:16px;font-weight:700;color:#0f0f1a;margin-bottom:12px}
+    .threshold-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #f1f5f9}
+    .threshold-row:last-child{border-bottom:none}
+    .threshold-row .dur{font-size:16px;font-weight:700;color:#6366f1;min-width:80px}
+    .threshold-row .desc{font-size:14px;color:#475569}
+    .cta-box{background:linear-gradient(135deg,#6366f1,#7c3aed);border-radius:20px;padding:40px 36px;text-align:center;color:white;margin:48px 0}
+    .cta-box h2{font-size:24px;font-weight:800;margin-bottom:10px;color:white}
+    .cta-box p{color:rgba(255,255,255,0.85);font-size:15px;margin-bottom:24px}
+    .cta-box a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:white;color:#6366f1;font-size:15px;font-weight:700;border-radius:12px;text-decoration:none}
+    footer{text-align:center;padding:32px;font-size:13px;color:#94a3b8;border-top:1px solid #e8eaf0}
+    footer a{color:#6366f1;text-decoration:none}
+    @media(max-width:768px){nav{padding:14px 20px}.hero{padding:40px 16px 28px}.nav-links a:not(.nav-cta){display:none}}
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5BNNVFL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<nav>
+  <a href="/" class="logo"><span class="logo-highlight">bolo</span><span class="logo-plain">aur</span><span class="logo-highlight">likho</span></a>
+  <div class="nav-links"><a href="/blog">Blog</a><a href="/" class="nav-cta">Try Free →</a></div>
+</nav>
+<div class="hero">
+  <div class="hero-tag">🔇 Dead Air Detection</div>
+  <h1>Dead Air Detection:<br><span class="accent">Silence That Signals a Problem</span></h1>
+  <p class="hero-sub">A few seconds of silence on a call is natural. Five seconds of silence while a customer waits is awkward. Fifteen seconds of dead air while an agent searches for information is a call quality failure. AI detects exactly when and why silence happens.</p>
+</div>
+<div class="container">
+  <div class="section">
+    <h2><span>What is Dead Air on a Call?</span></h2>
+    <p>Dead air refers to extended periods of silence during a call where neither the agent nor the customer is speaking. Unlike natural conversational pauses (1 to 3 seconds), dead air typically lasts 5 seconds or more and signals a problem — the agent is searching for information, navigating a slow system, unsure of the answer, or lost in the conversation flow.</p>
+    <p>Dead air is distinguished from hold time. When an agent explicitly places a customer on hold with a message, the customer expects silence. When silence happens without explanation during an active conversation, customer satisfaction drops sharply — within as little as 8 to 10 seconds, customers begin to wonder if the call has disconnected.</p>
+
+    <div class="threshold-box">
+      <h3>Dead Air Thresholds: What Each Duration Signals</h3>
+      <div class="threshold-row"><div class="dur">1–3 sec</div><div class="desc">Natural conversational pause. Normal. Not flagged.</div></div>
+      <div class="threshold-row"><div class="dur">4–7 sec</div><div class="desc">Agent is thinking or checking something. Acceptable but worth monitoring for frequency.</div></div>
+      <div class="threshold-row"><div class="dur">8–15 sec</div><div class="desc">Agent is searching for information. Customer patience thinning. Should be acknowledged verbally ("main check karta hoon, ek second").</div></div>
+      <div class="threshold-row"><div class="dur">15+ sec</div><div class="desc">Significant dead air. High risk of customer disengagement or call abandonment. Flagged as a quality issue.</div></div>
+    </div>
+
+    <h2><span>The 5 Causes of Dead Air</span></h2>
+
+    <div class="cause-card">
+      <div class="type">Knowledge Gap</div>
+      <h3>Agent Does Not Know the Answer</h3>
+      <p>The customer asks a question the agent cannot answer immediately — product features, pricing details, policy terms. The agent goes silent while searching documentation or a knowledge base. Fix: better training and faster-access knowledge bases.</p>
+    </div>
+    <div class="cause-card">
+      <div class="type">System Delay</div>
+      <h3>Slow CRM or Internal Tools</h3>
+      <p>The agent is waiting for a screen to load, a record to pull up, or a system to respond. The customer hears silence. Fix: technology and process, not coaching — agents cannot speak faster than their systems.</p>
+    </div>
+    <div class="cause-card">
+      <div class="type">Script Navigation</div>
+      <h3>Agent Lost in Script or Call Flow</h3>
+      <p>Newer agents frequently fall silent while reading ahead in a script or trying to find the right section of a call guide. Fix: script simplification and script memorisation training.</p>
+    </div>
+    <div class="cause-card">
+      <div class="type">Objection Shock</div>
+      <h3>Unexpected Objection With No Prepared Response</h3>
+      <p>A customer raises an objection the agent was not expecting and goes silent while thinking of a response. Extended silence here signals the agent needs more objection handling preparation.</p>
+    </div>
+    <div class="cause-card">
+      <div class="type">After-Call Prep</div>
+      <h3>Agent Completing Notes During the Call</h3>
+      <p>Some agents write call notes or update CRM records while still technically on the call, creating silent periods the customer experiences as dead air. Fix: post-call note automation.</p>
+    </div>
+
+    <h2><span>How AI Detects Dead Air</span></h2>
+    <p>In a call transcript, dead air appears as extended gaps between speaker turns — periods where neither the [Agent] nor [Customer] label is active. AI identifies these gaps, measures their duration, and flags instances above the defined threshold (typically 8 seconds) as quality issues.</p>
+    <p>At scale, dead air data reveals systemic patterns: which agents have the most dead air, at what point in calls it occurs, and whether it correlates with specific call types, objection categories, or product queries. This turns a vague "agents hesitate" impression into specific, actionable data.</p>
+
+    <div class="callout">💡 Upload a call to Bolo Aur Likho and search the transcript for gaps. Timestamps in the transcript let you identify exactly when dead air occurred and what the conversation context was immediately before the silence.</div>
+  </div>
+  <div class="cta-box">
+    <h2>Detect Dead Air in Your Calls. Free.</h2>
+    <p>Upload any call recording. Get instant timestamped transcript. Identify silence patterns by agent.</p>
+    <a href="/">Try Free →</a>
+  </div>
+</div>
+<footer><p><a href="/">Call Audit Tool</a> · <a href="/blog">Blog</a> · <a href="/privacy.html">Privacy</a></p><p style="margin-top:8px">© 2026 Bolo Aur Likho</p></footer>
+</body>
+</html>

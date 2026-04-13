@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Call QA Automation: How to Go from Manual Sampling to 100% Coverage | Bolo Aur Likho</title>
+  <meta name="description" content="Call QA automation replaces manual spot-checking with AI that reviews every call. Learn how to migrate from a 2% manual sample to 100% AI coverage — without replacing your QA team.">
+  <meta property="og:title" content="Call QA Automation: From Manual Sampling to 100% Coverage | Bolo Aur Likho">
+  <meta property="og:url" content="https://boloaurlikho.com/call-qa-automation-guide">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://boloaurlikho.com/call-qa-automation-guide">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="/favicon.svg">
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N5BNNVFL');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RP14TND3FS"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-RP14TND3FS');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Call QA Automation: How to Go from Manual Sampling to 100% Coverage","description":"How to migrate from manual call QA sampling to AI-powered 100% coverage — what changes, what stays the same, and how to do it without disrupting your QA team.","url":"https://boloaurlikho.com/call-qa-automation-guide","datePublished":"2026-04-13","author":{"@type":"Person","name":"Goyal Vikas"},"publisher":{"@type":"Organization","name":"Bolo Aur Likho","url":"https://boloaurlikho.com"}}</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:#f7f8fc;color:#1a1a2e}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #e8eaf0;position:sticky;top:0;z-index:100}
+    .logo{text-decoration:none;display:flex;align-items:center}
+    .logo-plain{color:#1a1a2e;font-weight:700;font-size:19px;padding:0 2px}
+    .logo-highlight{color:#fff;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:5px;padding:1px 6px;font-weight:800;font-size:19px;font-style:italic}
+    .nav-links{display:flex;align-items:center;gap:20px}
+    .nav-links a{font-size:13px;color:#475569;text-decoration:none;font-weight:500}
+    .nav-cta{font-size:13px!important;font-weight:600!important;color:#fff!important;background:linear-gradient(135deg,#6366f1,#7c3aed);padding:8px 18px;border-radius:20px;text-decoration:none}
+    .hero{padding:64px 24px 40px;text-align:center;max-width:800px;margin:0 auto}
+    .hero-tag{display:inline-flex;align-items:center;gap:7px;background:#eef2ff;color:#6366f1;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:20px;border:1px solid #c7d2fe;text-transform:uppercase;letter-spacing:0.5px}
+    h1{font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1.12;letter-spacing:-1px;color:#0f0f1a;margin-bottom:20px}
+    .accent{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:17px;color:#475569;line-height:1.7;max-width:640px;margin:0 auto 24px}
+    .container{max-width:780px;margin:0 auto;padding:0 24px 80px}
+    .section{margin-bottom:52px}
+    .section h2{font-size:24px;font-weight:800;color:#0f0f1a;margin-bottom:16px;letter-spacing:-0.5px}
+    .section h2 span{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .section h3{font-size:18px;font-weight:700;color:#1e293b;margin:24px 0 10px}
+    .section p{font-size:16px;color:#334155;line-height:1.8;margin-bottom:16px}
+    .section ul{margin:0 0 16px 24px}
+    .section li{font-size:16px;color:#334155;line-height:1.8;margin-bottom:8px}
+    .section strong{color:#1e293b}
+    .callout{background:#eef2ff;border:1px solid #c7d2fe;border-radius:14px;padding:20px 24px;margin:24px 0;font-size:15px;color:#4338ca;font-weight:500}
+    .before-after{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+    .ba-card{border-radius:14px;padding:20px}
+    .ba-card.before{background:#fff1f2;border:1px solid #fecdd3}
+    .ba-card.after{background:#f0fdf4;border:1px solid #bbf7d0}
+    .ba-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+    .ba-card.before .ba-label{color:#be123c}
+    .ba-card.after .ba-label{color:#15803d}
+    .ba-card h3{font-size:15px;font-weight:700;margin-bottom:8px}
+    .ba-card.before h3{color:#be123c}
+    .ba-card.after h3{color:#15803d}
+    .ba-card ul{margin:0 0 0 16px}
+    .ba-card li{font-size:14px;color:#475569;line-height:1.6;margin-bottom:4px}
+    .migration-step{background:white;border:1px solid #e2e8f0;border-radius:14px;padding:20px 24px;margin:16px 0;display:flex;gap:16px;align-items:flex-start}
+    .ms-num{flex-shrink:0;width:36px;height:36px;background:#eef2ff;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#6366f1;font-weight:800;font-size:15px}
+    .ms-content h3{font-size:16px;font-weight:700;color:#0f0f1a;margin:0 0 6px}
+    .ms-content p{font-size:14px;color:#475569;line-height:1.6;margin:0}
+    .cta-box{background:linear-gradient(135deg,#6366f1,#7c3aed);border-radius:20px;padding:40px 36px;text-align:center;color:white;margin:48px 0}
+    .cta-box h2{font-size:24px;font-weight:800;margin-bottom:10px;color:white}
+    .cta-box p{color:rgba(255,255,255,0.85);font-size:15px;margin-bottom:24px}
+    .cta-box a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:white;color:#6366f1;font-size:15px;font-weight:700;border-radius:12px;text-decoration:none}
+    footer{text-align:center;padding:32px;font-size:13px;color:#94a3b8;border-top:1px solid #e8eaf0}
+    footer a{color:#6366f1;text-decoration:none}
+    @media(max-width:768px){nav{padding:14px 20px}.hero{padding:40px 16px 28px}.before-after{grid-template-columns:1fr}.migration-step{flex-direction:column;gap:10px}.nav-links a:not(.nav-cta){display:none}}
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5BNNVFL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<nav>
+  <a href="/" class="logo"><span class="logo-highlight">bolo</span><span class="logo-plain">aur</span><span class="logo-highlight">likho</span></a>
+  <div class="nav-links"><a href="/blog">Blog</a><a href="/" class="nav-cta">Try Free →</a></div>
+</nav>
+<div class="hero">
+  <div class="hero-tag">🤖 QA Automation</div>
+  <h1>Call QA Automation:<br><span class="accent">From 2% to 100% Coverage</span></h1>
+  <p class="hero-sub">Most contact centres review 2 to 5% of calls manually. The other 95 to 98% are never heard by a QA team. AI QA automation does not replace your QA team — it gives them the coverage they were never able to achieve manually.</p>
+</div>
+<div class="container">
+  <div class="section">
+    <h2><span>Manual QA vs Automated QA: What Changes</span></h2>
+    <div class="before-after">
+      <div class="ba-card before">
+        <div class="ba-label">Manual QA (Current State)</div>
+        <h3>What You Have Now</h3>
+        <ul>
+          <li>2–5% of calls reviewed</li>
+          <li>Random sampling — no systematic logic</li>
+          <li>15–20 minutes per call review</li>
+          <li>Reviewer bias affects scores</li>
+          <li>Compliance gaps accumulate undetected</li>
+          <li>Agent coaching is reactive, not pattern-based</li>
+          <li>No audit trail of what was reviewed</li>
+        </ul>
+      </div>
+      <div class="ba-card after">
+        <div class="ba-label">Automated QA (Target State)</div>
+        <h3>What You Have With AI</h3>
+        <ul>
+          <li>100% of calls reviewed automatically</li>
+          <li>Risk-based flagging for human review</li>
+          <li>3–5 minutes per transcript review</li>
+          <li>Consistent AI scoring baseline</li>
+          <li>Real-time compliance flagging</li>
+          <li>Pattern-based coaching from trend data</li>
+          <li>Complete automated audit trail</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2><span>What Call QA Automation Does NOT Replace</span></h2>
+    <p>A common concern about call QA automation is that it will replace human QA analysts and managers. It does not — and should not. Here is what automation handles and what still needs a human:</p>
+    <ul>
+      <li><strong>AI handles:</strong> Transcription, keyword detection, compliance flag generation, quality scoring, sentiment tagging, trend reporting across all calls</li>
+      <li><strong>Humans handle:</strong> Interpreting nuanced calls, calibration decisions, coaching conversations, performance review discussions, dispute resolution, escalation judgement</li>
+    </ul>
+    <p>Automated QA frees your QA team from spending 80% of their time listening to audio and writing scores — so they can spend that time on the coaching and improvement work that actually changes behaviour.</p>
+
+    <h2><span>The 5-Step Migration to Automated Call QA</span></h2>
+
+    <div class="migration-step">
+      <div class="ms-num">1</div>
+      <div class="ms-content"><h3>Audit your current state</h3><p>Quantify: how many calls per day, how many are manually reviewed, what is the current QA team capacity, what is the coverage gap. This sets the baseline to measure improvement against.</p></div>
+    </div>
+    <div class="migration-step">
+      <div class="ms-num">2</div>
+      <div class="ms-content"><h3>Define what AI should flag</h3><p>List the compliance elements, risk phrases, and quality criteria the AI should check on every call. These become your automated scoring dimensions — start with 5 to 8, not 40.</p></div>
+    </div>
+    <div class="migration-step">
+      <div class="ms-num">3</div>
+      <div class="ms-content"><h3>Start with a pilot batch</h3><p>Upload 50 to 100 calls to Bolo Aur Likho. Compare AI-generated quality flags to manual review of the same calls. Calibrate your expectations — and identify any patterns the AI is over or under-flagging.</p></div>
+    </div>
+    <div class="migration-step">
+      <div class="ms-num">4</div>
+      <div class="ms-content"><h3>Shift QA team focus</h3><p>As AI handles coverage, your QA team shifts from reviewing to: investigating AI-flagged high-risk calls, coaching on patterns, running calibration sessions, and managing dispute resolution. This is higher-value work.</p></div>
+    </div>
+    <div class="migration-step">
+      <div class="ms-num">5</div>
+      <div class="ms-content"><h3>Measure and iterate monthly</h3><p>Track: compliance violation rate (are flagged issues declining?), agent QA scores (are they improving?), complaint rate (are regulatory incidents declining?). Iterate the AI criteria if patterns emerge that are not being caught.</p></div>
+    </div>
+
+    <div class="callout">💡 Start the pilot with your highest-risk call type — insurance sales, NBFC loan activation, or collection calls. These carry the highest compliance exposure and will demonstrate the value of automated coverage most clearly within the first week.</div>
+
+    <h2><span>The Cost Case for Automation</span></h2>
+    <p>A QA analyst who reviews 6 calls per hour, working 8 hours per day, reviews 48 calls. If your team makes 1,000 calls per day, one analyst covers 4.8% — just above the industry average manual coverage rate.</p>
+    <p>If 5% of calls contain a compliance gap, approximately 47.6 non-reviewed calls per day carry an undetected risk. At a conservative Rs 50,000 average complaint cost, that is a potential Rs 23.8 lakh per day in undetected liability.</p>
+    <p>AI automation does not cost Rs 23.8 lakh per day. The ROI case for 100% coverage is straightforward in any regulated industry.</p>
+  </div>
+  <div class="cta-box">
+    <h2>Start Automating Call QA Today. Free.</h2>
+    <p>Upload any call. Get instant AI transcript and quality analysis. No signup, no contract.</p>
+    <a href="/">Try Free →</a>
+  </div>
+</div>
+<footer><p><a href="/">Call Audit Tool</a> · <a href="/blog">Blog</a> · <a href="/privacy.html">Privacy</a></p><p style="margin-top:8px">© 2026 Bolo Aur Likho</p></footer>
+</body>
+</html>

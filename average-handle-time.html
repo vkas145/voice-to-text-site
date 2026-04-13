@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Average Handle Time (AHT): Definition, Formula, Benchmarks and How to Reduce It | Bolo Aur Likho</title>
+  <meta name="description" content="Average Handle Time (AHT) is a core call center KPI. Learn the formula, industry benchmarks, the AHT-quality tradeoff, and how AI auditing helps reduce AHT without hurting customer experience.">
+  <meta property="og:title" content="Average Handle Time (AHT): Formula, Benchmarks & Optimization | Bolo Aur Likho">
+  <meta property="og:url" content="https://boloaurlikho.com/average-handle-time">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://boloaurlikho.com/average-handle-time">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="/favicon.svg">
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N5BNNVFL');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RP14TND3FS"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-RP14TND3FS');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Average Handle Time (AHT): Definition, Formula, Benchmarks and How to Reduce It","description":"AHT explained — formula, benchmarks, the quality tradeoff, and how to reduce average handle time without hurting FCR or CSAT.","url":"https://boloaurlikho.com/average-handle-time","datePublished":"2026-04-13","author":{"@type":"Person","name":"Goyal Vikas"},"publisher":{"@type":"Organization","name":"Bolo Aur Likho","url":"https://boloaurlikho.com"}}</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:#f7f8fc;color:#1a1a2e}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #e8eaf0;position:sticky;top:0;z-index:100}
+    .logo{text-decoration:none;display:flex;align-items:center}
+    .logo-plain{color:#1a1a2e;font-weight:700;font-size:19px;padding:0 2px}
+    .logo-highlight{color:#fff;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:5px;padding:1px 6px;font-weight:800;font-size:19px;font-style:italic}
+    .nav-links{display:flex;align-items:center;gap:20px}
+    .nav-links a{font-size:13px;color:#475569;text-decoration:none;font-weight:500}
+    .nav-cta{font-size:13px!important;font-weight:600!important;color:#fff!important;background:linear-gradient(135deg,#6366f1,#7c3aed);padding:8px 18px;border-radius:20px;text-decoration:none}
+    .hero{padding:64px 24px 40px;text-align:center;max-width:800px;margin:0 auto}
+    .hero-tag{display:inline-flex;align-items:center;gap:7px;background:#eef2ff;color:#6366f1;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:20px;border:1px solid #c7d2fe;text-transform:uppercase;letter-spacing:0.5px}
+    h1{font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1.12;letter-spacing:-1px;color:#0f0f1a;margin-bottom:20px}
+    .accent{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:17px;color:#475569;line-height:1.7;max-width:640px;margin:0 auto 24px}
+    .container{max-width:780px;margin:0 auto;padding:0 24px 80px}
+    .section{margin-bottom:52px}
+    .section h2{font-size:24px;font-weight:800;color:#0f0f1a;margin-bottom:16px;letter-spacing:-0.5px}
+    .section h2 span{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .section h3{font-size:18px;font-weight:700;color:#1e293b;margin:24px 0 10px}
+    .section p{font-size:16px;color:#334155;line-height:1.8;margin-bottom:16px}
+    .section ul{margin:0 0 16px 24px}
+    .section li{font-size:16px;color:#334155;line-height:1.8;margin-bottom:8px}
+    .section strong{color:#1e293b}
+    .callout{background:#eef2ff;border:1px solid #c7d2fe;border-radius:14px;padding:20px 24px;margin:24px 0;font-size:15px;color:#4338ca;font-weight:500}
+    .formula-box{background:#0f0f1a;border-radius:14px;padding:24px 28px;margin:24px 0;text-align:center}
+    .formula-box .label{font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+    .formula-box .formula{font-size:18px;font-weight:800;color:white;font-family:monospace;line-height:1.6}
+    .formula-box .formula span{color:#a5b4fc}
+    .benchmark-row{display:flex;gap:12px;margin:20px 0;flex-wrap:wrap}
+    .benchmark-pill{background:white;border:1px solid #e2e8f0;border-radius:10px;padding:12px 20px;text-align:center;flex:1;min-width:140px}
+    .benchmark-pill .val{font-size:22px;font-weight:800;color:#6366f1}
+    .benchmark-pill .lab{font-size:12px;color:#64748b;margin-top:3px}
+    .warning-callout{background:#fff7ed;border:1px solid #fed7aa;border-radius:14px;padding:20px 24px;margin:24px 0;font-size:15px;color:#c2410c;font-weight:500}
+    .cta-box{background:linear-gradient(135deg,#6366f1,#7c3aed);border-radius:20px;padding:40px 36px;text-align:center;color:white;margin:48px 0}
+    .cta-box h2{font-size:24px;font-weight:800;margin-bottom:10px;color:white}
+    .cta-box p{color:rgba(255,255,255,0.85);font-size:15px;margin-bottom:24px}
+    .cta-box a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:white;color:#6366f1;font-size:15px;font-weight:700;border-radius:12px;text-decoration:none}
+    footer{text-align:center;padding:32px;font-size:13px;color:#94a3b8;border-top:1px solid #e8eaf0}
+    footer a{color:#6366f1;text-decoration:none}
+    @media(max-width:768px){nav{padding:14px 20px}.hero{padding:40px 16px 28px}.benchmark-row{flex-direction:column}.nav-links a:not(.nav-cta){display:none}}
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5BNNVFL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<nav>
+  <a href="/" class="logo"><span class="logo-highlight">bolo</span><span class="logo-plain">aur</span><span class="logo-highlight">likho</span></a>
+  <div class="nav-links"><a href="/blog">Blog</a><a href="/" class="nav-cta">Try Free →</a></div>
+</nav>
+<div class="hero">
+  <div class="hero-tag">⏱️ Call Center KPI</div>
+  <h1>Average Handle Time (AHT):<br><span class="accent">Formula, Benchmarks and How to Reduce It</span></h1>
+  <p class="hero-sub">AHT is one of the most tracked call centre metrics — and one of the most mismanaged. Reducing it blindly destroys FCR and CSAT. Reducing it intelligently, by fixing the actual causes of long calls, is a win on all three dimensions.</p>
+</div>
+<div class="container">
+  <div class="section">
+    <h2><span>What is Average Handle Time?</span></h2>
+    <p>Average Handle Time (AHT) is the average total time an agent spends on a single customer interaction — including talk time, hold time, and the after-call work (ACW) needed to document and close the case.</p>
+
+    <div class="formula-box">
+      <div class="label">AHT Formula</div>
+      <div class="formula">AHT = <span>(Talk Time + Hold Time + After-Call Work)</span> ÷ <span>Number of Calls</span></div>
+    </div>
+
+    <h2><span>AHT Benchmarks</span></h2>
+    <div class="benchmark-row">
+      <div class="benchmark-pill"><div class="val">4–6 min</div><div class="lab">Telecom Support (India)</div></div>
+      <div class="benchmark-pill"><div class="val">6–10 min</div><div class="lab">BFSI and Insurance</div></div>
+      <div class="benchmark-pill"><div class="val">8–15 min</div><div class="lab">Complex Financial Products</div></div>
+      <div class="benchmark-pill"><div class="val">3–5 min</div><div class="lab">Simple Inbound Queries</div></div>
+    </div>
+    <p>Benchmarks vary significantly by call type, industry, and whether the call involves sales vs support. A 6-minute AHT on a simple telecom support call is too long; a 6-minute AHT on a personal loan origination call may be too short to complete required disclosures.</p>
+
+    <div class="warning-callout">⚠️ The most dangerous AHT reduction tactic is setting it as a target agents are scored against. When agents know they are judged on call length, they end calls prematurely — creating repeat contacts, missed disclosures, and customer dissatisfaction. AHT is an outcome metric, not a behaviour target.</div>
+
+    <h2><span>The AHT-Quality Tradeoff: What Most Teams Get Wrong</span></h2>
+    <p>A call that lasts 3 minutes because the agent resolved the issue efficiently is excellent. A call that lasts 3 minutes because the agent cut off the customer is a disaster. AHT looks identical in both cases.</p>
+    <p>This is why AHT should always be tracked alongside FCR (did the issue get resolved?) and CSAT (was the customer satisfied?). An agent with low AHT, low FCR, and low CSAT is not efficient — they are creating expensive repeat contacts.</p>
+
+    <h2><span>The 6 Real Causes of High AHT</span></h2>
+    <ul>
+      <li><strong>Agent knowledge gaps:</strong> Time spent searching for information while the customer waits. The fix is training and better knowledge base access, not telling agents to speak faster.</li>
+      <li><strong>Excessive hold time:</strong> Agents putting customers on hold to consult supervisors or systems. Reduces with better tool access and empowerment.</li>
+      <li><strong>Inefficient issue identification:</strong> Agents spending 3 minutes establishing what the problem actually is. Structured discovery and active listening training reduces this.</li>
+      <li><strong>Excessive after-call work (ACW):</strong> Manual call notes, CRM updates, and ticket creation taking longer than the call itself. AI transcription eliminates manual note-taking entirely.</li>
+      <li><strong>Unnecessary call transfers:</strong> Routing errors or departmental silos forcing customers to start over. Reduces with better IVR design and cross-training.</li>
+      <li><strong>Complex compliance scripting:</strong> Lengthy mandatory disclosures that dominate call time. For regulated industries, the solution is efficient scripting that meets compliance without padding, not skipping the disclosures.</li>
+    </ul>
+
+    <h2><span>How AI Transcription Reduces AHT</span></h2>
+    <p>One of the largest contributors to AHT is after-call work — writing up call notes, updating CRM records, categorising the call. For many agents, ACW adds 2 to 4 minutes to every interaction.</p>
+    <p>AI call transcription automatically documents what was said, removing the need for manual note-writing. Agents who have call transcripts instantly available after the call can complete CRM updates in under 60 seconds — a 60 to 75% reduction in ACW time for many teams.</p>
+
+    <div class="callout">💡 Upload your high-AHT calls to Bolo Aur Likho and get instant transcripts. Identify exactly where time is being lost — at the opening, during hold, in discovery, or in after-call processing.</div>
+  </div>
+  <div class="cta-box">
+    <h2>Diagnose High AHT with AI. Free.</h2>
+    <p>Upload any call and get an instant transcript. Pinpoint exactly where handle time is going.</p>
+    <a href="/">Try Free →</a>
+  </div>
+</div>
+<footer><p><a href="/">Call Audit Tool</a> · <a href="/blog">Blog</a> · <a href="/privacy.html">Privacy</a></p><p style="margin-top:8px">© 2026 Bolo Aur Likho</p></footer>
+</body>
+</html>

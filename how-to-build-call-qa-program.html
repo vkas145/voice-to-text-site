@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a Call QA Program from Scratch: Step-by-Step Guide 2026 | Bolo Aur Likho</title>
+  <meta name="description" content="A practical step-by-step guide to building a call QA programme from scratch — defining standards, building scorecards, staffing QA, running calibration, and using AI to scale coverage.">
+  <meta property="og:title" content="How to Build a Call QA Program from Scratch | Bolo Aur Likho">
+  <meta property="og:url" content="https://boloaurlikho.com/how-to-build-call-qa-program">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://boloaurlikho.com/how-to-build-call-qa-program">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="shortcut icon" href="/favicon.svg">
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N5BNNVFL');</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RP14TND3FS"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-RP14TND3FS');</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Build a Call QA Program from Scratch: Step-by-Step Guide 2026","description":"A complete guide to building a call quality assurance programme — from defining standards to using AI for full-coverage auditing.","url":"https://boloaurlikho.com/how-to-build-call-qa-program","datePublished":"2026-04-13","author":{"@type":"Person","name":"Goyal Vikas"},"publisher":{"@type":"Organization","name":"Bolo Aur Likho","url":"https://boloaurlikho.com"}}</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:#f7f8fc;color:#1a1a2e}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #e8eaf0;position:sticky;top:0;z-index:100}
+    .logo{text-decoration:none;display:flex;align-items:center}
+    .logo-plain{color:#1a1a2e;font-weight:700;font-size:19px;padding:0 2px}
+    .logo-highlight{color:#fff;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:5px;padding:1px 6px;font-weight:800;font-size:19px;font-style:italic}
+    .nav-links{display:flex;align-items:center;gap:20px}
+    .nav-links a{font-size:13px;color:#475569;text-decoration:none;font-weight:500}
+    .nav-cta{font-size:13px!important;font-weight:600!important;color:#fff!important;background:linear-gradient(135deg,#6366f1,#7c3aed);padding:8px 18px;border-radius:20px;text-decoration:none}
+    .hero{padding:64px 24px 40px;text-align:center;max-width:800px;margin:0 auto}
+    .hero-tag{display:inline-flex;align-items:center;gap:7px;background:#eef2ff;color:#6366f1;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:20px;border:1px solid #c7d2fe;text-transform:uppercase;letter-spacing:0.5px}
+    h1{font-size:clamp(28px,4vw,46px);font-weight:800;line-height:1.12;letter-spacing:-1px;color:#0f0f1a;margin-bottom:20px}
+    .accent{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:17px;color:#475569;line-height:1.7;max-width:640px;margin:0 auto 24px}
+    .container{max-width:780px;margin:0 auto;padding:0 24px 80px}
+    .section{margin-bottom:52px}
+    .section h2{font-size:24px;font-weight:800;color:#0f0f1a;margin-bottom:16px;letter-spacing:-0.5px}
+    .section h2 span{background:linear-gradient(135deg,#6366f1,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .section p{font-size:16px;color:#334155;line-height:1.8;margin-bottom:16px}
+    .section ul,.section ol{margin:0 0 16px 24px}
+    .section li{font-size:16px;color:#334155;line-height:1.8;margin-bottom:8px}
+    .section strong{color:#1e293b}
+    .callout{background:#eef2ff;border:1px solid #c7d2fe;border-radius:14px;padding:20px 24px;margin:24px 0;font-size:15px;color:#4338ca;font-weight:500}
+    .phase{background:white;border:1px solid #e2e8f0;border-radius:16px;padding:24px;margin:20px 0}
+    .phase-header{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+    .phase-num{width:44px;height:44px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:18px;flex-shrink:0}
+    .phase-header h3{font-size:18px;font-weight:700;color:#0f0f1a;margin:0}
+    .phase-header .timeline{font-size:12px;font-weight:600;color:#6366f1;background:#eef2ff;padding:3px 10px;border-radius:20px;margin-left:auto}
+    .phase p{font-size:15px;color:#475569;line-height:1.7;margin-bottom:10px}
+    .phase ul{margin:0 0 0 18px}
+    .phase li{font-size:15px;color:#475569;line-height:1.7;margin-bottom:5px}
+    .cta-box{background:linear-gradient(135deg,#6366f1,#7c3aed);border-radius:20px;padding:40px 36px;text-align:center;color:white;margin:48px 0}
+    .cta-box h2{font-size:24px;font-weight:800;margin-bottom:10px;color:white}
+    .cta-box p{color:rgba(255,255,255,0.85);font-size:15px;margin-bottom:24px}
+    .cta-box a{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:white;color:#6366f1;font-size:15px;font-weight:700;border-radius:12px;text-decoration:none}
+    footer{text-align:center;padding:32px;font-size:13px;color:#94a3b8;border-top:1px solid #e8eaf0}
+    footer a{color:#6366f1;text-decoration:none}
+    @media(max-width:768px){nav{padding:14px 20px}.hero{padding:40px 16px 28px}.phase-header{flex-wrap:wrap}.nav-links a:not(.nav-cta){display:none}}
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5BNNVFL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<nav>
+  <a href="/" class="logo"><span class="logo-highlight">bolo</span><span class="logo-plain">aur</span><span class="logo-highlight">likho</span></a>
+  <div class="nav-links"><a href="/blog">Blog</a><a href="/" class="nav-cta">Try Free →</a></div>
+</nav>
+<div class="hero">
+  <div class="hero-tag">🏗️ Programme Guide</div>
+  <h1>How to Build a Call QA Program<br><span class="accent">from Scratch</span></h1>
+  <p class="hero-sub">Building a call QA programme is not about buying software. It is about creating a systematic process — from defining standards, to reviewing calls, to coaching that changes behaviour. This guide gives you that process in seven phases.</p>
+</div>
+<div class="container">
+  <div class="section">
+    <p>Most contact centre operations have some version of call monitoring. Very few have a programme — a repeatable system that improves quality over time rather than just flagging problems. The difference is structure, and this guide provides it.</p>
+
+    <h2><span>The 7-Phase Call QA Programme Build</span></h2>
+
+    <div class="phase">
+      <div class="phase-header"><div class="phase-num">1</div><h3>Define the Purpose and Scope</h3><span class="timeline">Week 1</span></div>
+      <p>Before building anything, answer three questions: What call types will be covered? What is the primary goal — compliance, sales performance, or customer experience? Who is the QA programme ultimately accountable to?</p>
+      <ul>
+        <li>List all call types (outbound sales, inbound support, collections, retention, escalations)</li>
+        <li>Rank them by regulatory risk and business impact</li>
+        <li>Start with 1 to 2 call types — do not try to audit everything at once</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header"><div class="phase-num">2</div><h3>Define Quality Standards for Each Call Type</h3><span class="timeline">Week 1–2</span></div>
+      <p>Document what a perfect call looks like for each call type in scope. This becomes the basis for your scorecard. Use your best agents as the reference point — what do they do that others do not?</p>
+      <ul>
+        <li>Interview top performers: ask them to walk through their process</li>
+        <li>Review 10 to 15 calls from each call type to identify consistent quality markers</li>
+        <li>Separate mandatory items (compliance) from preferred items (quality)</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header"><div class="phase-num">3</div><h3>Build the Scorecard</h3><span class="timeline">Week 2</span></div>
+      <p>Convert your quality standards into a weighted scorecard. Compliance items should carry higher weight than communication style items. A scorecard with 6 to 8 dimensions and 3 to 5 items per dimension is practical to use; 30-item scorecards are usually abandoned.</p>
+      <ul>
+        <li>Weight: Compliance 30–40%, Discovery 15–20%, Pitch Quality 15–20%, Objection Handling 10–15%, Closing 10–15%</li>
+        <li>Score each item as 0 / 1 / 2 (not met / partial / met)</li>
+        <li>Define the fail threshold — typically 65% triggers a coaching conversation</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header"><div class="phase-num">4</div><h3>Set Coverage Targets and Sampling Logic</h3><span class="timeline">Week 2–3</span></div>
+      <p>Decide how many calls per agent per week will be reviewed. For manual QA, 5 to 10 calls per agent per week is realistic. For AI-assisted QA, 100% coverage is achievable. Your sampling logic should also include: new agent intensive review (10+ calls per week in month 1), complaint-triggered review, and random sampling.</p>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header"><div class="phase-num">5</div><h3>Run Calibration Before You Start Scoring</h3><span class="timeline">Week 3</span></div>
+      <p>Before scoring agent calls, have 2 to 3 reviewers score the same 5 calls independently. Compare results. Where scores diverge by more than 10 points, discuss the criteria until aligned. Calibration ensures the QA process is fair and consistent.</p>
+      <ul>
+        <li>Run calibration sessions monthly, especially after new criteria are added</li>
+        <li>Document calibration outcomes — these are your interpretation guidelines</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header"><div class="phase-num">6</div><h3>Launch with Transparency</h3><span class="timeline">Week 3–4</span></div>
+      <p>Communicate the programme to agents before the first scored call. Share the scorecard. Explain that the goal is improvement, not surveillance. Agents who understand what is being measured and why are more receptive to feedback from it.</p>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header"><div class="phase-num">7</div><h3>Use AI to Scale Coverage from Day One</h3><span class="timeline">Ongoing</span></div>
+      <p>Manual QA covers 2 to 5% of calls at best. Pair your human QA process with AI transcription and analysis to extend coverage to 100% of calls. Use human review for coaching conversations; use AI for coverage, trend data, and compliance flagging.</p>
+    </div>
+
+    <div class="callout">💡 You do not need a QA platform or a QA team to start. A manager reviewing 5 calls per agent per week using Bolo Aur Likho transcripts can run a basic call QA programme for a 10 to 15 agent team in under 3 hours per week.</div>
+  </div>
+  <div class="cta-box">
+    <h2>Start Your Call QA Programme Today. Free.</h2>
+    <p>Upload your first call and get instant transcript and quality analysis. No setup required.</p>
+    <a href="/">Try Free →</a>
+  </div>
+</div>
+<footer><p><a href="/">Call Audit Tool</a> · <a href="/blog">Blog</a> · <a href="/privacy.html">Privacy</a></p><p style="margin-top:8px">© 2026 Bolo Aur Likho</p></footer>
+</body>
+</html>
