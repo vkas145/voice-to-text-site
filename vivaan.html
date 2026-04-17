@@ -244,16 +244,6 @@ const DAY_NAMES=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 function fmtDate(d){return`${DAY_NAMES[d.getDay()]} ${d.getDate()} ${MONTH_NAMES[d.getMonth()]}`;}
 function dateKey(sub,d){return`vivaan_v3_${sub}_${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;}
 
-// ─── CHARACTERS ────────────────────────────────────────────────
-const CHARS=[
-  {name:"Paddington Bear",neutral:"🐻",happyMsgs:["Paw-some! 🐻🎉","Honey-sweet correct! 🍯","You're un-bear-ably smart!"],sadMsgs:["Even bears slip! 🐾","Shake it off, champ!","Next one — paws crossed! 🐻"]},
-  {name:"Jerry Mouse",neutral:"🐭",happyMsgs:["Squeaky genius! 🐭✨","Jerry approves! 🧀","You outsmarted Tom too!"],sadMsgs:["Jerry says try again!","Even I get chased sometimes 🐭","Cheese will come! 🧀"]},
-  {name:"Tom Cat",neutral:"🐱",happyMsgs:["Purr-fect! 🐱🎊","Tom is impressed! ✨","Meow-nificent answer!"],sadMsgs:["Hiss! Close one! 😾","Tom says read again!","Even cats land on all fours 🐱"]},
-  {name:"Masha",neutral:"👧",happyMsgs:["Masha shouts YES! 👧🎉","You're as smart as Masha!","Dancing time! 💃"],sadMsgs:["Masha says don't worry!","Try again — Masha believes in you!","We make mistakes too! 👧"]},
-  {name:"Simba",neutral:"🦁",happyMsgs:["ROAR! Correct! 🦁👑","The Pride Lands cheer for you!","Remember who you are — brilliant!"],sadMsgs:["Even Simba learns from Rafiki!","Hakuna Matata — next one! 🦁","Keep going, future king!"]},
-  {name:"Super Vivaan",neutral:"🦸",happyMsgs:["SUPERHERO move! 🦸⚡","Vivaan saves the day!","Cape ON — brain BLAZING! 🌟"],sadMsgs:["Even heroes have off days!","Power UP and try again! 🦸","You've got this, hero! ⚡"]}
-];
-
 // ─── QUESTION DATA ─────────────────────────────────────────────
 // Format: { q:"question text", o:["CORRECT","wrong1","wrong2","wrong3"], a:0 }
 // o[0] is always correct; options are shuffled before display
