@@ -12,3 +12,15 @@
 
 [functions."verify-otp"]
   timeout = 10
+
+[[redirects]]
+  from = "/vivaan"
+  to = "/vivaan.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/vivaan/*"
+  to = "/vivaan.html"
+  status = 200
+  force = true
