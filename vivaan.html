@@ -8,40 +8,65 @@
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N5BNNVFL');</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
-:root{--bg:#0f0c29;--card:#1a1740;--accent:#f7c948;--green:#22d67a;--red:#ff5e5e;--blue:#4fc3f7;--purple:#b39ddb;--orange:#ff9f43}
+:root{
+  --bg:#0f0c29;--card:#1a1740;--accent:#f7c948;--green:#22d67a;--red:#ff5e5e;
+  --blue:#4fc3f7;--purple:#b39ddb;--orange:#ff9f43;
+  --beg:#4fc3f7;--pro:#ff5e5e;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;color:white;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(1px 1px at 15% 25%,rgba(255,255,255,.5) 0%,transparent 100%),radial-gradient(1px 1px at 85% 15%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 45% 65%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1px 1px at 5% 85%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 95% 75%,rgba(255,255,255,.3) 0%,transparent 100%);pointer-events:none;z-index:0}
-.wrapper{position:relative;z-index:1;max-width:840px;margin:0 auto;padding:16px 14px 90px}
+.wrapper{position:relative;z-index:1;max-width:840px;margin:0 auto;padding:16px 14px 100px}
 
 /* Header */
-.header{text-align:center;padding:22px 0 14px}
-.header .crown{font-size:42px;animation:bounce 1.6s infinite;display:block}
+.header{text-align:center;padding:20px 0 12px}
+.header .crown{font-size:40px;animation:bounce 1.6s infinite;display:block}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.header h1{font-size:clamp(24px,5vw,38px);font-weight:900;letter-spacing:-1px;line-height:1.1}
+.header h1{font-size:clamp(22px,5vw,36px);font-weight:900;letter-spacing:-1px;line-height:1.1}
 .header h1 span{color:var(--accent)}
-.header p{margin-top:5px;font-size:13px;color:#b0aed0}
+.header p{margin-top:5px;font-size:12px;color:#b0aed0}
 
 /* Subject Tabs */
-.subject-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0 18px}
-.sub-tab{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:50px;padding:9px 18px;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;color:#b0aed0;font-family:'Nunito',sans-serif}
+.subject-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0 16px}
+.sub-tab{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:50px;padding:8px 16px;font-size:13px;font-weight:800;cursor:pointer;transition:all .2s;color:#b0aed0;font-family:'Nunito',sans-serif}
 .sub-tab:hover{background:rgba(247,201,72,.15);border-color:var(--accent);color:var(--accent)}
 .sub-tab.active{border-color:var(--accent);color:#0f0c29;background:var(--accent)}
 .sub-tab[data-sub="english"].active{background:#4fc3f7;border-color:#4fc3f7;color:#0f0c29}
 .sub-tab[data-sub="evs"].active{background:#22d67a;border-color:#22d67a;color:#0f0c29}
 .sub-tab[data-sub="gk"].active{background:#b39ddb;border-color:#b39ddb;color:#0f0c29}
 
-/* Day tabs */
-.day-tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:0 0 14px}
-.day-tab{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:50px;padding:6px 13px;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;color:#b0aed0;white-space:nowrap;font-family:'Nunito',sans-serif}
-.day-tab:hover{background:rgba(247,201,72,.15);border-color:var(--accent);color:var(--accent)}
-.day-tab.active{background:var(--accent);border-color:var(--accent);color:#0f0c29}
-.day-tab.done{background:rgba(34,214,122,.15);border-color:var(--green);color:var(--green)}
-.day-tab.done.active{background:var(--green);color:#0f0c29}
+/* Chapter Selector */
+.chapter-section{margin-bottom:14px}
+.chapter-section label{font-size:11px;font-weight:700;color:#8884b0;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;text-align:center}
+.chapter-pills{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+.ch-pill{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:12px;padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer;transition:all .2s;color:#b0aed0;font-family:'Nunito',sans-serif;text-align:center}
+.ch-pill:hover{background:rgba(247,201,72,.15);border-color:var(--accent);color:var(--accent)}
+.ch-pill.active{background:var(--accent);border-color:var(--accent);color:#0f0c29}
+.ch-pill .ch-num{font-size:10px;opacity:.7;display:block}
+
+/* Level Toggle */
+.level-section{display:flex;justify-content:center;gap:0;margin-bottom:14px;border-radius:50px;overflow:hidden;width:fit-content;margin-left:auto;margin-right:auto;border:2px solid rgba(255,255,255,.12)}
+.level-btn{padding:9px 24px;font-size:13px;font-weight:800;cursor:pointer;transition:all .2s;color:#b0aed0;font-family:'Nunito',sans-serif;background:rgba(255,255,255,.05);border:none}
+.level-btn.beginner.active{background:var(--beg);color:#0f0c29}
+.level-btn.pro.active{background:var(--pro);color:white}
+.level-btn:hover:not(.active){background:rgba(255,255,255,.1);color:white}
+
+/* Level badge on card */
+.level-badge{display:inline-flex;align-items:center;gap:4px;border-radius:50px;padding:3px 10px;font-size:11px;font-weight:800}
+.level-badge.beginner{background:rgba(79,195,247,.2);border:1px solid rgba(79,195,247,.4);color:var(--beg)}
+.level-badge.pro{background:rgba(255,94,94,.2);border:1px solid rgba(255,94,94,.4);color:var(--red)}
+
+/* Set Tabs */
+.set-tabs{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:0 0 14px}
+.set-tab{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;color:#b0aed0;white-space:nowrap;font-family:'Nunito',sans-serif}
+.set-tab:hover{background:rgba(247,201,72,.15);border-color:var(--accent);color:var(--accent)}
+.set-tab.active{background:var(--accent);border-color:var(--accent);color:#0f0c29}
+.set-tab.done{background:rgba(34,214,122,.15);border-color:var(--green);color:var(--green)}
+.set-tab.done.active{background:var(--green);color:#0f0c29}
 
 /* Timer */
 .timer-bar{text-align:center;margin-bottom:12px}
-.timer-display{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50px;padding:6px 16px;font-size:16px;font-weight:900;color:var(--accent)}
+.timer-display{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50px;padding:5px 15px;font-size:15px;font-weight:900;color:var(--accent)}
 
 /* Layout */
 .page-layout{display:flex;gap:12px;align-items:flex-start}
@@ -55,40 +80,44 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 /* Quiz card */
 .quiz-area{flex:1;min-width:0}
 .quiz-card{background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:22px 18px;margin-bottom:16px}
-.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
-.day-title{font-size:16px;font-weight:800;color:var(--accent)}
-.day-meta{font-size:11px;color:#8884b0;margin-top:2px}
-.live-score{display:inline-flex;align-items:center;gap:5px;background:rgba(34,214,122,.12);border:1px solid rgba(34,214,122,.3);border-radius:50px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--green)}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.card-top-left .chapter-title{font-size:15px;font-weight:800;color:var(--accent);margin-bottom:3px}
+.card-top-left .set-label{font-size:11px;color:#8884b0}
+.live-score{display:inline-flex;align-items:center;gap:5px;background:rgba(34,214,122,.12);border:1px solid rgba(34,214,122,.3);border-radius:50px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--green);flex-shrink:0}
 .progress-bar-wrap{background:rgba(255,255,255,.08);border-radius:50px;height:7px;margin-bottom:18px;overflow:hidden}
 .progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),#ff9f43);border-radius:50px;transition:width .4s}
+
+/* Topic tag */
+.topic-tag{display:inline-block;background:rgba(179,157,219,.2);border:1px solid rgba(179,157,219,.3);border-radius:50px;padding:3px 10px;font-size:10px;font-weight:700;color:var(--purple);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+
 .q-counter{font-size:11px;font-weight:700;color:#8884b0;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-.question-text{font-size:clamp(15px,3.5vw,21px);font-weight:800;line-height:1.45;margin-bottom:18px;min-height:56px}
+.question-text{font-size:clamp(15px,3.5vw,20px);font-weight:800;line-height:1.5;margin-bottom:18px;min-height:52px}
 
 /* Options */
 .options{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
-.opt-btn{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:14px;padding:13px 9px;font-size:15px;font-weight:800;color:white;cursor:pointer;transition:all .2s;text-align:center;font-family:'Nunito',sans-serif}
+.opt-btn{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:14px;padding:13px 9px;font-size:14px;font-weight:800;color:white;cursor:pointer;transition:all .2s;text-align:center;font-family:'Nunito',sans-serif;line-height:1.3}
 .opt-btn:hover:not(:disabled){background:rgba(247,201,72,.15);border-color:var(--accent);transform:scale(1.03)}
 .opt-btn.correct{background:rgba(34,214,122,.25);border-color:var(--green);color:var(--green)}
 .opt-btn.wrong{background:rgba(255,94,94,.2);border-color:var(--red);color:var(--red)}
 .opt-btn:disabled{cursor:not-allowed}
 
-/* Character panel — ALWAYS visible */
-.char-panel{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:13px 16px;margin-bottom:13px;display:flex;align-items:center;gap:12px}
-.char-avatar{font-size:50px;line-height:1;transition:transform .3s}
+/* Character panel — always visible */
+.char-panel{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;gap:12px}
+.char-avatar{font-size:48px;line-height:1;transition:transform .3s}
 .char-avatar.pop{animation:charPop .4s ease}
 .char-avatar.shake{animation:charShake .5s ease}
 @keyframes charPop{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
 @keyframes charShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 .char-info{flex:1}
 .char-name{font-size:11px;font-weight:700;color:#8884b0;text-transform:uppercase;letter-spacing:.8px;margin-bottom:2px}
-.char-emotion{font-size:18px;font-weight:900}
+.char-emotion{font-size:17px;font-weight:900}
 .char-emotion.correct-em{color:var(--green)}
 .char-emotion.wrong-em{color:var(--red)}
 .char-emotion.neutral-em{color:#b0aed0}
 .char-msg{font-size:12px;color:#b0aed0;margin-top:2px;font-weight:600}
 
 /* Feedback + Next */
-.feedback{text-align:center;font-size:17px;font-weight:900;padding:9px 14px;border-radius:12px;margin-bottom:12px;display:none}
+.feedback{text-align:center;font-size:16px;font-weight:900;padding:9px 14px;border-radius:12px;margin-bottom:12px;display:none}
 .feedback.show{display:block;animation:popIn .3s}
 @keyframes popIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
 .feedback.correct-fb{background:rgba(34,214,122,.15);color:var(--green)}
@@ -100,45 +129,55 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 /* Result */
 .result-screen{display:none;text-align:center;padding:10px 0}
 .result-screen.show{display:block;animation:popIn .4s}
-.result-char{font-size:64px;display:block;margin-bottom:8px;animation:bounce 1s infinite}
-.result-trophy{font-size:56px;display:block;margin-bottom:8px}
-.result-score{font-size:48px;font-weight:900;color:var(--accent);line-height:1}
-.result-score span{font-size:18px;color:#b0aed0;font-weight:600}
-.result-stars{font-size:28px;letter-spacing:4px;margin:10px 0}
-.result-msg{font-size:17px;font-weight:700;margin-bottom:16px}
-.restart-btn{background:linear-gradient(135deg,var(--blue),#7986cb);color:white;border:none;border-radius:14px;padding:11px 26px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
+.result-char{font-size:60px;display:block;margin-bottom:8px;animation:bounce 1s infinite}
+.result-trophy{font-size:52px;display:block;margin-bottom:8px}
+.result-score{font-size:46px;font-weight:900;color:var(--accent);line-height:1}
+.result-score .sub{font-size:17px;color:#b0aed0;font-weight:600}
+.result-stars{font-size:26px;letter-spacing:4px;margin:10px 0}
+.result-msg{font-size:16px;font-weight:700;margin-bottom:6px}
+.result-time{font-size:12px;color:#8884b0;margin-bottom:16px}
+.restart-btn{background:linear-gradient(135deg,var(--blue),#7986cb);color:white;border:none;border-radius:14px;padding:11px 26px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-right:8px}
+.next-set-btn{background:linear-gradient(135deg,var(--green),#00b09b);color:white;border:none;border-radius:14px;padding:11px 26px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
 
 /* Floating Scoreboard Button */
-.scoreboard-fab{position:fixed;bottom:22px;right:22px;z-index:100;background:linear-gradient(135deg,var(--accent),#ff9f43);color:#0f0c29;border:none;border-radius:50px;padding:12px 20px;font-size:15px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 20px rgba(247,201,72,.4);display:flex;align-items:center;gap:7px;transition:transform .15s}
+.scoreboard-fab{position:fixed;bottom:22px;right:22px;z-index:100;background:linear-gradient(135deg,var(--accent),#ff9f43);color:#0f0c29;border:none;border-radius:50px;padding:11px 18px;font-size:14px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 20px rgba(247,201,72,.4);display:flex;align-items:center;gap:7px;transition:transform .15s}
 .scoreboard-fab:hover{transform:scale(1.05)}
 
 /* Scoreboard Modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
 .modal-overlay.show{display:flex}
-.modal-box{background:#1a1740;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:24px 20px;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;position:relative}
-.modal-close{position:absolute;top:14px;right:16px;background:rgba(255,255,255,.1);border:none;color:white;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.modal-title{font-size:20px;font-weight:900;margin-bottom:16px;color:var(--accent)}
-.modal-sub-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
-.modal-sub-tab{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;color:#b0aed0;font-family:'Nunito',sans-serif;transition:all .2s}
-.modal-sub-tab.active{background:var(--accent);border-color:var(--accent);color:#0f0c29}
-.score-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:11px 14px;margin-bottom:8px}
-.sr-date{font-size:13px;color:#b0aed0;font-weight:600}
-.sr-day{font-size:11px;color:#8884b0;margin-top:2px}
-.sr-score{font-size:19px;font-weight:900;color:var(--accent)}
-.sr-stars{font-size:14px}
+.modal-box{background:#1a1740;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:22px 18px;width:100%;max-width:500px;max-height:85vh;overflow-y:auto;position:relative}
+.modal-close{position:absolute;top:12px;right:14px;background:rgba(255,255,255,.1);border:none;color:white;border-radius:50%;width:30px;height:30px;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif}
+.modal-title{font-size:19px;font-weight:900;margin-bottom:14px;color:var(--accent)}
+.modal-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.modal-filter-btn{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:50px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;color:#b0aed0;font-family:'Nunito',sans-serif;transition:all .2s}
+.modal-filter-btn.active{background:var(--accent);border-color:var(--accent);color:#0f0c29}
+.score-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 13px;margin-bottom:7px}
+.sr-info .sr-label{font-size:13px;color:white;font-weight:700}
+.sr-info .sr-sub{font-size:11px;color:#8884b0;margin-top:2px}
+.sr-right{text-align:right}
+.sr-score{font-size:18px;font-weight:900;color:var(--accent)}
+.sr-stars{font-size:13px}
 .score-row.perfect .sr-score{color:var(--green)}
-.history-empty{font-size:13px;color:#8884b0;text-align:center;padding:20px}
+.modal-empty{font-size:13px;color:#8884b0;text-align:center;padding:20px}
+.modal-chapter-header{font-size:12px;font-weight:800;color:#8884b0;text-transform:uppercase;letter-spacing:1px;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
 
 /* Confetti */
 #confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999}
+
+/* "Coming Soon" chapter state */
+.ch-pill.soon{opacity:.45;cursor:not-allowed}
+.ch-pill.soon:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12);color:#b0aed0}
+.ch-pill .soon-tag{font-size:9px;background:rgba(255,255,255,.15);border-radius:4px;padding:1px 4px;margin-left:4px}
 
 @media(max-width:560px){
   .page-layout{flex-direction:column}
   .progress-sidebar{width:100%;flex-direction:row;flex-wrap:wrap;padding:8px;gap:4px;justify-content:center}
   .q-block{width:28px;height:28px;font-size:9px}
   .options{grid-template-columns:1fr 1fr}
-  .opt-btn{padding:11px 7px;font-size:13px}
+  .opt-btn{padding:10px 7px;font-size:13px}
   .quiz-card{padding:16px 12px}
+  .level-btn{padding:8px 16px;font-size:12px}
 }
 </style>
 </head>
@@ -151,7 +190,7 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
   <div class="header">
     <span class="crown">👑</span>
     <h1>Vivaan's <span>Quiz Challenge!</span></h1>
-    <p>Math · English · EVS · GK — 20 questions per day · 7 days 🚀</p>
+    <p>Mathematics Buzzz • Chapter-wise • Beginner &amp; Pro Levels</p>
   </div>
 
   <!-- Subject Tabs -->
@@ -162,8 +201,20 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
     <button class="sub-tab" data-sub="gk" onclick="switchSubject('gk')">🌍 GK</button>
   </div>
 
-  <!-- Day tabs -->
-  <div class="day-tabs" id="dayTabs"></div>
+  <!-- Chapter Selector -->
+  <div class="chapter-section">
+    <label>Select Chapter</label>
+    <div class="chapter-pills" id="chapterPills"></div>
+  </div>
+
+  <!-- Level Toggle -->
+  <div class="level-section">
+    <button class="level-btn beginner active" id="btnBeginner" onclick="switchLevel('beginner')">⭐ Beginner</button>
+    <button class="level-btn pro" id="btnPro" onclick="switchLevel('pro')">🔥 Pro</button>
+  </div>
+
+  <!-- Set Tabs -->
+  <div class="set-tabs" id="setTabs"></div>
 
   <!-- Timer -->
   <div class="timer-bar">
@@ -176,26 +227,30 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
     <div class="quiz-area">
       <div class="quiz-card">
         <div class="card-top">
-          <div>
-            <div class="day-title" id="dayTitle"></div>
-            <div class="day-meta" id="dayMeta"></div>
+          <div class="card-top-left">
+            <div class="chapter-title" id="cardChapterTitle"></div>
+            <div class="set-label" id="cardSetLabel"></div>
           </div>
-          <div class="live-score">✅ <span id="liveScore">0</span> / 20</div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+            <div class="live-score">✅ <span id="liveScore">0</span> / <span id="totalQs">10</span></div>
+            <div class="level-badge beginner" id="levelBadge">⭐ Beginner</div>
+          </div>
         </div>
         <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
 
         <div id="quizBody">
-          <div class="q-counter" id="qCounter">Question 1 of 20</div>
+          <div class="topic-tag" id="topicTag"></div>
+          <div class="q-counter" id="qCounter">Question 1</div>
           <div class="question-text" id="questionText"></div>
           <div class="options" id="optionsGrid"></div>
 
-          <!-- Character panel — always visible -->
+          <!-- Character panel always visible -->
           <div class="char-panel" id="charPanel">
             <div class="char-avatar" id="charAvatar"></div>
             <div class="char-info">
               <div class="char-name" id="charName"></div>
               <div class="char-emotion neutral-em" id="charEmotion">Waiting for your answer...</div>
-              <div class="char-msg" id="charMsg">Go on, give it your best shot! 💪</div>
+              <div class="char-msg" id="charMsg">Give it your best shot! 💪</div>
             </div>
           </div>
 
@@ -206,10 +261,17 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
         <div class="result-screen" id="resultScreen">
           <span class="result-char" id="resChar"></span>
           <span class="result-trophy" id="resTrophy"></span>
-          <div class="result-score"><span id="resScore">0</span><br><span>out of 20</span></div>
+          <div class="result-score">
+            <span id="resScore">0</span><br>
+            <span class="sub">out of <span id="resTotalQ">10</span></span>
+          </div>
           <div class="result-stars" id="resStars"></div>
           <div class="result-msg" id="resMsg"></div>
-          <button class="restart-btn" onclick="restartDay()">🔄 Try Again</button>
+          <div class="result-time" id="resTime"></div>
+          <div>
+            <button class="restart-btn" onclick="restartSet()">🔄 Try Again</button>
+            <button class="next-set-btn" id="nextSetBtn" onclick="goNextSet()">Next Set →</button>
+          </div>
         </div>
       </div>
     </div>
@@ -218,711 +280,199 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 </div>
 
 <!-- Floating Scoreboard Button -->
-<button class="scoreboard-fab" onclick="openScoreboard()">🏆 Scoreboard</button>
+<button class="scoreboard-fab" onclick="openScoreboard()">🏆 Scores</button>
 
 <!-- Scoreboard Modal -->
 <div class="modal-overlay" id="scoreModal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeScoreboard()">✕</button>
-    <div class="modal-title">🏆 Score Board</div>
-    <div class="modal-sub-tabs" id="modalSubTabs">
-      <button class="modal-sub-tab active" data-sub="math" onclick="showModalSub('math')">🔢 Math</button>
-      <button class="modal-sub-tab" data-sub="english" onclick="showModalSub('english')">📖 English</button>
-      <button class="modal-sub-tab" data-sub="evs" onclick="showModalSub('evs')">🌿 EVS</button>
-      <button class="modal-sub-tab" data-sub="gk" onclick="showModalSub('gk')">🌍 GK</button>
-    </div>
+    <div class="modal-title">🏆 My Scores</div>
+    <div class="modal-filters" id="modalFilters"></div>
     <div id="modalScoreList"></div>
   </div>
 </div>
 
 <script>
-// ─── DATES ─────────────────────────────────────────────────────
-function getDates(){const a=[];const n=new Date();const b=new Date(n.getFullYear(),n.getMonth(),n.getDate());for(let i=0;i<7;i++){const d=new Date(b);d.setDate(b.getDate()+i);a.push(d);}return a;}
-const DATES=getDates();
-const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const DAY_NAMES=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-function fmtDate(d){return`${DAY_NAMES[d.getDay()]} ${d.getDate()} ${MONTH_NAMES[d.getMonth()]}`;}
-function dateKey(sub,d){return`vivaan_v3_${sub}_${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;}
+// ═══════════════════════════════════════════════════════
+// QUESTION DATA
+// Format: { q:"question", o:["CORRECT","w1","w2","w3"], a:0, topic:"topic label" }
+// o[0] is always the correct answer; shuffled before display.
+// ═══════════════════════════════════════════════════════
 
-// ─── QUESTION DATA ─────────────────────────────────────────────
-// Format: { q:"question text", o:["CORRECT","wrong1","wrong2","wrong3"], a:0 }
-// o[0] is always correct; options are shuffled before display
+const CHAPTERS = {
 
-const ALL_QUESTIONS = {
+  math: [
+    {
+      id: 'ch1',
+      title: 'Numbers & Numeration',
+      short: 'Ch 1',
+      sets: {
 
-math: [
-// Day 0 — Tables 2-5 + Abacus Intro
-[
-{q:"2 × 7 = ?",o:["14","12","16","18"],a:0},
-{q:"3 × 8 = ?",o:["24","21","27","18"],a:0},
-{q:"4 × 6 = ?",o:["24","20","28","16"],a:0},
-{q:"5 × 9 = ?",o:["45","40","50","35"],a:0},
-{q:"2 × 12 = ?",o:["24","22","20","26"],a:0},
-{q:"3 × 11 = ?",o:["33","30","36","27"],a:0},
-{q:"4 × 9 = ?",o:["36","32","40","28"],a:0},
-{q:"5 × 7 = ?",o:["35","30","40","25"],a:0},
-{q:"How many beads are on an abacus rod if it shows the number 7?",o:["7","3","10","5"],a:0},
-{q:"On an abacus, which rod shows ONES?",o:["Rightmost rod","Leftmost rod","Middle rod","Top rod"],a:0},
-{q:"2 × 2 × 2 = ?",o:["8","6","4","12"],a:0},
-{q:"If you have 4 bags with 5 sweets each, how many sweets total?",o:["20","15","25","18"],a:0},
-{q:"3 × 4 = ?",o:["12","9","15","16"],a:0},
-{q:"5 × 5 = ?",o:["25","20","30","15"],a:0},
-{q:"What comes next: 2, 4, 6, 8, ___?",o:["10","9","12","11"],a:0},
-{q:"What comes next: 5, 10, 15, 20, ___?",o:["25","24","30","22"],a:0},
-{q:"4 × 4 = ?",o:["16","12","20","14"],a:0},
-{q:"Vivaan has 3 boxes of 7 crayons each. Total crayons?",o:["21","18","24","14"],a:0},
-{q:"Which number is 2 tens and 4 ones?",o:["24","42","204","20"],a:0},
-{q:"What is 3 × 0?",o:["0","3","1","30"],a:0}
-],
-// Day 1 — Tables 6-10 + Place Value
-[
-{q:"6 × 7 = ?",o:["42","36","48","54"],a:0},
-{q:"7 × 8 = ?",o:["56","49","63","54"],a:0},
-{q:"8 × 6 = ?",o:["48","42","54","40"],a:0},
-{q:"9 × 7 = ?",o:["63","54","72","56"],a:0},
-{q:"10 × 9 = ?",o:["90","80","100","70"],a:0},
-{q:"6 × 9 = ?",o:["54","48","60","63"],a:0},
-{q:"7 × 7 = ?",o:["49","42","56","54"],a:0},
-{q:"8 × 9 = ?",o:["72","64","81","63"],a:0},
-{q:"In 345, what is the digit in the TENS place?",o:["4","3","5","34"],a:0},
-{q:"In 728, what is the HUNDREDS digit?",o:["7","2","8","72"],a:0},
-{q:"What is the place value of 6 in 360?",o:["60","6","600","3"],a:0},
-{q:"Which number has 5 hundreds, 2 tens, 8 ones?",o:["528","582","825","258"],a:0},
-{q:"9 × 9 = ?",o:["81","72","90","63"],a:0},
-{q:"10 × 10 = ?",o:["100","110","90","1000"],a:0},
-{q:"6 × 6 = ?",o:["36","30","42","48"],a:0},
-{q:"What is 400 + 70 + 3?",o:["473","437","374","743"],a:0},
-{q:"8 × 8 = ?",o:["64","56","72","81"],a:0},
-{q:"7 × 6 = ?",o:["42","35","49","48"],a:0},
-{q:"10 × 6 = ?",o:["60","56","66","70"],a:0},
-{q:"Expand 954: 9 is in ___ place",o:["Hundreds","Tens","Ones","Thousands"],a:0}
-],
-// Day 2 — Tables 11-15 + Big Numbers
-[
-{q:"11 × 4 = ?",o:["44","41","48","55"],a:0},
-{q:"12 × 5 = ?",o:["60","55","65","50"],a:0},
-{q:"13 × 3 = ?",o:["39","36","42","33"],a:0},
-{q:"14 × 2 = ?",o:["28","24","32","26"],a:0},
-{q:"15 × 4 = ?",o:["60","55","65","50"],a:0},
-{q:"11 × 11 = ?",o:["121","111","131","112"],a:0},
-{q:"12 × 8 = ?",o:["96","84","108","88"],a:0},
-{q:"13 × 6 = ?",o:["78","72","84","68"],a:0},
-{q:"How many zeros in ONE MILLION (10,00,000)?",o:["6","5","7","4"],a:0},
-{q:"How many zeros in ONE BILLION (100 crore)?",o:["9","8","7","10"],a:0},
-{q:"1,000 = one ___",o:["Thousand","Hundred","Million","Lakh"],a:0},
-{q:"10,000 = ten ___",o:["Thousand","Hundred","Lakh","Million"],a:0},
-{q:"1,00,000 = one ___",o:["Lakh","Thousand","Million","Crore"],a:0},
-{q:"14 × 5 = ?",o:["70","65","75","60"],a:0},
-{q:"15 × 6 = ?",o:["90","85","95","80"],a:0},
-{q:"11 × 9 = ?",o:["99","90","108","88"],a:0},
-{q:"12 × 12 = ?",o:["144","132","156","124"],a:0},
-{q:"13 × 7 = ?",o:["91","84","98","77"],a:0},
-{q:"Which is greater: 1 Lakh or 1 Million?",o:["1 Million","1 Lakh","They are equal","Cannot say"],a:0},
-{q:"15 × 9 = ?",o:["135","120","150","125"],a:0}
-],
-// Day 3 — Tables 16-20 + Word Problems
-[
-{q:"16 × 3 = ?",o:["48","42","54","36"],a:0},
-{q:"17 × 4 = ?",o:["68","64","72","60"],a:0},
-{q:"18 × 5 = ?",o:["90","85","95","80"],a:0},
-{q:"19 × 3 = ?",o:["57","54","60","51"],a:0},
-{q:"20 × 7 = ?",o:["140","120","160","130"],a:0},
-{q:"16 × 6 = ?",o:["96","88","104","80"],a:0},
-{q:"17 × 7 = ?",o:["119","112","126","105"],a:0},
-{q:"18 × 4 = ?",o:["72","64","80","68"],a:0},
-{q:"A class has 19 students. Each gets 4 stickers. How many stickers total?",o:["76","72","80","68"],a:0},
-{q:"A box has 16 chocolates. 5 boxes total chocolates?",o:["80","75","85","70"],a:0},
-{q:"20 × 9 = ?",o:["180","160","200","170"],a:0},
-{q:"19 × 5 = ?",o:["95","90","100","85"],a:0},
-{q:"16 × 8 = ?",o:["128","120","136","112"],a:0},
-{q:"Mia saves ₹17 every day. In 6 days she saves?",o:["₹102","₹96","₹108","₹85"],a:0},
-{q:"17 × 9 = ?",o:["153","144","162","136"],a:0},
-{q:"18 × 6 = ?",o:["108","96","120","102"],a:0},
-{q:"There are 20 rows with 8 seats each. Total seats?",o:["160","150","180","140"],a:0},
-{q:"19 × 7 = ?",o:["133","126","140","119"],a:0},
-{q:"16 × 9 = ?",o:["144","136","152","128"],a:0},
-{q:"20 × 20 = ?",o:["400","200","440","360"],a:0}
-],
-// Day 4 — Division, Fractions, Patterns
-[
-{q:"20 ÷ 4 = ?",o:["5","4","6","8"],a:0},
-{q:"36 ÷ 6 = ?",o:["6","7","5","9"],a:0},
-{q:"48 ÷ 8 = ?",o:["6","5","7","4"],a:0},
-{q:"63 ÷ 7 = ?",o:["9","8","7","6"],a:0},
-{q:"½ of 20 = ?",o:["10","5","15","8"],a:0},
-{q:"¼ of 16 = ?",o:["4","8","2","6"],a:0},
-{q:"⅓ of 21 = ?",o:["7","6","9","3"],a:0},
-{q:"Which fraction is bigger: ½ or ¼?",o:["½","¼","They are equal","Cannot tell"],a:0},
-{q:"81 ÷ 9 = ?",o:["9","8","7","6"],a:0},
-{q:"100 ÷ 10 = ?",o:["10","9","11","5"],a:0},
-{q:"What pattern: 1, 4, 9, 16, ___?",o:["25","20","24","36"],a:0},
-{q:"What pattern: 3, 6, 12, 24, ___?",o:["48","36","42","30"],a:0},
-{q:"72 ÷ 8 = ?",o:["9","8","7","6"],a:0},
-{q:"½ of 50 = ?",o:["25","20","30","10"],a:0},
-{q:"What is ¾ of 12?",o:["9","6","8","10"],a:0},
-{q:"56 ÷ 7 = ?",o:["8","7","9","6"],a:0},
-{q:"What pattern: 100, 90, 80, 70, ___?",o:["60","65","55","50"],a:0},
-{q:"45 ÷ 5 = ?",o:["9","8","7","6"],a:0},
-{q:"What is ⅔ of 18?",o:["12","9","6","15"],a:0},
-{q:"64 ÷ 8 = ?",o:["8","7","9","6"],a:0}
-],
-// Day 5 — Time, Money, Measurement
-[
-{q:"How many minutes in 1 hour?",o:["60","30","100","50"],a:0},
-{q:"How many hours in 1 day?",o:["24","12","20","48"],a:0},
-{q:"How many seconds in 1 minute?",o:["60","30","100","50"],a:0},
-{q:"How many days in a week?",o:["7","5","6","10"],a:0},
-{q:"How many months in a year?",o:["12","10","11","13"],a:0},
-{q:"If it is 3:00 PM now, what time was it 2 hours ago?",o:["1:00 PM","2:00 PM","5:00 PM","4:00 PM"],a:0},
-{q:"₹1 = ___ paise",o:["100","10","50","1000"],a:0},
-{q:"₹5 note × 8 = ₹?",o:["40","35","45","30"],a:0},
-{q:"1 metre = ___ centimetres",o:["100","10","1000","50"],a:0},
-{q:"1 kilometre = ___ metres",o:["1000","100","500","10000"],a:0},
-{q:"1 kilogram = ___ grams",o:["1000","100","500","10000"],a:0},
-{q:"A pencil is 15 cm. A ruler is 30 cm. Difference?",o:["15 cm","10 cm","20 cm","5 cm"],a:0},
-{q:"School starts at 8:00 AM, ends at 2:00 PM. How many hours?",o:["6","5","7","4"],a:0},
-{q:"Vivaan buys a book for ₹45 and pays ₹50. Change?",o:["₹5","₹10","₹15","₹45"],a:0},
-{q:"Half a kilogram = ___ grams",o:["500","250","750","100"],a:0},
-{q:"Which is heavier: 2 kg or 1500 grams?",o:["2 kg","1500 grams","Same","Cannot say"],a:0},
-{q:"How many weeks in a year?",o:["52","48","54","50"],a:0},
-{q:"3:30 PM in clock language: minutes hand points to?",o:["6","3","12","9"],a:0},
-{q:"1 litre = ___ millilitres",o:["1000","100","500","10000"],a:0},
-{q:"A train at 9 AM arrives at 1 PM. Travel time?",o:["4 hours","3 hours","5 hours","6 hours"],a:0}
-],
-// Day 6 — Ultimate Boss Level
-[
-{q:"13 × 14 = ?",o:["182","174","192","168"],a:0},
-{q:"17 × 16 = ?",o:["272","256","288","264"],a:0},
-{q:"144 ÷ 12 = ?",o:["12","11","13","14"],a:0},
-{q:"What is 15% of 100?",o:["15","10","20","5"],a:0},
-{q:"If 1 dozen = 12, what is 3 dozen?",o:["36","24","48","30"],a:0},
-{q:"What is the next prime number after 7?",o:["11","9","10","13"],a:0},
-{q:"Square root of 81 = ?",o:["9","8","7","6"],a:0},
-{q:"Square of 12 = ?",o:["144","124","132","168"],a:0},
-{q:"1 Crore = ___ Lakh",o:["100","10","1000","50"],a:0},
-{q:"What fraction of 1 hour is 15 minutes?",o:["¼","½","⅓","⅙"],a:0},
-{q:"19 × 19 = ?",o:["361","341","381","351"],a:0},
-{q:"If a bag has 5 red, 3 blue, 2 green balls — total?",o:["10","8","11","9"],a:0},
-{q:"Perimeter of a square with side 7 cm?",o:["28 cm","21 cm","14 cm","49 cm"],a:0},
-{q:"Area of rectangle 6 cm × 4 cm?",o:["24 cm²","20 cm²","28 cm²","10 cm²"],a:0},
-{q:"Which is greatest: ½, ¾, ⅓?",o:["¾","½","⅓","All equal"],a:0},
-{q:"1000 × 1000 = ?",o:["1,000,000","10,000","100,000","1,000"],a:0},
-{q:"20 × 18 = ?",o:["360","340","380","320"],a:0},
-{q:"If Vivaan scores 18/20 each day for 5 days, total score?",o:["90","85","100","80"],a:0},
-{q:"Roman numeral for 14?",o:["XIV","XiV","IVX","VIX"],a:0},
-{q:"What is the LCM of 4 and 6?",o:["12","8","24","6"],a:0}
-]
-],
+        beginner: [
 
-english: [
-// Day 0 — Alphabet & Phonics
-[
-{q:"Which word starts with a VOWEL?",o:["Apple","Ball","Cat","Dog"],a:0},
-{q:"How many vowels in ELEPHANT?",o:["3","2","4","5"],a:0},
-{q:"Which letter comes AFTER 'M' in the alphabet?",o:["N","L","O","P"],a:0},
-{q:"'CAT' rhymes with which word?",o:["Hat","Cup","Dog","Bed"],a:0},
-{q:"How many letters are in the alphabet?",o:["26","24","28","25"],a:0},
-{q:"Which is a VOWEL?",o:["E","B","C","D"],a:0},
-{q:"BIG means the OPPOSITE of?",o:["Small","Tall","Fast","Heavy"],a:0},
-{q:"Which word has the SHORT 'a' sound?",o:["Bag","Cake","Rain","Day"],a:0},
-{q:"'DOG' — what sound does the letter D make?",o:["Duh","Tuh","Guh","Buh"],a:0},
-{q:"Which letter comes BEFORE 'K'?",o:["J","L","I","M"],a:0},
-{q:"'SUN' rhymes with?",o:["Run","Pin","Bat","Cup"],a:0},
-{q:"How many CONSONANTS in 'SHIP'?",o:["3","2","4","1"],a:0},
-{q:"Which word begins with a silent letter?",o:["Knight","King","Kite","Key"],a:0},
-{q:"What type of word is 'JUMP'?",o:["Verb","Noun","Adjective","Pronoun"],a:0},
-{q:"'HAPPY' is a word that describes. It is a/an ___",o:["Adjective","Noun","Verb","Adverb"],a:0},
-{q:"Pick the NOUN: The fast dog ran quickly.",o:["Dog","Fast","Ran","Quickly"],a:0},
-{q:"Which word has the LONG 'i' sound?",o:["Kite","Kit","Bit","Sit"],a:0},
-{q:"Arrange: 'is / Vivaan / smart'. Correct sentence?",o:["Vivaan is smart.","Smart Vivaan is.","Is Vivaan smart?","Smart is Vivaan."],a:0},
-{q:"How many syllables in 'BUTTERFLY'?",o:["3","2","4","1"],a:0},
-{q:"'SHE' is a ___",o:["Pronoun","Noun","Verb","Adjective"],a:0}
-],
-// Day 1 — CVC Words & Short Vowels
-[
-{q:"Which is a CVC word? (Consonant-Vowel-Consonant)",o:["PIG","PLAY","FROG","SHIP"],a:0},
-{q:"Fill in: The ___ is on the mat. (C-A-T or C-A-R)",o:["CAT","CAR","CAN","CAP"],a:0},
-{q:"Which word has SHORT 'e' sound?",o:["Bed","Bead","Bee","Beer"],a:0},
-{q:"'HOP' — change H to T. New word?",o:["TOP","TON","TOM","TOE"],a:0},
-{q:"Which word has SHORT 'o' sound?",o:["Pot","Pole","Poke","Poem"],a:0},
-{q:"'BIG' — change B to P. New word?",o:["PIG","PIN","PIT","PIE"],a:0},
-{q:"Which is NOT a CVC word?",o:["FROG","BUS","CUP","HIT"],a:0},
-{q:"'WIG' — change W to D. New word?",o:["DIG","DIP","DIM","DIN"],a:0},
-{q:"Which word has SHORT 'u' sound?",o:["Bug","Mule","Tune","Rude"],a:0},
-{q:"'RUN' — change R to F. New word?",o:["FUN","FAN","FIN","FON"],a:0},
-{q:"How many sounds in 'CAT'?",o:["3","2","4","1"],a:0},
-{q:"'NET' — change N to W. New word?",o:["WET","WAT","WOT","WIT"],a:0},
-{q:"Which word has SHORT 'i' sound?",o:["Bin","Bite","Bike","Bide"],a:0},
-{q:"'MOP' — change M to H. New word?",o:["HOP","HAP","HIP","HUP"],a:0},
-{q:"What letter is missing? B_G (a bag)?",o:["A","E","I","U"],a:0},
-{q:"'SIT' rhymes with?",o:["BIT","SAT","SET","BUT"],a:0},
-{q:"What letter is missing? R_N (to run)?",o:["U","A","E","I"],a:0},
-{q:"Which word does NOT rhyme with 'PAN'?",o:["PIN","CAN","MAN","FAN"],a:0},
-{q:"'DOT' — change D to H. New word?",o:["HOT","HAT","HIT","HUT"],a:0},
-{q:"What letter is missing? L_G (a leg)?",o:["E","A","I","O"],a:0}
-],
-// Day 2 — Blends & Sight Words
-[
-{q:"Which word begins with a BLEND?",o:["FROG","FISH","FAIL","FALL"],a:0},
-{q:"'BL' blend word — which is correct?",o:["BLUE","BULE","BLEU","BULD"],a:0},
-{q:"'SP' blend — fill in: _OON (for eating)?",o:["SPOON","SPOOL","SPORE","SPOKE"],a:0},
-{q:"Which is a sight word you should KNOW?",o:["THE","ZAP","QUB","WUZ"],a:0},
-{q:"'TR' blend — TRAIN starts with?",o:["TR","TH","CR","DR"],a:0},
-{q:"Complete: She ___ to school. (GOES/GOSE)",o:["GOES","GOSE","GOEZ","GOOS"],a:0},
-{q:"Which word has 'TH' sound?",o:["THINK","TICK","TAKE","TREE"],a:0},
-{q:"'CH' blend word?",o:["CHAIR","CARE","SHARE","STAIR"],a:0},
-{q:"Sight word: I ___ a dog. (SEE/CEE)",o:["SEE","CEE","SI","ZEE"],a:0},
-{q:"'SH' blend word?",o:["SHIP","SPIT","SLIP","SKIP"],a:0},
-{q:"Complete: He ___ happy. (IS/IZ)",o:["IS","IZ","IES","YS"],a:0},
-{q:"'FL' blend word?",o:["FLAG","FRAG","FLUG","FLOG"],a:0},
-{q:"Correct spelling?",o:["BECAUSE","BECAUS","BECAUZE","BECOSE"],a:0},
-{q:"'CR' blend word?",o:["CRAB","DRAB","GRAB","BRAB"],a:0},
-{q:"Correct spelling?",o:["FRIEND","FREIND","FREND","FRINED"],a:0},
-{q:"Which word ends in 'NG'?",o:["SING","SLIM","SKIN","SHIN"],a:0},
-{q:"Correct spelling?",o:["PEOPLE","PEAPLE","PEEPLE","PEPOLE"],a:0},
-{q:"'SK' blend word?",o:["SKY","SLY","SPY","SHY"],a:0},
-{q:"Correct spelling?",o:["AGAIN","AGIAN","AGEIN","AGEN"],a:0},
-{q:"Which word has 'WH' blend?",o:["WHEEL","WEAL","WELL","WEEN"],a:0}
-],
-// Day 3 — Plurals & Opposites
-[
-{q:"Plural of CHILD?",o:["CHILDREN","CHILDS","CHILDES","CHILDRENS"],a:0},
-{q:"Plural of MOUSE?",o:["MICE","MOUSES","MOUSE","MOOSES"],a:0},
-{q:"Opposite of COLD?",o:["HOT","WARM","COOL","HEAT"],a:0},
-{q:"Opposite of DARK?",o:["LIGHT","BRIGHT","CLEAR","WHITE"],a:0},
-{q:"Plural of TOOTH?",o:["TEETH","TOOTHS","TOOTHES","TEETHS"],a:0},
-{q:"Opposite of FAST?",o:["SLOW","QUICK","LATE","STOP"],a:0},
-{q:"Plural of LEAF?",o:["LEAVES","LEAFS","LEAFES","LEAF"],a:0},
-{q:"Opposite of HAPPY?",o:["SAD","ANGRY","TIRED","BORED"],a:0},
-{q:"Plural of FOOT?",o:["FEET","FOOTS","FOOTES","FEETS"],a:0},
-{q:"Opposite of TALL?",o:["SHORT","SMALL","THIN","LOW"],a:0},
-{q:"Plural of BOX?",o:["BOXES","BOXS","BOXIES","BOXEN"],a:0},
-{q:"Opposite of DAY?",o:["NIGHT","DARK","EVENING","DUSK"],a:0},
-{q:"Plural of CITY?",o:["CITIES","CITYS","CITYES","CITIESN"],a:0},
-{q:"Opposite of EMPTY?",o:["FULL","FILL","HALF","HEAVY"],a:0},
-{q:"Plural of KNIFE?",o:["KNIVES","KNIFES","KNIFES","KNIVE"],a:0},
-{q:"Opposite of OPEN?",o:["CLOSED","SHUT","LOCKED","SEALED"],a:0},
-{q:"Plural of PERSON?",o:["PEOPLE","PERSONS","PEOPLES","PERSONNES"],a:0},
-{q:"Opposite of RICH?",o:["POOR","CHEAP","LOW","SMALL"],a:0},
-{q:"Plural of SHEEP?",o:["SHEEP","SHEEPS","SHEEPES","SHEEPEN"],a:0},
-{q:"Opposite of ALWAYS?",o:["NEVER","SOMETIMES","OFTEN","RARELY"],a:0}
-],
-// Day 4 — Sentences & Punctuation
-[
-{q:"Which sentence is correct?",o:["Vivaan is clever.","vivaan is clever.","Vivaan is Clever.","vivaan Is clever."],a:0},
-{q:"A sentence always starts with a ___?",o:["Capital letter","Small letter","Number","Symbol"],a:0},
-{q:"Which punctuation ends a question?",o:["?","!",".","..."],a:0},
-{q:"Which is a COMPLETE sentence?",o:["The bird sang.","The bird.","Sang loudly.","Bird the."],a:0},
-{q:"I am going to school ___ (add right punctuation)",o:[". (full stop)","! (exclamation)","? (question mark)","... (ellipsis)"],a:0},
-{q:"Which sentence asks something?",o:["Is it raining?","It is raining.","It is raining!","Oh, it rains."],a:0},
-{q:"What is the SUBJECT in: 'Vivaan runs fast.'?",o:["Vivaan","runs","fast","fast runs"],a:0},
-{q:"What is the VERB in: 'She eats mango.'?",o:["eats","She","mango","likes"],a:0},
-{q:"Which needs an EXCLAMATION mark?",o:["Wow, I won!","Is it over?","She reads.","He runs."],a:0},
-{q:"Correct sentence?",o:["He doesn't like peas.","He dont like peas.","He doesn't likes peas.","He do not likes peas."],a:0},
-{q:"'AND' joins two parts of a sentence. It is a ___",o:["Conjunction","Noun","Verb","Adjective"],a:0},
-{q:"Which is a QUESTION?",o:["Where is my bag?","My bag is here.","Find my bag!","My bag."],a:0},
-{q:"Correct: She ___ to the park yesterday.",o:["went","goes","go","going"],a:0},
-{q:"Correct: They ___ playing now.",o:["are","is","was","be"],a:0},
-{q:"Which word is an ADVERB (describes how)?",o:["Quickly","Quick","Quicker","Quickest"],a:0},
-{q:"Correct sentence?",o:["I have two cats.","I have two cat.","I has two cats.","I have tow cats."],a:0},
-{q:"A comma is used to ___",o:["Separate items in a list","End a sentence","Ask a question","Show surprise"],a:0},
-{q:"Which is PAST tense?",o:["He ran.","He runs.","He will run.","He is running."],a:0},
-{q:"Correct: ___ going to the market. (I'm/Im)",o:["I'm","Im","I m","IM"],a:0},
-{q:"What is the OBJECT in: 'Mia eats an apple.'?",o:["apple","Mia","eats","an"],a:0}
-],
-// Day 5 — Rhyming & Word Families
-[
-{q:"Which word rhymes with NIGHT?",o:["LIGHT","LAKE","LONG","LOST"],a:0},
-{q:"Which word rhymes with CAKE?",o:["LAKE","LICK","LOCK","LUCK"],a:0},
-{q:"Same word family as PLAY, PLAYED: ___?",o:["PLAYING","PLAYS","PLAYER","All of these"],a:0},
-{q:"Which does NOT rhyme with STAR?",o:["STIR","FAR","CAR","BAR"],a:0},
-{q:"Which word rhymes with TREE?",o:["FREE","FROG","TRIP","TRIM"],a:0},
-{q:"'AT' family: CAT, BAT, ___, MAT",o:["HAT","HIT","HOT","HUT"],a:0},
-{q:"Which rhymes with HOUSE?",o:["MOUSE","MOOSE","MOLE","MOPE"],a:0},
-{q:"'OT' family: HOT, NOT, DOT, ___",o:["POT","PET","PIT","PUT"],a:0},
-{q:"Which does NOT rhyme with KING?",o:["STING","SING","RING","BRING"],a:0},
-{q:"'UN' family: FUN, RUN, SUN, ___",o:["BUN","BAN","BIN","BON"],a:0},
-{q:"Which rhymes with SNOW?",o:["GLOW","SLOW","FLOW","All of these"],a:0},
-{q:"'AKE' family: CAKE, MAKE, ___, WAKE",o:["TAKE","TALK","TASK","TACK"],a:0},
-{q:"Which rhymes with COLD?",o:["GOLD","TOLD","BOLD","All of these"],a:0},
-{q:"'ILL' family: HILL, FILL, BILL, ___",o:["PILL","PULL","POLL","PELL"],a:0},
-{q:"Which does NOT rhyme with FOUND?",o:["FOND","SOUND","ROUND","GROUND"],a:0},
-{q:"'OOL' family: POOL, COOL, TOOL, ___",o:["FOOL","FALL","FILL","FULL"],a:0},
-{q:"Which rhymes with BRIGHT?",o:["MIGHT","MITT","MIST","MINT"],a:0},
-{q:"'ANE' family: LANE, CANE, ___, SANE",o:["MANE","MINE","MOON","MORE"],a:0},
-{q:"Which rhymes with FLOWER?",o:["POWER","PLOWER","PONDER","PEWTER"],a:0},
-{q:"'ONG' family: SONG, LONG, STRONG, ___",o:["WRONG","WRING","WRUNG","WRANG"],a:0}
-],
-// Day 6 — Mixed English Challenge
-[
-{q:"Synonym for BIG?",o:["LARGE","LITTLE","TINY","SMALL"],a:0},
-{q:"Synonym for HAPPY?",o:["JOYFUL","GLOOMY","SAD","TIRED"],a:0},
-{q:"Correct: She is ___ than her sister. (TALL)",o:["TALLER","TALLEST","MOST TALL","MORE TALL"],a:0},
-{q:"He is the ___ boy in class. (SMART)",o:["SMARTEST","SMARTER","MOST SMART","MORE SMART"],a:0},
-{q:"Which is the correct PAST TENSE of 'eat'?",o:["ATE","EATED","EATTED","EATEN"],a:0},
-{q:"Which is the correct past tense of 'go'?",o:["WENT","GOED","GOED","WENTED"],a:0},
-{q:"'BOOK' is a ___",o:["Noun","Verb","Adjective","Adverb"],a:0},
-{q:"'BEAUTIFUL' is a ___",o:["Adjective","Noun","Verb","Conjunction"],a:0},
-{q:"Which uses APOSTROPHE correctly?",o:["It's raining.","Its' raining.","Its raining.","It'is raining."],a:0},
-{q:"Which is FUTURE tense?",o:["She will read.","She read.","She reads.","She is reading."],a:0},
-{q:"Antonym of ANCIENT?",o:["MODERN","OLD","AGED","PAST"],a:0},
-{q:"Antonym of BRAVE?",o:["COWARDLY","WEAK","SLOW","TIMID"],a:0},
-{q:"Correct spelling?",o:["BEAUTIFUL","BEUTIFUL","BEAUTIFULL","BEAUTIFAL"],a:0},
-{q:"Correct spelling?",o:["DAUGHTER","DAUGTER","DAUGHER","DAUTHER"],a:0},
-{q:"Correct: I ___ my homework yesterday. (DO)",o:["DID","DONE","DO","DOES"],a:0},
-{q:"'THEY' refers to ___",o:["More than one person","One person","A place","A thing"],a:0},
-{q:"Which sentence uses 'THEIR' correctly?",o:["That is their house.","They're house is big.","There house is new.","Their is a house."],a:0},
-{q:"Which word means the same as 'BEGIN'?",o:["START","STOP","PAUSE","END"],a:0},
-{q:"Correct: We ___ friends since 2020.",o:["have been","has been","are","was"],a:0},
-{q:"A story has: beginning, ___, and end.",o:["middle","chapter","title","author"],a:0}
-]
-],
+          // ── Beginner Set 1: Number Names, H/T/O, Abacus basics ──────
+          [
+            {topic:"Number Names", q:"What is the number name for 235?", o:["Two hundred and thirty-five","Two hundred and fifty-three","Twenty-three five","Two hundred fifty"], a:0},
+            {topic:"Number Names", q:"Which number means 'Four hundred and twelve'?", o:["412","421","142","241"], a:0},
+            {topic:"Number Names", q:"Write in digits: 'Seven hundred and nine'", o:["709","790","970","907"], a:0},
+            {topic:"Hundreds Tens Ones", q:"In 367, the digit in the HUNDREDS place is?", o:["3","6","7","36"], a:0},
+            {topic:"Hundreds Tens Ones", q:"In 845, how many TENS are there?", o:["4","8","5","84"], a:0},
+            {topic:"Hundreds Tens Ones", q:"In 129, how many ONES are there?", o:["9","1","2","12"], a:0},
+            {topic:"Hundreds Tens Ones", q:"5 hundreds + 0 tens + 9 ones = ?", o:["509","590","59","905"], a:0},
+            {topic:"Abacus", q:"On an abacus: Hundreds=2, Tens=5, Ones=1. What number?", o:["251","215","512","125"], a:0},
+            {topic:"Abacus", q:"On an abacus: Hundreds=4, Tens=0, Ones=7. What number?", o:["407","470","47","740"], a:0},
+            {topic:"Expansion", q:"300 + 50 + 6 = ?", o:["356","365","536","305"], a:0},
+            {topic:"Expansion", q:"Expand 472 correctly:", o:["400 + 70 + 2","40 + 7 + 2","4 + 7 + 2","400 + 7 + 2"], a:0},
+            {topic:"Place Value", q:"What is the place value of 6 in 563?", o:["60","6","600","56"], a:0}
+          ],
 
-evs: [
-// Day 0 — Animals & Habitats
-[
-{q:"Where does a fish live?",o:["Water","Land","Tree","Desert"],a:0},
-{q:"Which animal gives us milk?",o:["Cow","Dog","Cat","Horse"],a:0},
-{q:"A bird uses its ___ to fly.",o:["Wings","Legs","Beak","Tail"],a:0},
-{q:"Which animal is called the 'King of the Jungle'?",o:["Lion","Tiger","Elephant","Bear"],a:0},
-{q:"Which is a DOMESTIC animal (lives with humans)?",o:["Dog","Tiger","Wolf","Crocodile"],a:0},
-{q:"Where does a polar bear live?",o:["Arctic / Polar region","Desert","Rainforest","Ocean"],a:0},
-{q:"Which bird CANNOT fly?",o:["Penguin","Eagle","Parrot","Pigeon"],a:0},
-{q:"A caterpillar turns into a ___?",o:["Butterfly","Bee","Moth","Ant"],a:0},
-{q:"Which animal has a long trunk?",o:["Elephant","Giraffe","Hippo","Rhino"],a:0},
-{q:"A CARNIVORE eats?",o:["Only meat","Only plants","Both meat and plants","Rocks"],a:0},
-{q:"A HERBIVORE eats?",o:["Only plants","Only meat","Both","Nothing"],a:0},
-{q:"Which animal sleeps all winter? (Hibernates)",o:["Bear","Dog","Cat","Parrot"],a:0},
-{q:"What is a baby dog called?",o:["Puppy","Kitten","Cub","Foal"],a:0},
-{q:"What is a baby cat called?",o:["Kitten","Puppy","Cub","Lamb"],a:0},
-{q:"Which animal makes honey?",o:["Bee","Ant","Butterfly","Fly"],a:0},
-{q:"Where does a camel store water?",o:["Hump","Legs","Stomach","Nose"],a:0},
-{q:"Which is an AMPHIBIAN?",o:["Frog","Fish","Snake","Lizard"],a:0},
-{q:"What sound does a cow make?",o:["Moo","Baa","Bark","Roar"],a:0},
-{q:"Which animal has black and white stripes?",o:["Zebra","Tiger","Panda","Skunk"],a:0},
-{q:"Where does a squirrel store its food?",o:["In a tree / underground","In water","In its hump","In its pouch"],a:0}
-],
-// Day 1 — Plants & Nature
-[
-{q:"Which part of a plant makes food using sunlight?",o:["Leaves","Roots","Stem","Flowers"],a:0},
-{q:"What do roots do for a plant?",o:["Absorb water and hold plant in soil","Make food","Produce flowers","Give fruits"],a:0},
-{q:"The process by which plants make food is called?",o:["Photosynthesis","Breathing","Digestion","Germination"],a:0},
-{q:"Which gas do plants take in from air?",o:["Carbon dioxide","Oxygen","Nitrogen","Hydrogen"],a:0},
-{q:"Which gas do plants give out?",o:["Oxygen","Carbon dioxide","Nitrogen","Steam"],a:0},
-{q:"Seeds grow into ___",o:["New plants","Flowers","Fruits","Leaves"],a:0},
-{q:"A plant that has no leaves in winter is called ___",o:["Deciduous tree","Evergreen tree","Cactus","Fern"],a:0},
-{q:"Which part of a plant holds it upright?",o:["Stem","Leaf","Root","Flower"],a:0},
-{q:"Where do mangoes grow?",o:["On trees","Underground","In water","On a bush"],a:0},
-{q:"Which vegetable grows underground?",o:["Carrot","Tomato","Pea","Brinjal"],a:0},
-{q:"Which plant lives in the desert with no water?",o:["Cactus","Rose","Lotus","Bamboo"],a:0},
-{q:"Lotus is a plant that grows in ___",o:["Water","Desert","Ice","Rock"],a:0},
-{q:"Trees give us ___ to breathe.",o:["Oxygen","Carbon dioxide","Nitrogen","Smoke"],a:0},
-{q:"Which is NOT a fruit?",o:["Carrot","Mango","Orange","Banana"],a:0},
-{q:"Pollen is carried from flower to flower by?",o:["Bees","Fish","Dogs","Worms"],a:0},
-{q:"A very old and very big tree is called a ___",o:["Banyan / Giant tree","Shrub","Herb","Creeper"],a:0},
-{q:"Which part of a plant becomes a fruit?",o:["Flower","Leaf","Stem","Root"],a:0},
-{q:"Plants need ___ to grow.",o:["Sunlight, water, soil","Only water","Only soil","Only sunlight"],a:0},
-{q:"Bamboo is the food of ___",o:["Giant Panda","Elephant","Giraffe","Hippo"],a:0},
-{q:"Which tree is called the 'National Tree of India'?",o:["Banyan","Mango","Peepal","Neem"],a:0}
-],
-// Day 2 — My Body
-[
-{q:"How many bones in an adult human body?",o:["206","106","306","186"],a:0},
-{q:"Which organ pumps blood through our body?",o:["Heart","Lungs","Brain","Kidney"],a:0},
-{q:"Which organ do we use to breathe?",o:["Lungs","Heart","Stomach","Liver"],a:0},
-{q:"Which organ controls our entire body?",o:["Brain","Heart","Stomach","Eyes"],a:0},
-{q:"How many senses do humans have?",o:["5","4","6","3"],a:0},
-{q:"We use our EYES to ___",o:["See","Hear","Smell","Taste"],a:0},
-{q:"We use our EARS to ___",o:["Hear","See","Feel","Taste"],a:0},
-{q:"We use our NOSE to ___",o:["Smell","Taste","See","Hear"],a:0},
-{q:"We use our TONGUE to ___",o:["Taste","Smell","Hear","See"],a:0},
-{q:"We use our SKIN to ___",o:["Feel / Touch","Smell","See","Hear"],a:0},
-{q:"How many teeth does an adult human have?",o:["32","28","36","24"],a:0},
-{q:"Which part of the body filters blood?",o:["Kidneys","Lungs","Stomach","Heart"],a:0},
-{q:"Where does digestion start?",o:["Mouth","Stomach","Intestine","Throat"],a:0},
-{q:"Strong feelings and thinking happen in the ___",o:["Brain","Heart","Eyes","Hands"],a:0},
-{q:"Muscles are attached to ___",o:["Bones","Organs","Skin","Blood"],a:0},
-{q:"Which part keeps our body warm?",o:["Skin","Bones","Blood","Hair"],a:0},
-{q:"White blood cells help us fight ___",o:["Germs / Diseases","Cold","Hunger","Tiredness"],a:0},
-{q:"We should brush our teeth ___",o:["Twice a day","Once a week","Once a day","Never"],a:0},
-{q:"Which food makes our bones strong?",o:["Milk / Dairy","Sweets","Rice","Oil"],a:0},
-{q:"Exercise keeps our ___ healthy.",o:["Body","Mind","Both body and mind","Neither"],a:0}
-],
-// Day 3 — Food & Nutrition
-[
-{q:"Which food group gives us ENERGY?",o:["Carbohydrates","Vitamins","Minerals","Water"],a:0},
-{q:"Which food group builds our body?",o:["Proteins","Carbohydrates","Fats","Vitamins"],a:0},
-{q:"Which food is rich in PROTEIN?",o:["Eggs","Rice","Sugar","Oil"],a:0},
-{q:"Which vitamin do we get from sunlight?",o:["Vitamin D","Vitamin C","Vitamin A","Vitamin B"],a:0},
-{q:"Which food is rich in Vitamin C?",o:["Orange","Rice","Bread","Butter"],a:0},
-{q:"Which food is rich in CALCIUM (for bones)?",o:["Milk","Sugar","Oil","Rice"],a:0},
-{q:"Which is a JUNK food?",o:["Pizza/Burger","Apple","Carrot","Banana"],a:0},
-{q:"How many glasses of water should we drink each day?",o:["8 glasses","2 glasses","4 glasses","12 glasses"],a:0},
-{q:"Fruits and vegetables are rich in ___",o:["Vitamins & Minerals","Proteins","Carbohydrates","Fats"],a:0},
-{q:"Which is a DAIRY product?",o:["Cheese","Bread","Apple","Chicken"],a:0},
-{q:"We should eat ___ for breakfast.",o:["A healthy meal","Nothing","Only sweets","Only juice"],a:0},
-{q:"Which food comes from plants?",o:["Wheat","Chicken","Fish","Egg"],a:0},
-{q:"Which food comes from animals?",o:["Honey","Mango","Rice","Wheat"],a:0},
-{q:"Pulses like dal are rich in ___",o:["Protein","Fat","Sugar","Starch"],a:0},
-{q:"Which vitamin helps us see in the dark?",o:["Vitamin A","Vitamin B","Vitamin C","Vitamin D"],a:0},
-{q:"Junk food leads to ___",o:["Health problems","Good health","Strong muscles","Sharp mind"],a:0},
-{q:"Which is the healthiest cooking oil?",o:["Olive oil / mustard oil","Butter","Ghee","Lard"],a:0},
-{q:"Green leafy vegetables give us ___",o:["Iron and vitamins","Protein","Carbohydrates","Calcium"],a:0},
-{q:"Which is NOT a vegetable?",o:["Strawberry","Spinach","Pea","Potato"],a:0},
-{q:"A balanced diet means eating ___",o:["All food groups in right amounts","Only vegetables","Only fruits","Only proteins"],a:0}
-],
-// Day 4 — Weather & Seasons
-[
-{q:"How many seasons are there in India?",o:["4","2","3","6"],a:0},
-{q:"Which season comes after summer in India?",o:["Monsoon/Rainy","Winter","Spring","Autumn"],a:0},
-{q:"In which season do we use umbrellas?",o:["Rainy season","Summer","Winter","Spring"],a:0},
-{q:"In which season do we wear woolens?",o:["Winter","Summer","Rainy","Spring"],a:0},
-{q:"Clouds are made of ___",o:["Water droplets","Cotton","Smoke","Dust"],a:0},
-{q:"Rain forms when clouds ___",o:["Release water droplets","Get heavy","Turn dark","Freeze"],a:0},
-{q:"A tool to measure temperature is called a ___",o:["Thermometer","Barometer","Ruler","Scale"],a:0},
-{q:"Which season has the longest days?",o:["Summer","Winter","Rainy","Autumn"],a:0},
-{q:"Snow falls in ___",o:["Very cold places / mountains","Desert","Rainforest","Ocean"],a:0},
-{q:"A rainbow appears after ___",o:["Rain and sunshine","Thunder","Fog","Snowfall"],a:0},
-{q:"Thunder and lightning happen during ___",o:["Storm / Thunderstorm","Fog","Sunny day","Winter"],a:0},
-{q:"Fog is common in ___",o:["Winter mornings","Summer afternoons","Rainy evenings","Spring nights"],a:0},
-{q:"Wind direction is measured by a ___",o:["Wind vane","Thermometer","Barometer","Ruler"],a:0},
-{q:"Which season do flowers bloom most?",o:["Spring","Winter","Rainy","Autumn"],a:0},
-{q:"A very strong wind over the sea is called a ___",o:["Cyclone / Hurricane","Tsunami","Earthquake","Flood"],a:0},
-{q:"Ice melts into ___",o:["Water","Steam","Fog","Cloud"],a:0},
-{q:"Water turns to steam when ___",o:["Heated","Cooled","Frozen","Mixed"],a:0},
-{q:"Which instrument measures rainfall?",o:["Rain gauge","Thermometer","Barometer","Hygrometer"],a:0},
-{q:"The Thar Desert in India has a ___ climate.",o:["Hot and dry","Cold and wet","Tropical","Polar"],a:0},
-{q:"Global warming causes ___",o:["Rise in Earth's temperature","More rainfall","More snow","Cooler summers"],a:0}
-],
-// Day 5 — Transport & Community
-[
-{q:"Which is a WATER transport?",o:["Ship / Boat","Bus","Train","Aeroplane"],a:0},
-{q:"Which is an AIR transport?",o:["Aeroplane","Bicycle","Bus","Ship"],a:0},
-{q:"Which is LAND transport?",o:["Car","Boat","Aeroplane","Submarine"],a:0},
-{q:"Fastest mode of transport?",o:["Aeroplane","Train","Car","Ship"],a:0},
-{q:"What does a RED traffic light mean?",o:["STOP","GO","SLOW DOWN","SPEED UP"],a:0},
-{q:"What does a GREEN traffic light mean?",o:["GO","STOP","SLOW DOWN","WAIT"],a:0},
-{q:"What does an AMBER/YELLOW traffic light mean?",o:["GET READY / SLOW DOWN","GO","STOP","REVERSE"],a:0},
-{q:"Who helps us when we are sick?",o:["Doctor","Teacher","Farmer","Postman"],a:0},
-{q:"Who grows food for us?",o:["Farmer","Doctor","Engineer","Pilot"],a:0},
-{q:"Who puts out fires?",o:["Fireman / Fire brigade","Police","Soldier","Postman"],a:0},
-{q:"Who delivers letters and parcels?",o:["Postman","Doctor","Farmer","Pilot"],a:0},
-{q:"The first railway in India ran between?",o:["Mumbai and Thane","Delhi and Agra","Chennai and Kolkata","Mumbai and Pune"],a:0},
-{q:"A place where planes land and take off?",o:["Airport","Railway station","Bus stop","Harbour"],a:0},
-{q:"A place where ships dock?",o:["Harbour / Port","Airport","Bus terminal","Railway station"],a:0},
-{q:"Fuel used in cars is called?",o:["Petrol / Diesel","Coal","Wood","LPG"],a:0},
-{q:"Fuel used in aeroplanes is called?",o:["Aviation turbine fuel (ATF)","Petrol","Diesel","LPG"],a:0},
-{q:"An ambulance is used to?",o:["Carry sick people to hospital","Fight fires","Deliver letters","Teach children"],a:0},
-{q:"A SUBMARINE travels ___",o:["Underwater","In air","On road","On rails"],a:0},
-{q:"Which road sign is a red circle with a white bar?",o:["No entry","Stop","One way","Speed limit"],a:0},
-{q:"We should wear a ___ while riding a bike.",o:["Helmet","Cap","Scarf","Gloves"],a:0}
-],
-// Day 6 — Environment & Conservation
-[
-{q:"Cutting down too many trees is called?",o:["Deforestation","Afforestation","Pollution","Erosion"],a:0},
-{q:"Planting more trees is called?",o:["Afforestation","Deforestation","Pollution","Mining"],a:0},
-{q:"Which gas causes the 'greenhouse effect'?",o:["Carbon dioxide","Oxygen","Nitrogen","Hydrogen"],a:0},
-{q:"The three R's of conservation are?",o:["Reduce, Reuse, Recycle","Read, Run, Rest","Rain, River, Rock","Roots, Rocks, Rain"],a:0},
-{q:"Throwing garbage in water bodies causes?",o:["Water pollution","Air pollution","Noise pollution","Land pollution"],a:0},
-{q:"Vehicle smoke causes?",o:["Air pollution","Water pollution","Soil pollution","Noise pollution"],a:0},
-{q:"Which energy source does NOT pollute?",o:["Solar energy","Coal","Petrol","Diesel"],a:0},
-{q:"Which is a renewable energy source?",o:["Wind energy","Coal","Petrol","Natural gas"],a:0},
-{q:"Acid rain is caused by ___",o:["Air pollution / factory gases","Normal rainfall","Greenhouse gases","Forest fires"],a:0},
-{q:"The ozone layer protects us from ___",o:["Harmful UV rays of the sun","Rain","Wind","Cold"],a:0},
-{q:"Which wildlife reserve is famous for tigers in India?",o:["Jim Corbett National Park","Kaziranga","Sundarbans","Bharatpur"],a:0},
-{q:"Which is the national animal of India?",o:["Tiger","Lion","Elephant","Peacock"],a:0},
-{q:"Kaziranga National Park is famous for?",o:["One-horned rhinoceros","Tigers","Elephants","Dolphins"],a:0},
-{q:"Which is the national bird of India?",o:["Peacock","Parrot","Eagle","Flamingo"],a:0},
-{q:"To save electricity we should ___",o:["Switch off lights when not in use","Keep lights on all day","Use more fans","Watch more TV"],a:0},
-{q:"Composting turns waste into ___",o:["Natural fertilizer","Plastic","Metal","Coal"],a:0},
-{q:"The Earth's surface is covered ___ by water.",o:["71%","30%","50%","90%"],a:0},
-{q:"Global warming leads to melting of ___",o:["Polar ice caps","Mountains","Oceans","Deserts"],a:0},
-{q:"A reusable bag is better than a ___ bag.",o:["Plastic","Cotton","Jute","Cloth"],a:0},
-{q:"Earth Day is celebrated on?",o:["22 April","5 June","1 March","15 August"],a:0}
-]
-],
+          // ── Beginner Set 2: Comparison, Ordering, Odd/Even ──────────
+          [
+            {topic:"Comparison", q:"Which is GREATER: 234 or 243?", o:["243","234","Both equal","Cannot say"], a:0},
+            {topic:"Comparison", q:"Which is SMALLER: 652 or 625?", o:["625","652","Both equal","Cannot say"], a:0},
+            {topic:"Comparison", q:"Fill in: 400 ___ 399", o:["> (greater than)","< (less than)","= (equal to)","≥"], a:0},
+            {topic:"Comparison", q:"Which is greatest: 500, 050, 005?", o:["500","50","5","All equal"], a:0},
+            {topic:"Ascending Order", q:"Arrange in ASCENDING order: 301, 103, 130", o:["103, 130, 301","301, 130, 103","130, 103, 301","103, 301, 130"], a:0},
+            {topic:"Descending Order", q:"Arrange in DESCENDING order: 542, 524, 425", o:["542, 524, 425","425, 524, 542","524, 425, 542","542, 425, 524"], a:0},
+            {topic:"Odd & Even", q:"Is 46 an ODD or EVEN number?", o:["Even","Odd","Both","Neither"], a:0},
+            {topic:"Odd & Even", q:"Is 73 an ODD or EVEN number?", o:["Odd","Even","Both","Neither"], a:0},
+            {topic:"Odd & Even", q:"Is 100 an ODD or EVEN number?", o:["Even","Odd","Both","Neither"], a:0},
+            {topic:"Odd & Even", q:"Which number is ODD?", o:["35","42","66","80"], a:0},
+            {topic:"Odd & Even", q:"Which number is EVEN?", o:["48","37","51","93"], a:0},
+            {topic:"Number Names", q:"Write in digits: 'Eight hundred and fifty'", o:["850","805","580","508"], a:0}
+          ],
 
-gk: [
-// Day 0 — India: States, Capitals & Symbols
-[
-{q:"Capital of India?",o:["New Delhi","Mumbai","Kolkata","Chennai"],a:0},
-{q:"Largest state in India by area?",o:["Rajasthan","Maharashtra","UP","MP"],a:0},
-{q:"National animal of India?",o:["Tiger","Lion","Elephant","Leopard"],a:0},
-{q:"National bird of India?",o:["Peacock","Parrot","Eagle","Flamingo"],a:0},
-{q:"National flower of India?",o:["Lotus","Rose","Sunflower","Marigold"],a:0},
-{q:"National fruit of India?",o:["Mango","Banana","Guava","Papaya"],a:0},
-{q:"National game of India?",o:["Hockey","Cricket","Kabaddi","Football"],a:0},
-{q:"National river of India?",o:["Ganga","Yamuna","Godavari","Brahmaputra"],a:0},
-{q:"Capital of Maharashtra?",o:["Mumbai","Pune","Nagpur","Aurangabad"],a:0},
-{q:"Capital of Rajasthan?",o:["Jaipur","Jodhpur","Udaipur","Ajmer"],a:0},
-{q:"How many states are there in India?",o:["28","26","29","30"],a:0},
-{q:"India's independence day is celebrated on?",o:["15 August","26 January","2 October","14 November"],a:0},
-{q:"India's Republic Day is celebrated on?",o:["26 January","15 August","2 October","26 November"],a:0},
-{q:"Who is called the Father of the Nation?",o:["Mahatma Gandhi","Nehru","Bose","Patel"],a:0},
-{q:"First Prime Minister of India?",o:["Jawaharlal Nehru","Lal Bahadur Shastri","Indira Gandhi","Rajiv Gandhi"],a:0},
-{q:"Capital of UP (Uttar Pradesh)?",o:["Lucknow","Kanpur","Varanasi","Agra"],a:0},
-{q:"Which is the longest river in India?",o:["Ganga","Yamuna","Godavari","Narmada"],a:0},
-{q:"Taj Mahal is in which city?",o:["Agra","Delhi","Jaipur","Lucknow"],a:0},
-{q:"Currency of India?",o:["Rupee","Dollar","Pound","Euro"],a:0},
-{q:"The 'Pink City' of India is?",o:["Jaipur","Jodhpur","Jaisalmer","Udaipur"],a:0}
-],
-// Day 1 — World: Countries & Capitals
-[
-{q:"Capital of USA?",o:["Washington D.C.","New York","Los Angeles","Chicago"],a:0},
-{q:"Capital of UK?",o:["London","Manchester","Liverpool","Edinburgh"],a:0},
-{q:"Capital of France?",o:["Paris","Lyon","Marseille","Nice"],a:0},
-{q:"Capital of Japan?",o:["Tokyo","Osaka","Kyoto","Hiroshima"],a:0},
-{q:"Largest country in the world by area?",o:["Russia","Canada","USA","China"],a:0},
-{q:"Smallest country in the world?",o:["Vatican City","Monaco","San Marino","Liechtenstein"],a:0},
-{q:"Which continent is India in?",o:["Asia","Africa","Europe","Australia"],a:0},
-{q:"How many continents are there?",o:["7","5","6","8"],a:0},
-{q:"Which is the largest continent?",o:["Asia","Africa","North America","Europe"],a:0},
-{q:"Which is the smallest continent?",o:["Australia","Europe","Antarctica","South America"],a:0},
-{q:"Capital of Australia?",o:["Canberra","Sydney","Melbourne","Brisbane"],a:0},
-{q:"Capital of China?",o:["Beijing","Shanghai","Hong Kong","Guangzhou"],a:0},
-{q:"Which country has the Great Wall?",o:["China","Japan","Korea","India"],a:0},
-{q:"The Amazon rainforest is in?",o:["South America","Africa","Asia","Australia"],a:0},
-{q:"Which ocean is the largest?",o:["Pacific","Atlantic","Indian","Arctic"],a:0},
-{q:"Which is the longest river in the world?",o:["Nile","Amazon","Yangtze","Mississippi"],a:0},
-{q:"Capital of Canada?",o:["Ottawa","Toronto","Vancouver","Montreal"],a:0},
-{q:"The Eiffel Tower is in which country?",o:["France","Italy","Spain","Germany"],a:0},
-{q:"Which country is called the 'Land of the Rising Sun'?",o:["Japan","China","India","Korea"],a:0},
-{q:"How many oceans are there?",o:["5","4","3","6"],a:0}
-],
-// Day 2 — Sports & Games
-[
-{q:"How many players in a cricket team?",o:["11","10","12","9"],a:0},
-{q:"How many players in a football team?",o:["11","10","12","9"],a:0},
-{q:"How many players in a basketball team?",o:["5","6","7","4"],a:0},
-{q:"Olympics are held every ___ years.",o:["4","2","3","5"],a:0},
-{q:"Which sport uses a shuttlecock?",o:["Badminton","Tennis","Squash","Volleyball"],a:0},
-{q:"Which sport has a 'hole-in-one'?",o:["Golf","Cricket","Baseball","Hockey"],a:0},
-{q:"Where were the 2024 Olympics held?",o:["Paris, France","Tokyo, Japan","London, UK","Sydney, Australia"],a:0},
-{q:"Sachin Tendulkar plays which sport?",o:["Cricket","Football","Tennis","Badminton"],a:0},
-{q:"P.V. Sindhu plays which sport?",o:["Badminton","Tennis","Table Tennis","Squash"],a:0},
-{q:"Which country invented cricket?",o:["England","India","Australia","South Africa"],a:0},
-{q:"A hat-trick in cricket means ___",o:["3 wickets in 3 balls","3 sixes in a row","3 fours in a row","3 wickets in an over"],a:0},
-{q:"FIFA World Cup is for which sport?",o:["Football","Cricket","Hockey","Rugby"],a:0},
-{q:"In chess, the most powerful piece is the ___",o:["Queen","King","Rook","Bishop"],a:0},
-{q:"Kabaddi is originally from which country?",o:["India","Pakistan","Nepal","Bangladesh"],a:0},
-{q:"The Olympic rings are how many?",o:["5","4","6","7"],a:0},
-{q:"Which sport does Neeraj Chopra play?",o:["Javelin throw","Cricket","Badminton","Swimming"],a:0},
-{q:"In football, a penalty is taken from ___",o:["Penalty spot","Corner","Centre","Goalpost"],a:0},
-{q:"Which country has won most Cricket World Cups?",o:["Australia","India","West Indies","England"],a:0},
-{q:"Table tennis / Ping pong was invented in?",o:["England","China","Japan","USA"],a:0},
-{q:"Chess was invented in which country?",o:["India","Persia","China","Greece"],a:0}
-],
-// Day 3 — Famous People & Inventions
-[
-{q:"Who invented the telephone?",o:["Alexander Graham Bell","Thomas Edison","Nikola Tesla","Marconi"],a:0},
-{q:"Who invented the light bulb?",o:["Thomas Edison","Graham Bell","Newton","Einstein"],a:0},
-{q:"Who discovered gravity?",o:["Isaac Newton","Einstein","Galileo","Archimedes"],a:0},
-{q:"Who invented the computer?",o:["Charles Babbage","Bill Gates","Steve Jobs","Alan Turing"],a:0},
-{q:"Who painted the Mona Lisa?",o:["Leonardo da Vinci","Michelangelo","Picasso","Raphael"],a:0},
-{q:"APJ Abdul Kalam was famous as India's ___",o:["Missile Man / President","Prime Minister","Cricketer","Scientist only"],a:0},
-{q:"Who wrote the National Anthem of India?",o:["Rabindranath Tagore","Bankim Chandra","Sarojini Naidu","Gandhi"],a:0},
-{q:"Who was the first person to walk on the Moon?",o:["Neil Armstrong","Buzz Aldrin","Yuri Gagarin","John Glenn"],a:0},
-{q:"First person in space?",o:["Yuri Gagarin","Neil Armstrong","Buzz Aldrin","Alan Shepard"],a:0},
-{q:"Kalpana Chawla was India's first female ___",o:["Astronaut","Pilot","Doctor","Scientist"],a:0},
-{q:"Who invented penicillin (antibiotic)?",o:["Alexander Fleming","Louis Pasteur","Edward Jenner","Lister"],a:0},
-{q:"Who invented the aeroplane?",o:["Wright Brothers","Edison","Bell","Marconi"],a:0},
-{q:"Which scientist gave the theory of relativity?",o:["Albert Einstein","Newton","Bohr","Curie"],a:0},
-{q:"Mother Teresa was famous for?",o:["Serving the poor and sick","Inventing medicine","Writing books","Teaching science"],a:0},
-{q:"Who invented the printing press?",o:["Gutenberg","Edison","Newton","Bell"],a:0},
-{q:"Mahatma Gandhi's real first name?",o:["Mohandas","Mahesh","Mohan","Madan"],a:0},
-{q:"Marie Curie was the first woman to win ___",o:["Nobel Prize","Olympic gold","Grammy","Oscar"],a:0},
-{q:"Who discovered America?",o:["Christopher Columbus","Vasco da Gama","Marco Polo","Magellan"],a:0},
-{q:"Vasco da Gama discovered the sea route to ___",o:["India","America","Africa","Australia"],a:0},
-{q:"Who invented WWW (World Wide Web)?",o:["Tim Berners-Lee","Bill Gates","Steve Jobs","Mark Zuckerberg"],a:0}
-],
-// Day 4 — Science & Space
-[
-{q:"How many planets in our solar system?",o:["8","9","7","10"],a:0},
-{q:"Which planet is closest to the Sun?",o:["Mercury","Venus","Earth","Mars"],a:0},
-{q:"Which is the largest planet?",o:["Jupiter","Saturn","Uranus","Neptune"],a:0},
-{q:"Which planet has rings around it?",o:["Saturn","Jupiter","Uranus","Neptune"],a:0},
-{q:"What is the Sun?",o:["A star","A planet","A moon","A comet"],a:0},
-{q:"How many moons does Earth have?",o:["1","2","0","3"],a:0},
-{q:"The Moon is a ___",o:["Satellite","Star","Planet","Comet"],a:0},
-{q:"Which planet is known as the 'Red Planet'?",o:["Mars","Mercury","Jupiter","Saturn"],a:0},
-{q:"Speed of light is about ___",o:["3,00,000 km/s","1,00,000 km/s","5,00,000 km/s","1000 km/s"],a:0},
-{q:"What is the centre of an atom called?",o:["Nucleus","Cell","Electron","Proton"],a:0},
-{q:"Sound cannot travel through ___",o:["Vacuum / Space","Air","Water","Solid"],a:0},
-{q:"Water boils at ___",o:["100°C","0°C","50°C","200°C"],a:0},
-{q:"Water freezes at ___",o:["0°C","100°C","-10°C","10°C"],a:0},
-{q:"Which is the closest star to Earth (apart from Sun)?",o:["Proxima Centauri","Sirius","Betelgeuse","Rigel"],a:0},
-{q:"A shooting star is actually a ___",o:["Meteor","Star","Comet","Asteroid"],a:0},
-{q:"What force pulls things toward Earth?",o:["Gravity","Magnetism","Friction","Electricity"],a:0},
-{q:"Electricity is measured in ___",o:["Volts","Kilograms","Metres","Celsius"],a:0},
-{q:"Which metal is liquid at room temperature?",o:["Mercury","Iron","Gold","Silver"],a:0},
-{q:"ISRO is India's ___",o:["Space agency","Army","Navy","Air Force"],a:0},
-{q:"Chandrayaan-3 successfully landed on which part of the Moon?",o:["South Pole","North Pole","Equator","Far side"],a:0}
-],
-// Day 5 — Festivals & Culture
-[
-{q:"Diwali is the festival of ___",o:["Lights","Colours","Harvest","Water"],a:0},
-{q:"Holi is the festival of ___",o:["Colours","Lights","Harvest","Fasting"],a:0},
-{q:"Eid-ul-Fitr is celebrated after ___",o:["Ramadan (month of fasting)","Haj","A birth","A harvest"],a:0},
-{q:"Christmas is celebrated to mark the birth of ___",o:["Jesus Christ","Prophet Muhammad","Lord Krishna","Lord Ram"],a:0},
-{q:"Pongal is a harvest festival of which state?",o:["Tamil Nadu","Punjab","Gujarat","Maharashtra"],a:0},
-{q:"Baisakhi is celebrated in which state?",o:["Punjab","Tamil Nadu","West Bengal","UP"],a:0},
-{q:"Onam is the harvest festival of ___",o:["Kerala","Karnataka","Andhra Pradesh","Tamil Nadu"],a:0},
-{q:"Navratri celebrates ___",o:["Goddess Durga","Lord Krishna","Lord Ram","Lord Shiva"],a:0},
-{q:"Janmashtami celebrates the birth of ___",o:["Lord Krishna","Lord Ram","Lord Shiva","Goddess Durga"],a:0},
-{q:"Children's Day in India is on ___",o:["14 November","15 August","26 January","2 October"],a:0},
-{q:"Teachers' Day in India is on ___",o:["5 September","14 November","1 October","25 December"],a:0},
-{q:"The national language of India (official language)?",o:["Hindi","English","Sanskrit","Bengali"],a:0},
-{q:"India has ___ official languages.",o:["22","14","28","18"],a:0},
-{q:"Bharatanatyam is a classical dance from ___",o:["Tamil Nadu","Odisha","Kerala","Manipur"],a:0},
-{q:"Kathakali is a classical dance from ___",o:["Kerala","Tamil Nadu","Rajasthan","Gujarat"],a:0},
-{q:"Garba dance is from ___",o:["Gujarat","Punjab","Rajasthan","Maharashtra"],a:0},
-{q:"The Taj Mahal was built by Mughal Emperor ___",o:["Shah Jahan","Akbar","Aurangzeb","Humayun"],a:0},
-{q:"Yoga was born in which country?",o:["India","China","Japan","Greece"],a:0},
-{q:"International Yoga Day is on ___",o:["21 June","5 June","22 April","1 May"],a:0},
-{q:"Cricket World Cup 2011 was won by ___",o:["India","Sri Lanka","Pakistan","Australia"],a:0}
-],
-// Day 6 — Mixed GK Challenge
-[
-{q:"Which is the tallest mountain in the world?",o:["Mount Everest","K2","Kangchenjunga","Makalu"],a:0},
-{q:"Mount Everest is in which country?",o:["Nepal / Tibet border","India","Bhutan","Pakistan"],a:0},
-{q:"Which is the deepest ocean trench?",o:["Mariana Trench","Tonga Trench","Java Trench","Puerto Rico Trench"],a:0},
-{q:"Sunita Williams is an Indian-origin ___",o:["Astronaut","Scientist","Doctor","Engineer"],a:0},
-{q:"Which is the world's fastest land animal?",o:["Cheetah","Lion","Horse","Greyhound"],a:0},
-{q:"Which is the world's largest mammal?",o:["Blue Whale","Elephant","Giraffe","Hippopotamus"],a:0},
-{q:"Which planet is farthest from the Sun?",o:["Neptune","Uranus","Saturn","Jupiter"],a:0},
-{q:"Which language has the most native speakers in the world?",o:["Mandarin Chinese","English","Spanish","Hindi"],a:0},
-{q:"Which country is both a continent and a country?",o:["Australia","India","Russia","Brazil"],a:0},
-{q:"United Nations (UN) headquarters is in?",o:["New York, USA","Geneva, Switzerland","Paris, France","London, UK"],a:0},
-{q:"G20 summit 2023 was held in?",o:["New Delhi, India","Bali, Indonesia","Rome, Italy","Osaka, Japan"],a:0},
-{q:"Who is the current President of India (2024)?",o:["Droupadi Murmu","Ram Nath Kovind","Pranab Mukherjee","APJ Abdul Kalam"],a:0},
-{q:"Which is India's first indigenously built aircraft carrier?",o:["INS Vikrant","INS Vikramaditya","INS Arihant","INS Chennai"],a:0},
-{q:"Chandrayaan-3 was launched in which year?",o:["2023","2022","2021","2024"],a:0},
-{q:"Which sport did India win gold at 2020 Tokyo Olympics (Neeraj Chopra)?",o:["Javelin Throw","Badminton","Wrestling","Boxing"],a:0},
-{q:"Who wrote 'Jungle Book'?",o:["Rudyard Kipling","Roald Dahl","J.K. Rowling","Enid Blyton"],a:0},
-{q:"Who wrote 'Harry Potter'?",o:["J.K. Rowling","Roald Dahl","Rudyard Kipling","C.S. Lewis"],a:0},
-{q:"Which colour is in the MIDDLE of the Indian flag?",o:["White","Orange/Saffron","Green","Blue"],a:0},
-{q:"The blue wheel in the Indian flag is called the ___",o:["Ashok Chakra","Dharma Chakra","Karma Chakra","Arjun Chakra"],a:0},
-{q:"Who said 'Do or Die' during India's freedom struggle?",o:["Mahatma Gandhi","Nehru","Subhas Bose","Patel"],a:0}
-]
-]
+          // ── Beginner Set 3: Before/After/Between, Place Value, Abacus ──
+          [
+            {topic:"Before After Between", q:"What comes BEFORE 301?", o:["300","302","299","310"], a:0},
+            {topic:"Before After Between", q:"What comes AFTER 498?", o:["499","497","500","489"], a:0},
+            {topic:"Before After Between", q:"What comes BETWEEN 219 and 221?", o:["220","218","222","219"], a:0},
+            {topic:"Before After Between", q:"What comes BEFORE 500?", o:["499","501","498","500"], a:0},
+            {topic:"Before After Between", q:"What comes AFTER 799?", o:["800","798","801","799"], a:0},
+            {topic:"Abacus", q:"On an abacus: Hundreds=6, Tens=0, Ones=0. What number?", o:["600","60","6","660"], a:0},
+            {topic:"Abacus", q:"On an abacus: Hundreds=3, Tens=3, Ones=3. What number?", o:["333","33","3","303"], a:0},
+            {topic:"Place Value", q:"What is the place value of 5 in 507?", o:["500","5","50","570"], a:0},
+            {topic:"Place Value", q:"What is the place value of 9 in 296?", o:["90","9","900","29"], a:0},
+            {topic:"Expansion", q:"Which expanded form equals 408?", o:["400 + 0 + 8","40 + 8","400 + 8","4 + 0 + 8"], a:0},
+            {topic:"Expansion", q:"700 + 20 + 0 = ?", o:["720","702","270","72"], a:0},
+            {topic:"Hundreds Tens Ones", q:"Which number has 4 hundreds, 1 ten, 6 ones?", o:["416","461","641","146"], a:0}
+          ],
 
-}; // end ALL_QUESTIONS
+          // ── Beginner Set 4: Mixed Review of All Topics ───────────────
+          [
+            {topic:"Hundreds Tens Ones", q:"In 748, which digit is in the TENS place?", o:["4","7","8","14"], a:0},
+            {topic:"Expansion", q:"200 + 30 + 1 = ?", o:["231","213","321","123"], a:0},
+            {topic:"Abacus", q:"On an abacus: Hundreds=7, Tens=2, Ones=0. What number?", o:["720","702","72","270"], a:0},
+            {topic:"Comparison", q:"Which is the LARGEST: 456, 654, 546?", o:["654","546","456","All same"], a:0},
+            {topic:"Ascending Order", q:"Which is the SMALLEST: 312, 123, 213?", o:["123","312","213","All same"], a:0},
+            {topic:"Number Names", q:"What is the number name for 800?", o:["Eight hundred","Eighty","Eight thousand","Eight hundred zero"], a:0},
+            {topic:"Odd & Even", q:"Is 254 odd or even?", o:["Even","Odd","Both","Neither"], a:0},
+            {topic:"Odd & Even", q:"Is 387 odd or even?", o:["Odd","Even","Both","Neither"], a:0},
+            {topic:"Before After Between", q:"What comes BETWEEN 500 and 502?", o:["501","503","499","500"], a:0},
+            {topic:"Descending Order", q:"Arrange DESCENDING: 234, 432, 342, 243", o:["432, 342, 243, 234","234, 243, 342, 432","342, 432, 243, 234","243, 342, 234, 432"], a:0},
+            {topic:"Place Value", q:"What is the place value of 0 in 304?", o:["0","3","4","30"], a:0},
+            {topic:"Hundreds Tens Ones", q:"9 hundreds + 9 tens + 9 ones = ?", o:["999","99","9","909"], a:0}
+          ]
+
+        ], // end beginner
+
+        pro: [
+
+          // ── Pro Set 1: Face Value vs Place Value, Advanced Names ─────
+          [
+            {topic:"Place Value", q:"What is the FACE VALUE of 7 in 472?", o:["7","70","700","47"], a:0},
+            {topic:"Place Value", q:"What is the PLACE VALUE of 7 in 472?", o:["70","7","700","720"], a:0},
+            {topic:"Place Value", q:"In which number is 4 in the HUNDREDS place?", o:["456","645","564","546"], a:0},
+            {topic:"Place Value", q:"In 328, what is the DIFFERENCE between the place value and face value of 2?", o:["18","20","2","22"], a:0},
+            {topic:"Place Value", q:"How many TENS make 5 hundreds?", o:["50","5","500","100"], a:0},
+            {topic:"Place Value", q:"How many ONES are there in 3 tens?", o:["30","3","300","10"], a:0},
+            {topic:"Place Value", q:"Which digit has the SAME face value and place value in 123?", o:["3","1","2","0"], a:0},
+            {topic:"Place Value", q:"The place value of the middle 9 in 999 is?", o:["90","9","900","99"], a:0},
+            {topic:"Number Names", q:"'Six hundred and two' — how many TENS does it have?", o:["0","6","2","60"], a:0},
+            {topic:"Hundreds Tens Ones", q:"A number has 4 hundreds, 12 tens and 5 ones. What is it?", o:["525","425","515","245"], a:0},
+            {topic:"Ascending Order", q:"What is the LARGEST 3-digit number?", o:["999","998","990","9999"], a:0},
+            {topic:"Ascending Order", q:"What is the SMALLEST 3-digit number?", o:["100","101","110","99"], a:0}
+          ],
+
+          // ── Pro Set 2: Tricky Expansion & Abacus Carry-Over ──────────
+          [
+            {topic:"Expansion", q:"? + 30 + 7 = 537. Find '?'", o:["500","50","5","5000"], a:0},
+            {topic:"Expansion", q:"400 + ? + 9 = 459. Find '?'", o:["50","5","500","15"], a:0},
+            {topic:"Expansion", q:"600 + 70 + ? = 674. Find '?'", o:["4","40","400","14"], a:0},
+            {topic:"Expansion", q:"Which number when fully expanded gives: 3 hundreds + 12 tens + 5 ones?", o:["425","3125","315","435"], a:0},
+            {topic:"Abacus", q:"On an abacus: Hundreds=4, Tens=10, Ones=5. After carrying over, what number is shown?", o:["505","4105","415","455"], a:0},
+            {topic:"Expansion", q:"Expand 708 correctly:", o:["700 + 0 + 8","70 + 8","700 + 8","7 + 0 + 8"], a:0},
+            {topic:"Expansion", q:"A number has digit sum of 9. Its hundreds = 4, ones = 2. What is it?", o:["432","423","342","243"], a:0},
+            {topic:"Abacus", q:"We add 1 bead to the TENS rod of 199 on an abacus. What number is shown?", o:["209","200","199","210"], a:0},
+            {topic:"Expansion", q:"4 × 100 + 2 × 10 + 8 × 1 = ?", o:["428","482","248","824"], a:0},
+            {topic:"Hundreds Tens Ones", q:"A number has 8 ones, 3 tens, 5 hundreds. What is it?", o:["538","358","835","583"], a:0},
+            {topic:"Place Value", q:"What is the sum of all PLACE VALUES in 321?", o:["321","123","6","12"], a:0},
+            {topic:"Abacus", q:"On an abacus: Hundreds=0, Tens=5, Ones=0. What number?", o:["50","500","5","505"], a:0}
+          ],
+
+          // ── Pro Set 3: Comparison, Patterns & Range Puzzles ──────────
+          [
+            {topic:"Comparison", q:"How many 3-digit numbers are there in total?", o:["900","100","999","890"], a:0},
+            {topic:"Comparison", q:"What is the largest 3-digit ODD number?", o:["999","997","998","989"], a:0},
+            {topic:"Comparison", q:"What is the largest 3-digit EVEN number?", o:["998","999","990","988"], a:0},
+            {topic:"Ascending Order", q:"Using digits 1, 2, 3 once each — what is the LARGEST 3-digit number?", o:["321","312","231","123"], a:0},
+            {topic:"Ascending Order", q:"Using digits 4, 0, 8 once each — what is the SMALLEST 3-digit number? (Cannot start with 0)", o:["408","048","480","804"], a:0},
+            {topic:"Odd & Even", q:"How many ODD numbers are between 100 and 110? (not including 100 or 110)", o:["5","4","6","3"], a:0},
+            {topic:"Odd & Even", q:"How many EVEN numbers are between 200 and 210? (not including 200 or 210)", o:["4","5","6","3"], a:0},
+            {topic:"Before After Between", q:"A number is 100 LESS than 500. What is it?", o:["400","600","490","501"], a:0},
+            {topic:"Before After Between", q:"A number is 10 MORE than 390. What is it?", o:["400","380","300","391"], a:0},
+            {topic:"Ascending Order", q:"Counting by 2s from 100: 100, 102, 104... What is the 5th number?", o:["108","110","106","112"], a:0},
+            {topic:"Ascending Order", q:"Which of these is in ASCENDING order?", o:["125, 152, 215, 251","251, 215, 152, 125","152, 125, 215, 251","125, 251, 152, 215"], a:0},
+            {topic:"Comparison", q:"Which number is just BEFORE the smallest 3-digit number?", o:["99","100","101","98"], a:0}
+          ],
+
+          // ── Pro Set 4: Word Problems & Construct-a-Number ────────────
+          [
+            {topic:"Hundreds Tens Ones", q:"Riya has 3 hundreds, 4 tens, and 2 ones worth of stickers. How many stickers?", o:["342","324","423","432"], a:0},
+            {topic:"Hundreds Tens Ones", q:"In a 3-digit number, tens=5, ones=3, hundreds is TWICE the ones digit. What is the number?", o:["653","563","635","365"], a:0},
+            {topic:"Before After Between", q:"I am the number just BEFORE the smallest 3-digit number. Who am I?", o:["99","100","101","98"], a:0},
+            {topic:"Before After Between", q:"I am the number just AFTER the largest 3-digit number. Who am I?", o:["1000","998","999","100"], a:0},
+            {topic:"Place Value", q:"The HUNDREDS digit of 762 is added to the ONES digit of 319. What do we get?", o:["16","9","13","10"], a:0},
+            {topic:"Descending Order", q:"Arrange DESCENDING and find the middle number: 148, 481, 418", o:["418","481","148","148"], a:0},
+            {topic:"Odd & Even", q:"Count numbers with a 5 in the TENS place: between 100 and 200", o:["10","9","5","20"], a:0},
+            {topic:"Comparison", q:"Which pair has the SAME hundreds digit?", o:["456 and 489","123 and 234","567 and 678","100 and 200"], a:0},
+            {topic:"Expansion", q:"My hundreds = ones digit + 3. My tens = 0. My ones = 2. What am I?", o:["502","302","320","250"], a:0},
+            {topic:"Comparison", q:"Difference between the LARGEST and SMALLEST 3-digit number is?", o:["899","900","898","1000"], a:0},
+            {topic:"Odd & Even", q:"Which is both GREATER than 450 AND LESS than 460 AND is EVEN?", o:["452","451","459","461"], a:0},
+            {topic:"Number Names", q:"The number 'Six hundred and zero' in digits, and is it ODD or EVEN?", o:["600 — Even","600 — Odd","060 — Even","006 — Odd"], a:0}
+          ]
+
+        ] // end pro
+
+      } // end sets
+    } // end ch1
+    // Future chapters will be added here
+  ], // end math
+
+  english: [], // coming soon
+  evs: [],     // coming soon
+  gk: []       // coming soon
+
+}; // end CHAPTERS
 
 // ─── CHARACTERS ────────────────────────────────────────────────
 const CHARS=[
   {name:"Paddington Bear",emoji:"🐻",happyMsgs:["Paw-some! 🐻🎉","Honey-sweet correct! 🍯","Un-bear-ably smart!"],sadMsgs:["Even bears slip! 🐾","Shake it off, champ!","Next one — paws crossed!"]},
   {name:"Jerry Mouse",emoji:"🐭",happyMsgs:["Squeaky genius! 🐭✨","Jerry approves! 🧀","You outsmarted everyone!"],sadMsgs:["Jerry says try again!","Even I get chased! 🐭","Cheese will come! 🧀"]},
-  {name:"Tom Cat",emoji:"🐱",happyMsgs:["Purr-fect! 🐱🎊","Tom is impressed! ✨","Meow-nificent!"],sadMsgs:["Hiss! Close one! 😾","Tom says read again!","Land on all fours! 🐱"]},
+  {name:"Tom Cat",emoji:"🐱",happyMsgs:["Purr-fect! 🐱🎊","Tom is impressed! ✨","Meow-nificent!"],sadMsgs:["Hiss! Close one! 😾","Tom says: read again!","Land on all fours! 🐱"]},
   {name:"Masha",emoji:"👧",happyMsgs:["Masha shouts YES! 👧🎉","Smart as Masha!","Dancing time! 💃"],sadMsgs:["Masha says: don't worry!","Try again — Masha believes!","We all make mistakes! 👧"]},
   {name:"Simba",emoji:"🦁",happyMsgs:["ROAR! Correct! 🦁👑","Pride Lands cheer for you!","Remember who you are! 🌟"],sadMsgs:["Even Simba learns! 🦁","Hakuna Matata — next one!","Keep going, future king!"]},
   {name:"Super Vivaan",emoji:"🦸",happyMsgs:["SUPERHERO move! 🦸⚡","Vivaan saves the day!","Cape ON, brain BLAZING! 🌟"],sadMsgs:["Even heroes have off days!","Power UP and retry! 🦸","You've got this, hero! ⚡"]}
 ];
 
 const SUBJECT_LABELS={math:"🔢 Math",english:"📖 English",evs:"🌿 EVS",gk:"🌍 GK"};
+const COMING_SOON_MSG="More chapters and subjects coming soon! 🚀";
 
 // ─── STATE ─────────────────────────────────────────────────────
 let currentSubject='math';
-let currentDayIdx=0;
+let currentChapterIdx=0;
+let currentLevel='beginner';
+let currentSetIdx=0;
 let currentQ=0;
 let score=0;
 let answered=false;
@@ -931,90 +481,146 @@ let currentChar=null;
 let timerInterval=null;
 let timerSeconds=0;
 let modalSubject='math';
+let modalLevel='beginner';
 
 // ─── UTILS ─────────────────────────────────────────────────────
 function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function rand(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function scoreKey(sub,chIdx,level,setIdx){return`vivaan_v4_${sub}_ch${chIdx}_${level}_set${setIdx}`;}
 
 // ─── TIMER ─────────────────────────────────────────────────────
 function startTimer(){
-  clearInterval(timerInterval);
-  timerSeconds=0;
-  updateTimerDisplay();
+  clearInterval(timerInterval);timerSeconds=0;updateTimerDisplay();
   timerInterval=setInterval(()=>{timerSeconds++;updateTimerDisplay();},1000);
 }
 function stopTimer(){clearInterval(timerInterval);}
 function updateTimerDisplay(){
-  const m=Math.floor(timerSeconds/60);
-  const s=timerSeconds%60;
+  const m=Math.floor(timerSeconds/60),s=timerSeconds%60;
   document.getElementById('timerDisplay').textContent=`${m}:${s.toString().padStart(2,'0')}`;
+}
+
+// ─── GET CURRENT QUESTIONS ─────────────────────────────────────
+function getCurrentQuestions(){
+  const ch=CHAPTERS[currentSubject][currentChapterIdx];
+  if(!ch)return[];
+  return ch.sets[currentLevel][currentSetIdx]||[];
 }
 
 // ─── SUBJECT SWITCH ─────────────────────────────────────────────
 function switchSubject(sub){
   currentSubject=sub;
   document.querySelectorAll('.sub-tab').forEach(t=>t.classList.toggle('active',t.dataset.sub===sub));
-  currentDayIdx=0;
-  buildDayTabs();
-  startDay();
+  currentChapterIdx=0;currentSetIdx=0;
+  buildChapterPills();
+  buildSetTabs();
+  startQuiz();
 }
 
-// ─── DAY TABS ─────────────────────────────────────────────────
-function buildDayTabs(){
-  const el=document.getElementById('dayTabs');
+// ─── LEVEL SWITCH ──────────────────────────────────────────────
+function switchLevel(level){
+  currentLevel=level;
+  document.getElementById('btnBeginner').classList.toggle('active',level==='beginner');
+  document.getElementById('btnPro').classList.toggle('active',level==='pro');
+  const badge=document.getElementById('levelBadge');
+  badge.className='level-badge '+level;
+  badge.textContent=level==='beginner'?'⭐ Beginner':'🔥 Pro';
+  currentSetIdx=0;
+  buildSetTabs();
+  startQuiz();
+}
+
+// ─── CHAPTER PILLS ─────────────────────────────────────────────
+function buildChapterPills(){
+  const el=document.getElementById('chapterPills');
   el.innerHTML='';
-  DATES.forEach((d,i)=>{
-    const key=dateKey(currentSubject,d);
+  const chapters=CHAPTERS[currentSubject];
+  if(!chapters||chapters.length===0){
+    el.innerHTML=`<div style="font-size:13px;color:#8884b0;text-align:center;padding:8px">${COMING_SOON_MSG}</div>`;
+    return;
+  }
+  chapters.forEach((ch,i)=>{
+    const btn=document.createElement('button');
+    btn.className='ch-pill'+(i===currentChapterIdx?' active':'');
+    btn.innerHTML=`<span class="ch-num">${ch.short}</span>${ch.title}`;
+    btn.onclick=()=>{currentChapterIdx=i;currentSetIdx=0;buildChapterPills();buildSetTabs();startQuiz();};
+    el.appendChild(btn);
+  });
+  // Placeholder for future chapters (show as coming soon)
+  if(currentSubject==='math'){
+    const comingSoon=[
+      {short:'Ch 2',title:'Addition'},
+      {short:'Ch 3',title:'Subtraction'},
+      {short:'Ch 4',title:'Multiplication'},
+      {short:'Ch 5',title:'Division'}
+    ];
+    comingSoon.forEach(ch=>{
+      const btn=document.createElement('button');
+      btn.className='ch-pill soon';
+      btn.innerHTML=`<span class="ch-num">${ch.short}</span>${ch.title}<span class="soon-tag">Soon</span>`;
+      btn.disabled=true;
+      el.appendChild(btn);
+    });
+  }
+}
+
+// ─── SET TABS ──────────────────────────────────────────────────
+function buildSetTabs(){
+  const el=document.getElementById('setTabs');
+  el.innerHTML='';
+  const ch=CHAPTERS[currentSubject][currentChapterIdx];
+  if(!ch)return;
+  const sets=ch.sets[currentLevel];
+  sets.forEach((s,i)=>{
+    const key=scoreKey(currentSubject,currentChapterIdx,currentLevel,i);
     const saved=localStorage.getItem(key);
     const btn=document.createElement('button');
-    btn.className='day-tab'+(i===currentDayIdx?' active':'')+(saved?' done':'');
-    btn.textContent=`${fmtDate(d)}`;
-    btn.onclick=()=>selectDay(i);
+    btn.className='set-tab'+(i===currentSetIdx?' active':'')+(saved?' done':'');
+    btn.textContent=`Set ${i+1}${saved?(' ✓'):''}`;
+    btn.onclick=()=>{currentSetIdx=i;buildSetTabs();startQuiz();};
     el.appendChild(btn);
   });
 }
 
-function selectDay(i){
-  currentDayIdx=i;
-  document.querySelectorAll('.day-tab').forEach((t,idx)=>t.classList.toggle('active',idx===i));
-  startDay();
-}
-
-// ─── START DAY ─────────────────────────────────────────────────
-function startDay(){
+// ─── START QUIZ ────────────────────────────────────────────────
+function startQuiz(){
   currentQ=0;score=0;answered=false;
-  questionResults=new Array(20).fill(null);
+  const qs=getCurrentQuestions();
+  questionResults=new Array(qs.length).fill(null);
   currentChar=CHARS[Math.floor(Math.random()*CHARS.length)];
   document.getElementById('resultScreen').classList.remove('show');
   document.getElementById('quizBody').style.display='block';
-  buildSidebar();
+  document.getElementById('totalQs').textContent=qs.length;
+  document.getElementById('resTotalQ').textContent=qs.length;
+  const ch=CHAPTERS[currentSubject][currentChapterIdx];
+  document.getElementById('cardChapterTitle').textContent=ch?`${ch.short}: ${ch.title}`:'';
+  document.getElementById('cardSetLabel').textContent=`${currentLevel==='beginner'?'⭐ Beginner':'🔥 Pro'} · Set ${currentSetIdx+1} of ${ch?ch.sets[currentLevel].length:0}`;
+  buildSidebar(qs.length);
   renderQuestion();
   startTimer();
   document.getElementById('liveScore').textContent='0';
   document.getElementById('progressBar').style.width='0%';
-  document.getElementById('dayTitle').textContent=SUBJECT_LABELS[currentSubject];
-  document.getElementById('dayMeta').textContent=fmtDate(DATES[currentDayIdx]);
-  // Reset character to neutral
   setCharNeutral();
+  // Show/hide next-set button
+  const ch2=CHAPTERS[currentSubject][currentChapterIdx];
+  const hasNext=ch2&&(currentSetIdx<ch2.sets[currentLevel].length-1);
+  document.getElementById('nextSetBtn').style.display=hasNext?'':'none';
 }
 
 // ─── SIDEBAR ───────────────────────────────────────────────────
-function buildSidebar(){
+function buildSidebar(total){
   const el=document.getElementById('progressSidebar');
   el.innerHTML='';
-  for(let i=0;i<20;i++){
+  for(let i=0;i<total;i++){
     const b=document.createElement('div');
     b.className='q-block'+(i===0?' current':'');
-    b.id=`qb${i}`;
-    b.textContent=i+1;
+    b.id=`qb${i}`;b.textContent=i+1;
     el.appendChild(b);
   }
 }
-
 function updateSidebar(){
-  for(let i=0;i<20;i++){
-    const b=document.getElementById(`qb${i}`);
-    if(!b)continue;
+  const total=getCurrentQuestions().length;
+  for(let i=0;i<total;i++){
+    const b=document.getElementById(`qb${i}`);if(!b)continue;
     b.className='q-block';
     if(questionResults[i]==='correct')b.classList.add('correct');
     else if(questionResults[i]==='wrong')b.classList.add('wrong');
@@ -1024,19 +630,20 @@ function updateSidebar(){
 
 // ─── RENDER QUESTION ───────────────────────────────────────────
 function renderQuestion(){
-  const qs=ALL_QUESTIONS[currentSubject][currentDayIdx];
+  const qs=getCurrentQuestions();
   const q=qs[currentQ];
   answered=false;
-  document.getElementById('qCounter').textContent=`Question ${currentQ+1} of 20`;
+  const total=qs.length;
+  document.getElementById('qCounter').textContent=`Question ${currentQ+1} of ${total}`;
   document.getElementById('questionText').textContent=q.q;
+  document.getElementById('topicTag').textContent=q.topic||'';
   document.getElementById('feedback').className='feedback';
-  document.getElementById('feedback').textContent='';
   document.getElementById('nextBtn').className='next-btn';
   updateSidebar();
 
   const correct=q.o[q.a];
   const shuffled=shuffle(q.o);
-  const newCorrectIdx=shuffled.indexOf(correct);
+  const correctIdx=shuffled.indexOf(correct);
 
   const grid=document.getElementById('optionsGrid');
   grid.innerHTML='';
@@ -1044,7 +651,7 @@ function renderQuestion(){
     const btn=document.createElement('button');
     btn.className='opt-btn';
     btn.textContent=opt;
-    btn.onclick=()=>answer(btn,i===newCorrectIdx,shuffled,newCorrectIdx);
+    btn.onclick=()=>answer(btn,i===correctIdx,shuffled,correctIdx);
     grid.appendChild(btn);
   });
 
@@ -1058,54 +665,48 @@ function answer(btn,isCorrect,shuffled,correctIdx){
   const btns=document.querySelectorAll('.opt-btn');
   btns.forEach(b=>b.disabled=true);
   btns[correctIdx].classList.add('correct');
-
   const fb=document.getElementById('feedback');
-
+  const qs=getCurrentQuestions();
+  const total=qs.length;
   if(isCorrect){
     btn.classList.add('correct');
     score++;
     questionResults[currentQ]='correct';
     fb.className='feedback correct-fb show';
-    fb.textContent='✅ Correct! Well done!';
+    fb.textContent='✅ Correct! Brilliant!';
     setCharHappy();
   } else {
     btn.classList.add('wrong');
     questionResults[currentQ]='wrong';
     fb.className='feedback wrong-fb show';
-    fb.textContent=`❌ Oops! Correct: ${shuffled[correctIdx]}`;
+    fb.textContent=`❌ Oops! Answer: ${shuffled[correctIdx]}`;
     setCharSad();
   }
-
   document.getElementById('liveScore').textContent=score;
-  document.getElementById('progressBar').style.width=`${((currentQ+1)/20)*100}%`;
+  document.getElementById('progressBar').style.width=`${((currentQ+1)/total)*100}%`;
   updateSidebar();
   document.getElementById('nextBtn').className='next-btn show';
 }
 
 // ─── CHARACTER ─────────────────────────────────────────────────
 function setCharNeutral(){
-  const av=document.getElementById('charAvatar');
-  av.textContent=currentChar.emoji;
-  av.className='char-avatar';
+  document.getElementById('charAvatar').textContent=currentChar.emoji;
+  document.getElementById('charAvatar').className='char-avatar';
   document.getElementById('charName').textContent=currentChar.name;
   document.getElementById('charEmotion').className='char-emotion neutral-em';
   document.getElementById('charEmotion').textContent='Waiting for your answer...';
-  document.getElementById('charMsg').textContent='Go on, give it your best shot! 💪';
+  document.getElementById('charMsg').textContent='Give it your best shot! 💪';
 }
-
 function setCharHappy(){
   const av=document.getElementById('charAvatar');
-  av.textContent=currentChar.emoji;
-  av.className='char-avatar pop';
+  av.textContent=currentChar.emoji;av.className='char-avatar pop';
   document.getElementById('charEmotion').className='char-emotion correct-em';
   document.getElementById('charEmotion').textContent='🎉 Amazing!';
   document.getElementById('charMsg').textContent=rand(currentChar.happyMsgs);
 }
-
 function setCharSad(){
   const av=document.getElementById('charAvatar');
-  av.textContent=currentChar.emoji;
-  av.className='char-avatar shake';
+  av.textContent=currentChar.emoji;av.className='char-avatar shake';
   document.getElementById('charEmotion').className='char-emotion wrong-em';
   document.getElementById('charEmotion').textContent='😔 Oh no...';
   document.getElementById('charMsg').textContent=rand(currentChar.sadMsgs);
@@ -1113,74 +714,112 @@ function setCharSad(){
 
 // ─── NEXT QUESTION ─────────────────────────────────────────────
 function nextQuestion(){
-  if(currentQ<19){
-    currentQ++;
-    renderQuestion();
-  } else {
-    showResult();
-  }
+  const total=getCurrentQuestions().length;
+  if(currentQ<total-1){currentQ++;renderQuestion();}
+  else showResult();
 }
 
 // ─── RESULT ────────────────────────────────────────────────────
 function showResult(){
   stopTimer();
-  const pct=Math.round((score/20)*100);
-  // Save score
-  const key=dateKey(currentSubject,DATES[currentDayIdx]);
-  localStorage.setItem(key,JSON.stringify({score,pct,time:timerSeconds,date:fmtDate(DATES[currentDayIdx])}));
-  // Update day tab
-  buildDayTabs();
+  const total=getCurrentQuestions().length;
+  const pct=Math.round((score/total)*100);
+  const key=scoreKey(currentSubject,currentChapterIdx,currentLevel,currentSetIdx);
+  localStorage.setItem(key,JSON.stringify({score,total,pct,time:timerSeconds}));
+  buildSetTabs();
 
   document.getElementById('quizBody').style.display='none';
-  const rs=document.getElementById('resultScreen');
-  rs.classList.add('show');
+  const rs=document.getElementById('resultScreen');rs.classList.add('show');
   document.getElementById('resChar').textContent=currentChar.emoji;
   document.getElementById('resTrophy').textContent=pct>=90?'🏆':pct>=70?'🥈':'🥉';
   document.getElementById('resScore').textContent=score;
   const stars=pct>=90?'⭐⭐⭐':pct>=70?'⭐⭐':'⭐';
   document.getElementById('resStars').textContent=stars;
-  const msgs={90:`GENIUS! ${currentChar.name} is in awe! 🌟`,70:`Great job! ${currentChar.name} is proud! 🎉`,0:`Keep practising! ${currentChar.name} believes in you! 💪`};
-  document.getElementById('resMsg').textContent=pct>=90?msgs[90]:pct>=70?msgs[70]:msgs[0];
-
+  const min=Math.floor(timerSeconds/60),sec=timerSeconds%60;
+  document.getElementById('resTime').textContent=`Time: ${min}m ${sec}s`;
+  document.getElementById('resMsg').textContent=
+    pct>=90?`GENIUS! ${currentChar.name} is in awe! 🌟`:
+    pct>=70?`Great job! ${currentChar.name} is proud! 🎉`:
+    `Keep practising! ${currentChar.name} believes in you! 💪`;
   if(pct>=90)launchConfetti();
 }
 
-function restartDay(){
+function restartSet(){
   document.getElementById('resultScreen').classList.remove('show');
   document.getElementById('quizBody').style.display='block';
-  startDay();
+  startQuiz();
+}
+function goNextSet(){
+  currentSetIdx++;
+  buildSetTabs();
+  startQuiz();
 }
 
-// ─── SCOREBOARD MODAL ──────────────────────────────────────────
+// ─── SCOREBOARD ────────────────────────────────────────────────
 function openScoreboard(){
-  modalSubject=currentSubject;
-  document.querySelectorAll('.modal-sub-tab').forEach(t=>t.classList.toggle('active',t.dataset.sub===modalSubject));
+  modalSubject=currentSubject;modalLevel=currentLevel;
+  renderModalFilters();
   renderModalScores();
   document.getElementById('scoreModal').classList.add('show');
 }
 function closeScoreboard(){document.getElementById('scoreModal').classList.remove('show');}
-function showModalSub(sub){
-  modalSubject=sub;
-  document.querySelectorAll('.modal-sub-tab').forEach(t=>t.classList.toggle('active',t.dataset.sub===sub));
-  renderModalScores();
+
+function renderModalFilters(){
+  const f=document.getElementById('modalFilters');
+  f.innerHTML='';
+  ['math','english','evs','gk'].forEach(s=>{
+    const b=document.createElement('button');
+    b.className='modal-filter-btn'+(s===modalSubject?' active':'');
+    b.textContent=SUBJECT_LABELS[s];
+    b.onclick=()=>{modalSubject=s;renderModalFilters();renderModalScores();};
+    f.appendChild(b);
+  });
+  ['beginner','pro'].forEach(l=>{
+    const b=document.createElement('button');
+    b.className='modal-filter-btn'+(l===modalLevel?' active':'');
+    b.textContent=l==='beginner'?'⭐ Beginner':'🔥 Pro';
+    b.style.borderColor=l==='beginner'?'rgba(79,195,247,.4)':'rgba(255,94,94,.4)';
+    if(l===modalLevel)b.style.background=l==='beginner'?'var(--beg)':'var(--red)';
+    b.onclick=()=>{modalLevel=l;renderModalFilters();renderModalScores();};
+    f.appendChild(b);
+  });
 }
+
 function renderModalScores(){
   const list=document.getElementById('modalScoreList');
   list.innerHTML='';
+  const chapters=CHAPTERS[modalSubject];
+  if(!chapters||chapters.length===0){
+    list.innerHTML=`<div class="modal-empty">${COMING_SOON_MSG}</div>`;return;
+  }
   let found=false;
-  DATES.forEach(d=>{
-    const key=dateKey(modalSubject,d);
-    const raw=localStorage.getItem(key);
-    if(!raw)return;
+  chapters.forEach((ch,chIdx)=>{
+    const sets=ch.sets[modalLevel];
+    const savedSets=sets.map((_,si)=>{
+      const key=scoreKey(modalSubject,chIdx,modalLevel,si);
+      const raw=localStorage.getItem(key);
+      return raw?JSON.parse(raw):null;
+    }).filter(Boolean);
+    if(savedSets.length===0)return;
     found=true;
-    const data=JSON.parse(raw);
-    const row=document.createElement('div');
-    row.className='score-row'+(data.pct>=90?' perfect':'');
-    const stars=data.pct>=90?'⭐⭐⭐':data.pct>=70?'⭐⭐':'⭐';
-    row.innerHTML=`<div><div class="sr-date">${fmtDate(d)}</div></div><div style="text-align:right"><div class="sr-score">${data.score}/20</div><div class="sr-stars">${stars}</div></div>`;
-    list.appendChild(row);
+    const header=document.createElement('div');
+    header.className='modal-chapter-header';
+    header.textContent=`${ch.short}: ${ch.title}`;
+    list.appendChild(header);
+    sets.forEach((_,si)=>{
+      const key=scoreKey(modalSubject,chIdx,modalLevel,si);
+      const raw=localStorage.getItem(key);
+      if(!raw)return;
+      const data=JSON.parse(raw);
+      const stars=data.pct>=90?'⭐⭐⭐':data.pct>=70?'⭐⭐':'⭐';
+      const row=document.createElement('div');
+      row.className='score-row'+(data.pct>=90?' perfect':'');
+      const min=Math.floor(data.time/60),sec=data.time%60;
+      row.innerHTML=`<div class="sr-info"><div class="sr-label">Set ${si+1}</div><div class="sr-sub">${min}m ${sec}s</div></div><div class="sr-right"><div class="sr-score">${data.score}/${data.total}</div><div class="sr-stars">${stars}</div></div>`;
+      list.appendChild(row);
+    });
   });
-  if(!found)list.innerHTML='<div class="history-empty">No scores yet — start quizzing! 🚀</div>';
+  if(!found)list.innerHTML='<div class="modal-empty">No scores yet — start quizzing! 🚀</div>';
 }
 
 // ─── CONFETTI ──────────────────────────────────────────────────
@@ -1188,7 +827,7 @@ function launchConfetti(){
   const canvas=document.getElementById('confetti-canvas');
   const ctx=canvas.getContext('2d');
   canvas.width=window.innerWidth;canvas.height=window.innerHeight;
-  const pieces=Array.from({length:120},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height-canvas.height,r:Math.random()*6+3,c:`hsl(${Math.random()*360},90%,60%)`,vx:(Math.random()-0.5)*4,vy:Math.random()*5+2,a:Math.random()*360}));
+  const pieces=Array.from({length:120},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height-canvas.height,r:Math.random()*6+3,c:`hsl(${Math.random()*360},90%,60%)`,vx:(Math.random()-.5)*4,vy:Math.random()*5+2,a:Math.random()*360}));
   let frames=0;
   function draw(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -1207,8 +846,9 @@ function launchConfetti(){
 
 // ─── INIT ──────────────────────────────────────────────────────
 document.getElementById('scoreModal').addEventListener('click',function(e){if(e.target===this)closeScoreboard();});
-buildDayTabs();
-startDay();
+buildChapterPills();
+buildSetTabs();
+startQuiz();
 </script>
 </body>
 </html>
