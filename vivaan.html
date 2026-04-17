@@ -6,674 +6,589 @@
 <title>Vivaan's Math Challenge! 🧠⚡</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
-
-  :root {
-    --bg: #0f0c29;
-    --card: #1a1740;
-    --accent: #f7c948;
-    --green: #22d67a;
-    --red: #ff5e5e;
-    --blue: #4fc3f7;
-    --purple: #b39ddb;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Nunito', sans-serif;
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-    min-height: 100vh;
-    color: white;
-    overflow-x: hidden;
-  }
-
-  /* Stars background */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image:
-      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 50% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 90% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 65% 40%, rgba(255,255,255,0.4) 0%, transparent 100%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .wrapper { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; padding: 20px 16px 60px; }
+  :root{--bg:#0f0c29;--card:#1a1740;--accent:#f7c948;--green:#22d67a;--red:#ff5e5e;--blue:#4fc3f7;--purple:#b39ddb}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;color:white;overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(1px 1px at 15% 25%,rgba(255,255,255,.5) 0%,transparent 100%),radial-gradient(1px 1px at 85% 15%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 45% 65%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1px 1px at 5% 85%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 95% 75%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1px 1px at 55% 45%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 30% 95%,rgba(255,255,255,.3) 0%,transparent 100%);pointer-events:none;z-index:0}
+  .wrapper{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:20px 16px 60px}
 
   /* Header */
-  .header { text-align: center; padding: 32px 0 24px; }
-  .header .crown { font-size: 52px; animation: bounce 1.5s infinite; display: block; }
-  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-  .header h1 { font-size: clamp(28px,6vw,42px); font-weight:900; letter-spacing:-1px; line-height:1.1; }
-  .header h1 span { color: var(--accent); }
-  .header p { margin-top:8px; font-size:15px; color:#b0aed0; }
+  .header{text-align:center;padding:28px 0 20px}
+  .header .crown{font-size:48px;animation:bounce 1.6s infinite;display:block}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .header h1{font-size:clamp(26px,5vw,40px);font-weight:900;letter-spacing:-1px;line-height:1.1}
+  .header h1 span{color:var(--accent)}
+  .header p{margin-top:7px;font-size:14px;color:#b0aed0}
 
   /* Day tabs */
-  .day-tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin: 24px 0 20px; }
-  .day-tab {
-    background: rgba(255,255,255,0.07);
-    border: 2px solid rgba(255,255,255,0.12);
-    border-radius: 50px;
-    padding: 8px 16px;
-    font-size: 13px; font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-    color: #b0aed0;
-    white-space: nowrap;
-  }
-  .day-tab:hover { background: rgba(247,201,72,0.15); border-color: var(--accent); color: var(--accent); }
-  .day-tab.active { background: var(--accent); border-color: var(--accent); color: #0f0c29; }
-  .day-tab.done { background: rgba(34,214,122,0.15); border-color: var(--green); color: var(--green); }
-  .day-tab.done.active { background: var(--green); color: #0f0c29; }
+  .day-tabs{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:20px 0 16px}
+  .day-tab{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:50px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;color:#b0aed0;white-space:nowrap;line-height:1.4}
+  .day-tab:hover{background:rgba(247,201,72,.15);border-color:var(--accent);color:var(--accent)}
+  .day-tab.active{background:var(--accent);border-color:var(--accent);color:#0f0c29}
+  .day-tab.done{background:rgba(34,214,122,.15);border-color:var(--green);color:var(--green)}
+  .day-tab.done.active{background:var(--green);color:#0f0c29}
+
+  /* Main layout: sidebar + quiz */
+  .page-layout{display:flex;gap:14px;align-items:flex-start}
+
+  /* Progress sidebar */
+  .progress-sidebar{flex-shrink:0;width:44px;display:flex;flex-direction:column;gap:5px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:12px 6px}
+  .q-block{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:rgba(255,255,255,.3);transition:all .35s;cursor:default}
+  .q-block.current{border-color:var(--accent);color:var(--accent);animation:qpulse 1.2s infinite;background:rgba(247,201,72,.12)}
+  .q-block.correct{background:rgba(34,214,122,.25);border-color:var(--green);color:var(--green)}
+  .q-block.wrong{background:rgba(255,94,94,.25);border-color:var(--red);color:var(--red)}
+  @keyframes qpulse{0%,100%{box-shadow:0 0 0 0 rgba(247,201,72,.4)}50%{box-shadow:0 0 0 5px rgba(247,201,72,0)}}
 
   /* Quiz card */
-  .quiz-card {
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 24px;
-    padding: 28px 24px;
-    margin-bottom: 24px;
-  }
+  .quiz-area{flex:1;min-width:0}
+  .quiz-card{background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 20px;margin-bottom:20px}
+  .day-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+  .day-title{font-size:17px;font-weight:800;color:var(--accent)}
+  .day-meta{font-size:12px;color:#8884b0}
+  .live-score{display:inline-flex;align-items:center;gap:5px;background:rgba(34,214,122,.12);border:1px solid rgba(34,214,122,.3);border-radius:50px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--green)}
+  .progress-bar-wrap{background:rgba(255,255,255,.08);border-radius:50px;height:8px;margin-bottom:20px;overflow:hidden}
+  .progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),#ff9f43);border-radius:50px;transition:width .4s}
+  .q-counter{font-size:11px;font-weight:700;color:#8884b0;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}
+  .question-text{font-size:clamp(16px,3.5vw,22px);font-weight:800;line-height:1.45;margin-bottom:20px;min-height:60px}
+  .question-emoji{font-size:28px;display:block;margin-bottom:6px}
 
-  .day-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
-  .day-title { font-size: 20px; font-weight: 800; color: var(--accent); }
-  .day-meta { font-size: 13px; color: #8884b0; }
+  /* Options */
+  .options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+  .opt-btn{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:14px;padding:14px 10px;font-size:16px;font-weight:800;color:white;cursor:pointer;transition:all .2s;text-align:center;font-family:'Nunito',sans-serif}
+  .opt-btn:hover:not(:disabled){background:rgba(247,201,72,.15);border-color:var(--accent);transform:scale(1.03)}
+  .opt-btn.correct{background:rgba(34,214,122,.25);border-color:var(--green);color:var(--green)}
+  .opt-btn.wrong{background:rgba(255,94,94,.2);border-color:var(--red);color:var(--red)}
+  .opt-btn:disabled{cursor:not-allowed}
 
-  .progress-bar-wrap { background: rgba(255,255,255,0.08); border-radius: 50px; height: 10px; margin-bottom: 24px; overflow: hidden; }
-  .progress-bar { height: 100%; background: linear-gradient(90deg, var(--accent), #ff9f43); border-radius: 50px; transition: width 0.4s; }
-
-  /* Question */
-  .q-counter { font-size: 12px; font-weight: 700; color: #8884b0; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-  .question-text {
-    font-size: clamp(18px,4vw,26px);
-    font-weight: 800;
-    line-height: 1.4;
-    margin-bottom: 24px;
-    min-height: 64px;
-  }
-  .question-emoji { font-size: 32px; display: block; margin-bottom: 8px; }
-
-  /* Answer options */
-  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-  .opt-btn {
-    background: rgba(255,255,255,0.07);
-    border: 2px solid rgba(255,255,255,0.15);
-    border-radius: 16px;
-    padding: 16px 12px;
-    font-size: 18px; font-weight: 800;
-    color: white;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-    font-family: 'Nunito', sans-serif;
-  }
-  .opt-btn:hover:not(:disabled) { background: rgba(247,201,72,0.15); border-color: var(--accent); transform: scale(1.03); }
-  .opt-btn.correct { background: rgba(34,214,122,0.25); border-color: var(--green); color: var(--green); }
-  .opt-btn.wrong { background: rgba(255,94,94,0.2); border-color: var(--red); color: var(--red); }
-  .opt-btn:disabled { cursor: not-allowed; }
+  /* Character reaction panel */
+  .char-panel{display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 18px;margin-bottom:14px;align-items:center;gap:14px;animation:slideUp .35s ease}
+  .char-panel.show{display:flex}
+  @keyframes slideUp{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
+  .char-avatar{font-size:52px;line-height:1;animation:charBounce .5s ease}
+  @keyframes charBounce{0%{transform:scale(0.6)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+  .char-avatar.shake{animation:charShake .5s ease}
+  @keyframes charShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+  .char-info{flex:1}
+  .char-name{font-size:12px;font-weight:700;color:#8884b0;text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px}
+  .char-emotion{font-size:20px;font-weight:900}
+  .char-emotion.correct-em{color:var(--green)}
+  .char-emotion.wrong-em{color:var(--red)}
+  .char-msg{font-size:13px;color:#b0aed0;margin-top:2px;font-weight:600}
 
   /* Feedback */
-  .feedback {
-    text-align: center; font-size: 22px; font-weight: 900;
-    padding: 12px 20px; border-radius: 14px; margin-bottom: 16px;
-    display: none;
-  }
-  .feedback.show { display: block; animation: popIn 0.3s; }
-  @keyframes popIn { from{transform:scale(0.8);opacity:0} to{transform:scale(1);opacity:1} }
-  .feedback.correct-fb { background: rgba(34,214,122,0.15); color: var(--green); }
-  .feedback.wrong-fb { background: rgba(255,94,94,0.12); color: var(--red); }
+  .feedback{text-align:center;font-size:18px;font-weight:900;padding:10px 16px;border-radius:12px;margin-bottom:14px;display:none}
+  .feedback.show{display:block;animation:popIn .3s}
+  @keyframes popIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+  .feedback.correct-fb{background:rgba(34,214,122,.15);color:var(--green)}
+  .feedback.wrong-fb{background:rgba(255,94,94,.12);color:var(--red)}
+  .next-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--accent),#ff9f43);color:#0f0c29;font-size:16px;font-weight:900;border:none;border-radius:14px;cursor:pointer;font-family:'Nunito',sans-serif;transition:transform .15s,box-shadow .15s;display:none}
+  .next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(247,201,72,.35)}
+  .next-btn.show{display:block;animation:popIn .3s}
 
-  .next-btn {
-    width: 100%; padding: 16px;
-    background: linear-gradient(135deg, var(--accent), #ff9f43);
-    color: #0f0c29; font-size: 17px; font-weight: 900;
-    border: none; border-radius: 16px; cursor: pointer;
-    font-family: 'Nunito', sans-serif;
-    transition: transform 0.15s, box-shadow 0.15s;
-    display: none;
-  }
-  .next-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(247,201,72,0.35); }
-  .next-btn.show { display: block; animation: popIn 0.3s; }
+  /* Result */
+  .result-screen{display:none;text-align:center;padding:10px 0}
+  .result-screen.show{display:block;animation:popIn .4s}
+  .result-trophy{font-size:68px;display:block;margin-bottom:10px}
+  .result-score{font-size:52px;font-weight:900;color:var(--accent);line-height:1}
+  .result-score span{font-size:20px;color:#b0aed0;font-weight:600}
+  .result-stars{font-size:32px;letter-spacing:4px;margin:10px 0}
+  .result-msg{font-size:18px;font-weight:700;margin-bottom:18px}
+  .result-char{font-size:64px;animation:bounce 1s infinite;display:block;margin-bottom:8px}
+  .restart-btn{background:linear-gradient(135deg,var(--blue),#7986cb);color:white;border:none;border-radius:14px;padding:12px 28px;font-size:15px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:transform .15s}
+  .restart-btn:hover{transform:translateY(-2px)}
 
-  /* Result screen */
-  .result-screen { display: none; text-align: center; padding: 12px 0; }
-  .result-screen.show { display: block; animation: popIn 0.4s; }
-  .result-trophy { font-size: 72px; display: block; margin-bottom: 12px; }
-  .result-score { font-size: 56px; font-weight: 900; color: var(--accent); line-height: 1; }
-  .result-score span { font-size: 22px; color: #b0aed0; font-weight: 600; }
-  .result-msg { font-size: 20px; font-weight: 700; margin: 12px 0 20px; }
-  .result-stars { font-size: 36px; letter-spacing: 4px; margin-bottom: 20px; }
-  .restart-btn {
-    background: linear-gradient(135deg, var(--blue), #7986cb);
-    color: white; border: none; border-radius: 16px;
-    padding: 14px 32px; font-size: 16px; font-weight: 800;
-    cursor: pointer; font-family: 'Nunito', sans-serif;
-    transition: transform 0.15s;
-  }
-  .restart-btn:hover { transform: translateY(-2px); }
+  /* History */
+  .history-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:22px;margin-top:8px}
+  .history-card h2{font-size:18px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+  .score-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 16px;margin-bottom:9px}
+  .sr-date{font-size:13px;color:#b0aed0;font-weight:600}
+  .sr-day-label{font-size:12px;color:#8884b0;margin-top:2px}
+  .sr-score{font-size:20px;font-weight:900;color:var(--accent)}
+  .sr-pct{font-size:11px;color:#8884b0}
+  .sr-stars{font-size:16px;letter-spacing:2px}
+  .score-row.perfect .sr-score{color:var(--green)}
+  .history-empty{font-size:14px;color:#8884b0;text-align:center;padding:18px}
 
-  /* Score History */
-  .history-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 24px;
-    padding: 24px;
-    margin-top: 8px;
-  }
-  .history-card h2 { font-size: 20px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-  .history-empty { font-size: 14px; color: #8884b0; text-align: center; padding: 20px; }
+  /* Confetti */
+  #confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999}
 
-  .score-row {
-    display: flex; align-items: center; justify-content: space-between;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    padding: 14px 18px;
-    margin-bottom: 10px;
-  }
-  .score-row .sr-date { font-size: 14px; color: #b0aed0; font-weight: 600; }
-  .score-row .sr-day { font-size: 13px; color: #8884b0; margin-top: 2px; }
-  .score-row .sr-score { font-size: 22px; font-weight: 900; color: var(--accent); }
-  .score-row .sr-stars { font-size: 18px; letter-spacing: 2px; }
-  .score-row .sr-pct { font-size: 12px; color: #8884b0; }
-  .score-row.perfect .sr-score { color: var(--green); }
-
-  /* Confetti canvas */
-  #confetti-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 999; }
-
-  /* Medal badge */
-  .live-score {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(34,214,122,0.12);
-    border: 1px solid rgba(34,214,122,0.3);
-    border-radius: 50px; padding: 5px 14px;
-    font-size: 14px; font-weight: 700; color: var(--green);
-  }
-
-  @media (max-width: 480px) {
-    .options { grid-template-columns: 1fr 1fr; }
-    .opt-btn { padding: 14px 8px; font-size: 16px; }
-    .quiz-card { padding: 20px 16px; }
+  @media(max-width:560px){
+    .page-layout{flex-direction:column}
+    .progress-sidebar{width:100%;flex-direction:row;flex-wrap:wrap;padding:10px;gap:4px;justify-content:center}
+    .q-block{width:28px;height:28px;font-size:9px;border-radius:6px}
+    .options{grid-template-columns:1fr 1fr}
+    .opt-btn{padding:12px 8px;font-size:14px}
+    .quiz-card{padding:18px 14px}
   }
 </style>
 </head>
 <body>
-
 <canvas id="confetti-canvas"></canvas>
-
 <div class="wrapper">
 
-  <!-- Header -->
   <div class="header">
     <span class="crown">👑</span>
-    <h1>Vivaan's<br><span>Math Challenges!</span></h1>
-    <p>7 days · 20 questions each · Are you ready? 🚀</p>
+    <h1>Vivaan's <span>Math Challenges!</span></h1>
+    <p>7 days · 20 questions each · Tables 2–20 · Millions & Billions · Abacus 🚀</p>
   </div>
 
-  <!-- Day Selector -->
   <div class="day-tabs" id="dayTabs"></div>
 
-  <!-- Quiz Area -->
-  <div class="quiz-card" id="quizCard">
-    <div class="day-header">
-      <div>
-        <div class="day-title" id="dayTitle"></div>
-        <div class="day-meta" id="dayMeta"></div>
+  <div class="page-layout">
+    <!-- Left progress blocks -->
+    <div class="progress-sidebar" id="progressSidebar"></div>
+
+    <!-- Quiz area -->
+    <div class="quiz-area">
+      <div class="quiz-card">
+        <div class="day-header">
+          <div>
+            <div class="day-title" id="dayTitle"></div>
+            <div class="day-meta" id="dayMeta"></div>
+          </div>
+          <div class="live-score">✅ <span id="liveScore">0</span> / 20</div>
+        </div>
+        <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+
+        <div id="quizBody">
+          <div class="q-counter" id="qCounter">Question 1 of 20</div>
+          <div class="question-text" id="questionText"></div>
+          <div class="options" id="optionsGrid"></div>
+          <div class="char-panel" id="charPanel">
+            <div class="char-avatar" id="charAvatar"></div>
+            <div class="char-info">
+              <div class="char-name" id="charName"></div>
+              <div class="char-emotion" id="charEmotion"></div>
+              <div class="char-msg" id="charMsg"></div>
+            </div>
+          </div>
+          <div class="feedback" id="feedback"></div>
+          <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question →</button>
+        </div>
+
+        <div class="result-screen" id="resultScreen">
+          <span class="result-char" id="resChar"></span>
+          <span class="result-trophy" id="resTrophy"></span>
+          <div class="result-score"><span id="resScore">0</span><br><span>out of 20</span></div>
+          <div class="result-stars" id="resStars"></div>
+          <div class="result-msg" id="resMsg"></div>
+          <button class="restart-btn" onclick="restartDay()">🔄 Try Again</button>
+        </div>
       </div>
-      <div class="live-score">✅ <span id="liveScore">0</span> / <span id="liveTot">20</span></div>
+
+      <div class="history-card">
+        <h2>📊 Score Board</h2>
+        <div id="historyList"></div>
+      </div>
     </div>
-
-    <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
-
-    <!-- Question -->
-    <div id="quizBody">
-      <div class="q-counter" id="qCounter">Question 1 of 20</div>
-      <div class="question-text" id="questionText"></div>
-      <div class="options" id="optionsGrid"></div>
-      <div class="feedback" id="feedback"></div>
-      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question →</button>
-    </div>
-
-    <!-- Result screen -->
-    <div class="result-screen" id="resultScreen">
-      <span class="result-trophy" id="resTrophy">🏆</span>
-      <div class="result-score"><span id="resScore">0</span><br><span>out of 20</span></div>
-      <div class="result-stars" id="resStars"></div>
-      <div class="result-msg" id="resMsg"></div>
-      <button class="restart-btn" onclick="restartDay()">🔄 Try Again</button>
-    </div>
-  </div>
-
-  <!-- Score History -->
-  <div class="history-card">
-    <h2>📊 Score Board</h2>
-    <div id="historyList"></div>
   </div>
 
 </div>
 
 <script>
-// ─── DATES ───────────────────────────────────────────────────
-function getDates() {
-  const dates = [];
-  const now = new Date();
-  // Use today as Day 1 (UTC-safe)
-  const base = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  for (let i = 0; i < 7; i++) {
-    const d = new Date(base);
-    d.setDate(base.getDate() + i);
-    dates.push(d);
-  }
-  return dates;
-}
+// ─── DATES ────────────────────────────────────────────────────
+function getDates(){const a=[];const n=new Date();const b=new Date(n.getFullYear(),n.getMonth(),n.getDate());for(let i=0;i<7;i++){const d=new Date(b);d.setDate(b.getDate()+i);a.push(d);}return a;}
+const DATES=getDates();
+const DAY_NAMES=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function fmtDate(d){return`${d.getDate()} ${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`;}
+function dateKey(d){return`${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;}
 
-const DATES = getDates();
-const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+// ─── CHARACTERS ───────────────────────────────────────────────
+const CHARS=[
+  {name:"Paddington Bear",neutral:"🐻",happy:"🐻",happyEm:"Paw-some! 🐻🎉",happyMsgs:["That's bearilliant!","Honey for you! 🍯","You're unbearable-ly smart!"],sadEm:"🐻😢",sadMsgs:["Even bears make mistakes!","Shake it off! 🐾","Next one, champ!"]},
+  {name:"Jerry Mouse",neutral:"🐭",happy:"🐭",happyEm:"Cheese! 🧀⭐",happyMsgs:["Squeak squeak! Correct!","Jerry does a happy dance!","You outsmarted Tom AND the question!"],sadEm:"🐭😿",sadMsgs:["Yikes! Even Jerry needs practice!","Tom would say the same thing!","Try again, little mouse!"]},
+  {name:"Tom Cat",neutral:"🐱",happy:"😸",happyEm:"Purrfect! 😸🔥",happyMsgs:["Tom is impressed!","Meow-velous answer!","Even Tom can't argue with that!"],sadEm:"😿",sadMsgs:["Oops! Tom gives a sad meow!","Don't worry, Tom fails too sometimes!","Meow… try harder next time!"]},
+  {name:"Masha",neutral:"👧",happy:"🤩",happyEm:"Hooray Vivaan! 🤩✨",happyMsgs:["Masha is dancing with joy!","You're smarter than the bear!","GENIUS! Masha is amazed!"],sadEm:"😢",sadMsgs:["Masha says: keep going!","Oopsie! You'll get the next one!","Even Masha makes mistakes!"]},
+  {name:"Simba",neutral:"🦁",happy:"🦁",happyEm:"ROAR! 🦁👑",happyMsgs:["The lion king approves!","SIMBA ROARS with pride!","Future king of maths!"],sadEm:"🙁",sadMsgs:["Even Simba had to learn!","Hakuna Matata! Try again!","The pride lands believe in you!"]},
+  {name:"Kermit",neutral:"🐸",happy:"🐸",happyEm:"It's not easy being right! 🐸🌟",happyMsgs:["Kermit does a frog jump!","Ribbit ribbit — CORRECT!","Kermit is OVER THE MOON!"],sadEm:"😕",sadMsgs:["It's not easy… but keep trying!","Ribbit… almost there!","Kermit believes in you!"]},
+  {name:"Super Vivaan",neutral:"🦸",happy:"🦸",happyEm:"SUPERHERO MOVE! 🦸⚡🏆",happyMsgs:["BOSS LEVEL ANSWER!","INVINCIBLE brain activated!","The world's youngest maths superhero!"],sadEm:"💪",sadMsgs:["Superheroes never give up!","POWER UP and try again!","Even heroes miss sometimes!"]}
+];
 
-function fmtDate(d) { return `${d.getDate()} ${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`; }
-function dateKey(d) { return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`; }
+// ─── QUESTION SETS ────────────────────────────────────────────
+// options[0] = always the correct answer (shuffled on render)
+const QUESTION_SETS=[
 
-// ─── QUESTION SETS (20 per day) ──────────────────────────────
-// Each question: { emoji, text, options: [a,b,c,d], answer: 0-indexed }
+// DAY 1 — Tables 2–5, Addition, Subtraction, Abacus Intro
+[
+{e:"✌️",t:"2 × 8 = ?",o:["16","14","18","12"],a:0},
+{e:"3️⃣",t:"3 × 7 = ?",o:["21","18","24","27"],a:0},
+{e:"4️⃣",t:"4 × 6 = ?",o:["24","20","28","16"],a:0},
+{e:"5️⃣",t:"5 × 9 = ?",o:["45","40","50","35"],a:0},
+{e:"✌️",t:"2 × 15 = ?",o:["30","28","32","25"],a:0},
+{e:"3️⃣",t:"3 × 12 = ?",o:["36","33","30","39"],a:0},
+{e:"4️⃣",t:"4 × 9 = ?",o:["36","32","40","27"],a:0},
+{e:"5️⃣",t:"5 × 12 = ?",o:["60","55","50","65"],a:0},
+{e:"🧮",t:"Abacus 🧮 — TENS rod: 2 beads, ONES rod: 7 beads. What number?",o:["27","72","207","720"],a:0},
+{e:"✌️",t:"2 × 13 = ?",o:["26","24","28","22"],a:0},
+{e:"🐻",t:"A bear eats 4 jars of honey each day. In 5 days he eats how many jars?",o:["20","16","24","25"],a:0},
+{e:"3️⃣",t:"3 × 11 = ?",o:["33","30","36","27"],a:0},
+{e:"🍕",t:"74 + 38 = ?",o:["112","102","122","110"],a:0},
+{e:"4️⃣",t:"4 × 8 = ?",o:["32","28","36","24"],a:0},
+{e:"🎯",t:"100 − 47 = ?",o:["53","63","43","57"],a:0},
+{e:"5️⃣",t:"5 × 7 = ?",o:["35","30","40","25"],a:0},
+{e:"🧮",t:"Abacus 🧮 — HUNDREDS: 1 bead, TENS: 3 beads, ONES: 5 beads. What number?",o:["135","153","315","531"],a:0},
+{e:"✌️",t:"2 × 17 = ?",o:["34","32","36","28"],a:0},
+{e:"🌟",t:"Which times table gives: 8, 16, 24, 32, 40…?",o:["8× table","4× table","2× table","6× table"],a:0},
+{e:"5️⃣",t:"5 × 11 = ?",o:["55","50","60","45"],a:0},
+],
 
-const QUESTION_SETS = [
+// DAY 2 — Tables 6–10, Place Value, Abacus
+[
+{e:"6️⃣",t:"6 × 7 = ?",o:["42","36","48","54"],a:0},
+{e:"7️⃣",t:"7 × 8 = ?",o:["56","49","63","54"],a:0},
+{e:"8️⃣",t:"8 × 6 = ?",o:["48","42","54","56"],a:0},
+{e:"9️⃣",t:"9 × 7 = ?",o:["63","54","72","56"],a:0},
+{e:"🔟",t:"10 × 9 = ?",o:["90","80","100","70"],a:0},
+{e:"6️⃣",t:"6 × 9 = ?",o:["54","48","60","63"],a:0},
+{e:"7️⃣",t:"7 × 7 = ?",o:["49","42","56","63"],a:0},
+{e:"8️⃣",t:"8 × 9 = ?",o:["72","64","81","63"],a:0},
+{e:"9️⃣",t:"9 × 8 = ?",o:["72","81","63","54"],a:0},
+{e:"🧮",t:"Abacus 🧮 — HUNDREDS: 3, TENS: 0, ONES: 8. What number?",o:["308","380","803","038"],a:0},
+{e:"🔢",t:"In the number 572, which digit is in the TENS place?",o:["7","5","2","57"],a:0},
+{e:"6️⃣",t:"6 × 12 = ?",o:["72","66","78","60"],a:0},
+{e:"🧮",t:"Abacus 🧮 — HUNDREDS: 4, TENS: 2, ONES: 0. What number?",o:["420","402","240","204"],a:0},
+{e:"🔢",t:"What is the VALUE of 8 in the number 835?",o:["800","80","8","83"],a:0},
+{e:"7️⃣",t:"7 × 9 = ?",o:["63","56","72","54"],a:0},
+{e:"🏗️",t:"Which number has 5 hundreds, 3 tens and 9 ones?",o:["539","593","935","359"],a:0},
+{e:"8️⃣",t:"8 × 7 = ?",o:["56","48","63","72"],a:0},
+{e:"🧮",t:"Abacus 🧮 — TENS: 6, ONES: 4 (no hundreds). What number?",o:["64","46","604","640"],a:0},
+{e:"9️⃣",t:"9 × 6 = ?",o:["54","45","63","48"],a:0},
+{e:"🔢",t:"Write 400 + 70 + 5 as a number",o:["475","457","745","574"],a:0},
+],
 
-  // DAY 1 — Addition & Subtraction Party 🎉
-  [
-    { emoji:"🍕", text:"Vivaan has 34 pizza slices. He eats 17. How many are left?", options:["17","15","18","16"], answer:0 },
-    { emoji:"🐶", text:"There are 45 dogs at the park. 23 run away. How many stay?", options:["22","23","25","20"], answer:0 },
-    { emoji:"⚽", text:"Arjun scored 18 goals. Vivaan scored 24 goals. Together?", options:["42","40","41","43"], answer:0 },
-    { emoji:"🍦", text:"56 + 37 = ?", options:["93","83","94","92"], answer:0 },
-    { emoji:"🎈", text:"100 balloons − 48 = ?", options:["52","62","42","58"], answer:0 },
-    { emoji:"🚀", text:"A rocket has 75 fuel units. It uses 39. How much left?", options:["36","46","35","37"], answer:0 },
-    { emoji:"🦁", text:"63 lions + 28 tigers = ? big cats", options:["91","81","92","89"], answer:0 },
-    { emoji:"🍎", text:"Vivaan picks 47 apples. He gives away 19. Remaining?", options:["28","38","27","29"], answer:0 },
-    { emoji:"🌟", text:"What is 88 − 55?", options:["33","43","34","32"], answer:0 },
-    { emoji:"🎮", text:"A game has 64 levels. Vivaan clears 38. Still to play?", options:["26","36","24","27"], answer:0 },
-    { emoji:"🦋", text:"72 + 19 = ?", options:["91","81","89","92"], answer:0 },
-    { emoji:"🎯", text:"53 − 27 = ?", options:["26","36","24","28"], answer:0 },
-    { emoji:"🏀", text:"35 + 46 = ?", options:["81","71","80","82"], answer:0 },
-    { emoji:"🐠", text:"There are 90 fish. 34 swim away. How many remain?", options:["56","66","54","57"], answer:0 },
-    { emoji:"🍩", text:"48 donuts + 35 donuts = ?", options:["83","73","84","82"], answer:0 },
-    { emoji:"🌈", text:"What is 67 + 24?", options:["91","81","90","92"], answer:0 },
-    { emoji:"🎻", text:"100 − 63 = ?", options:["37","27","38","36"], answer:0 },
-    { emoji:"🦄", text:"29 + 55 = ?", options:["84","74","83","85"], answer:0 },
-    { emoji:"🍓", text:"Vivaan has 93 strawberries. Eats 46. Left?", options:["47","57","46","48"], answer:0 },
-    { emoji:"🏆", text:"What is 77 + 18?", options:["95","85","96","94"], answer:0 },
-  ],
+// DAY 3 — Tables 11–15, Zeroes in Large Numbers (millions, billions)
+[
+{e:"1️⃣1️⃣",t:"11 × 4 = ?",o:["44","40","48","33"],a:0},
+{e:"1️⃣2️⃣",t:"12 × 5 = ?",o:["60","55","65","48"],a:0},
+{e:"1️⃣3️⃣",t:"13 × 3 = ?",o:["39","36","42","30"],a:0},
+{e:"1️⃣4️⃣",t:"14 × 4 = ?",o:["56","52","60","48"],a:0},
+{e:"1️⃣5️⃣",t:"15 × 5 = ?",o:["75","70","80","60"],a:0},
+{e:"🔢",t:"1,000 (one thousand) has how many ZEROES?",o:["3","2","4","1"],a:0},
+{e:"🔢",t:"10,000 (ten thousand) has how many ZEROES?",o:["4","3","5","6"],a:0},
+{e:"🔢",t:"1,00,000 (one lakh) has how many ZEROES?",o:["5","4","6","3"],a:0},
+{e:"💰",t:"1 MILLION = 10,00,000. How many zeroes does it have?",o:["6","5","7","4"],a:0},
+{e:"🌍",t:"1 BILLION = 1,00,00,00,000. How many zeroes?",o:["9","6","7","8"],a:0},
+{e:"1️⃣1️⃣",t:"11 × 6 = ?",o:["66","60","72","55"],a:0},
+{e:"1️⃣2️⃣",t:"12 × 7 = ?",o:["84","72","96","78"],a:0},
+{e:"💡",t:"1 CRORE = 1,00,00,000. How many zeroes?",o:["7","6","8","5"],a:0},
+{e:"1️⃣3️⃣",t:"13 × 5 = ?",o:["65","60","70","55"],a:0},
+{e:"🤔",t:"Which is BIGGER — 1 million or 1 lakh?",o:["1 million","1 lakh","They are equal","Cannot compare"],a:0},
+{e:"1️⃣4️⃣",t:"14 × 3 = ?",o:["42","36","48","39"],a:0},
+{e:"💡",t:"1 million = how many lakhs?",o:["10","100","5","1"],a:0},
+{e:"1️⃣5️⃣",t:"15 × 6 = ?",o:["90","85","80","95"],a:0},
+{e:"1️⃣1️⃣",t:"11 × 11 = ?",o:["121","111","131","122"],a:0},
+{e:"🌌",t:"1 TRILLION has how many zeroes? (Hint: 1000 billions)",o:["12","9","6","10"],a:0},
+],
 
-  // DAY 2 — Multiplication Magic ✨
-  [
-    { emoji:"🐙", text:"An octopus has 8 legs. 3 octopuses have how many legs?", options:["24","28","18","32"], answer:0 },
-    { emoji:"🎲", text:"4 × 7 = ?", options:["28","24","32","21"], answer:0 },
-    { emoji:"🦆", text:"6 ducks × 5 feathers each = ? feathers total", options:["30","25","36","24"], answer:0 },
-    { emoji:"🍫", text:"3 × 9 = ?", options:["27","24","21","30"], answer:0 },
-    { emoji:"🚗", text:"Each car has 4 wheels. 8 cars have how many wheels?", options:["32","28","40","24"], answer:0 },
-    { emoji:"⭐", text:"5 × 6 = ?", options:["30","25","35","20"], answer:0 },
-    { emoji:"🍕", text:"7 pizzas, each cut into 8 slices. Total slices?", options:["56","48","63","54"], answer:0 },
-    { emoji:"🦊", text:"2 × 12 = ?", options:["24","22","20","26"], answer:0 },
-    { emoji:"🎠", text:"9 × 3 = ?", options:["27","24","30","21"], answer:0 },
-    { emoji:"🐝", text:"Each beehive has 10 bees. 7 hives = ?", options:["70","60","80","7"], answer:0 },
-    { emoji:"🌺", text:"6 × 4 = ?", options:["24","28","20","18"], answer:0 },
-    { emoji:"🎭", text:"8 × 5 = ?", options:["40","45","35","48"], answer:0 },
-    { emoji:"🦓", text:"A zebra has 4 legs. 9 zebras have how many legs?", options:["36","32","40","27"], answer:0 },
-    { emoji:"🍇", text:"7 × 6 = ?", options:["42","48","36","49"], answer:0 },
-    { emoji:"🎨", text:"3 × 8 = ?", options:["24","21","27","32"], answer:0 },
-    { emoji:"🐬", text:"5 dolphins × 7 jumps each = ? jumps", options:["35","30","40","42"], answer:0 },
-    { emoji:"🌙", text:"4 × 9 = ?", options:["36","32","40","27"], answer:0 },
-    { emoji:"🚂", text:"Each train has 6 coaches. 5 trains = ? coaches", options:["30","25","36","24"], answer:0 },
-    { emoji:"🏄", text:"2 × 11 = ?", options:["22","20","24","21"], answer:0 },
-    { emoji:"🎉", text:"10 × 7 = ?", options:["70","60","80","7"], answer:0 },
-  ],
+// DAY 4 — Tables 16–20, Word Problems
+[
+{e:"1️⃣6️⃣",t:"16 × 2 = ?",o:["32","28","36","30"],a:0},
+{e:"1️⃣7️⃣",t:"17 × 3 = ?",o:["51","48","54","45"],a:0},
+{e:"1️⃣8️⃣",t:"18 × 4 = ?",o:["72","64","80","68"],a:0},
+{e:"1️⃣9️⃣",t:"19 × 3 = ?",o:["57","54","60","51"],a:0},
+{e:"2️⃣0️⃣",t:"20 × 6 = ?",o:["120","100","130","110"],a:0},
+{e:"1️⃣6️⃣",t:"16 × 5 = ?",o:["80","72","88","70"],a:0},
+{e:"1️⃣7️⃣",t:"17 × 4 = ?",o:["68","64","72","60"],a:0},
+{e:"1️⃣8️⃣",t:"18 × 3 = ?",o:["54","48","60","51"],a:0},
+{e:"1️⃣9️⃣",t:"19 × 2 = ?",o:["38","34","42","36"],a:0},
+{e:"2️⃣0️⃣",t:"20 × 9 = ?",o:["180","160","200","170"],a:0},
+{e:"🐭",t:"Jerry finds 16 pieces of cheese each day. In 4 days he finds how many pieces?",o:["64","48","80","32"],a:0},
+{e:"🐱",t:"Tom runs at 17 km per hour for 3 hours. How far does he run?",o:["51 km","45 km","57 km","48 km"],a:0},
+{e:"1️⃣6️⃣",t:"16 × 4 = ?",o:["64","56","72","48"],a:0},
+{e:"👧",t:"Masha picks 19 flowers every day. In a week (7 days) she picks how many?",o:["133","119","140","126"],a:0},
+{e:"1️⃣7️⃣",t:"17 × 5 = ?",o:["85","80","90","75"],a:0},
+{e:"2️⃣0️⃣",t:"20 × 11 = ?",o:["220","200","210","230"],a:0},
+{e:"1️⃣8️⃣",t:"18 × 5 = ?",o:["90","85","95","80"],a:0},
+{e:"🐻",t:"A bear eats 18 berries in the morning and 18 berries at night every day. In 5 days, total berries?",o:["180","90","360","150"],a:0},
+{e:"1️⃣9️⃣",t:"19 × 5 = ?",o:["95","90","100","85"],a:0},
+{e:"2️⃣0️⃣",t:"20 × 15 = ?",o:["300","280","320","250"],a:0},
+],
 
-  // DAY 3 — Word Problem Workshop 📚
-  [
-    { emoji:"📚", text:"Vivaan reads 15 pages Mon, 18 pages Tue, 12 pages Wed. Total?", options:["45","40","55","42"], answer:0 },
-    { emoji:"🍒", text:"A bag has 50 cherries. Vivaan eats 3 each day for 7 days. Left?", options:["29","21","30","28"], answer:0 },
-    { emoji:"🎒", text:"Vivaan has ₹80. Spends ₹35 on a book. Change?", options:["₹45","₹55","₹40","₹50"], answer:0 },
-    { emoji:"🐟", text:"A fish tank had 40 fish. 8 were added daily for 3 days. Now?", options:["64","48","52","60"], answer:0 },
-    { emoji:"🌴", text:"A tree grows 5 cm per week. After 9 weeks, how tall?", options:["45 cm","40 cm","50 cm","35 cm"], answer:0 },
-    { emoji:"🎁", text:"Vivaan has 4 boxes of 7 chocolates each. Total chocolates?", options:["28","24","32","21"], answer:0 },
-    { emoji:"🏃", text:"Vivaan runs 3 km each day. In 6 days he runs how far?", options:["18 km","15 km","21 km","24 km"], answer:0 },
-    { emoji:"🍭", text:"60 lollipops shared equally among 5 friends = ? each", options:["12","10","15","8"], answer:0 },
-    { emoji:"⏰", text:"Class starts at 9:00 AM and ends at 11:30 AM. How long?", options:["2.5 hours","2 hours","3 hours","1.5 hours"], answer:0 },
-    { emoji:"🚌", text:"Bus holds 42 students. 17 are seated. Empty seats?", options:["25","35","23","27"], answer:0 },
-    { emoji:"🌻", text:"A garden has 6 rows of 8 sunflowers. Total?", options:["48","42","54","56"], answer:0 },
-    { emoji:"🎯", text:"Vivaan scored 97, 85 and 92 in three tests. Total?", options:["274","264","284","270"], answer:0 },
-    { emoji:"🐣", text:"A hen lays 2 eggs per day. In 2 weeks, how many eggs?", options:["28","14","21","30"], answer:0 },
-    { emoji:"💧", text:"A bottle holds 250 ml. Vivaan drinks 4 bottles. Total ml?", options:["1000","800","1200","750"], answer:0 },
-    { emoji:"🎈", text:"23 red balloons + 17 blue + 14 yellow = ?", options:["54","44","64","50"], answer:0 },
-    { emoji:"🍰", text:"1 cake cut into 8 slices. 3 cakes = ? slices total", options:["24","20","28","32"], answer:0 },
-    { emoji:"🦅", text:"An eagle flies 80 km/hr for 2 hours. Distance covered?", options:["160 km","80 km","120 km","200 km"], answer:0 },
-    { emoji:"🧩", text:"Vivaan solves 9 puzzles a day. In 5 days he solves?", options:["45","40","54","36"], answer:0 },
-    { emoji:"🛒", text:"3 bags of 12 apples each = ? apples", options:["36","30","42","24"], answer:0 },
-    { emoji:"🌊", text:"Ocean is 500 m deep. Vivaan dives to 237 m. How far from bottom?", options:["263 m","273 m","253 m","300 m"], answer:0 },
-  ],
+// DAY 5 — Division, Fractions, Patterns, Tables Mixed
+[
+{e:"➗",t:"48 ÷ 6 = ?",o:["8","7","9","6"],a:0},
+{e:"➗",t:"63 ÷ 7 = ?",o:["9","8","7","6"],a:0},
+{e:"½",t:"Half of 96 = ?",o:["48","44","52","40"],a:0},
+{e:"¼",t:"One-quarter of 80 = ?",o:["20","25","15","40"],a:0},
+{e:"➗",t:"72 ÷ 8 = ?",o:["9","8","7","6"],a:0},
+{e:"📈",t:"Pattern: 2, 6, 18, 54, ?",o:["162","108","216","72"],a:0},
+{e:"⅓",t:"One-third of 90 = ?",o:["30","45","20","60"],a:0},
+{e:"➗",t:"84 ÷ 7 = ?",o:["12","11","14","10"],a:0},
+{e:"🔢",t:"What fraction of 20 is 5?",o:["1/4","1/5","1/3","1/2"],a:0},
+{e:"📐",t:"Pattern: 1, 4, 9, 16, 25, 36, ?",o:["49","42","56","48"],a:0},
+{e:"➗",t:"81 ÷ 9 = ?",o:["9","8","7","6"],a:0},
+{e:"¾",t:"Three-quarters of 40 = ?",o:["30","20","10","35"],a:0},
+{e:"📈",t:"Pattern: 3, 7, 11, 15, ?",o:["19","17","21","18"],a:0},
+{e:"➗",t:"132 ÷ 12 = ?",o:["11","10","12","9"],a:0},
+{e:"🔢",t:"Which fraction is BIGGEST: 1/2, 1/3, 1/4, or 3/4?",o:["3/4","1/2","1/3","1/4"],a:0},
+{e:"📈",t:"Pattern: 1, 2, 4, 8, 16, ?",o:["32","24","28","20"],a:0},
+{e:"➗",t:"110 ÷ 11 = ?",o:["10","9","11","8"],a:0},
+{e:"½",t:"Half of 150 = ?",o:["75","70","80","65"],a:0},
+{e:"🧩",t:"? × 7 = 84 — what is ?",o:["12","11","14","10"],a:0},
+{e:"🌟",t:"What are the MISSING numbers? 12, 24, ?, 48, ?, 72",o:["36 and 60","30 and 54","40 and 64","38 and 58"],a:0},
+],
 
-  // DAY 4 — Division & Fractions 🍕
-  [
-    { emoji:"🍕", text:"24 pizza slices shared equally among 4 friends = ?", options:["6","8","4","12"], answer:0 },
-    { emoji:"🎁", text:"35 ÷ 5 = ?", options:["7","6","8","5"], answer:0 },
-    { emoji:"🌸", text:"What is half of 48?", options:["24","20","28","22"], answer:0 },
-    { emoji:"🏅", text:"40 medals shared among 8 teams = ? each", options:["5","4","6","8"], answer:0 },
-    { emoji:"🦋", text:"27 ÷ 3 = ?", options:["9","6","8","7"], answer:0 },
-    { emoji:"🎠", text:"Half of 36 = ?", options:["18","16","20","14"], answer:0 },
-    { emoji:"🐘", text:"63 ÷ 7 = ?", options:["9","8","7","6"], answer:0 },
-    { emoji:"🍒", text:"What is one-quarter of 20?", options:["5","4","6","10"], answer:0 },
-    { emoji:"🔮", text:"56 ÷ 8 = ?", options:["7","6","8","9"], answer:0 },
-    { emoji:"🌊", text:"If 1/2 of a pizza = 4 slices, the whole pizza has?", options:["8","6","10","4"], answer:0 },
-    { emoji:"🚀", text:"72 ÷ 9 = ?", options:["8","7","9","6"], answer:0 },
-    { emoji:"🎯", text:"One-third of 30 = ?", options:["10","8","12","15"], answer:0 },
-    { emoji:"🏠", text:"45 ÷ 5 = ?", options:["9","8","7","6"], answer:0 },
-    { emoji:"🌺", text:"Half of 100 = ?", options:["50","40","60","25"], answer:0 },
-    { emoji:"🍦", text:"32 ÷ 4 = ?", options:["8","7","6","9"], answer:0 },
-    { emoji:"🎸", text:"One-quarter of 40 = ?", options:["10","8","12","5"], answer:0 },
-    { emoji:"🦁", text:"48 ÷ 6 = ?", options:["8","7","9","6"], answer:0 },
-    { emoji:"🌙", text:"If 1/4 of stickers = 5, total stickers = ?", options:["20","10","15","25"], answer:0 },
-    { emoji:"🐳", text:"60 ÷ 10 = ?", options:["6","5","7","8"], answer:0 },
-    { emoji:"⭐", text:"Half of 86 = ?", options:["43","42","44","40"], answer:0 },
-  ],
+// DAY 6 — Time, Money, Measurement, Geometry
+[
+{e:"⏰",t:"Clock shows 3:45. What time is it 30 minutes later?",o:["4:15","4:30","4:00","3:75"],a:0},
+{e:"💰",t:"₹50 + ₹25 + ₹10 = ?",o:["₹85","₹75","₹80","₹90"],a:0},
+{e:"📏",t:"1 metre = how many centimetres?",o:["100","10","1000","500"],a:0},
+{e:"🚂",t:"Train leaves at 10:00 AM, arrives at 1:30 PM. Journey time?",o:["3.5 hours","3 hours","4 hours","2.5 hours"],a:0},
+{e:"🛒",t:"Vivaan buys 3 books at ₹45 each. Total cost?",o:["₹135","₹120","₹150","₹125"],a:0},
+{e:"📐",t:"Perimeter of a SQUARE with side 8 cm?",o:["32 cm","16 cm","64 cm","24 cm"],a:0},
+{e:"⚖️",t:"1 kilogram = how many grams?",o:["1000","100","500","2000"],a:0},
+{e:"🎬",t:"Movie starts at 6:45 PM and runs for 2 hours 15 minutes. When does it end?",o:["9:00 PM","8:45 PM","9:15 PM","8:30 PM"],a:0},
+{e:"🔲",t:"Area of a rectangle 10 cm long and 6 cm wide = ?",o:["60 sq cm","32 sq cm","16 sq cm","100 sq cm"],a:0},
+{e:"💸",t:"Pay ₹200 for something that costs ₹137. Change received?",o:["₹63","₹73","₹53","₹67"],a:0},
+{e:"💧",t:"1 litre = how many millilitres?",o:["1000","100","500","10"],a:0},
+{e:"📅",t:"How many months are in 2 years?",o:["24","12","20","18"],a:0},
+{e:"📐",t:"A rectangle is 12 cm long and 5 cm wide. What is its PERIMETER?",o:["34 cm","60 cm","17 cm","24 cm"],a:0},
+{e:"📅",t:"7 weeks = how many days?",o:["49","42","56","35"],a:0},
+{e:"🚶",t:"Vivaan walks 2.5 km in the morning and 1.5 km in the evening. Total km?",o:["4 km","3 km","5 km","3.5 km"],a:0},
+{e:"🌡️",t:"1 hour and 45 minutes = how many minutes total?",o:["105","100","115","95"],a:0},
+{e:"📐",t:"A square has AREA = 36 sq cm. What is the length of each side?",o:["6 cm","4 cm","9 cm","18 cm"],a:0},
+{e:"💰",t:"5 pens cost ₹18 each. Then Vivaan buys 1 eraser for ₹7. Total spent?",o:["₹97","₹90","₹107","₹87"],a:0},
+{e:"🏃",t:"School starts at 8:00 AM. Vivaan arrives 20 minutes early. What time did he arrive?",o:["7:40 AM","7:30 AM","7:50 AM","8:20 AM"],a:0},
+{e:"🔲",t:"Perimeter of a rectangle: length = 15 cm, width = 7 cm?",o:["44 cm","105 cm","22 cm","30 cm"],a:0},
+],
 
-  // DAY 5 — Patterns & Place Value 🔢
-  [
-    { emoji:"🔢", text:"What comes next? 5, 10, 15, 20, ?", options:["25","30","22","24"], answer:0 },
-    { emoji:"🌟", text:"What is the value of 7 in the number 375?", options:["70","7","700","75"], answer:0 },
-    { emoji:"🎵", text:"Pattern: 3, 6, 9, 12, ?", options:["15","14","18","13"], answer:0 },
-    { emoji:"🏗️", text:"Which number has 4 hundreds, 2 tens, 7 ones?", options:["427","472","247","724"], answer:0 },
-    { emoji:"🦚", text:"What comes next? 2, 4, 8, 16, ?", options:["32","24","20","28"], answer:0 },
-    { emoji:"🌈", text:"In 583, which digit is in the tens place?", options:["8","5","3","58"], answer:0 },
-    { emoji:"🐾", text:"Pattern: 100, 90, 80, 70, ?", options:["60","50","65","55"], answer:0 },
-    { emoji:"🎪", text:"Write 300 + 50 + 6 as a number", options:["356","365","536","563"], answer:0 },
-    { emoji:"🚂", text:"Next in pattern: 11, 22, 33, 44, ?", options:["55","50","60","45"], answer:0 },
-    { emoji:"🌍", text:"Which is GREATEST: 304, 430, 340, 403?", options:["430","403","340","304"], answer:0 },
-    { emoji:"🐬", text:"Pattern: 1, 4, 9, 16, 25, ?", options:["36","30","35","40"], answer:0 },
-    { emoji:"🎭", text:"In 719, the digit 9 is in the ___ place", options:["ones","tens","hundreds","thousands"], answer:0 },
-    { emoji:"🌺", text:"Odd one out: 2, 4, 6, 7, 8, 10", options:["7","2","10","8"], answer:0 },
-    { emoji:"⚡", text:"50 + ? = 80", options:["30","20","40","25"], answer:0 },
-    { emoji:"🦋", text:"What is 200 + 40 + 3?", options:["243","234","342","432"], answer:0 },
-    { emoji:"🎯", text:"Pattern: 5, 10, 20, 40, ?", options:["80","60","50","70"], answer:0 },
-    { emoji:"🌙", text:"Which is SMALLEST: 867, 786, 768, 876?", options:["768","786","867","876"], answer:0 },
-    { emoji:"🍀", text:"Fill in: 3 × ? = 36", options:["12","9","11","13"], answer:0 },
-    { emoji:"🚀", text:"Pattern: 1, 3, 6, 10, 15, ?", options:["21","18","20","24"], answer:0 },
-    { emoji:"🏆", text:"Round 467 to the nearest hundred", options:["500","400","470","460"], answer:0 },
-  ],
+// DAY 7 — ULTIMATE BOSS LEVEL: All Topics Mixed
+[
+{e:"🧠",t:"19 × 6 = ?",o:["114","108","120","96"],a:0},
+{e:"🌍",t:"How many zeroes does 1 BILLION have?",o:["9","6","12","7"],a:0},
+{e:"🧮",t:"Abacus 🧮 — TEN-THOUSANDS: 1, THOUSANDS: 2, HUNDREDS: 0, TENS: 5, ONES: 3. What number?",o:["12053","12503","21053","10253"],a:0},
+{e:"🔥",t:"(8 × 7) + (6 × 5) = ?",o:["86","56","30","96"],a:0},
+{e:"🦁",t:"17 × 8 = ?",o:["136","128","144","120"],a:0},
+{e:"🐭",t:"Jerry collects 12 pieces of cheese per day. In 3 WEEKS (21 days), how many pieces?",o:["252","84","168","216"],a:0},
+{e:"💰",t:"One quarter (1/4) of 1 million (1,000,000) = ?",o:["250,000","100,000","500,000","400,000"],a:0},
+{e:"🐱",t:"Tom runs at 16 km/h. After 45 minutes, how far has he run? (Hint: 45 min = 3/4 of an hour)",o:["12 km","8 km","16 km","6 km"],a:0},
+{e:"🌟",t:"14 × 13 = ? (Hint: 14×10 + 14×3)",o:["182","172","192","168"],a:0},
+{e:"📈",t:"Pattern: 11, 22, 33, 44, 55... What is the 8th term?",o:["88","77","99","66"],a:0},
+{e:"💡",t:"How many LAKHS are there in 1 CRORE?",o:["10","100","1","50"],a:0},
+{e:"⚡",t:"18 × 12 = ? (Hint: 18×10 + 18×2)",o:["216","204","228","196"],a:0},
+{e:"🦸",t:"Vivaan solves 17 maths problems every hour. In 6 hours he solves how many?",o:["102","96","108","85"],a:0},
+{e:"📐",t:"A square has PERIMETER = 36 cm. What is its AREA?",o:["81 sq cm","36 sq cm","9 sq cm","144 sq cm"],a:0},
+{e:"🔢",t:"3 × 3 × 3 × 3 = ?",o:["81","27","9","108"],a:0},
+{e:"👧",t:"Masha has 1,00,000 beads. She uses 37,500. How many are LEFT?",o:["62,500","72,500","52,500","63,500"],a:0},
+{e:"2️⃣0️⃣",t:"20 × 17 = ?",o:["340","320","360","300"],a:0},
+{e:"🧮",t:"Abacus 🧮 — THOUSANDS: 3, HUNDREDS: 2, TENS: 0, ONES: 6. What number?",o:["3206","3260","2306","3026"],a:0},
+{e:"🚀",t:"999 + 999 + 999 = ? (Hint: 1000×3 minus 3)",o:["2997","3000","2999","2994"],a:0},
+{e:"🏆",t:"FINAL BOSS: 1 billion ÷ 1 million = ? (Hint: billion has 9 zeroes, million has 6 zeroes)",o:["1,000","100","10,000","500"],a:0},
+],
+];
 
-  // DAY 6 — Time, Money & Measurement 📏
-  [
-    { emoji:"⏰", text:"It is 2:30 PM. What time will it be in 45 minutes?", options:["3:15 PM","3:00 PM","3:30 PM","2:45 PM"], answer:0 },
-    { emoji:"💰", text:"Vivaan has ₹50 note. A pen costs ₹18. Change received?", options:["₹32","₹28","₹42","₹38"], answer:0 },
-    { emoji:"📏", text:"A rope is 3 meters. Vivaan cuts 75 cm. Left (in cm)?", options:["225 cm","175 cm","250 cm","300 cm"], answer:0 },
-    { emoji:"⏱️", text:"School starts 8:00 AM. Vivaan arrives 20 mins early. Time?", options:["7:40 AM","7:30 AM","7:45 AM","8:20 AM"], answer:0 },
-    { emoji:"💎", text:"3 five-rupee coins + 2 two-rupee coins = ?", options:["₹19","₹17","₹21","₹15"], answer:0 },
-    { emoji:"🌡️", text:"Water boils at 100°C. Ice melts at 0°C. Difference?", options:["100°","90°","110°","80°"], answer:0 },
-    { emoji:"⏰", text:"Movie is 1 hour 30 mins. Starts 4:15 PM. Ends at?", options:["5:45 PM","5:30 PM","6:00 PM","5:15 PM"], answer:0 },
-    { emoji:"📐", text:"A square has sides of 7 cm. What is its perimeter?", options:["28 cm","21 cm","14 cm","49 cm"], answer:0 },
-    { emoji:"💴", text:"5 notebooks at ₹12 each = Total cost?", options:["₹60","₹50","₹70","₹55"], answer:0 },
-    { emoji:"🏃", text:"Vivaan runs 400 m in the morning, 600 m in the evening. Total km?", options:["1 km","2 km","0.5 km","1.5 km"], answer:0 },
-    { emoji:"⏰", text:"How many minutes in 2 hours?", options:["120","100","90","60"], answer:0 },
-    { emoji:"🧱", text:"A wall is 5 m long and 3 m tall. What is its area?", options:["15 sq m","8 sq m","10 sq m","20 sq m"], answer:0 },
-    { emoji:"💸", text:"Vivaan saves ₹15 per day. In 2 weeks he saves?", options:["₹210","₹150","₹180","₹200"], answer:0 },
-    { emoji:"📏", text:"1 km = ? metres", options:["1000","100","500","10000"], answer:0 },
-    { emoji:"⏱️", text:"45 minutes before noon is?", options:["11:15 AM","11:30 AM","11:45 AM","10:15 AM"], answer:0 },
-    { emoji:"🔲", text:"Rectangle: length 9 cm, width 4 cm. Perimeter?", options:["26 cm","36 cm","13 cm","18 cm"], answer:0 },
-    { emoji:"💰", text:"Buy toy for ₹73. Pay with ₹100. Change?", options:["₹27","₹37","₹17","₹23"], answer:0 },
-    { emoji:"⏰", text:"How many days in 3 weeks?", options:["21","14","28","18"], answer:0 },
-    { emoji:"📐", text:"Area of rectangle: length 6 cm, width 5 cm?", options:["30 sq cm","22 sq cm","11 sq cm","36 sq cm"], answer:0 },
-    { emoji:"💎", text:"4 ten-rupee notes + 3 one-rupee coins = ?", options:["₹43","₹34","₹44","₹40"], answer:0 },
-  ],
-
-  // DAY 7 — SUPER BRAIN BOSS LEVEL 🧠⚡
-  [
-    { emoji:"🧠", text:"If 8 × ? = 72, what is ?", options:["9","8","7","6"], answer:0 },
-    { emoji:"🔥", text:"(25 + 15) × 2 = ?", options:["80","40","70","90"], answer:0 },
-    { emoji:"🌌", text:"A shop sells 9 toys at ₹45 each. Total sales?", options:["₹405","₹360","₹450","₹395"], answer:0 },
-    { emoji:"⚡", text:"? + 37 = 100", options:["63","67","53","73"], answer:0 },
-    { emoji:"🎯", text:"5 friends share 95 marbles equally. Each gets?", options:["19","18","20","15"], answer:0 },
-    { emoji:"🔮", text:"100 − (27 + 38) = ?", options:["35","65","25","45"], answer:0 },
-    { emoji:"🏆", text:"Vivaan is 6 years old. His dad is 5× his age. Dad's age?", options:["30","24","36","25"], answer:0 },
-    { emoji:"🌠", text:"What is 3 × 3 × 3?", options:["27","18","9","21"], answer:0 },
-    { emoji:"🧩", text:"A number doubled gives 88. That number is?", options:["44","40","48","42"], answer:0 },
-    { emoji:"🦁", text:"(12 × 4) − 18 = ?", options:["30","24","48","28"], answer:0 },
-    { emoji:"💡", text:"Vivaan needs 144 stickers. He has 3 sheets of 36 each. More needed?", options:["36","48","0","24"], answer:0 },
-    { emoji:"🐲", text:"A dragon has 3 heads. Each head breathes fire 7 times. Total puffs?", options:["21","18","24","28"], answer:0 },
-    { emoji:"🌟", text:"What is the next prime number after 17?", options:["19","21","18","23"], answer:0 },
-    { emoji:"🚀", text:"A spaceship travels 450 km in 9 hours. Speed per hour?", options:["50 km","45 km","55 km","40 km"], answer:0 },
-    { emoji:"🎲", text:"? × 6 = 54", options:["9","8","7","6"], answer:0 },
-    { emoji:"🌊", text:"Half of (60 + 40) = ?", options:["50","40","60","100"], answer:0 },
-    { emoji:"🍎", text:"Vivaan has 7 bags. Each has 9 apples. He eats 15. Left?", options:["48","63","45","50"], answer:0 },
-    { emoji:"⭐", text:"4 × (10 + 5) = ?", options:["60","40","50","45"], answer:0 },
-    { emoji:"🏅", text:"A 3-digit number: hundreds = 2×3, tens = 18÷2, ones = 4+3. The number?", options:["697","679","967","796"], answer:0 },
-    { emoji:"🎉", text:"FINAL BOSS: 99 × 9 = ? (Think: 100×9 − 9)", options:["891","899","909","801"], answer:0 },
-  ],
+const DAY_TITLES=[
+  "Tables 2–5 + Abacus Intro 🔢","Tables 6–10 + Place Value 🧮","Tables 11–15 + Millions & Billions 💰","Tables 16–20 + Word Problems 🦁","Division, Fractions & Patterns ➗","Time, Money & Measurement 📏","⚡ ULTIMATE BOSS LEVEL 🏆"
 ];
 
 // ─── STATE ────────────────────────────────────────────────────
-let currentDay = 0;
-let currentQ = 0;
-let score = 0;
-let answered = false;
+let currentDay=0,currentQ=0,score=0,answered=false;
+let questionOrder=[];
 
-// ─── LOCALSTORAGE ─────────────────────────────────────────────
-function storageKey(dayIdx) { return 'vivaan_score_' + dateKey(DATES[dayIdx]); }
-function getScore(dayIdx) { const v = localStorage.getItem(storageKey(dayIdx)); return v !== null ? parseInt(v) : null; }
-function saveScore(dayIdx, s) { localStorage.setItem(storageKey(dayIdx), String(s)); }
+// ─── STORAGE ─────────────────────────────────────────────────
+function storageKey(i){return'vivaan2_score_'+dateKey(DATES[i]);}
+function getScore(i){const v=localStorage.getItem(storageKey(i));return v!==null?parseInt(v):null;}
+function saveScore(i,s){localStorage.setItem(storageKey(i),String(s));}
+
+// ─── SHUFFLE ─────────────────────────────────────────────────
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
 // ─── BUILD TABS ───────────────────────────────────────────────
-function buildTabs() {
-  const wrap = document.getElementById('dayTabs');
-  wrap.innerHTML = '';
-  DATES.forEach((d, i) => {
-    const tab = document.createElement('button');
-    const saved = getScore(i);
-    const isToday = i === 0;
-    tab.className = 'day-tab' + (i === currentDay ? ' active' : '') + (saved !== null ? ' done' : '');
-    tab.innerHTML = `${isToday ? '📅 ' : ''}${DAY_NAMES[d.getDay()].slice(0,3)}<br><small>${d.getDate()} ${MONTH_NAMES[d.getMonth()]}</small>`;
-    tab.style.lineHeight = '1.3';
-    tab.onclick = () => switchDay(i);
-    wrap.appendChild(tab);
+function buildTabs(){
+  const wrap=document.getElementById('dayTabs');wrap.innerHTML='';
+  DATES.forEach((d,i)=>{
+    const tab=document.createElement('button');
+    const saved=getScore(i);
+    tab.className='day-tab'+(i===currentDay?' active':'')+(saved!==null?' done':'');
+    tab.innerHTML=`${i===0?'📅 ':''}${DAY_NAMES[d.getDay()].slice(0,3)}<br><small>${d.getDate()} ${MONTH_NAMES[d.getMonth()]}</small>`;
+    tab.style.lineHeight='1.3';tab.onclick=()=>switchDay(i);wrap.appendChild(tab);
   });
 }
 
+// ─── BUILD PROGRESS BLOCKS ────────────────────────────────────
+function buildProgressBlocks(){
+  const sb=document.getElementById('progressSidebar');sb.innerHTML='';
+  const qs=QUESTION_SETS[currentDay];
+  qs.forEach((_,i)=>{
+    const b=document.createElement('div');b.className='q-block';b.id='qb'+i;b.textContent=i+1;sb.appendChild(b);
+  });
+  updateProgressBlocks();
+}
+
+function updateProgressBlocks(){
+  const qs=QUESTION_SETS[currentDay];
+  qs.forEach((_,i)=>{
+    const b=document.getElementById('qb'+i);if(!b)return;
+    b.className='q-block';
+    if(i<currentQ){
+      // completed — we'd need to track per-question results
+      const res=questionResults[i];
+      if(res===true)b.classList.add('correct');
+      else if(res===false)b.classList.add('wrong');
+    } else if(i===currentQ){
+      b.classList.add('current');
+    }
+  });
+}
+
+let questionResults=[];
+
 // ─── SWITCH DAY ───────────────────────────────────────────────
-function switchDay(idx) {
-  currentDay = idx;
-  currentQ = 0; score = 0; answered = false;
+function switchDay(idx){
+  currentDay=idx;currentQ=0;score=0;answered=false;questionResults=[];
   document.getElementById('resultScreen').classList.remove('show');
-  document.getElementById('quizBody').style.display = '';
-  document.getElementById('liveScore').textContent = '0';
-  buildTabs();
-  renderQuestion();
+  document.getElementById('quizBody').style.display='';
+  document.getElementById('liveScore').textContent='0';
+  document.getElementById('charPanel').className='char-panel';
+  document.getElementById('feedback').className='feedback';
+  document.getElementById('nextBtn').className='next-btn';
+  buildTabs();buildProgressBlocks();renderQuestion();
 }
 
 // ─── RENDER QUESTION ──────────────────────────────────────────
-function renderQuestion() {
-  const qs = QUESTION_SETS[currentDay];
-  const q = qs[currentQ];
-  answered = false;
+function renderQuestion(){
+  const qs=QUESTION_SETS[currentDay];
+  const q=qs[currentQ];
+  answered=false;
+  document.getElementById('qCounter').textContent=`Question ${currentQ+1} of ${qs.length}`;
+  document.getElementById('questionText').innerHTML=`<span class="question-emoji">${q.e}</span>${q.t}`;
+  document.getElementById('progressBar').style.width=((currentQ/qs.length)*100)+'%';
+  document.getElementById('charPanel').className='char-panel';
+  document.getElementById('feedback').className='feedback';
+  document.getElementById('nextBtn').className='next-btn';
 
-  document.getElementById('qCounter').textContent = `Question ${currentQ + 1} of ${qs.length}`;
-  document.getElementById('questionText').innerHTML = `<span class="question-emoji">${q.emoji}</span>${q.text}`;
+  // Shuffle options, track correct
+  const correct=q.o[q.a];
+  const shuffled=shuffle(q.o);
+  const newCorrectIdx=shuffled.indexOf(correct);
 
-  const pct = (currentQ / qs.length) * 100;
-  document.getElementById('progressBar').style.width = pct + '%';
-
-  const fb = document.getElementById('feedback');
-  fb.className = 'feedback'; fb.textContent = '';
-
-  const nb = document.getElementById('nextBtn');
-  nb.className = 'next-btn';
-
-  const grid = document.getElementById('optionsGrid');
-  grid.innerHTML = '';
-
-  // Shuffle options but track correct answer
-  const idxArr = [0,1,2,3];
-  // We keep options in original order for simplicity (answer is always index 0 in data)
-  q.options.forEach((opt, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'opt-btn';
-    btn.textContent = opt;
-    btn.dataset.idx = i;
-    btn.onclick = () => checkAnswer(i, q.answer);
+  const grid=document.getElementById('optionsGrid');grid.innerHTML='';
+  shuffled.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='opt-btn';btn.textContent=opt;btn.dataset.idx=i;
+    btn.onclick=()=>checkAnswer(i,newCorrectIdx,correct);
     grid.appendChild(btn);
   });
 
-  // Update day info
-  document.getElementById('dayTitle').textContent = `Day ${currentDay + 1} — ${['Addition & Subtraction 🎉','Multiplication Magic ✨','Word Problems 📚','Division & Fractions 🍕','Patterns & Place Value 🔢','Time, Money & Measurement 📏','Super Brain Boss Level 🧠⚡'][currentDay]}`;
-  document.getElementById('dayMeta').textContent = fmtDate(DATES[currentDay]);
+  document.getElementById('dayTitle').textContent=`Day ${currentDay+1} — ${DAY_TITLES[currentDay]}`;
+  document.getElementById('dayMeta').textContent=fmtDate(DATES[currentDay]);
+  updateProgressBlocks();
 }
 
 // ─── CHECK ANSWER ─────────────────────────────────────────────
-function checkAnswer(selected, correct) {
-  if (answered) return;
-  answered = true;
-
-  const btns = document.querySelectorAll('.opt-btn');
-  btns.forEach(b => b.disabled = true);
+function checkAnswer(selected,correct,correctText){
+  if(answered)return;answered=true;
+  const btns=document.querySelectorAll('.opt-btn');
+  btns.forEach(b=>b.disabled=true);
   btns[correct].classList.add('correct');
+  const char=CHARS[currentDay];
+  const isCorrect=selected===correct;
 
-  const fb = document.getElementById('feedback');
-  const nb = document.getElementById('nextBtn');
-
-  if (selected === correct) {
-    score++;
-    document.getElementById('liveScore').textContent = score;
+  if(isCorrect){
+    score++;questionResults[currentQ]=true;
+    document.getElementById('liveScore').textContent=score;
     btns[selected].classList.add('correct');
-    const msgs = ['🎉 Brilliant!','⚡ Superstar!','🔥 Nailed it!','🌟 Genius!','🚀 Correct!','💡 Smart!'];
-    fb.textContent = msgs[Math.floor(Math.random() * msgs.length)];
-    fb.className = 'feedback correct-fb show';
+    const msg=char.happyMsgs[Math.floor(Math.random()*char.happyMsgs.length)];
+    showChar(char.happy,char.name,char.happyEm,msg,true);
+    const fb=document.getElementById('feedback');
+    const celebrations=['🎉 Brilliant!','⚡ Superstar!','🔥 Nailed it!','🌟 Genius!','🚀 Correct!','💡 Smart!','✨ Perfect!'];
+    fb.textContent=celebrations[Math.floor(Math.random()*celebrations.length)];
+    fb.className='feedback correct-fb show';
   } else {
+    questionResults[currentQ]=false;
     btns[selected].classList.add('wrong');
-    fb.textContent = `❌ Oops! The answer was ${QUESTION_SETS[currentDay][currentQ].options[correct]}`;
-    fb.className = 'feedback wrong-fb show';
+    const msg=char.sadMsgs[Math.floor(Math.random()*char.sadMsgs.length)];
+    showChar(char.neutral,char.name,char.sadEm,msg,false);
+    const fb=document.getElementById('feedback');
+    fb.textContent=`❌ The answer was: ${correctText}`;
+    fb.className='feedback wrong-fb show';
   }
 
-  const qs = QUESTION_SETS[currentDay];
-  nb.className = 'next-btn show';
-  nb.textContent = currentQ < qs.length - 1 ? 'Next Question →' : 'See My Score! 🏆';
+  const qs=QUESTION_SETS[currentDay];
+  const nb=document.getElementById('nextBtn');
+  nb.className='next-btn show';
+  nb.textContent=currentQ<qs.length-1?'Next Question →':'See My Score! 🏆';
+  updateProgressBlocks();
 }
 
-// ─── NEXT QUESTION ────────────────────────────────────────────
-function nextQuestion() {
-  const qs = QUESTION_SETS[currentDay];
+// ─── SHOW CHARACTER ───────────────────────────────────────────
+function showChar(emoji,name,emotion,msg,isCorrect){
+  const panel=document.getElementById('charPanel');
+  const av=document.getElementById('charAvatar');
+  av.textContent=emoji;
+  av.className='char-avatar'+(isCorrect?'':' shake');
+  document.getElementById('charName').textContent=name+' says:';
+  const em=document.getElementById('charEmotion');
+  em.textContent=emotion;em.className='char-emotion'+(isCorrect?' correct-em':' wrong-em');
+  document.getElementById('charMsg').textContent=msg;
+  panel.className='char-panel show';
+}
+
+// ─── NEXT ─────────────────────────────────────────────────────
+function nextQuestion(){
   currentQ++;
-  if (currentQ >= qs.length) {
-    showResult();
-  } else {
-    renderQuestion();
-  }
+  if(currentQ>=QUESTION_SETS[currentDay].length)showResult();
+  else renderQuestion();
 }
 
-// ─── SHOW RESULT ──────────────────────────────────────────────
-function showResult() {
-  saveScore(currentDay, score);
-
-  document.getElementById('quizBody').style.display = 'none';
-  const rs = document.getElementById('resultScreen');
-  rs.classList.add('show');
-
-  document.getElementById('progressBar').style.width = '100%';
-
-  const pct = score / 20;
-  let trophy, msg, stars;
-  if (score === 20)      { trophy='🏆'; msg='PERFECT! You are a Math GOD! 🧠⚡'; stars='⭐⭐⭐⭐⭐'; }
-  else if (pct >= 0.9)   { trophy='🥇'; msg='Outstanding! Almost perfect! 🔥'; stars='⭐⭐⭐⭐⭐'; }
-  else if (pct >= 0.75)  { trophy='🥈'; msg='Great job! Keep pushing! 💪'; stars='⭐⭐⭐⭐'; }
-  else if (pct >= 0.6)   { trophy='🥉'; msg='Good effort! Practice makes perfect! 📚'; stars='⭐⭐⭐'; }
-  else                   { trophy='💪'; msg='Keep trying! You\'ve got this! 🚀'; stars='⭐⭐'; }
-
-  document.getElementById('resTrophy').textContent = trophy;
-  document.getElementById('resScore').textContent = score;
-  document.getElementById('resStars').textContent = stars;
-  document.getElementById('resMsg').textContent = msg;
-
-  if (pct >= 0.9) launchConfetti();
-
-  buildTabs();
-  renderHistory();
+// ─── RESULT ───────────────────────────────────────────────────
+function showResult(){
+  saveScore(currentDay,score);
+  document.getElementById('quizBody').style.display='none';
+  const rs=document.getElementById('resultScreen');rs.classList.add('show');
+  document.getElementById('progressBar').style.width='100%';
+  const pct=score/20;
+  let trophy,msg,stars,charEmoji;
+  if(score===20){trophy='🏆';msg='PERFECT! 100%! You are a Mathematics GOD! 🧠⚡';stars='⭐⭐⭐⭐⭐';charEmoji='🤩';}
+  else if(pct>=.9){trophy='🥇';msg='Outstanding! Almost flawless! 🔥';stars='⭐⭐⭐⭐⭐';charEmoji='😄';}
+  else if(pct>=.75){trophy='🥈';msg='Brilliant! Keep pushing, superstar! 💪';stars='⭐⭐⭐⭐';charEmoji='😊';}
+  else if(pct>=.6){trophy='🥉';msg='Good effort! You are getting stronger! 📚';stars='⭐⭐⭐';charEmoji='😐';}
+  else{trophy='💪';msg='Never give up! Try again and beat your score!';stars='⭐⭐';charEmoji='😤';}
+  document.getElementById('resTrophy').textContent=trophy;
+  document.getElementById('resChar').textContent=charEmoji;
+  document.getElementById('resScore').textContent=score;
+  document.getElementById('resStars').textContent=stars;
+  document.getElementById('resMsg').textContent=msg;
+  if(pct>=.9)launchConfetti();
+  buildTabs();renderHistory();
 }
 
 // ─── RESTART ─────────────────────────────────────────────────
-function restartDay() {
-  currentQ = 0; score = 0; answered = false;
+function restartDay(){
+  currentQ=0;score=0;answered=false;questionResults=[];
   document.getElementById('resultScreen').classList.remove('show');
-  document.getElementById('quizBody').style.display = '';
-  document.getElementById('liveScore').textContent = '0';
-  renderQuestion();
+  document.getElementById('quizBody').style.display='';
+  document.getElementById('liveScore').textContent='0';
+  buildProgressBlocks();renderQuestion();
 }
 
 // ─── HISTORY ─────────────────────────────────────────────────
-function renderHistory() {
-  const list = document.getElementById('historyList');
-  let html = '';
-  let any = false;
-  DATES.forEach((d, i) => {
-    const s = getScore(i);
-    if (s === null) return;
-    any = true;
-    const pct = Math.round((s / 20) * 100);
-    const stars = s === 20 ? '⭐⭐⭐⭐⭐' : s >= 18 ? '⭐⭐⭐⭐⭐' : s >= 15 ? '⭐⭐⭐⭐' : s >= 12 ? '⭐⭐⭐' : '⭐⭐';
-    html += `<div class="score-row${s===20?' perfect':''}">
-      <div>
-        <div class="sr-date">${fmtDate(d)} &nbsp;<span style="opacity:.5">·</span>&nbsp; ${DAY_NAMES[d.getDay()]}</div>
-        <div class="sr-day">Day ${i+1}</div>
-      </div>
-      <div style="text-align:right">
-        <div class="sr-score">${s} / 20</div>
-        <div class="sr-pct">${pct}%</div>
-        <div class="sr-stars">${stars}</div>
-      </div>
-    </div>`;
+function renderHistory(){
+  const list=document.getElementById('historyList');let html='';let any=false;
+  DATES.forEach((d,i)=>{
+    const s=getScore(i);if(s===null)return;any=true;
+    const pct=Math.round((s/20)*100);
+    const stars=s===20?'⭐⭐⭐⭐⭐':s>=18?'⭐⭐⭐⭐⭐':s>=15?'⭐⭐⭐⭐':s>=12?'⭐⭐⭐':'⭐⭐';
+    html+=`<div class="score-row${s===20?' perfect':''}"><div><div class="sr-date">${fmtDate(d)}</div><div class="sr-day-label">Day ${i+1} — ${DAY_NAMES[d.getDay()]}</div></div><div style="text-align:right"><div class="sr-score">${s}/20</div><div class="sr-pct">${pct}%</div><div class="sr-stars">${stars}</div></div></div>`;
   });
-  list.innerHTML = any ? html : '<div class="history-empty">No scores yet — complete a quiz to see results here! 🎯</div>';
+  list.innerHTML=any?html:'<div class="history-empty">No scores yet — finish a quiz to see results here! 🎯</div>';
 }
 
 // ─── CONFETTI ─────────────────────────────────────────────────
-function launchConfetti() {
-  const canvas = document.getElementById('confetti-canvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  const pieces = Array.from({length: 120}, () => ({
-    x: Math.random() * canvas.width,
-    y: Math.random() * -200,
-    r: Math.random() * 8 + 4,
-    c: `hsl(${Math.random()*360},90%,60%)`,
-    vx: (Math.random()-0.5)*4,
-    vy: Math.random()*4+2,
-    rot: Math.random()*360,
-    rv: (Math.random()-0.5)*6,
-  }));
-
-  let frame = 0;
-  function draw() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    pieces.forEach(p => {
-      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
-      ctx.fillStyle = p.c;
-      ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r);
-      ctx.restore();
-      p.x += p.vx; p.y += p.vy; p.rot += p.rv;
-    });
-    frame++;
-    if (frame < 120) requestAnimationFrame(draw);
-    else ctx.clearRect(0,0,canvas.width,canvas.height);
-  }
+function launchConfetti(){
+  const canvas=document.getElementById('confetti-canvas');
+  const ctx=canvas.getContext('2d');
+  canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+  const pieces=Array.from({length:150},()=>({x:Math.random()*canvas.width,y:Math.random()*-300,r:Math.random()*8+4,c:`hsl(${Math.random()*360},90%,60%)`,vx:(Math.random()-.5)*5,vy:Math.random()*5+2,rot:Math.random()*360,rv:(Math.random()-.5)*7}));
+  let frame=0;
+  function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);pieces.forEach(p=>{ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);ctx.fillStyle=p.c;ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r);ctx.restore();p.x+=p.vx;p.y+=p.vy;p.rot+=p.rv;});frame++;if(frame<180)requestAnimationFrame(draw);else ctx.clearRect(0,0,canvas.width,canvas.height);}
   draw();
 }
 
 // ─── INIT ─────────────────────────────────────────────────────
-buildTabs();
-renderQuestion();
-renderHistory();
+questionResults=[];
+buildTabs();buildProgressBlocks();renderQuestion();renderHistory();
 </script>
 </body>
 </html>
