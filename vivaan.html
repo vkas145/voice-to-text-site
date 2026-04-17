@@ -3,145 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vivaan's Math Challenge! 🧠⚡</title>
+<title>Vivaan's Quiz Challenge! 🌟</title>
+<!-- GTM -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N5BNNVFL');</script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
-  :root{--bg:#0f0c29;--card:#1a1740;--accent:#f7c948;--green:#22d67a;--red:#ff5e5e;--blue:#4fc3f7;--purple:#b39ddb}
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;color:white;overflow-x:hidden}
-  body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(1px 1px at 15% 25%,rgba(255,255,255,.5) 0%,transparent 100%),radial-gradient(1px 1px at 85% 15%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 45% 65%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1px 1px at 5% 85%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 95% 75%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1px 1px at 55% 45%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 30% 95%,rgba(255,255,255,.3) 0%,transparent 100%);pointer-events:none;z-index:0}
-  .wrapper{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:20px 16px 60px}
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+:root{--bg:#0f0c29;--card:#1a1740;--accent:#f7c948;--green:#22d67a;--red:#ff5e5e;--blue:#4fc3f7;--purple:#b39ddb;--orange:#ff9f43}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;color:white;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(1px 1px at 15% 25%,rgba(255,255,255,.5) 0%,transparent 100%),radial-gradient(1px 1px at 85% 15%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 45% 65%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1px 1px at 5% 85%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 95% 75%,rgba(255,255,255,.3) 0%,transparent 100%);pointer-events:none;z-index:0}
+.wrapper{position:relative;z-index:1;max-width:840px;margin:0 auto;padding:16px 14px 90px}
 
-  /* Header */
-  .header{text-align:center;padding:28px 0 20px}
-  .header .crown{font-size:48px;animation:bounce 1.6s infinite;display:block}
-  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-  .header h1{font-size:clamp(26px,5vw,40px);font-weight:900;letter-spacing:-1px;line-height:1.1}
-  .header h1 span{color:var(--accent)}
-  .header p{margin-top:7px;font-size:14px;color:#b0aed0}
+/* Header */
+.header{text-align:center;padding:22px 0 14px}
+.header .crown{font-size:42px;animation:bounce 1.6s infinite;display:block}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.header h1{font-size:clamp(24px,5vw,38px);font-weight:900;letter-spacing:-1px;line-height:1.1}
+.header h1 span{color:var(--accent)}
+.header p{margin-top:5px;font-size:13px;color:#b0aed0}
 
-  /* Day tabs */
-  .day-tabs{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:20px 0 16px}
-  .day-tab{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:50px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;color:#b0aed0;white-space:nowrap;line-height:1.4}
-  .day-tab:hover{background:rgba(247,201,72,.15);border-color:var(--accent);color:var(--accent)}
-  .day-tab.active{background:var(--accent);border-color:var(--accent);color:#0f0c29}
-  .day-tab.done{background:rgba(34,214,122,.15);border-color:var(--green);color:var(--green)}
-  .day-tab.done.active{background:var(--green);color:#0f0c29}
+/* Subject Tabs */
+.subject-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0 18px}
+.sub-tab{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:50px;padding:9px 18px;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;color:#b0aed0;font-family:'Nunito',sans-serif}
+.sub-tab:hover{background:rgba(247,201,72,.15);border-color:var(--accent);color:var(--accent)}
+.sub-tab.active{border-color:var(--accent);color:#0f0c29;background:var(--accent)}
+.sub-tab[data-sub="english"].active{background:#4fc3f7;border-color:#4fc3f7;color:#0f0c29}
+.sub-tab[data-sub="evs"].active{background:#22d67a;border-color:#22d67a;color:#0f0c29}
+.sub-tab[data-sub="gk"].active{background:#b39ddb;border-color:#b39ddb;color:#0f0c29}
 
-  /* Main layout: sidebar + quiz */
-  .page-layout{display:flex;gap:14px;align-items:flex-start}
+/* Day tabs */
+.day-tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:0 0 14px}
+.day-tab{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:50px;padding:6px 13px;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;color:#b0aed0;white-space:nowrap;font-family:'Nunito',sans-serif}
+.day-tab:hover{background:rgba(247,201,72,.15);border-color:var(--accent);color:var(--accent)}
+.day-tab.active{background:var(--accent);border-color:var(--accent);color:#0f0c29}
+.day-tab.done{background:rgba(34,214,122,.15);border-color:var(--green);color:var(--green)}
+.day-tab.done.active{background:var(--green);color:#0f0c29}
 
-  /* Progress sidebar */
-  .progress-sidebar{flex-shrink:0;width:44px;display:flex;flex-direction:column;gap:5px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:12px 6px}
-  .q-block{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:rgba(255,255,255,.3);transition:all .35s;cursor:default}
-  .q-block.current{border-color:var(--accent);color:var(--accent);animation:qpulse 1.2s infinite;background:rgba(247,201,72,.12)}
-  .q-block.correct{background:rgba(34,214,122,.25);border-color:var(--green);color:var(--green)}
-  .q-block.wrong{background:rgba(255,94,94,.25);border-color:var(--red);color:var(--red)}
-  @keyframes qpulse{0%,100%{box-shadow:0 0 0 0 rgba(247,201,72,.4)}50%{box-shadow:0 0 0 5px rgba(247,201,72,0)}}
+/* Timer */
+.timer-bar{text-align:center;margin-bottom:12px}
+.timer-display{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50px;padding:6px 16px;font-size:16px;font-weight:900;color:var(--accent)}
 
-  /* Quiz card */
-  .quiz-area{flex:1;min-width:0}
-  .quiz-card{background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 20px;margin-bottom:20px}
-  .day-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
-  .day-title{font-size:17px;font-weight:800;color:var(--accent)}
-  .day-meta{font-size:12px;color:#8884b0}
-  .live-score{display:inline-flex;align-items:center;gap:5px;background:rgba(34,214,122,.12);border:1px solid rgba(34,214,122,.3);border-radius:50px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--green)}
-  .progress-bar-wrap{background:rgba(255,255,255,.08);border-radius:50px;height:8px;margin-bottom:20px;overflow:hidden}
-  .progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),#ff9f43);border-radius:50px;transition:width .4s}
-  .q-counter{font-size:11px;font-weight:700;color:#8884b0;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}
-  .question-text{font-size:clamp(16px,3.5vw,22px);font-weight:800;line-height:1.45;margin-bottom:20px;min-height:60px}
-  .question-emoji{font-size:28px;display:block;margin-bottom:6px}
+/* Layout */
+.page-layout{display:flex;gap:12px;align-items:flex-start}
+.progress-sidebar{flex-shrink:0;width:42px;display:flex;flex-direction:column;gap:5px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:10px 5px}
+.q-block{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:rgba(255,255,255,.3);transition:all .35s}
+.q-block.current{border-color:var(--accent);color:var(--accent);animation:qpulse 1.2s infinite;background:rgba(247,201,72,.12)}
+.q-block.correct{background:rgba(34,214,122,.25);border-color:var(--green);color:var(--green)}
+.q-block.wrong{background:rgba(255,94,94,.25);border-color:var(--red);color:var(--red)}
+@keyframes qpulse{0%,100%{box-shadow:0 0 0 0 rgba(247,201,72,.4)}50%{box-shadow:0 0 0 5px rgba(247,201,72,0)}}
 
-  /* Options */
-  .options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-  .opt-btn{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:14px;padding:14px 10px;font-size:16px;font-weight:800;color:white;cursor:pointer;transition:all .2s;text-align:center;font-family:'Nunito',sans-serif}
-  .opt-btn:hover:not(:disabled){background:rgba(247,201,72,.15);border-color:var(--accent);transform:scale(1.03)}
-  .opt-btn.correct{background:rgba(34,214,122,.25);border-color:var(--green);color:var(--green)}
-  .opt-btn.wrong{background:rgba(255,94,94,.2);border-color:var(--red);color:var(--red)}
-  .opt-btn:disabled{cursor:not-allowed}
+/* Quiz card */
+.quiz-area{flex:1;min-width:0}
+.quiz-card{background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:22px 18px;margin-bottom:16px}
+.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.day-title{font-size:16px;font-weight:800;color:var(--accent)}
+.day-meta{font-size:11px;color:#8884b0;margin-top:2px}
+.live-score{display:inline-flex;align-items:center;gap:5px;background:rgba(34,214,122,.12);border:1px solid rgba(34,214,122,.3);border-radius:50px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--green)}
+.progress-bar-wrap{background:rgba(255,255,255,.08);border-radius:50px;height:7px;margin-bottom:18px;overflow:hidden}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),#ff9f43);border-radius:50px;transition:width .4s}
+.q-counter{font-size:11px;font-weight:700;color:#8884b0;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.question-text{font-size:clamp(15px,3.5vw,21px);font-weight:800;line-height:1.45;margin-bottom:18px;min-height:56px}
 
-  /* Character reaction panel */
-  .char-panel{display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 18px;margin-bottom:14px;align-items:center;gap:14px;animation:slideUp .35s ease}
-  .char-panel.show{display:flex}
-  @keyframes slideUp{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
-  .char-avatar{font-size:52px;line-height:1;animation:charBounce .5s ease}
-  @keyframes charBounce{0%{transform:scale(0.6)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
-  .char-avatar.shake{animation:charShake .5s ease}
-  @keyframes charShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
-  .char-info{flex:1}
-  .char-name{font-size:12px;font-weight:700;color:#8884b0;text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px}
-  .char-emotion{font-size:20px;font-weight:900}
-  .char-emotion.correct-em{color:var(--green)}
-  .char-emotion.wrong-em{color:var(--red)}
-  .char-msg{font-size:13px;color:#b0aed0;margin-top:2px;font-weight:600}
+/* Options */
+.options{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
+.opt-btn{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:14px;padding:13px 9px;font-size:15px;font-weight:800;color:white;cursor:pointer;transition:all .2s;text-align:center;font-family:'Nunito',sans-serif}
+.opt-btn:hover:not(:disabled){background:rgba(247,201,72,.15);border-color:var(--accent);transform:scale(1.03)}
+.opt-btn.correct{background:rgba(34,214,122,.25);border-color:var(--green);color:var(--green)}
+.opt-btn.wrong{background:rgba(255,94,94,.2);border-color:var(--red);color:var(--red)}
+.opt-btn:disabled{cursor:not-allowed}
 
-  /* Feedback */
-  .feedback{text-align:center;font-size:18px;font-weight:900;padding:10px 16px;border-radius:12px;margin-bottom:14px;display:none}
-  .feedback.show{display:block;animation:popIn .3s}
-  @keyframes popIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
-  .feedback.correct-fb{background:rgba(34,214,122,.15);color:var(--green)}
-  .feedback.wrong-fb{background:rgba(255,94,94,.12);color:var(--red)}
-  .next-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--accent),#ff9f43);color:#0f0c29;font-size:16px;font-weight:900;border:none;border-radius:14px;cursor:pointer;font-family:'Nunito',sans-serif;transition:transform .15s,box-shadow .15s;display:none}
-  .next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(247,201,72,.35)}
-  .next-btn.show{display:block;animation:popIn .3s}
+/* Character panel — ALWAYS visible */
+.char-panel{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:13px 16px;margin-bottom:13px;display:flex;align-items:center;gap:12px}
+.char-avatar{font-size:50px;line-height:1;transition:transform .3s}
+.char-avatar.pop{animation:charPop .4s ease}
+.char-avatar.shake{animation:charShake .5s ease}
+@keyframes charPop{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes charShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.char-info{flex:1}
+.char-name{font-size:11px;font-weight:700;color:#8884b0;text-transform:uppercase;letter-spacing:.8px;margin-bottom:2px}
+.char-emotion{font-size:18px;font-weight:900}
+.char-emotion.correct-em{color:var(--green)}
+.char-emotion.wrong-em{color:var(--red)}
+.char-emotion.neutral-em{color:#b0aed0}
+.char-msg{font-size:12px;color:#b0aed0;margin-top:2px;font-weight:600}
 
-  /* Result */
-  .result-screen{display:none;text-align:center;padding:10px 0}
-  .result-screen.show{display:block;animation:popIn .4s}
-  .result-trophy{font-size:68px;display:block;margin-bottom:10px}
-  .result-score{font-size:52px;font-weight:900;color:var(--accent);line-height:1}
-  .result-score span{font-size:20px;color:#b0aed0;font-weight:600}
-  .result-stars{font-size:32px;letter-spacing:4px;margin:10px 0}
-  .result-msg{font-size:18px;font-weight:700;margin-bottom:18px}
-  .result-char{font-size:64px;animation:bounce 1s infinite;display:block;margin-bottom:8px}
-  .restart-btn{background:linear-gradient(135deg,var(--blue),#7986cb);color:white;border:none;border-radius:14px;padding:12px 28px;font-size:15px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:transform .15s}
-  .restart-btn:hover{transform:translateY(-2px)}
+/* Feedback + Next */
+.feedback{text-align:center;font-size:17px;font-weight:900;padding:9px 14px;border-radius:12px;margin-bottom:12px;display:none}
+.feedback.show{display:block;animation:popIn .3s}
+@keyframes popIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+.feedback.correct-fb{background:rgba(34,214,122,.15);color:var(--green)}
+.feedback.wrong-fb{background:rgba(255,94,94,.12);color:var(--red)}
+.next-btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--accent),#ff9f43);color:#0f0c29;font-size:15px;font-weight:900;border:none;border-radius:14px;cursor:pointer;font-family:'Nunito',sans-serif;transition:transform .15s;display:none}
+.next-btn:hover{transform:translateY(-2px)}
+.next-btn.show{display:block;animation:popIn .3s}
 
-  /* History */
-  .history-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:22px;margin-top:8px}
-  .history-card h2{font-size:18px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:7px}
-  .score-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 16px;margin-bottom:9px}
-  .sr-date{font-size:13px;color:#b0aed0;font-weight:600}
-  .sr-day-label{font-size:12px;color:#8884b0;margin-top:2px}
-  .sr-score{font-size:20px;font-weight:900;color:var(--accent)}
-  .sr-pct{font-size:11px;color:#8884b0}
-  .sr-stars{font-size:16px;letter-spacing:2px}
-  .score-row.perfect .sr-score{color:var(--green)}
-  .history-empty{font-size:14px;color:#8884b0;text-align:center;padding:18px}
+/* Result */
+.result-screen{display:none;text-align:center;padding:10px 0}
+.result-screen.show{display:block;animation:popIn .4s}
+.result-char{font-size:64px;display:block;margin-bottom:8px;animation:bounce 1s infinite}
+.result-trophy{font-size:56px;display:block;margin-bottom:8px}
+.result-score{font-size:48px;font-weight:900;color:var(--accent);line-height:1}
+.result-score span{font-size:18px;color:#b0aed0;font-weight:600}
+.result-stars{font-size:28px;letter-spacing:4px;margin:10px 0}
+.result-msg{font-size:17px;font-weight:700;margin-bottom:16px}
+.restart-btn{background:linear-gradient(135deg,var(--blue),#7986cb);color:white;border:none;border-radius:14px;padding:11px 26px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
 
-  /* Confetti */
-  #confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999}
+/* Floating Scoreboard Button */
+.scoreboard-fab{position:fixed;bottom:22px;right:22px;z-index:100;background:linear-gradient(135deg,var(--accent),#ff9f43);color:#0f0c29;border:none;border-radius:50px;padding:12px 20px;font-size:15px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 20px rgba(247,201,72,.4);display:flex;align-items:center;gap:7px;transition:transform .15s}
+.scoreboard-fab:hover{transform:scale(1.05)}
 
-  @media(max-width:560px){
-    .page-layout{flex-direction:column}
-    .progress-sidebar{width:100%;flex-direction:row;flex-wrap:wrap;padding:10px;gap:4px;justify-content:center}
-    .q-block{width:28px;height:28px;font-size:9px;border-radius:6px}
-    .options{grid-template-columns:1fr 1fr}
-    .opt-btn{padding:12px 8px;font-size:14px}
-    .quiz-card{padding:18px 14px}
-  }
+/* Scoreboard Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.show{display:flex}
+.modal-box{background:#1a1740;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:24px 20px;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;position:relative}
+.modal-close{position:absolute;top:14px;right:16px;background:rgba(255,255,255,.1);border:none;color:white;border-radius:50%;width:32px;height:32px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.modal-title{font-size:20px;font-weight:900;margin-bottom:16px;color:var(--accent)}
+.modal-sub-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
+.modal-sub-tab{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;color:#b0aed0;font-family:'Nunito',sans-serif;transition:all .2s}
+.modal-sub-tab.active{background:var(--accent);border-color:var(--accent);color:#0f0c29}
+.score-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:11px 14px;margin-bottom:8px}
+.sr-date{font-size:13px;color:#b0aed0;font-weight:600}
+.sr-day{font-size:11px;color:#8884b0;margin-top:2px}
+.sr-score{font-size:19px;font-weight:900;color:var(--accent)}
+.sr-stars{font-size:14px}
+.score-row.perfect .sr-score{color:var(--green)}
+.history-empty{font-size:13px;color:#8884b0;text-align:center;padding:20px}
+
+/* Confetti */
+#confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999}
+
+@media(max-width:560px){
+  .page-layout{flex-direction:column}
+  .progress-sidebar{width:100%;flex-direction:row;flex-wrap:wrap;padding:8px;gap:4px;justify-content:center}
+  .q-block{width:28px;height:28px;font-size:9px}
+  .options{grid-template-columns:1fr 1fr}
+  .opt-btn{padding:11px 7px;font-size:13px}
+  .quiz-card{padding:16px 12px}
+}
 </style>
 </head>
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5BNNVFL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <canvas id="confetti-canvas"></canvas>
+
 <div class="wrapper">
 
   <div class="header">
     <span class="crown">👑</span>
-    <h1>Vivaan's <span>Math Challenges!</span></h1>
-    <p>7 days · 20 questions each · Tables 2–20 · Millions & Billions · Abacus 🚀</p>
+    <h1>Vivaan's <span>Quiz Challenge!</span></h1>
+    <p>Math · English · EVS · GK — 20 questions per day · 7 days 🚀</p>
   </div>
 
+  <!-- Subject Tabs -->
+  <div class="subject-tabs" id="subjectTabs">
+    <button class="sub-tab active" data-sub="math" onclick="switchSubject('math')">🔢 Math</button>
+    <button class="sub-tab" data-sub="english" onclick="switchSubject('english')">📖 English</button>
+    <button class="sub-tab" data-sub="evs" onclick="switchSubject('evs')">🌿 EVS</button>
+    <button class="sub-tab" data-sub="gk" onclick="switchSubject('gk')">🌍 GK</button>
+  </div>
+
+  <!-- Day tabs -->
   <div class="day-tabs" id="dayTabs"></div>
 
+  <!-- Timer -->
+  <div class="timer-bar">
+    <div class="timer-display">⏱ <span id="timerDisplay">0:00</span></div>
+  </div>
+
   <div class="page-layout">
-    <!-- Left progress blocks -->
     <div class="progress-sidebar" id="progressSidebar"></div>
 
-    <!-- Quiz area -->
     <div class="quiz-area">
       <div class="quiz-card">
-        <div class="day-header">
+        <div class="card-top">
           <div>
             <div class="day-title" id="dayTitle"></div>
             <div class="day-meta" id="dayMeta"></div>
@@ -154,14 +188,17 @@
           <div class="q-counter" id="qCounter">Question 1 of 20</div>
           <div class="question-text" id="questionText"></div>
           <div class="options" id="optionsGrid"></div>
+
+          <!-- Character panel — always visible -->
           <div class="char-panel" id="charPanel">
             <div class="char-avatar" id="charAvatar"></div>
             <div class="char-info">
               <div class="char-name" id="charName"></div>
-              <div class="char-emotion" id="charEmotion"></div>
-              <div class="char-msg" id="charMsg"></div>
+              <div class="char-emotion neutral-em" id="charEmotion">Waiting for your answer...</div>
+              <div class="char-msg" id="charMsg">Go on, give it your best shot! 💪</div>
             </div>
           </div>
+
           <div class="feedback" id="feedback"></div>
           <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question →</button>
         </div>
@@ -175,420 +212,1013 @@
           <button class="restart-btn" onclick="restartDay()">🔄 Try Again</button>
         </div>
       </div>
-
-      <div class="history-card">
-        <h2>📊 Score Board</h2>
-        <div id="historyList"></div>
-      </div>
     </div>
   </div>
 
 </div>
 
+<!-- Floating Scoreboard Button -->
+<button class="scoreboard-fab" onclick="openScoreboard()">🏆 Scoreboard</button>
+
+<!-- Scoreboard Modal -->
+<div class="modal-overlay" id="scoreModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeScoreboard()">✕</button>
+    <div class="modal-title">🏆 Score Board</div>
+    <div class="modal-sub-tabs" id="modalSubTabs">
+      <button class="modal-sub-tab active" data-sub="math" onclick="showModalSub('math')">🔢 Math</button>
+      <button class="modal-sub-tab" data-sub="english" onclick="showModalSub('english')">📖 English</button>
+      <button class="modal-sub-tab" data-sub="evs" onclick="showModalSub('evs')">🌿 EVS</button>
+      <button class="modal-sub-tab" data-sub="gk" onclick="showModalSub('gk')">🌍 GK</button>
+    </div>
+    <div id="modalScoreList"></div>
+  </div>
+</div>
+
 <script>
-// ─── DATES ────────────────────────────────────────────────────
+// ─── DATES ─────────────────────────────────────────────────────
 function getDates(){const a=[];const n=new Date();const b=new Date(n.getFullYear(),n.getMonth(),n.getDate());for(let i=0;i<7;i++){const d=new Date(b);d.setDate(b.getDate()+i);a.push(d);}return a;}
 const DATES=getDates();
-const DAY_NAMES=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const MONTH_NAMES=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-function fmtDate(d){return`${d.getDate()} ${MONTH_NAMES[d.getMonth()]} ${d.getFullYear()}`;}
-function dateKey(d){return`${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;}
+const DAY_NAMES=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function fmtDate(d){return`${DAY_NAMES[d.getDay()]} ${d.getDate()} ${MONTH_NAMES[d.getMonth()]}`;}
+function dateKey(sub,d){return`vivaan_v3_${sub}_${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;}
 
-// ─── CHARACTERS ───────────────────────────────────────────────
+// ─── CHARACTERS ────────────────────────────────────────────────
 const CHARS=[
-  {name:"Paddington Bear",neutral:"🐻",happy:"🐻",happyEm:"Paw-some! 🐻🎉",happyMsgs:["That's bearilliant!","Honey for you! 🍯","You're unbearable-ly smart!"],sadEm:"🐻😢",sadMsgs:["Even bears make mistakes!","Shake it off! 🐾","Next one, champ!"]},
-  {name:"Jerry Mouse",neutral:"🐭",happy:"🐭",happyEm:"Cheese! 🧀⭐",happyMsgs:["Squeak squeak! Correct!","Jerry does a happy dance!","You outsmarted Tom AND the question!"],sadEm:"🐭😿",sadMsgs:["Yikes! Even Jerry needs practice!","Tom would say the same thing!","Try again, little mouse!"]},
-  {name:"Tom Cat",neutral:"🐱",happy:"😸",happyEm:"Purrfect! 😸🔥",happyMsgs:["Tom is impressed!","Meow-velous answer!","Even Tom can't argue with that!"],sadEm:"😿",sadMsgs:["Oops! Tom gives a sad meow!","Don't worry, Tom fails too sometimes!","Meow… try harder next time!"]},
-  {name:"Masha",neutral:"👧",happy:"🤩",happyEm:"Hooray Vivaan! 🤩✨",happyMsgs:["Masha is dancing with joy!","You're smarter than the bear!","GENIUS! Masha is amazed!"],sadEm:"😢",sadMsgs:["Masha says: keep going!","Oopsie! You'll get the next one!","Even Masha makes mistakes!"]},
-  {name:"Simba",neutral:"🦁",happy:"🦁",happyEm:"ROAR! 🦁👑",happyMsgs:["The lion king approves!","SIMBA ROARS with pride!","Future king of maths!"],sadEm:"🙁",sadMsgs:["Even Simba had to learn!","Hakuna Matata! Try again!","The pride lands believe in you!"]},
-  {name:"Kermit",neutral:"🐸",happy:"🐸",happyEm:"It's not easy being right! 🐸🌟",happyMsgs:["Kermit does a frog jump!","Ribbit ribbit — CORRECT!","Kermit is OVER THE MOON!"],sadEm:"😕",sadMsgs:["It's not easy… but keep trying!","Ribbit… almost there!","Kermit believes in you!"]},
-  {name:"Super Vivaan",neutral:"🦸",happy:"🦸",happyEm:"SUPERHERO MOVE! 🦸⚡🏆",happyMsgs:["BOSS LEVEL ANSWER!","INVINCIBLE brain activated!","The world's youngest maths superhero!"],sadEm:"💪",sadMsgs:["Superheroes never give up!","POWER UP and try again!","Even heroes miss sometimes!"]}
+  {name:"Paddington Bear",neutral:"🐻",happyMsgs:["Paw-some! 🐻🎉","Honey-sweet correct! 🍯","You're un-bear-ably smart!"],sadMsgs:["Even bears slip! 🐾","Shake it off, champ!","Next one — paws crossed! 🐻"]},
+  {name:"Jerry Mouse",neutral:"🐭",happyMsgs:["Squeaky genius! 🐭✨","Jerry approves! 🧀","You outsmarted Tom too!"],sadMsgs:["Jerry says try again!","Even I get chased sometimes 🐭","Cheese will come! 🧀"]},
+  {name:"Tom Cat",neutral:"🐱",happyMsgs:["Purr-fect! 🐱🎊","Tom is impressed! ✨","Meow-nificent answer!"],sadMsgs:["Hiss! Close one! 😾","Tom says read again!","Even cats land on all fours 🐱"]},
+  {name:"Masha",neutral:"👧",happyMsgs:["Masha shouts YES! 👧🎉","You're as smart as Masha!","Dancing time! 💃"],sadMsgs:["Masha says don't worry!","Try again — Masha believes in you!","We make mistakes too! 👧"]},
+  {name:"Simba",neutral:"🦁",happyMsgs:["ROAR! Correct! 🦁👑","The Pride Lands cheer for you!","Remember who you are — brilliant!"],sadMsgs:["Even Simba learns from Rafiki!","Hakuna Matata — next one! 🦁","Keep going, future king!"]},
+  {name:"Super Vivaan",neutral:"🦸",happyMsgs:["SUPERHERO move! 🦸⚡","Vivaan saves the day!","Cape ON — brain BLAZING! 🌟"],sadMsgs:["Even heroes have off days!","Power UP and try again! 🦸","You've got this, hero! ⚡"]}
 ];
 
-// ─── QUESTION SETS ────────────────────────────────────────────
-// options[0] = always the correct answer (shuffled on render)
-const QUESTION_SETS=[
+// ─── QUESTION DATA ─────────────────────────────────────────────
+// Format: { q:"question text", o:["CORRECT","wrong1","wrong2","wrong3"], a:0 }
+// o[0] is always correct; options are shuffled before display
 
-// DAY 1 — Tables 2–5, Addition, Subtraction, Abacus Intro
+const ALL_QUESTIONS = {
+
+math: [
+// Day 0 — Tables 2-5 + Abacus Intro
 [
-{e:"✌️",t:"2 × 8 = ?",o:["16","14","18","12"],a:0},
-{e:"3️⃣",t:"3 × 7 = ?",o:["21","18","24","27"],a:0},
-{e:"4️⃣",t:"4 × 6 = ?",o:["24","20","28","16"],a:0},
-{e:"5️⃣",t:"5 × 9 = ?",o:["45","40","50","35"],a:0},
-{e:"✌️",t:"2 × 15 = ?",o:["30","28","32","25"],a:0},
-{e:"3️⃣",t:"3 × 12 = ?",o:["36","33","30","39"],a:0},
-{e:"4️⃣",t:"4 × 9 = ?",o:["36","32","40","27"],a:0},
-{e:"5️⃣",t:"5 × 12 = ?",o:["60","55","50","65"],a:0},
-{e:"🧮",t:"Abacus 🧮 — TENS rod: 2 beads, ONES rod: 7 beads. What number?",o:["27","72","207","720"],a:0},
-{e:"✌️",t:"2 × 13 = ?",o:["26","24","28","22"],a:0},
-{e:"🐻",t:"A bear eats 4 jars of honey each day. In 5 days he eats how many jars?",o:["20","16","24","25"],a:0},
-{e:"3️⃣",t:"3 × 11 = ?",o:["33","30","36","27"],a:0},
-{e:"🍕",t:"74 + 38 = ?",o:["112","102","122","110"],a:0},
-{e:"4️⃣",t:"4 × 8 = ?",o:["32","28","36","24"],a:0},
-{e:"🎯",t:"100 − 47 = ?",o:["53","63","43","57"],a:0},
-{e:"5️⃣",t:"5 × 7 = ?",o:["35","30","40","25"],a:0},
-{e:"🧮",t:"Abacus 🧮 — HUNDREDS: 1 bead, TENS: 3 beads, ONES: 5 beads. What number?",o:["135","153","315","531"],a:0},
-{e:"✌️",t:"2 × 17 = ?",o:["34","32","36","28"],a:0},
-{e:"🌟",t:"Which times table gives: 8, 16, 24, 32, 40…?",o:["8× table","4× table","2× table","6× table"],a:0},
-{e:"5️⃣",t:"5 × 11 = ?",o:["55","50","60","45"],a:0},
+{q:"2 × 7 = ?",o:["14","12","16","18"],a:0},
+{q:"3 × 8 = ?",o:["24","21","27","18"],a:0},
+{q:"4 × 6 = ?",o:["24","20","28","16"],a:0},
+{q:"5 × 9 = ?",o:["45","40","50","35"],a:0},
+{q:"2 × 12 = ?",o:["24","22","20","26"],a:0},
+{q:"3 × 11 = ?",o:["33","30","36","27"],a:0},
+{q:"4 × 9 = ?",o:["36","32","40","28"],a:0},
+{q:"5 × 7 = ?",o:["35","30","40","25"],a:0},
+{q:"How many beads are on an abacus rod if it shows the number 7?",o:["7","3","10","5"],a:0},
+{q:"On an abacus, which rod shows ONES?",o:["Rightmost rod","Leftmost rod","Middle rod","Top rod"],a:0},
+{q:"2 × 2 × 2 = ?",o:["8","6","4","12"],a:0},
+{q:"If you have 4 bags with 5 sweets each, how many sweets total?",o:["20","15","25","18"],a:0},
+{q:"3 × 4 = ?",o:["12","9","15","16"],a:0},
+{q:"5 × 5 = ?",o:["25","20","30","15"],a:0},
+{q:"What comes next: 2, 4, 6, 8, ___?",o:["10","9","12","11"],a:0},
+{q:"What comes next: 5, 10, 15, 20, ___?",o:["25","24","30","22"],a:0},
+{q:"4 × 4 = ?",o:["16","12","20","14"],a:0},
+{q:"Vivaan has 3 boxes of 7 crayons each. Total crayons?",o:["21","18","24","14"],a:0},
+{q:"Which number is 2 tens and 4 ones?",o:["24","42","204","20"],a:0},
+{q:"What is 3 × 0?",o:["0","3","1","30"],a:0}
+],
+// Day 1 — Tables 6-10 + Place Value
+[
+{q:"6 × 7 = ?",o:["42","36","48","54"],a:0},
+{q:"7 × 8 = ?",o:["56","49","63","54"],a:0},
+{q:"8 × 6 = ?",o:["48","42","54","40"],a:0},
+{q:"9 × 7 = ?",o:["63","54","72","56"],a:0},
+{q:"10 × 9 = ?",o:["90","80","100","70"],a:0},
+{q:"6 × 9 = ?",o:["54","48","60","63"],a:0},
+{q:"7 × 7 = ?",o:["49","42","56","54"],a:0},
+{q:"8 × 9 = ?",o:["72","64","81","63"],a:0},
+{q:"In 345, what is the digit in the TENS place?",o:["4","3","5","34"],a:0},
+{q:"In 728, what is the HUNDREDS digit?",o:["7","2","8","72"],a:0},
+{q:"What is the place value of 6 in 360?",o:["60","6","600","3"],a:0},
+{q:"Which number has 5 hundreds, 2 tens, 8 ones?",o:["528","582","825","258"],a:0},
+{q:"9 × 9 = ?",o:["81","72","90","63"],a:0},
+{q:"10 × 10 = ?",o:["100","110","90","1000"],a:0},
+{q:"6 × 6 = ?",o:["36","30","42","48"],a:0},
+{q:"What is 400 + 70 + 3?",o:["473","437","374","743"],a:0},
+{q:"8 × 8 = ?",o:["64","56","72","81"],a:0},
+{q:"7 × 6 = ?",o:["42","35","49","48"],a:0},
+{q:"10 × 6 = ?",o:["60","56","66","70"],a:0},
+{q:"Expand 954: 9 is in ___ place",o:["Hundreds","Tens","Ones","Thousands"],a:0}
+],
+// Day 2 — Tables 11-15 + Big Numbers
+[
+{q:"11 × 4 = ?",o:["44","41","48","55"],a:0},
+{q:"12 × 5 = ?",o:["60","55","65","50"],a:0},
+{q:"13 × 3 = ?",o:["39","36","42","33"],a:0},
+{q:"14 × 2 = ?",o:["28","24","32","26"],a:0},
+{q:"15 × 4 = ?",o:["60","55","65","50"],a:0},
+{q:"11 × 11 = ?",o:["121","111","131","112"],a:0},
+{q:"12 × 8 = ?",o:["96","84","108","88"],a:0},
+{q:"13 × 6 = ?",o:["78","72","84","68"],a:0},
+{q:"How many zeros in ONE MILLION (10,00,000)?",o:["6","5","7","4"],a:0},
+{q:"How many zeros in ONE BILLION (100 crore)?",o:["9","8","7","10"],a:0},
+{q:"1,000 = one ___",o:["Thousand","Hundred","Million","Lakh"],a:0},
+{q:"10,000 = ten ___",o:["Thousand","Hundred","Lakh","Million"],a:0},
+{q:"1,00,000 = one ___",o:["Lakh","Thousand","Million","Crore"],a:0},
+{q:"14 × 5 = ?",o:["70","65","75","60"],a:0},
+{q:"15 × 6 = ?",o:["90","85","95","80"],a:0},
+{q:"11 × 9 = ?",o:["99","90","108","88"],a:0},
+{q:"12 × 12 = ?",o:["144","132","156","124"],a:0},
+{q:"13 × 7 = ?",o:["91","84","98","77"],a:0},
+{q:"Which is greater: 1 Lakh or 1 Million?",o:["1 Million","1 Lakh","They are equal","Cannot say"],a:0},
+{q:"15 × 9 = ?",o:["135","120","150","125"],a:0}
+],
+// Day 3 — Tables 16-20 + Word Problems
+[
+{q:"16 × 3 = ?",o:["48","42","54","36"],a:0},
+{q:"17 × 4 = ?",o:["68","64","72","60"],a:0},
+{q:"18 × 5 = ?",o:["90","85","95","80"],a:0},
+{q:"19 × 3 = ?",o:["57","54","60","51"],a:0},
+{q:"20 × 7 = ?",o:["140","120","160","130"],a:0},
+{q:"16 × 6 = ?",o:["96","88","104","80"],a:0},
+{q:"17 × 7 = ?",o:["119","112","126","105"],a:0},
+{q:"18 × 4 = ?",o:["72","64","80","68"],a:0},
+{q:"A class has 19 students. Each gets 4 stickers. How many stickers total?",o:["76","72","80","68"],a:0},
+{q:"A box has 16 chocolates. 5 boxes total chocolates?",o:["80","75","85","70"],a:0},
+{q:"20 × 9 = ?",o:["180","160","200","170"],a:0},
+{q:"19 × 5 = ?",o:["95","90","100","85"],a:0},
+{q:"16 × 8 = ?",o:["128","120","136","112"],a:0},
+{q:"Mia saves ₹17 every day. In 6 days she saves?",o:["₹102","₹96","₹108","₹85"],a:0},
+{q:"17 × 9 = ?",o:["153","144","162","136"],a:0},
+{q:"18 × 6 = ?",o:["108","96","120","102"],a:0},
+{q:"There are 20 rows with 8 seats each. Total seats?",o:["160","150","180","140"],a:0},
+{q:"19 × 7 = ?",o:["133","126","140","119"],a:0},
+{q:"16 × 9 = ?",o:["144","136","152","128"],a:0},
+{q:"20 × 20 = ?",o:["400","200","440","360"],a:0}
+],
+// Day 4 — Division, Fractions, Patterns
+[
+{q:"20 ÷ 4 = ?",o:["5","4","6","8"],a:0},
+{q:"36 ÷ 6 = ?",o:["6","7","5","9"],a:0},
+{q:"48 ÷ 8 = ?",o:["6","5","7","4"],a:0},
+{q:"63 ÷ 7 = ?",o:["9","8","7","6"],a:0},
+{q:"½ of 20 = ?",o:["10","5","15","8"],a:0},
+{q:"¼ of 16 = ?",o:["4","8","2","6"],a:0},
+{q:"⅓ of 21 = ?",o:["7","6","9","3"],a:0},
+{q:"Which fraction is bigger: ½ or ¼?",o:["½","¼","They are equal","Cannot tell"],a:0},
+{q:"81 ÷ 9 = ?",o:["9","8","7","6"],a:0},
+{q:"100 ÷ 10 = ?",o:["10","9","11","5"],a:0},
+{q:"What pattern: 1, 4, 9, 16, ___?",o:["25","20","24","36"],a:0},
+{q:"What pattern: 3, 6, 12, 24, ___?",o:["48","36","42","30"],a:0},
+{q:"72 ÷ 8 = ?",o:["9","8","7","6"],a:0},
+{q:"½ of 50 = ?",o:["25","20","30","10"],a:0},
+{q:"What is ¾ of 12?",o:["9","6","8","10"],a:0},
+{q:"56 ÷ 7 = ?",o:["8","7","9","6"],a:0},
+{q:"What pattern: 100, 90, 80, 70, ___?",o:["60","65","55","50"],a:0},
+{q:"45 ÷ 5 = ?",o:["9","8","7","6"],a:0},
+{q:"What is ⅔ of 18?",o:["12","9","6","15"],a:0},
+{q:"64 ÷ 8 = ?",o:["8","7","9","6"],a:0}
+],
+// Day 5 — Time, Money, Measurement
+[
+{q:"How many minutes in 1 hour?",o:["60","30","100","50"],a:0},
+{q:"How many hours in 1 day?",o:["24","12","20","48"],a:0},
+{q:"How many seconds in 1 minute?",o:["60","30","100","50"],a:0},
+{q:"How many days in a week?",o:["7","5","6","10"],a:0},
+{q:"How many months in a year?",o:["12","10","11","13"],a:0},
+{q:"If it is 3:00 PM now, what time was it 2 hours ago?",o:["1:00 PM","2:00 PM","5:00 PM","4:00 PM"],a:0},
+{q:"₹1 = ___ paise",o:["100","10","50","1000"],a:0},
+{q:"₹5 note × 8 = ₹?",o:["40","35","45","30"],a:0},
+{q:"1 metre = ___ centimetres",o:["100","10","1000","50"],a:0},
+{q:"1 kilometre = ___ metres",o:["1000","100","500","10000"],a:0},
+{q:"1 kilogram = ___ grams",o:["1000","100","500","10000"],a:0},
+{q:"A pencil is 15 cm. A ruler is 30 cm. Difference?",o:["15 cm","10 cm","20 cm","5 cm"],a:0},
+{q:"School starts at 8:00 AM, ends at 2:00 PM. How many hours?",o:["6","5","7","4"],a:0},
+{q:"Vivaan buys a book for ₹45 and pays ₹50. Change?",o:["₹5","₹10","₹15","₹45"],a:0},
+{q:"Half a kilogram = ___ grams",o:["500","250","750","100"],a:0},
+{q:"Which is heavier: 2 kg or 1500 grams?",o:["2 kg","1500 grams","Same","Cannot say"],a:0},
+{q:"How many weeks in a year?",o:["52","48","54","50"],a:0},
+{q:"3:30 PM in clock language: minutes hand points to?",o:["6","3","12","9"],a:0},
+{q:"1 litre = ___ millilitres",o:["1000","100","500","10000"],a:0},
+{q:"A train at 9 AM arrives at 1 PM. Travel time?",o:["4 hours","3 hours","5 hours","6 hours"],a:0}
+],
+// Day 6 — Ultimate Boss Level
+[
+{q:"13 × 14 = ?",o:["182","174","192","168"],a:0},
+{q:"17 × 16 = ?",o:["272","256","288","264"],a:0},
+{q:"144 ÷ 12 = ?",o:["12","11","13","14"],a:0},
+{q:"What is 15% of 100?",o:["15","10","20","5"],a:0},
+{q:"If 1 dozen = 12, what is 3 dozen?",o:["36","24","48","30"],a:0},
+{q:"What is the next prime number after 7?",o:["11","9","10","13"],a:0},
+{q:"Square root of 81 = ?",o:["9","8","7","6"],a:0},
+{q:"Square of 12 = ?",o:["144","124","132","168"],a:0},
+{q:"1 Crore = ___ Lakh",o:["100","10","1000","50"],a:0},
+{q:"What fraction of 1 hour is 15 minutes?",o:["¼","½","⅓","⅙"],a:0},
+{q:"19 × 19 = ?",o:["361","341","381","351"],a:0},
+{q:"If a bag has 5 red, 3 blue, 2 green balls — total?",o:["10","8","11","9"],a:0},
+{q:"Perimeter of a square with side 7 cm?",o:["28 cm","21 cm","14 cm","49 cm"],a:0},
+{q:"Area of rectangle 6 cm × 4 cm?",o:["24 cm²","20 cm²","28 cm²","10 cm²"],a:0},
+{q:"Which is greatest: ½, ¾, ⅓?",o:["¾","½","⅓","All equal"],a:0},
+{q:"1000 × 1000 = ?",o:["1,000,000","10,000","100,000","1,000"],a:0},
+{q:"20 × 18 = ?",o:["360","340","380","320"],a:0},
+{q:"If Vivaan scores 18/20 each day for 5 days, total score?",o:["90","85","100","80"],a:0},
+{q:"Roman numeral for 14?",o:["XIV","XiV","IVX","VIX"],a:0},
+{q:"What is the LCM of 4 and 6?",o:["12","8","24","6"],a:0}
+]
 ],
 
-// DAY 2 — Tables 6–10, Place Value, Abacus
+english: [
+// Day 0 — Alphabet & Phonics
 [
-{e:"6️⃣",t:"6 × 7 = ?",o:["42","36","48","54"],a:0},
-{e:"7️⃣",t:"7 × 8 = ?",o:["56","49","63","54"],a:0},
-{e:"8️⃣",t:"8 × 6 = ?",o:["48","42","54","56"],a:0},
-{e:"9️⃣",t:"9 × 7 = ?",o:["63","54","72","56"],a:0},
-{e:"🔟",t:"10 × 9 = ?",o:["90","80","100","70"],a:0},
-{e:"6️⃣",t:"6 × 9 = ?",o:["54","48","60","63"],a:0},
-{e:"7️⃣",t:"7 × 7 = ?",o:["49","42","56","63"],a:0},
-{e:"8️⃣",t:"8 × 9 = ?",o:["72","64","81","63"],a:0},
-{e:"9️⃣",t:"9 × 8 = ?",o:["72","81","63","54"],a:0},
-{e:"🧮",t:"Abacus 🧮 — HUNDREDS: 3, TENS: 0, ONES: 8. What number?",o:["308","380","803","038"],a:0},
-{e:"🔢",t:"In the number 572, which digit is in the TENS place?",o:["7","5","2","57"],a:0},
-{e:"6️⃣",t:"6 × 12 = ?",o:["72","66","78","60"],a:0},
-{e:"🧮",t:"Abacus 🧮 — HUNDREDS: 4, TENS: 2, ONES: 0. What number?",o:["420","402","240","204"],a:0},
-{e:"🔢",t:"What is the VALUE of 8 in the number 835?",o:["800","80","8","83"],a:0},
-{e:"7️⃣",t:"7 × 9 = ?",o:["63","56","72","54"],a:0},
-{e:"🏗️",t:"Which number has 5 hundreds, 3 tens and 9 ones?",o:["539","593","935","359"],a:0},
-{e:"8️⃣",t:"8 × 7 = ?",o:["56","48","63","72"],a:0},
-{e:"🧮",t:"Abacus 🧮 — TENS: 6, ONES: 4 (no hundreds). What number?",o:["64","46","604","640"],a:0},
-{e:"9️⃣",t:"9 × 6 = ?",o:["54","45","63","48"],a:0},
-{e:"🔢",t:"Write 400 + 70 + 5 as a number",o:["475","457","745","574"],a:0},
+{q:"Which word starts with a VOWEL?",o:["Apple","Ball","Cat","Dog"],a:0},
+{q:"How many vowels in ELEPHANT?",o:["3","2","4","5"],a:0},
+{q:"Which letter comes AFTER 'M' in the alphabet?",o:["N","L","O","P"],a:0},
+{q:"'CAT' rhymes with which word?",o:["Hat","Cup","Dog","Bed"],a:0},
+{q:"How many letters are in the alphabet?",o:["26","24","28","25"],a:0},
+{q:"Which is a VOWEL?",o:["E","B","C","D"],a:0},
+{q:"BIG means the OPPOSITE of?",o:["Small","Tall","Fast","Heavy"],a:0},
+{q:"Which word has the SHORT 'a' sound?",o:["Bag","Cake","Rain","Day"],a:0},
+{q:"'DOG' — what sound does the letter D make?",o:["Duh","Tuh","Guh","Buh"],a:0},
+{q:"Which letter comes BEFORE 'K'?",o:["J","L","I","M"],a:0},
+{q:"'SUN' rhymes with?",o:["Run","Pin","Bat","Cup"],a:0},
+{q:"How many CONSONANTS in 'SHIP'?",o:["3","2","4","1"],a:0},
+{q:"Which word begins with a silent letter?",o:["Knight","King","Kite","Key"],a:0},
+{q:"What type of word is 'JUMP'?",o:["Verb","Noun","Adjective","Pronoun"],a:0},
+{q:"'HAPPY' is a word that describes. It is a/an ___",o:["Adjective","Noun","Verb","Adverb"],a:0},
+{q:"Pick the NOUN: The fast dog ran quickly.",o:["Dog","Fast","Ran","Quickly"],a:0},
+{q:"Which word has the LONG 'i' sound?",o:["Kite","Kit","Bit","Sit"],a:0},
+{q:"Arrange: 'is / Vivaan / smart'. Correct sentence?",o:["Vivaan is smart.","Smart Vivaan is.","Is Vivaan smart?","Smart is Vivaan."],a:0},
+{q:"How many syllables in 'BUTTERFLY'?",o:["3","2","4","1"],a:0},
+{q:"'SHE' is a ___",o:["Pronoun","Noun","Verb","Adjective"],a:0}
+],
+// Day 1 — CVC Words & Short Vowels
+[
+{q:"Which is a CVC word? (Consonant-Vowel-Consonant)",o:["PIG","PLAY","FROG","SHIP"],a:0},
+{q:"Fill in: The ___ is on the mat. (C-A-T or C-A-R)",o:["CAT","CAR","CAN","CAP"],a:0},
+{q:"Which word has SHORT 'e' sound?",o:["Bed","Bead","Bee","Beer"],a:0},
+{q:"'HOP' — change H to T. New word?",o:["TOP","TON","TOM","TOE"],a:0},
+{q:"Which word has SHORT 'o' sound?",o:["Pot","Pole","Poke","Poem"],a:0},
+{q:"'BIG' — change B to P. New word?",o:["PIG","PIN","PIT","PIE"],a:0},
+{q:"Which is NOT a CVC word?",o:["FROG","BUS","CUP","HIT"],a:0},
+{q:"'WIG' — change W to D. New word?",o:["DIG","DIP","DIM","DIN"],a:0},
+{q:"Which word has SHORT 'u' sound?",o:["Bug","Mule","Tune","Rude"],a:0},
+{q:"'RUN' — change R to F. New word?",o:["FUN","FAN","FIN","FON"],a:0},
+{q:"How many sounds in 'CAT'?",o:["3","2","4","1"],a:0},
+{q:"'NET' — change N to W. New word?",o:["WET","WAT","WOT","WIT"],a:0},
+{q:"Which word has SHORT 'i' sound?",o:["Bin","Bite","Bike","Bide"],a:0},
+{q:"'MOP' — change M to H. New word?",o:["HOP","HAP","HIP","HUP"],a:0},
+{q:"What letter is missing? B_G (a bag)?",o:["A","E","I","U"],a:0},
+{q:"'SIT' rhymes with?",o:["BIT","SAT","SET","BUT"],a:0},
+{q:"What letter is missing? R_N (to run)?",o:["U","A","E","I"],a:0},
+{q:"Which word does NOT rhyme with 'PAN'?",o:["PIN","CAN","MAN","FAN"],a:0},
+{q:"'DOT' — change D to H. New word?",o:["HOT","HAT","HIT","HUT"],a:0},
+{q:"What letter is missing? L_G (a leg)?",o:["E","A","I","O"],a:0}
+],
+// Day 2 — Blends & Sight Words
+[
+{q:"Which word begins with a BLEND?",o:["FROG","FISH","FAIL","FALL"],a:0},
+{q:"'BL' blend word — which is correct?",o:["BLUE","BULE","BLEU","BULD"],a:0},
+{q:"'SP' blend — fill in: _OON (for eating)?",o:["SPOON","SPOOL","SPORE","SPOKE"],a:0},
+{q:"Which is a sight word you should KNOW?",o:["THE","ZAP","QUB","WUZ"],a:0},
+{q:"'TR' blend — TRAIN starts with?",o:["TR","TH","CR","DR"],a:0},
+{q:"Complete: She ___ to school. (GOES/GOSE)",o:["GOES","GOSE","GOEZ","GOOS"],a:0},
+{q:"Which word has 'TH' sound?",o:["THINK","TICK","TAKE","TREE"],a:0},
+{q:"'CH' blend word?",o:["CHAIR","CARE","SHARE","STAIR"],a:0},
+{q:"Sight word: I ___ a dog. (SEE/CEE)",o:["SEE","CEE","SI","ZEE"],a:0},
+{q:"'SH' blend word?",o:["SHIP","SPIT","SLIP","SKIP"],a:0},
+{q:"Complete: He ___ happy. (IS/IZ)",o:["IS","IZ","IES","YS"],a:0},
+{q:"'FL' blend word?",o:["FLAG","FRAG","FLUG","FLOG"],a:0},
+{q:"Correct spelling?",o:["BECAUSE","BECAUS","BECAUZE","BECOSE"],a:0},
+{q:"'CR' blend word?",o:["CRAB","DRAB","GRAB","BRAB"],a:0},
+{q:"Correct spelling?",o:["FRIEND","FREIND","FREND","FRINED"],a:0},
+{q:"Which word ends in 'NG'?",o:["SING","SLIM","SKIN","SHIN"],a:0},
+{q:"Correct spelling?",o:["PEOPLE","PEAPLE","PEEPLE","PEPOLE"],a:0},
+{q:"'SK' blend word?",o:["SKY","SLY","SPY","SHY"],a:0},
+{q:"Correct spelling?",o:["AGAIN","AGIAN","AGEIN","AGEN"],a:0},
+{q:"Which word has 'WH' blend?",o:["WHEEL","WEAL","WELL","WEEN"],a:0}
+],
+// Day 3 — Plurals & Opposites
+[
+{q:"Plural of CHILD?",o:["CHILDREN","CHILDS","CHILDES","CHILDRENS"],a:0},
+{q:"Plural of MOUSE?",o:["MICE","MOUSES","MOUSE","MOOSES"],a:0},
+{q:"Opposite of COLD?",o:["HOT","WARM","COOL","HEAT"],a:0},
+{q:"Opposite of DARK?",o:["LIGHT","BRIGHT","CLEAR","WHITE"],a:0},
+{q:"Plural of TOOTH?",o:["TEETH","TOOTHS","TOOTHES","TEETHS"],a:0},
+{q:"Opposite of FAST?",o:["SLOW","QUICK","LATE","STOP"],a:0},
+{q:"Plural of LEAF?",o:["LEAVES","LEAFS","LEAFES","LEAF"],a:0},
+{q:"Opposite of HAPPY?",o:["SAD","ANGRY","TIRED","BORED"],a:0},
+{q:"Plural of FOOT?",o:["FEET","FOOTS","FOOTES","FEETS"],a:0},
+{q:"Opposite of TALL?",o:["SHORT","SMALL","THIN","LOW"],a:0},
+{q:"Plural of BOX?",o:["BOXES","BOXS","BOXIES","BOXEN"],a:0},
+{q:"Opposite of DAY?",o:["NIGHT","DARK","EVENING","DUSK"],a:0},
+{q:"Plural of CITY?",o:["CITIES","CITYS","CITYES","CITIESN"],a:0},
+{q:"Opposite of EMPTY?",o:["FULL","FILL","HALF","HEAVY"],a:0},
+{q:"Plural of KNIFE?",o:["KNIVES","KNIFES","KNIFES","KNIVE"],a:0},
+{q:"Opposite of OPEN?",o:["CLOSED","SHUT","LOCKED","SEALED"],a:0},
+{q:"Plural of PERSON?",o:["PEOPLE","PERSONS","PEOPLES","PERSONNES"],a:0},
+{q:"Opposite of RICH?",o:["POOR","CHEAP","LOW","SMALL"],a:0},
+{q:"Plural of SHEEP?",o:["SHEEP","SHEEPS","SHEEPES","SHEEPEN"],a:0},
+{q:"Opposite of ALWAYS?",o:["NEVER","SOMETIMES","OFTEN","RARELY"],a:0}
+],
+// Day 4 — Sentences & Punctuation
+[
+{q:"Which sentence is correct?",o:["Vivaan is clever.","vivaan is clever.","Vivaan is Clever.","vivaan Is clever."],a:0},
+{q:"A sentence always starts with a ___?",o:["Capital letter","Small letter","Number","Symbol"],a:0},
+{q:"Which punctuation ends a question?",o:["?","!",".","..."],a:0},
+{q:"Which is a COMPLETE sentence?",o:["The bird sang.","The bird.","Sang loudly.","Bird the."],a:0},
+{q:"I am going to school ___ (add right punctuation)",o:[". (full stop)","! (exclamation)","? (question mark)","... (ellipsis)"],a:0},
+{q:"Which sentence asks something?",o:["Is it raining?","It is raining.","It is raining!","Oh, it rains."],a:0},
+{q:"What is the SUBJECT in: 'Vivaan runs fast.'?",o:["Vivaan","runs","fast","fast runs"],a:0},
+{q:"What is the VERB in: 'She eats mango.'?",o:["eats","She","mango","likes"],a:0},
+{q:"Which needs an EXCLAMATION mark?",o:["Wow, I won!","Is it over?","She reads.","He runs."],a:0},
+{q:"Correct sentence?",o:["He doesn't like peas.","He dont like peas.","He doesn't likes peas.","He do not likes peas."],a:0},
+{q:"'AND' joins two parts of a sentence. It is a ___",o:["Conjunction","Noun","Verb","Adjective"],a:0},
+{q:"Which is a QUESTION?",o:["Where is my bag?","My bag is here.","Find my bag!","My bag."],a:0},
+{q:"Correct: She ___ to the park yesterday.",o:["went","goes","go","going"],a:0},
+{q:"Correct: They ___ playing now.",o:["are","is","was","be"],a:0},
+{q:"Which word is an ADVERB (describes how)?",o:["Quickly","Quick","Quicker","Quickest"],a:0},
+{q:"Correct sentence?",o:["I have two cats.","I have two cat.","I has two cats.","I have tow cats."],a:0},
+{q:"A comma is used to ___",o:["Separate items in a list","End a sentence","Ask a question","Show surprise"],a:0},
+{q:"Which is PAST tense?",o:["He ran.","He runs.","He will run.","He is running."],a:0},
+{q:"Correct: ___ going to the market. (I'm/Im)",o:["I'm","Im","I m","IM"],a:0},
+{q:"What is the OBJECT in: 'Mia eats an apple.'?",o:["apple","Mia","eats","an"],a:0}
+],
+// Day 5 — Rhyming & Word Families
+[
+{q:"Which word rhymes with NIGHT?",o:["LIGHT","LAKE","LONG","LOST"],a:0},
+{q:"Which word rhymes with CAKE?",o:["LAKE","LICK","LOCK","LUCK"],a:0},
+{q:"Same word family as PLAY, PLAYED: ___?",o:["PLAYING","PLAYS","PLAYER","All of these"],a:0},
+{q:"Which does NOT rhyme with STAR?",o:["STIR","FAR","CAR","BAR"],a:0},
+{q:"Which word rhymes with TREE?",o:["FREE","FROG","TRIP","TRIM"],a:0},
+{q:"'AT' family: CAT, BAT, ___, MAT",o:["HAT","HIT","HOT","HUT"],a:0},
+{q:"Which rhymes with HOUSE?",o:["MOUSE","MOOSE","MOLE","MOPE"],a:0},
+{q:"'OT' family: HOT, NOT, DOT, ___",o:["POT","PET","PIT","PUT"],a:0},
+{q:"Which does NOT rhyme with KING?",o:["STING","SING","RING","BRING"],a:0},
+{q:"'UN' family: FUN, RUN, SUN, ___",o:["BUN","BAN","BIN","BON"],a:0},
+{q:"Which rhymes with SNOW?",o:["GLOW","SLOW","FLOW","All of these"],a:0},
+{q:"'AKE' family: CAKE, MAKE, ___, WAKE",o:["TAKE","TALK","TASK","TACK"],a:0},
+{q:"Which rhymes with COLD?",o:["GOLD","TOLD","BOLD","All of these"],a:0},
+{q:"'ILL' family: HILL, FILL, BILL, ___",o:["PILL","PULL","POLL","PELL"],a:0},
+{q:"Which does NOT rhyme with FOUND?",o:["FOND","SOUND","ROUND","GROUND"],a:0},
+{q:"'OOL' family: POOL, COOL, TOOL, ___",o:["FOOL","FALL","FILL","FULL"],a:0},
+{q:"Which rhymes with BRIGHT?",o:["MIGHT","MITT","MIST","MINT"],a:0},
+{q:"'ANE' family: LANE, CANE, ___, SANE",o:["MANE","MINE","MOON","MORE"],a:0},
+{q:"Which rhymes with FLOWER?",o:["POWER","PLOWER","PONDER","PEWTER"],a:0},
+{q:"'ONG' family: SONG, LONG, STRONG, ___",o:["WRONG","WRING","WRUNG","WRANG"],a:0}
+],
+// Day 6 — Mixed English Challenge
+[
+{q:"Synonym for BIG?",o:["LARGE","LITTLE","TINY","SMALL"],a:0},
+{q:"Synonym for HAPPY?",o:["JOYFUL","GLOOMY","SAD","TIRED"],a:0},
+{q:"Correct: She is ___ than her sister. (TALL)",o:["TALLER","TALLEST","MOST TALL","MORE TALL"],a:0},
+{q:"He is the ___ boy in class. (SMART)",o:["SMARTEST","SMARTER","MOST SMART","MORE SMART"],a:0},
+{q:"Which is the correct PAST TENSE of 'eat'?",o:["ATE","EATED","EATTED","EATEN"],a:0},
+{q:"Which is the correct past tense of 'go'?",o:["WENT","GOED","GOED","WENTED"],a:0},
+{q:"'BOOK' is a ___",o:["Noun","Verb","Adjective","Adverb"],a:0},
+{q:"'BEAUTIFUL' is a ___",o:["Adjective","Noun","Verb","Conjunction"],a:0},
+{q:"Which uses APOSTROPHE correctly?",o:["It's raining.","Its' raining.","Its raining.","It'is raining."],a:0},
+{q:"Which is FUTURE tense?",o:["She will read.","She read.","She reads.","She is reading."],a:0},
+{q:"Antonym of ANCIENT?",o:["MODERN","OLD","AGED","PAST"],a:0},
+{q:"Antonym of BRAVE?",o:["COWARDLY","WEAK","SLOW","TIMID"],a:0},
+{q:"Correct spelling?",o:["BEAUTIFUL","BEUTIFUL","BEAUTIFULL","BEAUTIFAL"],a:0},
+{q:"Correct spelling?",o:["DAUGHTER","DAUGTER","DAUGHER","DAUTHER"],a:0},
+{q:"Correct: I ___ my homework yesterday. (DO)",o:["DID","DONE","DO","DOES"],a:0},
+{q:"'THEY' refers to ___",o:["More than one person","One person","A place","A thing"],a:0},
+{q:"Which sentence uses 'THEIR' correctly?",o:["That is their house.","They're house is big.","There house is new.","Their is a house."],a:0},
+{q:"Which word means the same as 'BEGIN'?",o:["START","STOP","PAUSE","END"],a:0},
+{q:"Correct: We ___ friends since 2020.",o:["have been","has been","are","was"],a:0},
+{q:"A story has: beginning, ___, and end.",o:["middle","chapter","title","author"],a:0}
+]
 ],
 
-// DAY 3 — Tables 11–15, Zeroes in Large Numbers (millions, billions)
+evs: [
+// Day 0 — Animals & Habitats
 [
-{e:"1️⃣1️⃣",t:"11 × 4 = ?",o:["44","40","48","33"],a:0},
-{e:"1️⃣2️⃣",t:"12 × 5 = ?",o:["60","55","65","48"],a:0},
-{e:"1️⃣3️⃣",t:"13 × 3 = ?",o:["39","36","42","30"],a:0},
-{e:"1️⃣4️⃣",t:"14 × 4 = ?",o:["56","52","60","48"],a:0},
-{e:"1️⃣5️⃣",t:"15 × 5 = ?",o:["75","70","80","60"],a:0},
-{e:"🔢",t:"1,000 (one thousand) has how many ZEROES?",o:["3","2","4","1"],a:0},
-{e:"🔢",t:"10,000 (ten thousand) has how many ZEROES?",o:["4","3","5","6"],a:0},
-{e:"🔢",t:"1,00,000 (one lakh) has how many ZEROES?",o:["5","4","6","3"],a:0},
-{e:"💰",t:"1 MILLION = 10,00,000. How many zeroes does it have?",o:["6","5","7","4"],a:0},
-{e:"🌍",t:"1 BILLION = 1,00,00,00,000. How many zeroes?",o:["9","6","7","8"],a:0},
-{e:"1️⃣1️⃣",t:"11 × 6 = ?",o:["66","60","72","55"],a:0},
-{e:"1️⃣2️⃣",t:"12 × 7 = ?",o:["84","72","96","78"],a:0},
-{e:"💡",t:"1 CRORE = 1,00,00,000. How many zeroes?",o:["7","6","8","5"],a:0},
-{e:"1️⃣3️⃣",t:"13 × 5 = ?",o:["65","60","70","55"],a:0},
-{e:"🤔",t:"Which is BIGGER — 1 million or 1 lakh?",o:["1 million","1 lakh","They are equal","Cannot compare"],a:0},
-{e:"1️⃣4️⃣",t:"14 × 3 = ?",o:["42","36","48","39"],a:0},
-{e:"💡",t:"1 million = how many lakhs?",o:["10","100","5","1"],a:0},
-{e:"1️⃣5️⃣",t:"15 × 6 = ?",o:["90","85","80","95"],a:0},
-{e:"1️⃣1️⃣",t:"11 × 11 = ?",o:["121","111","131","122"],a:0},
-{e:"🌌",t:"1 TRILLION has how many zeroes? (Hint: 1000 billions)",o:["12","9","6","10"],a:0},
+{q:"Where does a fish live?",o:["Water","Land","Tree","Desert"],a:0},
+{q:"Which animal gives us milk?",o:["Cow","Dog","Cat","Horse"],a:0},
+{q:"A bird uses its ___ to fly.",o:["Wings","Legs","Beak","Tail"],a:0},
+{q:"Which animal is called the 'King of the Jungle'?",o:["Lion","Tiger","Elephant","Bear"],a:0},
+{q:"Which is a DOMESTIC animal (lives with humans)?",o:["Dog","Tiger","Wolf","Crocodile"],a:0},
+{q:"Where does a polar bear live?",o:["Arctic / Polar region","Desert","Rainforest","Ocean"],a:0},
+{q:"Which bird CANNOT fly?",o:["Penguin","Eagle","Parrot","Pigeon"],a:0},
+{q:"A caterpillar turns into a ___?",o:["Butterfly","Bee","Moth","Ant"],a:0},
+{q:"Which animal has a long trunk?",o:["Elephant","Giraffe","Hippo","Rhino"],a:0},
+{q:"A CARNIVORE eats?",o:["Only meat","Only plants","Both meat and plants","Rocks"],a:0},
+{q:"A HERBIVORE eats?",o:["Only plants","Only meat","Both","Nothing"],a:0},
+{q:"Which animal sleeps all winter? (Hibernates)",o:["Bear","Dog","Cat","Parrot"],a:0},
+{q:"What is a baby dog called?",o:["Puppy","Kitten","Cub","Foal"],a:0},
+{q:"What is a baby cat called?",o:["Kitten","Puppy","Cub","Lamb"],a:0},
+{q:"Which animal makes honey?",o:["Bee","Ant","Butterfly","Fly"],a:0},
+{q:"Where does a camel store water?",o:["Hump","Legs","Stomach","Nose"],a:0},
+{q:"Which is an AMPHIBIAN?",o:["Frog","Fish","Snake","Lizard"],a:0},
+{q:"What sound does a cow make?",o:["Moo","Baa","Bark","Roar"],a:0},
+{q:"Which animal has black and white stripes?",o:["Zebra","Tiger","Panda","Skunk"],a:0},
+{q:"Where does a squirrel store its food?",o:["In a tree / underground","In water","In its hump","In its pouch"],a:0}
+],
+// Day 1 — Plants & Nature
+[
+{q:"Which part of a plant makes food using sunlight?",o:["Leaves","Roots","Stem","Flowers"],a:0},
+{q:"What do roots do for a plant?",o:["Absorb water and hold plant in soil","Make food","Produce flowers","Give fruits"],a:0},
+{q:"The process by which plants make food is called?",o:["Photosynthesis","Breathing","Digestion","Germination"],a:0},
+{q:"Which gas do plants take in from air?",o:["Carbon dioxide","Oxygen","Nitrogen","Hydrogen"],a:0},
+{q:"Which gas do plants give out?",o:["Oxygen","Carbon dioxide","Nitrogen","Steam"],a:0},
+{q:"Seeds grow into ___",o:["New plants","Flowers","Fruits","Leaves"],a:0},
+{q:"A plant that has no leaves in winter is called ___",o:["Deciduous tree","Evergreen tree","Cactus","Fern"],a:0},
+{q:"Which part of a plant holds it upright?",o:["Stem","Leaf","Root","Flower"],a:0},
+{q:"Where do mangoes grow?",o:["On trees","Underground","In water","On a bush"],a:0},
+{q:"Which vegetable grows underground?",o:["Carrot","Tomato","Pea","Brinjal"],a:0},
+{q:"Which plant lives in the desert with no water?",o:["Cactus","Rose","Lotus","Bamboo"],a:0},
+{q:"Lotus is a plant that grows in ___",o:["Water","Desert","Ice","Rock"],a:0},
+{q:"Trees give us ___ to breathe.",o:["Oxygen","Carbon dioxide","Nitrogen","Smoke"],a:0},
+{q:"Which is NOT a fruit?",o:["Carrot","Mango","Orange","Banana"],a:0},
+{q:"Pollen is carried from flower to flower by?",o:["Bees","Fish","Dogs","Worms"],a:0},
+{q:"A very old and very big tree is called a ___",o:["Banyan / Giant tree","Shrub","Herb","Creeper"],a:0},
+{q:"Which part of a plant becomes a fruit?",o:["Flower","Leaf","Stem","Root"],a:0},
+{q:"Plants need ___ to grow.",o:["Sunlight, water, soil","Only water","Only soil","Only sunlight"],a:0},
+{q:"Bamboo is the food of ___",o:["Giant Panda","Elephant","Giraffe","Hippo"],a:0},
+{q:"Which tree is called the 'National Tree of India'?",o:["Banyan","Mango","Peepal","Neem"],a:0}
+],
+// Day 2 — My Body
+[
+{q:"How many bones in an adult human body?",o:["206","106","306","186"],a:0},
+{q:"Which organ pumps blood through our body?",o:["Heart","Lungs","Brain","Kidney"],a:0},
+{q:"Which organ do we use to breathe?",o:["Lungs","Heart","Stomach","Liver"],a:0},
+{q:"Which organ controls our entire body?",o:["Brain","Heart","Stomach","Eyes"],a:0},
+{q:"How many senses do humans have?",o:["5","4","6","3"],a:0},
+{q:"We use our EYES to ___",o:["See","Hear","Smell","Taste"],a:0},
+{q:"We use our EARS to ___",o:["Hear","See","Feel","Taste"],a:0},
+{q:"We use our NOSE to ___",o:["Smell","Taste","See","Hear"],a:0},
+{q:"We use our TONGUE to ___",o:["Taste","Smell","Hear","See"],a:0},
+{q:"We use our SKIN to ___",o:["Feel / Touch","Smell","See","Hear"],a:0},
+{q:"How many teeth does an adult human have?",o:["32","28","36","24"],a:0},
+{q:"Which part of the body filters blood?",o:["Kidneys","Lungs","Stomach","Heart"],a:0},
+{q:"Where does digestion start?",o:["Mouth","Stomach","Intestine","Throat"],a:0},
+{q:"Strong feelings and thinking happen in the ___",o:["Brain","Heart","Eyes","Hands"],a:0},
+{q:"Muscles are attached to ___",o:["Bones","Organs","Skin","Blood"],a:0},
+{q:"Which part keeps our body warm?",o:["Skin","Bones","Blood","Hair"],a:0},
+{q:"White blood cells help us fight ___",o:["Germs / Diseases","Cold","Hunger","Tiredness"],a:0},
+{q:"We should brush our teeth ___",o:["Twice a day","Once a week","Once a day","Never"],a:0},
+{q:"Which food makes our bones strong?",o:["Milk / Dairy","Sweets","Rice","Oil"],a:0},
+{q:"Exercise keeps our ___ healthy.",o:["Body","Mind","Both body and mind","Neither"],a:0}
+],
+// Day 3 — Food & Nutrition
+[
+{q:"Which food group gives us ENERGY?",o:["Carbohydrates","Vitamins","Minerals","Water"],a:0},
+{q:"Which food group builds our body?",o:["Proteins","Carbohydrates","Fats","Vitamins"],a:0},
+{q:"Which food is rich in PROTEIN?",o:["Eggs","Rice","Sugar","Oil"],a:0},
+{q:"Which vitamin do we get from sunlight?",o:["Vitamin D","Vitamin C","Vitamin A","Vitamin B"],a:0},
+{q:"Which food is rich in Vitamin C?",o:["Orange","Rice","Bread","Butter"],a:0},
+{q:"Which food is rich in CALCIUM (for bones)?",o:["Milk","Sugar","Oil","Rice"],a:0},
+{q:"Which is a JUNK food?",o:["Pizza/Burger","Apple","Carrot","Banana"],a:0},
+{q:"How many glasses of water should we drink each day?",o:["8 glasses","2 glasses","4 glasses","12 glasses"],a:0},
+{q:"Fruits and vegetables are rich in ___",o:["Vitamins & Minerals","Proteins","Carbohydrates","Fats"],a:0},
+{q:"Which is a DAIRY product?",o:["Cheese","Bread","Apple","Chicken"],a:0},
+{q:"We should eat ___ for breakfast.",o:["A healthy meal","Nothing","Only sweets","Only juice"],a:0},
+{q:"Which food comes from plants?",o:["Wheat","Chicken","Fish","Egg"],a:0},
+{q:"Which food comes from animals?",o:["Honey","Mango","Rice","Wheat"],a:0},
+{q:"Pulses like dal are rich in ___",o:["Protein","Fat","Sugar","Starch"],a:0},
+{q:"Which vitamin helps us see in the dark?",o:["Vitamin A","Vitamin B","Vitamin C","Vitamin D"],a:0},
+{q:"Junk food leads to ___",o:["Health problems","Good health","Strong muscles","Sharp mind"],a:0},
+{q:"Which is the healthiest cooking oil?",o:["Olive oil / mustard oil","Butter","Ghee","Lard"],a:0},
+{q:"Green leafy vegetables give us ___",o:["Iron and vitamins","Protein","Carbohydrates","Calcium"],a:0},
+{q:"Which is NOT a vegetable?",o:["Strawberry","Spinach","Pea","Potato"],a:0},
+{q:"A balanced diet means eating ___",o:["All food groups in right amounts","Only vegetables","Only fruits","Only proteins"],a:0}
+],
+// Day 4 — Weather & Seasons
+[
+{q:"How many seasons are there in India?",o:["4","2","3","6"],a:0},
+{q:"Which season comes after summer in India?",o:["Monsoon/Rainy","Winter","Spring","Autumn"],a:0},
+{q:"In which season do we use umbrellas?",o:["Rainy season","Summer","Winter","Spring"],a:0},
+{q:"In which season do we wear woolens?",o:["Winter","Summer","Rainy","Spring"],a:0},
+{q:"Clouds are made of ___",o:["Water droplets","Cotton","Smoke","Dust"],a:0},
+{q:"Rain forms when clouds ___",o:["Release water droplets","Get heavy","Turn dark","Freeze"],a:0},
+{q:"A tool to measure temperature is called a ___",o:["Thermometer","Barometer","Ruler","Scale"],a:0},
+{q:"Which season has the longest days?",o:["Summer","Winter","Rainy","Autumn"],a:0},
+{q:"Snow falls in ___",o:["Very cold places / mountains","Desert","Rainforest","Ocean"],a:0},
+{q:"A rainbow appears after ___",o:["Rain and sunshine","Thunder","Fog","Snowfall"],a:0},
+{q:"Thunder and lightning happen during ___",o:["Storm / Thunderstorm","Fog","Sunny day","Winter"],a:0},
+{q:"Fog is common in ___",o:["Winter mornings","Summer afternoons","Rainy evenings","Spring nights"],a:0},
+{q:"Wind direction is measured by a ___",o:["Wind vane","Thermometer","Barometer","Ruler"],a:0},
+{q:"Which season do flowers bloom most?",o:["Spring","Winter","Rainy","Autumn"],a:0},
+{q:"A very strong wind over the sea is called a ___",o:["Cyclone / Hurricane","Tsunami","Earthquake","Flood"],a:0},
+{q:"Ice melts into ___",o:["Water","Steam","Fog","Cloud"],a:0},
+{q:"Water turns to steam when ___",o:["Heated","Cooled","Frozen","Mixed"],a:0},
+{q:"Which instrument measures rainfall?",o:["Rain gauge","Thermometer","Barometer","Hygrometer"],a:0},
+{q:"The Thar Desert in India has a ___ climate.",o:["Hot and dry","Cold and wet","Tropical","Polar"],a:0},
+{q:"Global warming causes ___",o:["Rise in Earth's temperature","More rainfall","More snow","Cooler summers"],a:0}
+],
+// Day 5 — Transport & Community
+[
+{q:"Which is a WATER transport?",o:["Ship / Boat","Bus","Train","Aeroplane"],a:0},
+{q:"Which is an AIR transport?",o:["Aeroplane","Bicycle","Bus","Ship"],a:0},
+{q:"Which is LAND transport?",o:["Car","Boat","Aeroplane","Submarine"],a:0},
+{q:"Fastest mode of transport?",o:["Aeroplane","Train","Car","Ship"],a:0},
+{q:"What does a RED traffic light mean?",o:["STOP","GO","SLOW DOWN","SPEED UP"],a:0},
+{q:"What does a GREEN traffic light mean?",o:["GO","STOP","SLOW DOWN","WAIT"],a:0},
+{q:"What does an AMBER/YELLOW traffic light mean?",o:["GET READY / SLOW DOWN","GO","STOP","REVERSE"],a:0},
+{q:"Who helps us when we are sick?",o:["Doctor","Teacher","Farmer","Postman"],a:0},
+{q:"Who grows food for us?",o:["Farmer","Doctor","Engineer","Pilot"],a:0},
+{q:"Who puts out fires?",o:["Fireman / Fire brigade","Police","Soldier","Postman"],a:0},
+{q:"Who delivers letters and parcels?",o:["Postman","Doctor","Farmer","Pilot"],a:0},
+{q:"The first railway in India ran between?",o:["Mumbai and Thane","Delhi and Agra","Chennai and Kolkata","Mumbai and Pune"],a:0},
+{q:"A place where planes land and take off?",o:["Airport","Railway station","Bus stop","Harbour"],a:0},
+{q:"A place where ships dock?",o:["Harbour / Port","Airport","Bus terminal","Railway station"],a:0},
+{q:"Fuel used in cars is called?",o:["Petrol / Diesel","Coal","Wood","LPG"],a:0},
+{q:"Fuel used in aeroplanes is called?",o:["Aviation turbine fuel (ATF)","Petrol","Diesel","LPG"],a:0},
+{q:"An ambulance is used to?",o:["Carry sick people to hospital","Fight fires","Deliver letters","Teach children"],a:0},
+{q:"A SUBMARINE travels ___",o:["Underwater","In air","On road","On rails"],a:0},
+{q:"Which road sign is a red circle with a white bar?",o:["No entry","Stop","One way","Speed limit"],a:0},
+{q:"We should wear a ___ while riding a bike.",o:["Helmet","Cap","Scarf","Gloves"],a:0}
+],
+// Day 6 — Environment & Conservation
+[
+{q:"Cutting down too many trees is called?",o:["Deforestation","Afforestation","Pollution","Erosion"],a:0},
+{q:"Planting more trees is called?",o:["Afforestation","Deforestation","Pollution","Mining"],a:0},
+{q:"Which gas causes the 'greenhouse effect'?",o:["Carbon dioxide","Oxygen","Nitrogen","Hydrogen"],a:0},
+{q:"The three R's of conservation are?",o:["Reduce, Reuse, Recycle","Read, Run, Rest","Rain, River, Rock","Roots, Rocks, Rain"],a:0},
+{q:"Throwing garbage in water bodies causes?",o:["Water pollution","Air pollution","Noise pollution","Land pollution"],a:0},
+{q:"Vehicle smoke causes?",o:["Air pollution","Water pollution","Soil pollution","Noise pollution"],a:0},
+{q:"Which energy source does NOT pollute?",o:["Solar energy","Coal","Petrol","Diesel"],a:0},
+{q:"Which is a renewable energy source?",o:["Wind energy","Coal","Petrol","Natural gas"],a:0},
+{q:"Acid rain is caused by ___",o:["Air pollution / factory gases","Normal rainfall","Greenhouse gases","Forest fires"],a:0},
+{q:"The ozone layer protects us from ___",o:["Harmful UV rays of the sun","Rain","Wind","Cold"],a:0},
+{q:"Which wildlife reserve is famous for tigers in India?",o:["Jim Corbett National Park","Kaziranga","Sundarbans","Bharatpur"],a:0},
+{q:"Which is the national animal of India?",o:["Tiger","Lion","Elephant","Peacock"],a:0},
+{q:"Kaziranga National Park is famous for?",o:["One-horned rhinoceros","Tigers","Elephants","Dolphins"],a:0},
+{q:"Which is the national bird of India?",o:["Peacock","Parrot","Eagle","Flamingo"],a:0},
+{q:"To save electricity we should ___",o:["Switch off lights when not in use","Keep lights on all day","Use more fans","Watch more TV"],a:0},
+{q:"Composting turns waste into ___",o:["Natural fertilizer","Plastic","Metal","Coal"],a:0},
+{q:"The Earth's surface is covered ___ by water.",o:["71%","30%","50%","90%"],a:0},
+{q:"Global warming leads to melting of ___",o:["Polar ice caps","Mountains","Oceans","Deserts"],a:0},
+{q:"A reusable bag is better than a ___ bag.",o:["Plastic","Cotton","Jute","Cloth"],a:0},
+{q:"Earth Day is celebrated on?",o:["22 April","5 June","1 March","15 August"],a:0}
+]
 ],
 
-// DAY 4 — Tables 16–20, Word Problems
+gk: [
+// Day 0 — India: States, Capitals & Symbols
 [
-{e:"1️⃣6️⃣",t:"16 × 2 = ?",o:["32","28","36","30"],a:0},
-{e:"1️⃣7️⃣",t:"17 × 3 = ?",o:["51","48","54","45"],a:0},
-{e:"1️⃣8️⃣",t:"18 × 4 = ?",o:["72","64","80","68"],a:0},
-{e:"1️⃣9️⃣",t:"19 × 3 = ?",o:["57","54","60","51"],a:0},
-{e:"2️⃣0️⃣",t:"20 × 6 = ?",o:["120","100","130","110"],a:0},
-{e:"1️⃣6️⃣",t:"16 × 5 = ?",o:["80","72","88","70"],a:0},
-{e:"1️⃣7️⃣",t:"17 × 4 = ?",o:["68","64","72","60"],a:0},
-{e:"1️⃣8️⃣",t:"18 × 3 = ?",o:["54","48","60","51"],a:0},
-{e:"1️⃣9️⃣",t:"19 × 2 = ?",o:["38","34","42","36"],a:0},
-{e:"2️⃣0️⃣",t:"20 × 9 = ?",o:["180","160","200","170"],a:0},
-{e:"🐭",t:"Jerry finds 16 pieces of cheese each day. In 4 days he finds how many pieces?",o:["64","48","80","32"],a:0},
-{e:"🐱",t:"Tom runs at 17 km per hour for 3 hours. How far does he run?",o:["51 km","45 km","57 km","48 km"],a:0},
-{e:"1️⃣6️⃣",t:"16 × 4 = ?",o:["64","56","72","48"],a:0},
-{e:"👧",t:"Masha picks 19 flowers every day. In a week (7 days) she picks how many?",o:["133","119","140","126"],a:0},
-{e:"1️⃣7️⃣",t:"17 × 5 = ?",o:["85","80","90","75"],a:0},
-{e:"2️⃣0️⃣",t:"20 × 11 = ?",o:["220","200","210","230"],a:0},
-{e:"1️⃣8️⃣",t:"18 × 5 = ?",o:["90","85","95","80"],a:0},
-{e:"🐻",t:"A bear eats 18 berries in the morning and 18 berries at night every day. In 5 days, total berries?",o:["180","90","360","150"],a:0},
-{e:"1️⃣9️⃣",t:"19 × 5 = ?",o:["95","90","100","85"],a:0},
-{e:"2️⃣0️⃣",t:"20 × 15 = ?",o:["300","280","320","250"],a:0},
+{q:"Capital of India?",o:["New Delhi","Mumbai","Kolkata","Chennai"],a:0},
+{q:"Largest state in India by area?",o:["Rajasthan","Maharashtra","UP","MP"],a:0},
+{q:"National animal of India?",o:["Tiger","Lion","Elephant","Leopard"],a:0},
+{q:"National bird of India?",o:["Peacock","Parrot","Eagle","Flamingo"],a:0},
+{q:"National flower of India?",o:["Lotus","Rose","Sunflower","Marigold"],a:0},
+{q:"National fruit of India?",o:["Mango","Banana","Guava","Papaya"],a:0},
+{q:"National game of India?",o:["Hockey","Cricket","Kabaddi","Football"],a:0},
+{q:"National river of India?",o:["Ganga","Yamuna","Godavari","Brahmaputra"],a:0},
+{q:"Capital of Maharashtra?",o:["Mumbai","Pune","Nagpur","Aurangabad"],a:0},
+{q:"Capital of Rajasthan?",o:["Jaipur","Jodhpur","Udaipur","Ajmer"],a:0},
+{q:"How many states are there in India?",o:["28","26","29","30"],a:0},
+{q:"India's independence day is celebrated on?",o:["15 August","26 January","2 October","14 November"],a:0},
+{q:"India's Republic Day is celebrated on?",o:["26 January","15 August","2 October","26 November"],a:0},
+{q:"Who is called the Father of the Nation?",o:["Mahatma Gandhi","Nehru","Bose","Patel"],a:0},
+{q:"First Prime Minister of India?",o:["Jawaharlal Nehru","Lal Bahadur Shastri","Indira Gandhi","Rajiv Gandhi"],a:0},
+{q:"Capital of UP (Uttar Pradesh)?",o:["Lucknow","Kanpur","Varanasi","Agra"],a:0},
+{q:"Which is the longest river in India?",o:["Ganga","Yamuna","Godavari","Narmada"],a:0},
+{q:"Taj Mahal is in which city?",o:["Agra","Delhi","Jaipur","Lucknow"],a:0},
+{q:"Currency of India?",o:["Rupee","Dollar","Pound","Euro"],a:0},
+{q:"The 'Pink City' of India is?",o:["Jaipur","Jodhpur","Jaisalmer","Udaipur"],a:0}
 ],
+// Day 1 — World: Countries & Capitals
+[
+{q:"Capital of USA?",o:["Washington D.C.","New York","Los Angeles","Chicago"],a:0},
+{q:"Capital of UK?",o:["London","Manchester","Liverpool","Edinburgh"],a:0},
+{q:"Capital of France?",o:["Paris","Lyon","Marseille","Nice"],a:0},
+{q:"Capital of Japan?",o:["Tokyo","Osaka","Kyoto","Hiroshima"],a:0},
+{q:"Largest country in the world by area?",o:["Russia","Canada","USA","China"],a:0},
+{q:"Smallest country in the world?",o:["Vatican City","Monaco","San Marino","Liechtenstein"],a:0},
+{q:"Which continent is India in?",o:["Asia","Africa","Europe","Australia"],a:0},
+{q:"How many continents are there?",o:["7","5","6","8"],a:0},
+{q:"Which is the largest continent?",o:["Asia","Africa","North America","Europe"],a:0},
+{q:"Which is the smallest continent?",o:["Australia","Europe","Antarctica","South America"],a:0},
+{q:"Capital of Australia?",o:["Canberra","Sydney","Melbourne","Brisbane"],a:0},
+{q:"Capital of China?",o:["Beijing","Shanghai","Hong Kong","Guangzhou"],a:0},
+{q:"Which country has the Great Wall?",o:["China","Japan","Korea","India"],a:0},
+{q:"The Amazon rainforest is in?",o:["South America","Africa","Asia","Australia"],a:0},
+{q:"Which ocean is the largest?",o:["Pacific","Atlantic","Indian","Arctic"],a:0},
+{q:"Which is the longest river in the world?",o:["Nile","Amazon","Yangtze","Mississippi"],a:0},
+{q:"Capital of Canada?",o:["Ottawa","Toronto","Vancouver","Montreal"],a:0},
+{q:"The Eiffel Tower is in which country?",o:["France","Italy","Spain","Germany"],a:0},
+{q:"Which country is called the 'Land of the Rising Sun'?",o:["Japan","China","India","Korea"],a:0},
+{q:"How many oceans are there?",o:["5","4","3","6"],a:0}
+],
+// Day 2 — Sports & Games
+[
+{q:"How many players in a cricket team?",o:["11","10","12","9"],a:0},
+{q:"How many players in a football team?",o:["11","10","12","9"],a:0},
+{q:"How many players in a basketball team?",o:["5","6","7","4"],a:0},
+{q:"Olympics are held every ___ years.",o:["4","2","3","5"],a:0},
+{q:"Which sport uses a shuttlecock?",o:["Badminton","Tennis","Squash","Volleyball"],a:0},
+{q:"Which sport has a 'hole-in-one'?",o:["Golf","Cricket","Baseball","Hockey"],a:0},
+{q:"Where were the 2024 Olympics held?",o:["Paris, France","Tokyo, Japan","London, UK","Sydney, Australia"],a:0},
+{q:"Sachin Tendulkar plays which sport?",o:["Cricket","Football","Tennis","Badminton"],a:0},
+{q:"P.V. Sindhu plays which sport?",o:["Badminton","Tennis","Table Tennis","Squash"],a:0},
+{q:"Which country invented cricket?",o:["England","India","Australia","South Africa"],a:0},
+{q:"A hat-trick in cricket means ___",o:["3 wickets in 3 balls","3 sixes in a row","3 fours in a row","3 wickets in an over"],a:0},
+{q:"FIFA World Cup is for which sport?",o:["Football","Cricket","Hockey","Rugby"],a:0},
+{q:"In chess, the most powerful piece is the ___",o:["Queen","King","Rook","Bishop"],a:0},
+{q:"Kabaddi is originally from which country?",o:["India","Pakistan","Nepal","Bangladesh"],a:0},
+{q:"The Olympic rings are how many?",o:["5","4","6","7"],a:0},
+{q:"Which sport does Neeraj Chopra play?",o:["Javelin throw","Cricket","Badminton","Swimming"],a:0},
+{q:"In football, a penalty is taken from ___",o:["Penalty spot","Corner","Centre","Goalpost"],a:0},
+{q:"Which country has won most Cricket World Cups?",o:["Australia","India","West Indies","England"],a:0},
+{q:"Table tennis / Ping pong was invented in?",o:["England","China","Japan","USA"],a:0},
+{q:"Chess was invented in which country?",o:["India","Persia","China","Greece"],a:0}
+],
+// Day 3 — Famous People & Inventions
+[
+{q:"Who invented the telephone?",o:["Alexander Graham Bell","Thomas Edison","Nikola Tesla","Marconi"],a:0},
+{q:"Who invented the light bulb?",o:["Thomas Edison","Graham Bell","Newton","Einstein"],a:0},
+{q:"Who discovered gravity?",o:["Isaac Newton","Einstein","Galileo","Archimedes"],a:0},
+{q:"Who invented the computer?",o:["Charles Babbage","Bill Gates","Steve Jobs","Alan Turing"],a:0},
+{q:"Who painted the Mona Lisa?",o:["Leonardo da Vinci","Michelangelo","Picasso","Raphael"],a:0},
+{q:"APJ Abdul Kalam was famous as India's ___",o:["Missile Man / President","Prime Minister","Cricketer","Scientist only"],a:0},
+{q:"Who wrote the National Anthem of India?",o:["Rabindranath Tagore","Bankim Chandra","Sarojini Naidu","Gandhi"],a:0},
+{q:"Who was the first person to walk on the Moon?",o:["Neil Armstrong","Buzz Aldrin","Yuri Gagarin","John Glenn"],a:0},
+{q:"First person in space?",o:["Yuri Gagarin","Neil Armstrong","Buzz Aldrin","Alan Shepard"],a:0},
+{q:"Kalpana Chawla was India's first female ___",o:["Astronaut","Pilot","Doctor","Scientist"],a:0},
+{q:"Who invented penicillin (antibiotic)?",o:["Alexander Fleming","Louis Pasteur","Edward Jenner","Lister"],a:0},
+{q:"Who invented the aeroplane?",o:["Wright Brothers","Edison","Bell","Marconi"],a:0},
+{q:"Which scientist gave the theory of relativity?",o:["Albert Einstein","Newton","Bohr","Curie"],a:0},
+{q:"Mother Teresa was famous for?",o:["Serving the poor and sick","Inventing medicine","Writing books","Teaching science"],a:0},
+{q:"Who invented the printing press?",o:["Gutenberg","Edison","Newton","Bell"],a:0},
+{q:"Mahatma Gandhi's real first name?",o:["Mohandas","Mahesh","Mohan","Madan"],a:0},
+{q:"Marie Curie was the first woman to win ___",o:["Nobel Prize","Olympic gold","Grammy","Oscar"],a:0},
+{q:"Who discovered America?",o:["Christopher Columbus","Vasco da Gama","Marco Polo","Magellan"],a:0},
+{q:"Vasco da Gama discovered the sea route to ___",o:["India","America","Africa","Australia"],a:0},
+{q:"Who invented WWW (World Wide Web)?",o:["Tim Berners-Lee","Bill Gates","Steve Jobs","Mark Zuckerberg"],a:0}
+],
+// Day 4 — Science & Space
+[
+{q:"How many planets in our solar system?",o:["8","9","7","10"],a:0},
+{q:"Which planet is closest to the Sun?",o:["Mercury","Venus","Earth","Mars"],a:0},
+{q:"Which is the largest planet?",o:["Jupiter","Saturn","Uranus","Neptune"],a:0},
+{q:"Which planet has rings around it?",o:["Saturn","Jupiter","Uranus","Neptune"],a:0},
+{q:"What is the Sun?",o:["A star","A planet","A moon","A comet"],a:0},
+{q:"How many moons does Earth have?",o:["1","2","0","3"],a:0},
+{q:"The Moon is a ___",o:["Satellite","Star","Planet","Comet"],a:0},
+{q:"Which planet is known as the 'Red Planet'?",o:["Mars","Mercury","Jupiter","Saturn"],a:0},
+{q:"Speed of light is about ___",o:["3,00,000 km/s","1,00,000 km/s","5,00,000 km/s","1000 km/s"],a:0},
+{q:"What is the centre of an atom called?",o:["Nucleus","Cell","Electron","Proton"],a:0},
+{q:"Sound cannot travel through ___",o:["Vacuum / Space","Air","Water","Solid"],a:0},
+{q:"Water boils at ___",o:["100°C","0°C","50°C","200°C"],a:0},
+{q:"Water freezes at ___",o:["0°C","100°C","-10°C","10°C"],a:0},
+{q:"Which is the closest star to Earth (apart from Sun)?",o:["Proxima Centauri","Sirius","Betelgeuse","Rigel"],a:0},
+{q:"A shooting star is actually a ___",o:["Meteor","Star","Comet","Asteroid"],a:0},
+{q:"What force pulls things toward Earth?",o:["Gravity","Magnetism","Friction","Electricity"],a:0},
+{q:"Electricity is measured in ___",o:["Volts","Kilograms","Metres","Celsius"],a:0},
+{q:"Which metal is liquid at room temperature?",o:["Mercury","Iron","Gold","Silver"],a:0},
+{q:"ISRO is India's ___",o:["Space agency","Army","Navy","Air Force"],a:0},
+{q:"Chandrayaan-3 successfully landed on which part of the Moon?",o:["South Pole","North Pole","Equator","Far side"],a:0}
+],
+// Day 5 — Festivals & Culture
+[
+{q:"Diwali is the festival of ___",o:["Lights","Colours","Harvest","Water"],a:0},
+{q:"Holi is the festival of ___",o:["Colours","Lights","Harvest","Fasting"],a:0},
+{q:"Eid-ul-Fitr is celebrated after ___",o:["Ramadan (month of fasting)","Haj","A birth","A harvest"],a:0},
+{q:"Christmas is celebrated to mark the birth of ___",o:["Jesus Christ","Prophet Muhammad","Lord Krishna","Lord Ram"],a:0},
+{q:"Pongal is a harvest festival of which state?",o:["Tamil Nadu","Punjab","Gujarat","Maharashtra"],a:0},
+{q:"Baisakhi is celebrated in which state?",o:["Punjab","Tamil Nadu","West Bengal","UP"],a:0},
+{q:"Onam is the harvest festival of ___",o:["Kerala","Karnataka","Andhra Pradesh","Tamil Nadu"],a:0},
+{q:"Navratri celebrates ___",o:["Goddess Durga","Lord Krishna","Lord Ram","Lord Shiva"],a:0},
+{q:"Janmashtami celebrates the birth of ___",o:["Lord Krishna","Lord Ram","Lord Shiva","Goddess Durga"],a:0},
+{q:"Children's Day in India is on ___",o:["14 November","15 August","26 January","2 October"],a:0},
+{q:"Teachers' Day in India is on ___",o:["5 September","14 November","1 October","25 December"],a:0},
+{q:"The national language of India (official language)?",o:["Hindi","English","Sanskrit","Bengali"],a:0},
+{q:"India has ___ official languages.",o:["22","14","28","18"],a:0},
+{q:"Bharatanatyam is a classical dance from ___",o:["Tamil Nadu","Odisha","Kerala","Manipur"],a:0},
+{q:"Kathakali is a classical dance from ___",o:["Kerala","Tamil Nadu","Rajasthan","Gujarat"],a:0},
+{q:"Garba dance is from ___",o:["Gujarat","Punjab","Rajasthan","Maharashtra"],a:0},
+{q:"The Taj Mahal was built by Mughal Emperor ___",o:["Shah Jahan","Akbar","Aurangzeb","Humayun"],a:0},
+{q:"Yoga was born in which country?",o:["India","China","Japan","Greece"],a:0},
+{q:"International Yoga Day is on ___",o:["21 June","5 June","22 April","1 May"],a:0},
+{q:"Cricket World Cup 2011 was won by ___",o:["India","Sri Lanka","Pakistan","Australia"],a:0}
+],
+// Day 6 — Mixed GK Challenge
+[
+{q:"Which is the tallest mountain in the world?",o:["Mount Everest","K2","Kangchenjunga","Makalu"],a:0},
+{q:"Mount Everest is in which country?",o:["Nepal / Tibet border","India","Bhutan","Pakistan"],a:0},
+{q:"Which is the deepest ocean trench?",o:["Mariana Trench","Tonga Trench","Java Trench","Puerto Rico Trench"],a:0},
+{q:"Sunita Williams is an Indian-origin ___",o:["Astronaut","Scientist","Doctor","Engineer"],a:0},
+{q:"Which is the world's fastest land animal?",o:["Cheetah","Lion","Horse","Greyhound"],a:0},
+{q:"Which is the world's largest mammal?",o:["Blue Whale","Elephant","Giraffe","Hippopotamus"],a:0},
+{q:"Which planet is farthest from the Sun?",o:["Neptune","Uranus","Saturn","Jupiter"],a:0},
+{q:"Which language has the most native speakers in the world?",o:["Mandarin Chinese","English","Spanish","Hindi"],a:0},
+{q:"Which country is both a continent and a country?",o:["Australia","India","Russia","Brazil"],a:0},
+{q:"United Nations (UN) headquarters is in?",o:["New York, USA","Geneva, Switzerland","Paris, France","London, UK"],a:0},
+{q:"G20 summit 2023 was held in?",o:["New Delhi, India","Bali, Indonesia","Rome, Italy","Osaka, Japan"],a:0},
+{q:"Who is the current President of India (2024)?",o:["Droupadi Murmu","Ram Nath Kovind","Pranab Mukherjee","APJ Abdul Kalam"],a:0},
+{q:"Which is India's first indigenously built aircraft carrier?",o:["INS Vikrant","INS Vikramaditya","INS Arihant","INS Chennai"],a:0},
+{q:"Chandrayaan-3 was launched in which year?",o:["2023","2022","2021","2024"],a:0},
+{q:"Which sport did India win gold at 2020 Tokyo Olympics (Neeraj Chopra)?",o:["Javelin Throw","Badminton","Wrestling","Boxing"],a:0},
+{q:"Who wrote 'Jungle Book'?",o:["Rudyard Kipling","Roald Dahl","J.K. Rowling","Enid Blyton"],a:0},
+{q:"Who wrote 'Harry Potter'?",o:["J.K. Rowling","Roald Dahl","Rudyard Kipling","C.S. Lewis"],a:0},
+{q:"Which colour is in the MIDDLE of the Indian flag?",o:["White","Orange/Saffron","Green","Blue"],a:0},
+{q:"The blue wheel in the Indian flag is called the ___",o:["Ashok Chakra","Dharma Chakra","Karma Chakra","Arjun Chakra"],a:0},
+{q:"Who said 'Do or Die' during India's freedom struggle?",o:["Mahatma Gandhi","Nehru","Subhas Bose","Patel"],a:0}
+]
+]
 
-// DAY 5 — Division, Fractions, Patterns, Tables Mixed
-[
-{e:"➗",t:"48 ÷ 6 = ?",o:["8","7","9","6"],a:0},
-{e:"➗",t:"63 ÷ 7 = ?",o:["9","8","7","6"],a:0},
-{e:"½",t:"Half of 96 = ?",o:["48","44","52","40"],a:0},
-{e:"¼",t:"One-quarter of 80 = ?",o:["20","25","15","40"],a:0},
-{e:"➗",t:"72 ÷ 8 = ?",o:["9","8","7","6"],a:0},
-{e:"📈",t:"Pattern: 2, 6, 18, 54, ?",o:["162","108","216","72"],a:0},
-{e:"⅓",t:"One-third of 90 = ?",o:["30","45","20","60"],a:0},
-{e:"➗",t:"84 ÷ 7 = ?",o:["12","11","14","10"],a:0},
-{e:"🔢",t:"What fraction of 20 is 5?",o:["1/4","1/5","1/3","1/2"],a:0},
-{e:"📐",t:"Pattern: 1, 4, 9, 16, 25, 36, ?",o:["49","42","56","48"],a:0},
-{e:"➗",t:"81 ÷ 9 = ?",o:["9","8","7","6"],a:0},
-{e:"¾",t:"Three-quarters of 40 = ?",o:["30","20","10","35"],a:0},
-{e:"📈",t:"Pattern: 3, 7, 11, 15, ?",o:["19","17","21","18"],a:0},
-{e:"➗",t:"132 ÷ 12 = ?",o:["11","10","12","9"],a:0},
-{e:"🔢",t:"Which fraction is BIGGEST: 1/2, 1/3, 1/4, or 3/4?",o:["3/4","1/2","1/3","1/4"],a:0},
-{e:"📈",t:"Pattern: 1, 2, 4, 8, 16, ?",o:["32","24","28","20"],a:0},
-{e:"➗",t:"110 ÷ 11 = ?",o:["10","9","11","8"],a:0},
-{e:"½",t:"Half of 150 = ?",o:["75","70","80","65"],a:0},
-{e:"🧩",t:"? × 7 = 84 — what is ?",o:["12","11","14","10"],a:0},
-{e:"🌟",t:"What are the MISSING numbers? 12, 24, ?, 48, ?, 72",o:["36 and 60","30 and 54","40 and 64","38 and 58"],a:0},
-],
+}; // end ALL_QUESTIONS
 
-// DAY 6 — Time, Money, Measurement, Geometry
-[
-{e:"⏰",t:"Clock shows 3:45. What time is it 30 minutes later?",o:["4:15","4:30","4:00","3:75"],a:0},
-{e:"💰",t:"₹50 + ₹25 + ₹10 = ?",o:["₹85","₹75","₹80","₹90"],a:0},
-{e:"📏",t:"1 metre = how many centimetres?",o:["100","10","1000","500"],a:0},
-{e:"🚂",t:"Train leaves at 10:00 AM, arrives at 1:30 PM. Journey time?",o:["3.5 hours","3 hours","4 hours","2.5 hours"],a:0},
-{e:"🛒",t:"Vivaan buys 3 books at ₹45 each. Total cost?",o:["₹135","₹120","₹150","₹125"],a:0},
-{e:"📐",t:"Perimeter of a SQUARE with side 8 cm?",o:["32 cm","16 cm","64 cm","24 cm"],a:0},
-{e:"⚖️",t:"1 kilogram = how many grams?",o:["1000","100","500","2000"],a:0},
-{e:"🎬",t:"Movie starts at 6:45 PM and runs for 2 hours 15 minutes. When does it end?",o:["9:00 PM","8:45 PM","9:15 PM","8:30 PM"],a:0},
-{e:"🔲",t:"Area of a rectangle 10 cm long and 6 cm wide = ?",o:["60 sq cm","32 sq cm","16 sq cm","100 sq cm"],a:0},
-{e:"💸",t:"Pay ₹200 for something that costs ₹137. Change received?",o:["₹63","₹73","₹53","₹67"],a:0},
-{e:"💧",t:"1 litre = how many millilitres?",o:["1000","100","500","10"],a:0},
-{e:"📅",t:"How many months are in 2 years?",o:["24","12","20","18"],a:0},
-{e:"📐",t:"A rectangle is 12 cm long and 5 cm wide. What is its PERIMETER?",o:["34 cm","60 cm","17 cm","24 cm"],a:0},
-{e:"📅",t:"7 weeks = how many days?",o:["49","42","56","35"],a:0},
-{e:"🚶",t:"Vivaan walks 2.5 km in the morning and 1.5 km in the evening. Total km?",o:["4 km","3 km","5 km","3.5 km"],a:0},
-{e:"🌡️",t:"1 hour and 45 minutes = how many minutes total?",o:["105","100","115","95"],a:0},
-{e:"📐",t:"A square has AREA = 36 sq cm. What is the length of each side?",o:["6 cm","4 cm","9 cm","18 cm"],a:0},
-{e:"💰",t:"5 pens cost ₹18 each. Then Vivaan buys 1 eraser for ₹7. Total spent?",o:["₹97","₹90","₹107","₹87"],a:0},
-{e:"🏃",t:"School starts at 8:00 AM. Vivaan arrives 20 minutes early. What time did he arrive?",o:["7:40 AM","7:30 AM","7:50 AM","8:20 AM"],a:0},
-{e:"🔲",t:"Perimeter of a rectangle: length = 15 cm, width = 7 cm?",o:["44 cm","105 cm","22 cm","30 cm"],a:0},
-],
-
-// DAY 7 — ULTIMATE BOSS LEVEL: All Topics Mixed
-[
-{e:"🧠",t:"19 × 6 = ?",o:["114","108","120","96"],a:0},
-{e:"🌍",t:"How many zeroes does 1 BILLION have?",o:["9","6","12","7"],a:0},
-{e:"🧮",t:"Abacus 🧮 — TEN-THOUSANDS: 1, THOUSANDS: 2, HUNDREDS: 0, TENS: 5, ONES: 3. What number?",o:["12053","12503","21053","10253"],a:0},
-{e:"🔥",t:"(8 × 7) + (6 × 5) = ?",o:["86","56","30","96"],a:0},
-{e:"🦁",t:"17 × 8 = ?",o:["136","128","144","120"],a:0},
-{e:"🐭",t:"Jerry collects 12 pieces of cheese per day. In 3 WEEKS (21 days), how many pieces?",o:["252","84","168","216"],a:0},
-{e:"💰",t:"One quarter (1/4) of 1 million (1,000,000) = ?",o:["250,000","100,000","500,000","400,000"],a:0},
-{e:"🐱",t:"Tom runs at 16 km/h. After 45 minutes, how far has he run? (Hint: 45 min = 3/4 of an hour)",o:["12 km","8 km","16 km","6 km"],a:0},
-{e:"🌟",t:"14 × 13 = ? (Hint: 14×10 + 14×3)",o:["182","172","192","168"],a:0},
-{e:"📈",t:"Pattern: 11, 22, 33, 44, 55... What is the 8th term?",o:["88","77","99","66"],a:0},
-{e:"💡",t:"How many LAKHS are there in 1 CRORE?",o:["10","100","1","50"],a:0},
-{e:"⚡",t:"18 × 12 = ? (Hint: 18×10 + 18×2)",o:["216","204","228","196"],a:0},
-{e:"🦸",t:"Vivaan solves 17 maths problems every hour. In 6 hours he solves how many?",o:["102","96","108","85"],a:0},
-{e:"📐",t:"A square has PERIMETER = 36 cm. What is its AREA?",o:["81 sq cm","36 sq cm","9 sq cm","144 sq cm"],a:0},
-{e:"🔢",t:"3 × 3 × 3 × 3 = ?",o:["81","27","9","108"],a:0},
-{e:"👧",t:"Masha has 1,00,000 beads. She uses 37,500. How many are LEFT?",o:["62,500","72,500","52,500","63,500"],a:0},
-{e:"2️⃣0️⃣",t:"20 × 17 = ?",o:["340","320","360","300"],a:0},
-{e:"🧮",t:"Abacus 🧮 — THOUSANDS: 3, HUNDREDS: 2, TENS: 0, ONES: 6. What number?",o:["3206","3260","2306","3026"],a:0},
-{e:"🚀",t:"999 + 999 + 999 = ? (Hint: 1000×3 minus 3)",o:["2997","3000","2999","2994"],a:0},
-{e:"🏆",t:"FINAL BOSS: 1 billion ÷ 1 million = ? (Hint: billion has 9 zeroes, million has 6 zeroes)",o:["1,000","100","10,000","500"],a:0},
-],
+// ─── CHARACTERS ────────────────────────────────────────────────
+const CHARS=[
+  {name:"Paddington Bear",emoji:"🐻",happyMsgs:["Paw-some! 🐻🎉","Honey-sweet correct! 🍯","Un-bear-ably smart!"],sadMsgs:["Even bears slip! 🐾","Shake it off, champ!","Next one — paws crossed!"]},
+  {name:"Jerry Mouse",emoji:"🐭",happyMsgs:["Squeaky genius! 🐭✨","Jerry approves! 🧀","You outsmarted everyone!"],sadMsgs:["Jerry says try again!","Even I get chased! 🐭","Cheese will come! 🧀"]},
+  {name:"Tom Cat",emoji:"🐱",happyMsgs:["Purr-fect! 🐱🎊","Tom is impressed! ✨","Meow-nificent!"],sadMsgs:["Hiss! Close one! 😾","Tom says read again!","Land on all fours! 🐱"]},
+  {name:"Masha",emoji:"👧",happyMsgs:["Masha shouts YES! 👧🎉","Smart as Masha!","Dancing time! 💃"],sadMsgs:["Masha says: don't worry!","Try again — Masha believes!","We all make mistakes! 👧"]},
+  {name:"Simba",emoji:"🦁",happyMsgs:["ROAR! Correct! 🦁👑","Pride Lands cheer for you!","Remember who you are! 🌟"],sadMsgs:["Even Simba learns! 🦁","Hakuna Matata — next one!","Keep going, future king!"]},
+  {name:"Super Vivaan",emoji:"🦸",happyMsgs:["SUPERHERO move! 🦸⚡","Vivaan saves the day!","Cape ON, brain BLAZING! 🌟"],sadMsgs:["Even heroes have off days!","Power UP and retry! 🦸","You've got this, hero! ⚡"]}
 ];
 
-const DAY_TITLES=[
-  "Tables 2–5 + Abacus Intro 🔢","Tables 6–10 + Place Value 🧮","Tables 11–15 + Millions & Billions 💰","Tables 16–20 + Word Problems 🦁","Division, Fractions & Patterns ➗","Time, Money & Measurement 📏","⚡ ULTIMATE BOSS LEVEL 🏆"
-];
+const SUBJECT_LABELS={math:"🔢 Math",english:"📖 English",evs:"🌿 EVS",gk:"🌍 GK"};
 
-// ─── STATE ────────────────────────────────────────────────────
-let currentDay=0,currentQ=0,score=0,answered=false;
-let questionOrder=[];
-
-// ─── STORAGE ─────────────────────────────────────────────────
-function storageKey(i){return'vivaan2_score_'+dateKey(DATES[i]);}
-function getScore(i){const v=localStorage.getItem(storageKey(i));return v!==null?parseInt(v):null;}
-function saveScore(i,s){localStorage.setItem(storageKey(i),String(s));}
-
-// ─── SHUFFLE ─────────────────────────────────────────────────
-function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-
-// ─── BUILD TABS ───────────────────────────────────────────────
-function buildTabs(){
-  const wrap=document.getElementById('dayTabs');wrap.innerHTML='';
-  DATES.forEach((d,i)=>{
-    const tab=document.createElement('button');
-    const saved=getScore(i);
-    tab.className='day-tab'+(i===currentDay?' active':'')+(saved!==null?' done':'');
-    tab.innerHTML=`${i===0?'📅 ':''}${DAY_NAMES[d.getDay()].slice(0,3)}<br><small>${d.getDate()} ${MONTH_NAMES[d.getMonth()]}</small>`;
-    tab.style.lineHeight='1.3';tab.onclick=()=>switchDay(i);wrap.appendChild(tab);
-  });
-}
-
-// ─── BUILD PROGRESS BLOCKS ────────────────────────────────────
-function buildProgressBlocks(){
-  const sb=document.getElementById('progressSidebar');sb.innerHTML='';
-  const qs=QUESTION_SETS[currentDay];
-  qs.forEach((_,i)=>{
-    const b=document.createElement('div');b.className='q-block';b.id='qb'+i;b.textContent=i+1;sb.appendChild(b);
-  });
-  updateProgressBlocks();
-}
-
-function updateProgressBlocks(){
-  const qs=QUESTION_SETS[currentDay];
-  qs.forEach((_,i)=>{
-    const b=document.getElementById('qb'+i);if(!b)return;
-    b.className='q-block';
-    if(i<currentQ){
-      // completed — we'd need to track per-question results
-      const res=questionResults[i];
-      if(res===true)b.classList.add('correct');
-      else if(res===false)b.classList.add('wrong');
-    } else if(i===currentQ){
-      b.classList.add('current');
-    }
-  });
-}
-
+// ─── STATE ─────────────────────────────────────────────────────
+let currentSubject='math';
+let currentDayIdx=0;
+let currentQ=0;
+let score=0;
+let answered=false;
 let questionResults=[];
+let currentChar=null;
+let timerInterval=null;
+let timerSeconds=0;
+let modalSubject='math';
 
-// ─── SWITCH DAY ───────────────────────────────────────────────
-function switchDay(idx){
-  currentDay=idx;currentQ=0;score=0;answered=false;questionResults=[];
-  document.getElementById('resultScreen').classList.remove('show');
-  document.getElementById('quizBody').style.display='';
-  document.getElementById('liveScore').textContent='0';
-  document.getElementById('charPanel').className='char-panel';
-  document.getElementById('feedback').className='feedback';
-  document.getElementById('nextBtn').className='next-btn';
-  buildTabs();buildProgressBlocks();renderQuestion();
+// ─── UTILS ─────────────────────────────────────────────────────
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function rand(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+// ─── TIMER ─────────────────────────────────────────────────────
+function startTimer(){
+  clearInterval(timerInterval);
+  timerSeconds=0;
+  updateTimerDisplay();
+  timerInterval=setInterval(()=>{timerSeconds++;updateTimerDisplay();},1000);
+}
+function stopTimer(){clearInterval(timerInterval);}
+function updateTimerDisplay(){
+  const m=Math.floor(timerSeconds/60);
+  const s=timerSeconds%60;
+  document.getElementById('timerDisplay').textContent=`${m}:${s.toString().padStart(2,'0')}`;
 }
 
-// ─── RENDER QUESTION ──────────────────────────────────────────
+// ─── SUBJECT SWITCH ─────────────────────────────────────────────
+function switchSubject(sub){
+  currentSubject=sub;
+  document.querySelectorAll('.sub-tab').forEach(t=>t.classList.toggle('active',t.dataset.sub===sub));
+  currentDayIdx=0;
+  buildDayTabs();
+  startDay();
+}
+
+// ─── DAY TABS ─────────────────────────────────────────────────
+function buildDayTabs(){
+  const el=document.getElementById('dayTabs');
+  el.innerHTML='';
+  DATES.forEach((d,i)=>{
+    const key=dateKey(currentSubject,d);
+    const saved=localStorage.getItem(key);
+    const btn=document.createElement('button');
+    btn.className='day-tab'+(i===currentDayIdx?' active':'')+(saved?' done':'');
+    btn.textContent=`${fmtDate(d)}`;
+    btn.onclick=()=>selectDay(i);
+    el.appendChild(btn);
+  });
+}
+
+function selectDay(i){
+  currentDayIdx=i;
+  document.querySelectorAll('.day-tab').forEach((t,idx)=>t.classList.toggle('active',idx===i));
+  startDay();
+}
+
+// ─── START DAY ─────────────────────────────────────────────────
+function startDay(){
+  currentQ=0;score=0;answered=false;
+  questionResults=new Array(20).fill(null);
+  currentChar=CHARS[Math.floor(Math.random()*CHARS.length)];
+  document.getElementById('resultScreen').classList.remove('show');
+  document.getElementById('quizBody').style.display='block';
+  buildSidebar();
+  renderQuestion();
+  startTimer();
+  document.getElementById('liveScore').textContent='0';
+  document.getElementById('progressBar').style.width='0%';
+  document.getElementById('dayTitle').textContent=SUBJECT_LABELS[currentSubject];
+  document.getElementById('dayMeta').textContent=fmtDate(DATES[currentDayIdx]);
+  // Reset character to neutral
+  setCharNeutral();
+}
+
+// ─── SIDEBAR ───────────────────────────────────────────────────
+function buildSidebar(){
+  const el=document.getElementById('progressSidebar');
+  el.innerHTML='';
+  for(let i=0;i<20;i++){
+    const b=document.createElement('div');
+    b.className='q-block'+(i===0?' current':'');
+    b.id=`qb${i}`;
+    b.textContent=i+1;
+    el.appendChild(b);
+  }
+}
+
+function updateSidebar(){
+  for(let i=0;i<20;i++){
+    const b=document.getElementById(`qb${i}`);
+    if(!b)continue;
+    b.className='q-block';
+    if(questionResults[i]==='correct')b.classList.add('correct');
+    else if(questionResults[i]==='wrong')b.classList.add('wrong');
+    else if(i===currentQ)b.classList.add('current');
+  }
+}
+
+// ─── RENDER QUESTION ───────────────────────────────────────────
 function renderQuestion(){
-  const qs=QUESTION_SETS[currentDay];
+  const qs=ALL_QUESTIONS[currentSubject][currentDayIdx];
   const q=qs[currentQ];
   answered=false;
-  document.getElementById('qCounter').textContent=`Question ${currentQ+1} of ${qs.length}`;
-  document.getElementById('questionText').innerHTML=`<span class="question-emoji">${q.e}</span>${q.t}`;
-  document.getElementById('progressBar').style.width=((currentQ/qs.length)*100)+'%';
-  document.getElementById('charPanel').className='char-panel';
+  document.getElementById('qCounter').textContent=`Question ${currentQ+1} of 20`;
+  document.getElementById('questionText').textContent=q.q;
   document.getElementById('feedback').className='feedback';
+  document.getElementById('feedback').textContent='';
   document.getElementById('nextBtn').className='next-btn';
+  updateSidebar();
 
-  // Shuffle options, track correct
   const correct=q.o[q.a];
   const shuffled=shuffle(q.o);
   const newCorrectIdx=shuffled.indexOf(correct);
 
-  const grid=document.getElementById('optionsGrid');grid.innerHTML='';
+  const grid=document.getElementById('optionsGrid');
+  grid.innerHTML='';
   shuffled.forEach((opt,i)=>{
     const btn=document.createElement('button');
-    btn.className='opt-btn';btn.textContent=opt;btn.dataset.idx=i;
-    btn.onclick=()=>checkAnswer(i,newCorrectIdx,correct);
+    btn.className='opt-btn';
+    btn.textContent=opt;
+    btn.onclick=()=>answer(btn,i===newCorrectIdx,shuffled,newCorrectIdx);
     grid.appendChild(btn);
   });
 
-  document.getElementById('dayTitle').textContent=`Day ${currentDay+1} — ${DAY_TITLES[currentDay]}`;
-  document.getElementById('dayMeta').textContent=fmtDate(DATES[currentDay]);
-  updateProgressBlocks();
+  setCharNeutral();
 }
 
-// ─── CHECK ANSWER ─────────────────────────────────────────────
-function checkAnswer(selected,correct,correctText){
-  if(answered)return;answered=true;
+// ─── ANSWER ────────────────────────────────────────────────────
+function answer(btn,isCorrect,shuffled,correctIdx){
+  if(answered)return;
+  answered=true;
   const btns=document.querySelectorAll('.opt-btn');
   btns.forEach(b=>b.disabled=true);
-  btns[correct].classList.add('correct');
-  const char=CHARS[currentDay];
-  const isCorrect=selected===correct;
+  btns[correctIdx].classList.add('correct');
+
+  const fb=document.getElementById('feedback');
 
   if(isCorrect){
-    score++;questionResults[currentQ]=true;
-    document.getElementById('liveScore').textContent=score;
-    btns[selected].classList.add('correct');
-    const msg=char.happyMsgs[Math.floor(Math.random()*char.happyMsgs.length)];
-    showChar(char.happy,char.name,char.happyEm,msg,true);
-    const fb=document.getElementById('feedback');
-    const celebrations=['🎉 Brilliant!','⚡ Superstar!','🔥 Nailed it!','🌟 Genius!','🚀 Correct!','💡 Smart!','✨ Perfect!'];
-    fb.textContent=celebrations[Math.floor(Math.random()*celebrations.length)];
+    btn.classList.add('correct');
+    score++;
+    questionResults[currentQ]='correct';
     fb.className='feedback correct-fb show';
+    fb.textContent='✅ Correct! Well done!';
+    setCharHappy();
   } else {
-    questionResults[currentQ]=false;
-    btns[selected].classList.add('wrong');
-    const msg=char.sadMsgs[Math.floor(Math.random()*char.sadMsgs.length)];
-    showChar(char.neutral,char.name,char.sadEm,msg,false);
-    const fb=document.getElementById('feedback');
-    fb.textContent=`❌ The answer was: ${correctText}`;
+    btn.classList.add('wrong');
+    questionResults[currentQ]='wrong';
     fb.className='feedback wrong-fb show';
+    fb.textContent=`❌ Oops! Correct: ${shuffled[correctIdx]}`;
+    setCharSad();
   }
 
-  const qs=QUESTION_SETS[currentDay];
-  const nb=document.getElementById('nextBtn');
-  nb.className='next-btn show';
-  nb.textContent=currentQ<qs.length-1?'Next Question →':'See My Score! 🏆';
-  updateProgressBlocks();
+  document.getElementById('liveScore').textContent=score;
+  document.getElementById('progressBar').style.width=`${((currentQ+1)/20)*100}%`;
+  updateSidebar();
+  document.getElementById('nextBtn').className='next-btn show';
 }
 
-// ─── SHOW CHARACTER ───────────────────────────────────────────
-function showChar(emoji,name,emotion,msg,isCorrect){
-  const panel=document.getElementById('charPanel');
+// ─── CHARACTER ─────────────────────────────────────────────────
+function setCharNeutral(){
   const av=document.getElementById('charAvatar');
-  av.textContent=emoji;
-  av.className='char-avatar'+(isCorrect?'':' shake');
-  document.getElementById('charName').textContent=name+' says:';
-  const em=document.getElementById('charEmotion');
-  em.textContent=emotion;em.className='char-emotion'+(isCorrect?' correct-em':' wrong-em');
-  document.getElementById('charMsg').textContent=msg;
-  panel.className='char-panel show';
+  av.textContent=currentChar.emoji;
+  av.className='char-avatar';
+  document.getElementById('charName').textContent=currentChar.name;
+  document.getElementById('charEmotion').className='char-emotion neutral-em';
+  document.getElementById('charEmotion').textContent='Waiting for your answer...';
+  document.getElementById('charMsg').textContent='Go on, give it your best shot! 💪';
 }
 
-// ─── NEXT ─────────────────────────────────────────────────────
+function setCharHappy(){
+  const av=document.getElementById('charAvatar');
+  av.textContent=currentChar.emoji;
+  av.className='char-avatar pop';
+  document.getElementById('charEmotion').className='char-emotion correct-em';
+  document.getElementById('charEmotion').textContent='🎉 Amazing!';
+  document.getElementById('charMsg').textContent=rand(currentChar.happyMsgs);
+}
+
+function setCharSad(){
+  const av=document.getElementById('charAvatar');
+  av.textContent=currentChar.emoji;
+  av.className='char-avatar shake';
+  document.getElementById('charEmotion').className='char-emotion wrong-em';
+  document.getElementById('charEmotion').textContent='😔 Oh no...';
+  document.getElementById('charMsg').textContent=rand(currentChar.sadMsgs);
+}
+
+// ─── NEXT QUESTION ─────────────────────────────────────────────
 function nextQuestion(){
-  currentQ++;
-  if(currentQ>=QUESTION_SETS[currentDay].length)showResult();
-  else renderQuestion();
+  if(currentQ<19){
+    currentQ++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
 }
 
-// ─── RESULT ───────────────────────────────────────────────────
+// ─── RESULT ────────────────────────────────────────────────────
 function showResult(){
-  saveScore(currentDay,score);
+  stopTimer();
+  const pct=Math.round((score/20)*100);
+  // Save score
+  const key=dateKey(currentSubject,DATES[currentDayIdx]);
+  localStorage.setItem(key,JSON.stringify({score,pct,time:timerSeconds,date:fmtDate(DATES[currentDayIdx])}));
+  // Update day tab
+  buildDayTabs();
+
   document.getElementById('quizBody').style.display='none';
-  const rs=document.getElementById('resultScreen');rs.classList.add('show');
-  document.getElementById('progressBar').style.width='100%';
-  const pct=score/20;
-  let trophy,msg,stars,charEmoji;
-  if(score===20){trophy='🏆';msg='PERFECT! 100%! You are a Mathematics GOD! 🧠⚡';stars='⭐⭐⭐⭐⭐';charEmoji='🤩';}
-  else if(pct>=.9){trophy='🥇';msg='Outstanding! Almost flawless! 🔥';stars='⭐⭐⭐⭐⭐';charEmoji='😄';}
-  else if(pct>=.75){trophy='🥈';msg='Brilliant! Keep pushing, superstar! 💪';stars='⭐⭐⭐⭐';charEmoji='😊';}
-  else if(pct>=.6){trophy='🥉';msg='Good effort! You are getting stronger! 📚';stars='⭐⭐⭐';charEmoji='😐';}
-  else{trophy='💪';msg='Never give up! Try again and beat your score!';stars='⭐⭐';charEmoji='😤';}
-  document.getElementById('resTrophy').textContent=trophy;
-  document.getElementById('resChar').textContent=charEmoji;
+  const rs=document.getElementById('resultScreen');
+  rs.classList.add('show');
+  document.getElementById('resChar').textContent=currentChar.emoji;
+  document.getElementById('resTrophy').textContent=pct>=90?'🏆':pct>=70?'🥈':'🥉';
   document.getElementById('resScore').textContent=score;
+  const stars=pct>=90?'⭐⭐⭐':pct>=70?'⭐⭐':'⭐';
   document.getElementById('resStars').textContent=stars;
-  document.getElementById('resMsg').textContent=msg;
-  if(pct>=.9)launchConfetti();
-  buildTabs();renderHistory();
+  const msgs={90:`GENIUS! ${currentChar.name} is in awe! 🌟`,70:`Great job! ${currentChar.name} is proud! 🎉`,0:`Keep practising! ${currentChar.name} believes in you! 💪`};
+  document.getElementById('resMsg').textContent=pct>=90?msgs[90]:pct>=70?msgs[70]:msgs[0];
+
+  if(pct>=90)launchConfetti();
 }
 
-// ─── RESTART ─────────────────────────────────────────────────
 function restartDay(){
-  currentQ=0;score=0;answered=false;questionResults=[];
   document.getElementById('resultScreen').classList.remove('show');
-  document.getElementById('quizBody').style.display='';
-  document.getElementById('liveScore').textContent='0';
-  buildProgressBlocks();renderQuestion();
+  document.getElementById('quizBody').style.display='block';
+  startDay();
 }
 
-// ─── HISTORY ─────────────────────────────────────────────────
-function renderHistory(){
-  const list=document.getElementById('historyList');let html='';let any=false;
-  DATES.forEach((d,i)=>{
-    const s=getScore(i);if(s===null)return;any=true;
-    const pct=Math.round((s/20)*100);
-    const stars=s===20?'⭐⭐⭐⭐⭐':s>=18?'⭐⭐⭐⭐⭐':s>=15?'⭐⭐⭐⭐':s>=12?'⭐⭐⭐':'⭐⭐';
-    html+=`<div class="score-row${s===20?' perfect':''}"><div><div class="sr-date">${fmtDate(d)}</div><div class="sr-day-label">Day ${i+1} — ${DAY_NAMES[d.getDay()]}</div></div><div style="text-align:right"><div class="sr-score">${s}/20</div><div class="sr-pct">${pct}%</div><div class="sr-stars">${stars}</div></div></div>`;
+// ─── SCOREBOARD MODAL ──────────────────────────────────────────
+function openScoreboard(){
+  modalSubject=currentSubject;
+  document.querySelectorAll('.modal-sub-tab').forEach(t=>t.classList.toggle('active',t.dataset.sub===modalSubject));
+  renderModalScores();
+  document.getElementById('scoreModal').classList.add('show');
+}
+function closeScoreboard(){document.getElementById('scoreModal').classList.remove('show');}
+function showModalSub(sub){
+  modalSubject=sub;
+  document.querySelectorAll('.modal-sub-tab').forEach(t=>t.classList.toggle('active',t.dataset.sub===sub));
+  renderModalScores();
+}
+function renderModalScores(){
+  const list=document.getElementById('modalScoreList');
+  list.innerHTML='';
+  let found=false;
+  DATES.forEach(d=>{
+    const key=dateKey(modalSubject,d);
+    const raw=localStorage.getItem(key);
+    if(!raw)return;
+    found=true;
+    const data=JSON.parse(raw);
+    const row=document.createElement('div');
+    row.className='score-row'+(data.pct>=90?' perfect':'');
+    const stars=data.pct>=90?'⭐⭐⭐':data.pct>=70?'⭐⭐':'⭐';
+    row.innerHTML=`<div><div class="sr-date">${fmtDate(d)}</div></div><div style="text-align:right"><div class="sr-score">${data.score}/20</div><div class="sr-stars">${stars}</div></div>`;
+    list.appendChild(row);
   });
-  list.innerHTML=any?html:'<div class="history-empty">No scores yet — finish a quiz to see results here! 🎯</div>';
+  if(!found)list.innerHTML='<div class="history-empty">No scores yet — start quizzing! 🚀</div>';
 }
 
-// ─── CONFETTI ─────────────────────────────────────────────────
+// ─── CONFETTI ──────────────────────────────────────────────────
 function launchConfetti(){
   const canvas=document.getElementById('confetti-canvas');
   const ctx=canvas.getContext('2d');
   canvas.width=window.innerWidth;canvas.height=window.innerHeight;
-  const pieces=Array.from({length:150},()=>({x:Math.random()*canvas.width,y:Math.random()*-300,r:Math.random()*8+4,c:`hsl(${Math.random()*360},90%,60%)`,vx:(Math.random()-.5)*5,vy:Math.random()*5+2,rot:Math.random()*360,rv:(Math.random()-.5)*7}));
-  let frame=0;
-  function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);pieces.forEach(p=>{ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);ctx.fillStyle=p.c;ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r);ctx.restore();p.x+=p.vx;p.y+=p.vy;p.rot+=p.rv;});frame++;if(frame<180)requestAnimationFrame(draw);else ctx.clearRect(0,0,canvas.width,canvas.height);}
+  const pieces=Array.from({length:120},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height-canvas.height,r:Math.random()*6+3,c:`hsl(${Math.random()*360},90%,60%)`,vx:(Math.random()-0.5)*4,vy:Math.random()*5+2,a:Math.random()*360}));
+  let frames=0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a*Math.PI/180);
+      ctx.fillStyle=p.c;ctx.fillRect(-p.r,-p.r/2,p.r*2,p.r);
+      ctx.restore();
+      p.x+=p.vx;p.y+=p.vy;p.a+=3;
+      if(p.y>canvas.height){p.y=-10;p.x=Math.random()*canvas.width;}
+    });
+    if(frames++<200)requestAnimationFrame(draw);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
   draw();
 }
 
-// ─── INIT ─────────────────────────────────────────────────────
-questionResults=[];
-buildTabs();buildProgressBlocks();renderQuestion();renderHistory();
+// ─── INIT ──────────────────────────────────────────────────────
+document.getElementById('scoreModal').addEventListener('click',function(e){if(e.target===this)closeScoreboard();});
+buildDayTabs();
+startDay();
 </script>
 </body>
 </html>
