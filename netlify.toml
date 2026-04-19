@@ -13,14 +13,18 @@
 [functions."verify-otp"]
   timeout = 10
 
+# /vivaan (no extension) has no physical file, so force the dashboard.
 [[redirects]]
   from = "/vivaan"
   to = "/vivaan.html"
   status = 200
   force = true
 
+# /vivaan/<something> is a SHADOW redirect (force=false) — it only applies
+# when the requested file doesn't exist. This lets real pages like
+# /vivaan/math-ch1.html, /vivaan/manifest.json, /vivaan/icon-192.png keep
+# working, while unknown paths still fall back to the dashboard.
 [[redirects]]
   from = "/vivaan/*"
   to = "/vivaan.html"
   status = 200
-  force = true
