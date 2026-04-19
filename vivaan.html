@@ -1,854 +1,1918 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vivaan's Quiz Challenge! 🌟</title>
-<!-- GTM -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N5BNNVFL');</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mathemagics · Grades 1 to 10 · For Kids Love</title>
+<meta name="description" content="Mathemagics — free, private, NCERT-aligned maths quiz for Grades 1 to 10. No sign-up, no data collected, scores stay on your device.">
+<meta name="theme-color" content="#FF6B6B">
+<link rel="manifest" href="/vivaan/manifest.json">
+
+<!-- Favicon (PNG + SVG fallback). Must come before any OG image for Chrome tab -->
+<link rel="icon" type="image/png" sizes="192x192" href="/vivaan/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/vivaan/icon-512.png">
+<link rel="icon" type="image/svg+xml" href="/vivaan/icon.svg">
+<link rel="apple-touch-icon" sizes="192x192" href="/vivaan/icon-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="/vivaan/icon-512.png">
+
+<!-- Open Graph (WhatsApp, iMessage, LinkedIn, Facebook link preview) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mathemagics · For Kids Love">
+<meta property="og:title" content="Mathemagics · NCERT Grades 1 to 10">
+<meta property="og:description" content="A free, private maths quiz aligned to NCERT Grades 1 to 10. No sign-up, no ads, nothing stored. Designed by Goyal Vikas for his son, sharing just for learning purposes.">
+<meta property="og:url" content="https://www.goyalvikas.com/vivaan/">
+<meta property="og:image" content="https://www.goyalvikas.com/vivaan/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Mathemagics NCERT Grades 1-10 Quiz, designed by Goyal Vikas, for kids love">
+<meta property="og:locale" content="en_IN">
+
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mathemagics · NCERT Grades 1 to 10">
+<meta name="twitter:description" content="Private, free, no sign-up maths quiz aligned to NCERT Grades 1 to 10. Designed by Goyal Vikas for his son.">
+<meta name="twitter:image" content="https://www.goyalvikas.com/vivaan/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N5BNNVFL');</script>
+<!-- End Google Tag Manager -->
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
-:root{
-  --bg:#0f0c29;--card:#1a1740;--accent:#f7c948;--green:#22d67a;--red:#ff5e5e;
-  --blue:#4fc3f7;--purple:#b39ddb;--orange:#ff9f43;
-  --beg:#4fc3f7;--pro:#ff5e5e;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;color:white;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(1px 1px at 15% 25%,rgba(255,255,255,.5) 0%,transparent 100%),radial-gradient(1px 1px at 85% 15%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 45% 65%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1px 1px at 5% 85%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 95% 75%,rgba(255,255,255,.3) 0%,transparent 100%);pointer-events:none;z-index:0}
-.wrapper{position:relative;z-index:1;max-width:840px;margin:0 auto;padding:16px 14px 100px}
+  :root{
+    --radius-card: 28px;
+    --radius-pill: 999px;
+    --ease-pop: cubic-bezier(.34,1.56,.64,1);
 
-/* Header */
-.header{text-align:center;padding:20px 0 12px}
-.header .crown{font-size:40px;animation:bounce 1.6s infinite;display:block}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.header h1{font-size:clamp(22px,5vw,36px);font-weight:900;letter-spacing:-1px;line-height:1.1}
-.header h1 span{color:var(--accent)}
-.header p{margin-top:5px;font-size:12px;color:#b0aed0}
+    --bg: #FFF7E6;
+    --bg-2: #FFECC7;
+    --ink: #2B1B4A;
+    --ink-2: #5B4B7E;
+    --muted: #8A7AAB;
+    --card: #FFFFFF;
+    --card-border: #2B1B4A;
+    --shadow: 0 6px 0 rgba(43,27,74,0.15), 0 10px 30px rgba(43,27,74,0.08);
+    --shadow-hard: 0 6px 0 #2B1B4A;
 
-/* Subject Tabs */
-.subject-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0 16px}
-.sub-tab{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:50px;padding:8px 16px;font-size:13px;font-weight:800;cursor:pointer;transition:all .2s;color:#b0aed0;font-family:'Nunito',sans-serif}
-.sub-tab:hover{background:rgba(247,201,72,.15);border-color:var(--accent);color:var(--accent)}
-.sub-tab.active{border-color:var(--accent);color:#0f0c29;background:var(--accent)}
-.sub-tab[data-sub="english"].active{background:#4fc3f7;border-color:#4fc3f7;color:#0f0c29}
-.sub-tab[data-sub="evs"].active{background:#22d67a;border-color:#22d67a;color:#0f0c29}
-.sub-tab[data-sub="gk"].active{background:#b39ddb;border-color:#b39ddb;color:#0f0c29}
+    --coral: #FF6B6B;
+    --yellow: #FFC93C;
+    --green: #4CC38A;
+    --sky: #4BA8FF;
+    --grape: #A06CD5;
+    --peach: #FFB07A;
+    --accent: var(--coral);
 
-/* Chapter Selector */
-.chapter-section{margin-bottom:14px}
-.chapter-section label{font-size:11px;font-weight:700;color:#8884b0;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;text-align:center}
-.chapter-pills{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
-.ch-pill{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:12px;padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer;transition:all .2s;color:#b0aed0;font-family:'Nunito',sans-serif;text-align:center}
-.ch-pill:hover{background:rgba(247,201,72,.15);border-color:var(--accent);color:var(--accent)}
-.ch-pill.active{background:var(--accent);border-color:var(--accent);color:#0f0c29}
-.ch-pill .ch-num{font-size:10px;opacity:.7;display:block}
+    --display: 'Fredoka', system-ui, sans-serif;
 
-/* Level Toggle */
-.level-section{display:flex;justify-content:center;gap:0;margin-bottom:14px;border-radius:50px;overflow:hidden;width:fit-content;margin-left:auto;margin-right:auto;border:2px solid rgba(255,255,255,.12)}
-.level-btn{padding:9px 24px;font-size:13px;font-weight:800;cursor:pointer;transition:all .2s;color:#b0aed0;font-family:'Nunito',sans-serif;background:rgba(255,255,255,.05);border:none}
-.level-btn.beginner.active{background:var(--beg);color:#0f0c29}
-.level-btn.pro.active{background:var(--pro);color:white}
-.level-btn:hover:not(.active){background:rgba(255,255,255,.1);color:white}
+    --gap: 20px;
+    --card-pad: 22px;
+  }
 
-/* Level badge on card */
-.level-badge{display:inline-flex;align-items:center;gap:4px;border-radius:50px;padding:3px 10px;font-size:11px;font-weight:800}
-.level-badge.beginner{background:rgba(79,195,247,.2);border:1px solid rgba(79,195,247,.4);color:var(--beg)}
-.level-badge.pro{background:rgba(255,94,94,.2);border:1px solid rgba(255,94,94,.4);color:var(--red)}
+  *,*::before,*::after{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family: 'Nunito', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--ink);
+    background:
+      radial-gradient(ellipse at 0% 0%, #FFD8A8 0%, transparent 50%),
+      radial-gradient(ellipse at 100% 0%, #FFE1E1 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 100%, #D7F0FF 0%, transparent 55%),
+      var(--bg);
+  }
+  button{ font-family: inherit; cursor: pointer; border: none; background: none; }
+  a{ text-decoration: none; color: inherit; }
 
-/* Set Tabs */
-.set-tabs{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:0 0 14px}
-.set-tab{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.12);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;color:#b0aed0;white-space:nowrap;font-family:'Nunito',sans-serif}
-.set-tab:hover{background:rgba(247,201,72,.15);border-color:var(--accent);color:var(--accent)}
-.set-tab.active{background:var(--accent);border-color:var(--accent);color:#0f0c29}
-.set-tab.done{background:rgba(34,214,122,.15);border-color:var(--green);color:var(--green)}
-.set-tab.done.active{background:var(--green);color:#0f0c29}
+  /* ───────── Layout ───────── */
+  .page{ position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 24px 20px 80px; }
 
-/* Timer */
-.timer-bar{text-align:center;margin-bottom:12px}
-.timer-display{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50px;padding:5px 15px;font-size:15px;font-weight:900;color:var(--accent)}
+  /* Topbar */
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom: 20px; gap: 14px; flex-wrap: wrap;
+  }
+  .brand{
+    display:flex; align-items:center; gap:12px;
+    font-family: var(--display); font-weight: 600;
+    font-size: 20px; letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .brand-logo{
+    width:46px; height:46px; border-radius: 14px;
+    display:grid; place-items:center; font-size: 26px;
+    background: linear-gradient(135deg, var(--yellow), var(--coral));
+    box-shadow: var(--shadow-hard);
+    transform: rotate(-4deg);
+    flex-shrink: 0;
+  }
+  .brand-lines .l1{ font-size: 19px; font-weight: 600; }
+  .brand-lines .l2{ font-size: 13px; font-weight: 600; color: var(--ink-2); }
 
-/* Layout */
-.page-layout{display:flex;gap:12px;align-items:flex-start}
-.progress-sidebar{flex-shrink:0;width:42px;display:flex;flex-direction:column;gap:5px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:10px 5px}
-.q-block{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:rgba(255,255,255,.3);transition:all .35s}
-.q-block.current{border-color:var(--accent);color:var(--accent);animation:qpulse 1.2s infinite;background:rgba(247,201,72,.12)}
-.q-block.correct{background:rgba(34,214,122,.25);border-color:var(--green);color:var(--green)}
-.q-block.wrong{background:rgba(255,94,94,.25);border-color:var(--red);color:var(--red)}
-@keyframes qpulse{0%,100%{box-shadow:0 0 0 0 rgba(247,201,72,.4)}50%{box-shadow:0 0 0 5px rgba(247,201,72,0)}}
+  .chip{
+    display:inline-flex; align-items:center; gap:6px;
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    background: var(--card);
+    border: 2px solid var(--card-border);
+    font-weight: 800; font-size: 13px; color: var(--ink);
+    box-shadow: 0 3px 0 var(--card-border);
+  }
+  .chip .dot{ width:8px; height:8px; border-radius:50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse-dot 1.8s infinite; }
+  @keyframes pulse-dot{
+    0%   { box-shadow: 0 0 0 0 rgba(76,195,138,.6); }
+    70%  { box-shadow: 0 0 0 10px rgba(76,195,138,0); }
+    100% { box-shadow: 0 0 0 0 rgba(76,195,138,0); }
+  }
+  .hud{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  button.chip{
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    transition: all .15s var(--ease-pop);
+  }
+  button.chip:hover{ transform: translateY(-2px); box-shadow: 0 5px 0 var(--card-border); }
+  .chip.user .chip-caret{ opacity: .5; margin-left: 2px; font-size: 10px; }
 
-/* Quiz card */
-.quiz-area{flex:1;min-width:0}
-.quiz-card{background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:22px 18px;margin-bottom:16px}
-.card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
-.card-top-left .chapter-title{font-size:15px;font-weight:800;color:var(--accent);margin-bottom:3px}
-.card-top-left .set-label{font-size:11px;color:#8884b0}
-.live-score{display:inline-flex;align-items:center;gap:5px;background:rgba(34,214,122,.12);border:1px solid rgba(34,214,122,.3);border-radius:50px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--green);flex-shrink:0}
-.progress-bar-wrap{background:rgba(255,255,255,.08);border-radius:50px;height:7px;margin-bottom:18px;overflow:hidden}
-.progress-bar{height:100%;background:linear-gradient(90deg,var(--accent),#ff9f43);border-radius:50px;transition:width .4s}
+  /* Grade selector */
+  .grade-bar{
+    display:flex; gap:8px; flex-wrap:wrap; justify-content:center;
+    padding: 10px;
+    margin: 6px auto 22px;
+    background: var(--card);
+    border: 2px solid var(--card-border);
+    border-radius: 22px;
+    box-shadow: 0 4px 0 var(--card-border);
+    max-width: 900px;
+  }
+  .grade-tab{
+    min-width: 64px;
+    padding: 8px 12px 10px;
+    border-radius: 14px;
+    background: transparent;
+    border: 2px solid transparent;
+    font-family: var(--display);
+    font-weight: 600;
+    color: var(--ink-2);
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    transition: all .15s var(--ease-pop);
+    cursor: pointer;
+  }
+  .grade-tab:hover:not(.active){ background: rgba(0,0,0,0.04); color: var(--ink); transform: translateY(-1px); }
+  .grade-tab.active{
+    background: var(--coral);
+    color: #FFF;
+    border-color: var(--card-border);
+    box-shadow: 0 3px 0 var(--card-border);
+  }
+  .grade-tab .g-num{ font-size: 19px; font-weight: 700; line-height: 1; }
+  .grade-tab .g-label{ font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; opacity: .75; }
 
-/* Topic tag */
-.topic-tag{display:inline-block;background:rgba(179,157,219,.2);border:1px solid rgba(179,157,219,.3);border-radius:50px;padding:3px 10px;font-size:10px;font-weight:700;color:var(--purple);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+  /* Profile modal */
+  .modal-ov{
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(43,27,74,0.55);
+    display: none; align-items: center; justify-content: center;
+    padding: 18px;
+  }
+  .modal-ov.show{ display:flex; animation: modalIn .25s ease; }
+  @keyframes modalIn{ from{opacity:0} to{opacity:1} }
+  .modal-box{
+    background: var(--card);
+    border: 2.5px solid var(--card-border);
+    border-radius: var(--radius-card);
+    box-shadow: 0 6px 0 var(--card-border);
+    padding: 22px 22px 18px;
+    width: 100%; max-width: 440px;
+    max-height: 90vh; overflow-y: auto;
+    animation: modalPop .35s var(--ease-pop);
+  }
+  @keyframes modalPop{ from{opacity:0; transform: scale(.9)} to{opacity:1; transform: scale(1)} }
+  .modal-head{
+    display: flex; gap: 14px; align-items: flex-start;
+    margin-bottom: 18px;
+  }
+  .modal-emo{
+    width: 54px; height: 54px; flex: 0 0 54px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--yellow), var(--coral));
+    border: 2px solid var(--card-border);
+    box-shadow: 0 3px 0 var(--card-border);
+    display: grid; place-items: center;
+    font-size: 30px;
+    transform: rotate(-4deg);
+  }
+  .modal-title{
+    font-family: var(--display); font-weight: 700;
+    font-size: 22px; color: var(--ink);
+    letter-spacing: -0.01em; line-height: 1.2;
+  }
+  .modal-sub{
+    font-size: 13px; font-weight: 700; color: var(--ink-2);
+    margin-top: 4px; line-height: 1.4;
+  }
+  .modal-label{
+    font-size: 11px; font-weight: 800; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+  .profile-existing{ margin-bottom: 14px; }
+  .profile-pills{ display: flex; gap: 8px; flex-wrap: wrap; }
+  .profile-pill{
+    padding: 7px 14px; border-radius: var(--radius-pill);
+    background: color-mix(in oklab, var(--sky), transparent 82%);
+    border: 2px solid color-mix(in oklab, var(--sky), transparent 55%);
+    color: var(--sky); font-weight: 800; font-size: 13px;
+    cursor: pointer; font-family: 'Nunito', sans-serif;
+    transition: all .15s var(--ease-pop);
+  }
+  .profile-pill:hover{ transform: translateY(-1px); background: var(--sky); color: #fff; }
+  .profile-pill.active{ background: var(--sky); color: #fff; }
+  .profile-pill .rm{
+    margin-left: 6px; opacity: .6; font-size: 11px;
+    display: inline-block;
+  }
+  .profile-pill .rm:hover{ opacity: 1; color: var(--coral); }
 
-.q-counter{font-size:11px;font-weight:700;color:#8884b0;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-.question-text{font-size:clamp(15px,3.5vw,20px);font-weight:800;line-height:1.5;margin-bottom:18px;min-height:52px}
+  .profile-form{
+    display: flex; gap: 8px; margin-bottom: 10px;
+  }
+  .profile-form input{
+    flex: 1; padding: 12px 14px; border-radius: 14px;
+    background: var(--card); border: 2px solid var(--card-border);
+    box-shadow: 0 2px 0 var(--card-border);
+    font-family: var(--display); font-weight: 600;
+    font-size: 18px; color: var(--ink);
+  }
+  .profile-form input:focus{ outline: none; border-color: var(--coral); }
+  .profile-go{
+    padding: 10px 20px; border-radius: var(--radius-pill);
+    background: var(--coral); color: #fff;
+    border: 2px solid var(--card-border);
+    box-shadow: 0 3px 0 var(--card-border);
+    font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 14px;
+    cursor: pointer; transition: all .15s var(--ease-pop);
+  }
+  .profile-go:hover{ transform: translateY(-2px); box-shadow: 0 5px 0 var(--card-border); }
+  .profile-note{
+    font-size: 11px; font-weight: 700; color: var(--muted);
+    line-height: 1.5; margin-top: 8px;
+  }
 
-/* Options */
-.options{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px}
-.opt-btn{background:rgba(255,255,255,.07);border:2px solid rgba(255,255,255,.15);border-radius:14px;padding:13px 9px;font-size:14px;font-weight:800;color:white;cursor:pointer;transition:all .2s;text-align:center;font-family:'Nunito',sans-serif;line-height:1.3}
-.opt-btn:hover:not(:disabled){background:rgba(247,201,72,.15);border-color:var(--accent);transform:scale(1.03)}
-.opt-btn.correct{background:rgba(34,214,122,.25);border-color:var(--green);color:var(--green)}
-.opt-btn.wrong{background:rgba(255,94,94,.2);border-color:var(--red);color:var(--red)}
-.opt-btn:disabled{cursor:not-allowed}
 
-/* Character panel — always visible */
-.char-panel{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:12px 16px;margin-bottom:12px;display:flex;align-items:center;gap:12px}
-.char-avatar{font-size:48px;line-height:1;transition:transform .3s}
-.char-avatar.pop{animation:charPop .4s ease}
-.char-avatar.shake{animation:charShake .5s ease}
-@keyframes charPop{0%{transform:scale(1)}40%{transform:scale(1.3)}100%{transform:scale(1)}}
-@keyframes charShake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
-.char-info{flex:1}
-.char-name{font-size:11px;font-weight:700;color:#8884b0;text-transform:uppercase;letter-spacing:.8px;margin-bottom:2px}
-.char-emotion{font-size:17px;font-weight:900}
-.char-emotion.correct-em{color:var(--green)}
-.char-emotion.wrong-em{color:var(--red)}
-.char-emotion.neutral-em{color:#b0aed0}
-.char-msg{font-size:12px;color:#b0aed0;margin-top:2px;font-weight:600}
+  /* Hero */
+  .hero{
+    text-align:center;
+    padding: 14px 16px 10px;
+    position: relative;
+  }
+  .hero-badge{
+    display:inline-flex; align-items:center; gap:8px;
+    padding: 7px 16px; border-radius: var(--radius-pill);
+    background: var(--card); border: 2px solid var(--card-border);
+    font-weight: 800; font-size: 13px; color: var(--ink);
+    box-shadow: 0 3px 0 var(--card-border);
+    margin-bottom: 22px;
+  }
+  .hero h1{
+    font-family: var(--display);
+    font-size: clamp(32px, 6vw, 56px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  .hero h1 .spark{
+    display:inline-block;
+    color: var(--yellow);
+    animation: wiggle 2s ease-in-out infinite;
+    transform-origin: center;
+  }
+  @keyframes wiggle{ 0%,100%{transform:rotate(-8deg)} 50%{transform:rotate(10deg) scale(1.1)} }
 
-/* Feedback + Next */
-.feedback{text-align:center;font-size:16px;font-weight:900;padding:9px 14px;border-radius:12px;margin-bottom:12px;display:none}
-.feedback.show{display:block;animation:popIn .3s}
-@keyframes popIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
-.feedback.correct-fb{background:rgba(34,214,122,.15);color:var(--green)}
-.feedback.wrong-fb{background:rgba(255,94,94,.12);color:var(--red)}
-.next-btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--accent),#ff9f43);color:#0f0c29;font-size:15px;font-weight:900;border:none;border-radius:14px;cursor:pointer;font-family:'Nunito',sans-serif;transition:transform .15s;display:none}
-.next-btn:hover{transform:translateY(-2px)}
-.next-btn.show{display:block;animation:popIn .3s}
+  .hero p.sub{
+    font-size: 17px; color: var(--ink-2);
+    max-width: 580px; margin: 0 auto;
+    font-weight: 600; line-height: 1.5;
+  }
 
-/* Result */
-.result-screen{display:none;text-align:center;padding:10px 0}
-.result-screen.show{display:block;animation:popIn .4s}
-.result-char{font-size:60px;display:block;margin-bottom:8px;animation:bounce 1s infinite}
-.result-trophy{font-size:52px;display:block;margin-bottom:8px}
-.result-score{font-size:46px;font-weight:900;color:var(--accent);line-height:1}
-.result-score .sub{font-size:17px;color:#b0aed0;font-weight:600}
-.result-stars{font-size:26px;letter-spacing:4px;margin:10px 0}
-.result-msg{font-size:16px;font-weight:700;margin-bottom:6px}
-.result-time{font-size:12px;color:#8884b0;margin-bottom:16px}
-.restart-btn{background:linear-gradient(135deg,var(--blue),#7986cb);color:white;border:none;border-radius:14px;padding:11px 26px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;margin-right:8px}
-.next-set-btn{background:linear-gradient(135deg,var(--green),#00b09b);color:white;border:none;border-radius:14px;padding:11px 26px;font-size:14px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif}
+  /* Scoreboard */
+  .scoreboard{
+    margin: 30px 0 26px;
+    background: var(--card);
+    border: 2.5px solid var(--card-border);
+    border-radius: var(--radius-card);
+    padding: 22px 22px 18px;
+    box-shadow: 0 6px 0 var(--card-border);
+  }
+  .sb-head{
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px; gap: 10px;
+  }
+  .sb-title{
+    font-family: var(--display); font-weight: 600;
+    font-size: 20px; letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sb-reset{
+    padding: 6px 14px; border-radius: var(--radius-pill);
+    background: var(--card); border: 2px solid var(--card-border);
+    color: var(--ink); font-weight: 800; font-size: 12px;
+    box-shadow: 0 2px 0 var(--card-border);
+    transition: all .15s var(--ease-pop);
+  }
+  .sb-reset:hover{ background: var(--coral); color: #fff; transform: translateY(-1px); }
+  .sb-stats{
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  }
+  @media (max-width: 520px){ .sb-stats{ grid-template-columns: repeat(2, 1fr); } }
+  .sb-stat{
+    background: color-mix(in oklab, var(--accent-stat, var(--coral)), transparent 90%);
+    border: 2px solid color-mix(in oklab, var(--accent-stat, var(--coral)), transparent 60%);
+    border-radius: 18px;
+    padding: 14px 10px;
+    text-align: center;
+  }
+  .sb-stat:nth-child(1){ --accent-stat: var(--coral); }
+  .sb-stat:nth-child(2){ --accent-stat: var(--green); }
+  .sb-stat:nth-child(3){ --accent-stat: var(--sky); }
+  .sb-stat:nth-child(4){ --accent-stat: var(--grape); }
+  .sb-stat .num{
+    font-family: var(--display); font-weight: 700;
+    font-size: 28px; line-height: 1;
+    color: var(--accent-stat);
+  }
+  .sb-stat .lbl{
+    margin-top: 6px; font-size: 11px; font-weight: 800;
+    color: var(--ink-2);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .sb-progress{
+    margin-top: 16px;
+    height: 12px;
+    background: color-mix(in oklab, var(--card-border), transparent 92%);
+    border: 2px solid var(--card-border);
+    border-radius: 999px; overflow: hidden;
+  }
+  .sb-progress-fill{
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--coral), var(--yellow) 50%, var(--green));
+    transition: width .6s ease;
+  }
+  .sb-empty{
+    margin-top: 10px;
+    text-align:center; font-weight: 700; font-size: 14px;
+    color: var(--ink-2);
+  }
 
-/* Floating Scoreboard Button */
-.scoreboard-fab{position:fixed;bottom:22px;right:22px;z-index:100;background:linear-gradient(135deg,var(--accent),#ff9f43);color:#0f0c29;border:none;border-radius:50px;padding:11px 18px;font-size:14px;font-weight:900;cursor:pointer;font-family:'Nunito',sans-serif;box-shadow:0 4px 20px rgba(247,201,72,.4);display:flex;align-items:center;gap:7px;transition:transform .15s}
-.scoreboard-fab:hover{transform:scale(1.05)}
+  /* Section head */
+  .section-head{
+    display:flex; align-items:end; justify-content:space-between; gap: 16px;
+    margin-bottom: 18px;
+  }
+  .section-head h2{
+    font-family: var(--display);
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.02em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-head h2 .lead{
+    width: 40px; height: 40px; border-radius: 12px;
+    display: grid; place-items: center;
+    font-size: 22px;
+    background: var(--card);
+    border: 2px solid var(--card-border);
+    box-shadow: 0 3px 0 var(--card-border);
+  }
 
-/* Scoreboard Modal */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
-.modal-overlay.show{display:flex}
-.modal-box{background:#1a1740;border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:22px 18px;width:100%;max-width:500px;max-height:85vh;overflow-y:auto;position:relative}
-.modal-close{position:absolute;top:12px;right:14px;background:rgba(255,255,255,.1);border:none;color:white;border-radius:50%;width:30px;height:30px;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif}
-.modal-title{font-size:19px;font-weight:900;margin-bottom:14px;color:var(--accent)}
-.modal-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.modal-filter-btn{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:50px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;color:#b0aed0;font-family:'Nunito',sans-serif;transition:all .2s}
-.modal-filter-btn.active{background:var(--accent);border-color:var(--accent);color:#0f0c29}
-.score-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 13px;margin-bottom:7px}
-.sr-info .sr-label{font-size:13px;color:white;font-weight:700}
-.sr-info .sr-sub{font-size:11px;color:#8884b0;margin-top:2px}
-.sr-right{text-align:right}
-.sr-score{font-size:18px;font-weight:900;color:var(--accent)}
-.sr-stars{font-size:13px}
-.score-row.perfect .sr-score{color:var(--green)}
-.modal-empty{font-size:13px;color:#8884b0;text-align:center;padding:20px}
-.modal-chapter-header{font-size:12px;font-weight:800;color:#8884b0;text-transform:uppercase;letter-spacing:1px;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.08)}
+  /* Chapter grid */
+  .chapter-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap);
+  }
+  @media (max-width: 860px){ .chapter-grid{ grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px){ .chapter-grid{ grid-template-columns: 1fr; } }
 
-/* Confetti */
-#confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999}
+  .chapter{
+    position: relative;
+    background: var(--card);
+    border: 2.5px solid var(--card-border);
+    border-radius: var(--radius-card);
+    padding: var(--card-pad);
+    box-shadow: 0 6px 0 var(--card-border);
+    transition: transform .15s var(--ease-pop), box-shadow .15s var(--ease-pop);
+    display:flex; flex-direction: column; gap: 14px;
+    overflow: hidden;
+    animation: popIn .5s var(--ease-pop) both;
+  }
+  @keyframes popIn{ from{opacity:0; transform: scale(.9);} to{opacity:1; transform: scale(1);} }
+  .chapter:nth-child(1)  { animation-delay: .04s; }
+  .chapter:nth-child(2)  { animation-delay: .08s; }
+  .chapter:nth-child(3)  { animation-delay: .12s; }
+  .chapter:nth-child(4)  { animation-delay: .16s; }
+  .chapter:nth-child(5)  { animation-delay: .20s; }
+  .chapter:nth-child(6)  { animation-delay: .24s; }
+  .chapter:nth-child(7)  { animation-delay: .28s; }
+  .chapter:nth-child(8)  { animation-delay: .32s; }
+  .chapter:nth-child(9)  { animation-delay: .36s; }
+  .chapter:nth-child(10) { animation-delay: .40s; }
+  .chapter:nth-child(11) { animation-delay: .44s; }
+  .chapter:nth-child(12) { animation-delay: .48s; }
+  .chapter:nth-child(13) { animation-delay: .52s; }
+  .chapter:nth-child(14) { animation-delay: .56s; }
+  .chapter:nth-child(15) { animation-delay: .60s; }
+  .chapter:nth-child(16) { animation-delay: .64s; }
 
-/* "Coming Soon" chapter state */
-.ch-pill.soon{opacity:.45;cursor:not-allowed}
-.ch-pill.soon:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12);color:#b0aed0}
-.ch-pill .soon-tag{font-size:9px;background:rgba(255,255,255,.15);border-radius:4px;padding:1px 4px;margin-left:4px}
+  .chapter:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 10px 0 var(--card-border);
+  }
+  .chapter::before{
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: var(--accent-ch, var(--accent));
+  }
 
-@media(max-width:560px){
-  .page-layout{flex-direction:column}
-  .progress-sidebar{width:100%;flex-direction:row;flex-wrap:wrap;padding:8px;gap:4px;justify-content:center}
-  .q-block{width:28px;height:28px;font-size:9px}
-  .options{grid-template-columns:1fr 1fr}
-  .opt-btn{padding:10px 7px;font-size:13px}
-  .quiz-card{padding:16px 12px}
-  .level-btn{padding:8px 16px;font-size:12px}
-}
+  .chapter.soon{
+    opacity: .82;
+    border-style: dashed;
+  }
+  .chapter.soon:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 var(--card-border);
+  }
+  .chapter.soon .play-btn{
+    background: var(--card);
+    color: var(--ink-2);
+    border-color: var(--card-border);
+    cursor: default;
+  }
+  .chapter.soon:hover .play-btn{ transform: none; box-shadow: 0 3px 0 var(--card-border); }
+  .soon-badge{
+    position: absolute; top: 12px; right: 12px;
+    font-size: 9.5px; font-weight: 900; letter-spacing: .05em;
+    background: var(--yellow); color: var(--ink);
+    padding: 3px 9px; border-radius: 999px;
+    border: 1.5px solid var(--card-border);
+    text-transform: uppercase;
+  }
+
+  .chapter-head{
+    display:flex; align-items:flex-start; justify-content:space-between; gap: 10px;
+  }
+  .ch-tag{
+    display:inline-flex; align-items:center; gap:4px;
+    padding: 5px 12px; border-radius: var(--radius-pill);
+    background: color-mix(in oklab, var(--accent-ch, var(--accent)), transparent 82%);
+    color: var(--accent-ch, var(--accent));
+    font-weight: 900; font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .ch-emoji{
+    width: 54px; height: 54px; flex:0 0 54px;
+    border-radius: 18px;
+    background: color-mix(in oklab, var(--accent-ch, var(--accent)), transparent 85%);
+    display:grid; place-items:center;
+    font-size: 30px;
+    transform: rotate(-4deg);
+    transition: transform .2s var(--ease-pop);
+  }
+  .chapter:hover .ch-emoji{ transform: rotate(6deg) scale(1.05); }
+
+  .chapter h3{
+    font-family: var(--display); font-weight: 700;
+    font-size: 22px; letter-spacing: -0.01em;
+    margin: 0; color: var(--ink);
+    line-height: 1.15;
+  }
+  .chapter p.desc{
+    margin: 0; font-size: 14px; color: var(--ink-2);
+    font-weight: 600; line-height: 1.45;
+  }
+
+  /* Toon panel */
+  .toon{
+    margin-top: 4px;
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px;
+    border-radius: 18px;
+    background: color-mix(in oklab, var(--accent-ch, var(--accent)), transparent 90%);
+    border: 1.5px dashed color-mix(in oklab, var(--accent-ch, var(--accent)), transparent 55%);
+  }
+  .toon-face{
+    width: 50px; height: 50px; flex: 0 0 50px;
+    border-radius: 16px;
+    display:grid; place-items:center;
+    font-size: 30px;
+    background: #FFF;
+    border: 2px solid var(--card-border);
+    box-shadow: 0 3px 0 var(--card-border);
+    transform: rotate(-5deg);
+    transition: transform .2s var(--ease-pop);
+  }
+  .chapter:hover .toon-face{ transform: rotate(6deg) scale(1.08); }
+  .toon-name{
+    font-family: var(--display); font-weight: 700;
+    font-size: 15px; letter-spacing: -0.01em;
+    color: var(--ink); line-height: 1.1;
+  }
+  .toon-line{
+    font-size: 12px; font-weight: 700; color: var(--ink-2);
+    margin-top: 3px; line-height: 1.3;
+  }
+
+  /* Chapter footer (score + play) */
+  .ch-footer{
+    display:flex; flex-direction: column; gap: 8px;
+    margin-top: auto; padding-top: 2px;
+  }
+  .ch-score{
+    font-size: 12px; font-weight: 800;
+    color: var(--ink-2);
+    text-align: center;
+  }
+  .ch-score .done{ color: var(--green); }
+  .play-btn{
+    width: 100%; justify-content: center;
+    padding: 12px 18px; border-radius: var(--radius-pill);
+    background: var(--accent-ch, var(--accent));
+    color: #FFF;
+    font-weight: 900; font-size: 15px;
+    display:inline-flex; align-items:center; gap: 6px;
+    box-shadow: 0 3px 0 var(--card-border);
+    transition: all .15s var(--ease-pop);
+    border: 2px solid var(--card-border);
+  }
+  .chapter:hover .play-btn{
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 var(--card-border);
+  }
+  .play-btn:active{ transform: translateY(1px); box-shadow: 0 2px 0 var(--card-border); }
+
+  /* More subjects grid (below chapters) */
+  .subjects-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap);
+  }
+  @media (max-width: 720px){ .subjects-grid{ grid-template-columns: repeat(2, 1fr); } }
+  .subj-card{
+    background: var(--card);
+    border: 2.5px dashed var(--card-border);
+    border-radius: var(--radius-card);
+    padding: 22px 14px;
+    text-align: center;
+    opacity: .9;
+    transition: transform .15s var(--ease-pop);
+  }
+  .subj-card:hover{ transform: translateY(-2px); }
+  .subj-emoji{
+    font-size: 44px;
+    margin-bottom: 10px;
+    display: inline-block;
+    animation: bob 3s ease-in-out infinite;
+  }
+  @keyframes bob{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  .subj-name{
+    font-family: var(--display); font-weight: 700;
+    font-size: 18px; color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .subj-tag{
+    display: inline-block;
+    font-size: 11px; font-weight: 900;
+    background: var(--yellow); color: var(--ink);
+    padding: 4px 12px; border-radius: 999px;
+    border: 2px solid var(--card-border);
+    box-shadow: 0 2px 0 var(--card-border);
+    letter-spacing: .06em;
+  }
+
+  /* Pick-grade empty state */
+  .pick-grade-card{
+    background: var(--card);
+    border: 2.5px dashed var(--card-border);
+    border-radius: var(--radius-card);
+    padding: 40px 24px;
+    text-align: center;
+    box-shadow: 0 6px 0 var(--card-border);
+  }
+  .pick-grade-card .pg-emo{
+    font-size: 58px; line-height: 1;
+    margin-bottom: 14px;
+    animation: bob 3s ease-in-out infinite;
+    display: inline-block;
+  }
+  .pick-grade-card .pg-title{
+    font-family: var(--display); font-weight: 700;
+    font-size: 24px; color: var(--ink);
+    margin-bottom: 6px; letter-spacing: -0.02em;
+  }
+  .pick-grade-card .pg-sub{
+    font-size: 14px; color: var(--ink-2); font-weight: 700;
+  }
+
+  /* Quiz Modal (full-screen for non-G2 chapters) */
+  .quiz-modal{ position: fixed; inset: 0; z-index: 250; display: none; }
+  .quiz-modal.show{ display: block; }
+  .quiz-modal .qm-ov{
+    position: absolute; inset: 0;
+    background: rgba(43,27,74,0.6);
+    backdrop-filter: blur(4px);
+  }
+  .quiz-modal .qm-box{
+    position: relative;
+    max-width: 760px;
+    margin: 20px auto;
+    height: calc(100vh - 40px);
+    background: var(--card);
+    border: 2.5px solid var(--card-border);
+    border-radius: var(--radius-card);
+    box-shadow: 0 6px 0 var(--card-border);
+    padding: 18px 20px 22px;
+    overflow-y: auto;
+    animation: modalPop .35s var(--ease-pop);
+  }
+  @media (max-width: 720px){
+    .quiz-modal .qm-box{ margin: 0; height: 100vh; border-radius: 0; border: none; }
+  }
+  .qm-close{
+    position: absolute; top: 14px; right: 14px;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--card); color: var(--ink);
+    border: 2px solid var(--card-border);
+    box-shadow: 0 2px 0 var(--card-border);
+    font-weight: 900; font-size: 16px;
+    display: grid; place-items: center; cursor: pointer;
+    transition: all .15s var(--ease-pop);
+  }
+  .qm-close:hover{ background: var(--coral); color: #fff; transform: translateY(-1px); }
+  .qm-head{ display: flex; align-items: center; gap: 12px; padding-right: 46px; margin-bottom: 12px; }
+  .qm-head-emoji{
+    width: 46px; height: 46px; flex: 0 0 46px;
+    border-radius: 14px;
+    background: color-mix(in oklab, var(--qm-accent, var(--coral)), transparent 82%);
+    display: grid; place-items: center; font-size: 26px;
+    transform: rotate(-4deg);
+  }
+  .qm-head-lines .qm-ch-tag{
+    font-size: 10px; font-weight: 900; letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--qm-accent, var(--coral));
+  }
+  .qm-head-lines .qm-title{
+    font-family: var(--display); font-weight: 700;
+    font-size: 20px; letter-spacing: -0.01em;
+    line-height: 1.1; color: var(--ink);
+  }
+
+  .qm-levels{
+    display: flex; gap: 6px; padding: 5px;
+    background: color-mix(in oklab, var(--card-border), transparent 95%);
+    border: 2px solid var(--card-border);
+    border-radius: 14px;
+    margin-bottom: 12px;
+  }
+  .qm-level-btn{
+    flex: 1;
+    padding: 9px 10px;
+    border-radius: 10px;
+    font-weight: 800; font-size: 13px;
+    color: var(--ink-2); background: transparent;
+    font-family: 'Nunito', sans-serif;
+    transition: all .15s var(--ease-pop);
+  }
+  .qm-level-btn.active[data-level="beginner"]{ background: var(--sky); color: #fff; box-shadow: 0 2px 0 var(--card-border); }
+  .qm-level-btn.active[data-level="pro"]{ background: var(--coral); color: #fff; box-shadow: 0 2px 0 var(--card-border); }
+
+  .qm-sets{ display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .qm-set-btn{
+    padding: 6px 12px; border-radius: 999px;
+    background: var(--card); color: var(--ink-2);
+    border: 2px solid var(--card-border);
+    font-weight: 800; font-size: 12px;
+    font-family: 'Nunito', sans-serif;
+    transition: all .15s var(--ease-pop);
+  }
+  .qm-set-btn.active{ background: var(--yellow); color: var(--ink); box-shadow: 0 2px 0 var(--card-border); }
+  .qm-set-btn.done{ border-color: var(--green); color: var(--green); }
+  .qm-set-btn.done.active{ background: var(--green); color: #fff; }
+
+  .qm-meta{
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; margin-bottom: 8px; flex-wrap: wrap;
+  }
+  .qm-meta > div{
+    background: var(--card);
+    border: 1.5px solid var(--card-border);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 12px; font-weight: 800;
+    color: var(--ink);
+  }
+  .qm-progress{
+    height: 8px; margin-bottom: 12px;
+    background: color-mix(in oklab, var(--card-border), transparent 92%);
+    border: 1.5px solid var(--card-border);
+    border-radius: 999px; overflow: hidden;
+  }
+  .qm-progress-fill{
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--qm-accent, var(--coral)), var(--yellow) 50%, var(--green));
+    transition: width .4s ease;
+  }
+
+  .qm-topic{
+    display: inline-block;
+    font-size: 11px; font-weight: 900; letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--grape);
+    background: color-mix(in oklab, var(--grape), transparent 88%);
+    border: 1.5px solid color-mix(in oklab, var(--grape), transparent 55%);
+    padding: 3px 10px; border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .qm-qnum{
+    font-size: 11px; font-weight: 800; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .06em;
+    margin-bottom: 4px;
+  }
+  .qm-q{
+    font-family: var(--display); font-weight: 600;
+    font-size: 20px; color: var(--ink); line-height: 1.3;
+    margin-bottom: 14px; min-height: 40px;
+  }
+
+  .qm-opts{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .qm-opt{
+    background: var(--card); color: var(--ink);
+    border: 2px solid var(--card-border);
+    box-shadow: 0 3px 0 var(--card-border);
+    border-radius: 14px;
+    padding: 12px 10px; text-align: left;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 14px;
+    cursor: pointer; transition: all .15s var(--ease-pop);
+    line-height: 1.3;
+  }
+  .qm-opt:hover:not(:disabled){ transform: translateY(-2px); box-shadow: 0 5px 0 var(--card-border); }
+  .qm-opt.correct{
+    background: color-mix(in oklab, var(--green), transparent 80%);
+    border-color: var(--green); color: var(--green);
+  }
+  .qm-opt.wrong{
+    background: color-mix(in oklab, var(--coral), transparent 80%);
+    border-color: var(--coral); color: var(--coral);
+  }
+  .qm-opt:disabled{ cursor: default; }
+  @media (max-width: 500px){ .qm-opts{ grid-template-columns: 1fr; } }
+
+  .qm-char{
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px;
+    border-radius: 16px;
+    background: color-mix(in oklab, var(--qm-accent, var(--coral)), transparent 90%);
+    border: 1.5px dashed color-mix(in oklab, var(--qm-accent, var(--coral)), transparent 55%);
+    margin-bottom: 10px;
+  }
+  .qm-char-face{
+    width: 48px; height: 48px; flex: 0 0 48px;
+    border-radius: 14px;
+    display: grid; place-items: center;
+    font-size: 28px;
+    background: #fff;
+    border: 2px solid var(--card-border);
+    box-shadow: 0 3px 0 var(--card-border);
+    transform: rotate(-5deg);
+    transition: transform .25s var(--ease-pop);
+  }
+  .qm-char-face.pop{ animation: qmPop .4s ease; }
+  .qm-char-face.shake{ animation: qmShake .45s ease; }
+  @keyframes qmPop{ 0%{transform:scale(1) rotate(-5deg)} 40%{transform:scale(1.25) rotate(6deg)} 100%{transform:scale(1) rotate(-5deg)} }
+  @keyframes qmShake{ 0%,100%{transform:translateX(0) rotate(-5deg)} 25%{transform:translateX(-5px) rotate(-8deg)} 75%{transform:translateX(5px) rotate(-2deg)} }
+  .qm-char-name{
+    font-family: var(--display); font-weight: 700;
+    font-size: 14px; color: var(--ink);
+  }
+  .qm-char-msg{
+    font-size: 12px; font-weight: 700; color: var(--ink-2);
+    margin-top: 2px;
+  }
+
+  .qm-feedback{
+    display: none; text-align: center;
+    padding: 9px 12px; border-radius: 12px;
+    font-weight: 900; font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .qm-feedback.show{ display: block; animation: modalPop .3s var(--ease-pop); }
+  .qm-feedback.good{ background: color-mix(in oklab, var(--green), transparent 85%); color: var(--green); }
+  .qm-feedback.bad{ background: color-mix(in oklab, var(--coral), transparent 85%); color: var(--coral); }
+
+  .qm-next{
+    display: none; width: 100%;
+    padding: 13px 16px; border-radius: 999px;
+    background: var(--qm-accent, var(--coral)); color: #fff;
+    border: 2px solid var(--card-border);
+    box-shadow: 0 3px 0 var(--card-border);
+    font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 15px;
+    cursor: pointer;
+    transition: all .15s var(--ease-pop);
+  }
+  .qm-next.show{ display: block; animation: modalPop .3s var(--ease-pop); }
+  .qm-next:hover{ transform: translateY(-2px); box-shadow: 0 5px 0 var(--card-border); }
+
+  .qm-result{ display: none; text-align: center; padding: 20px 6px; }
+  .qm-result.show{ display: block; animation: modalPop .4s var(--ease-pop); }
+  .qm-result .qm-res-emoji{ font-size: 64px; display: block; line-height: 1; margin-bottom: 8px; animation: bob 1s infinite; }
+  .qm-result .qm-res-score{
+    font-family: var(--display); font-weight: 700;
+    font-size: 48px; color: var(--qm-accent, var(--coral));
+    line-height: 1.0;
+  }
+  .qm-result .qm-res-score .sub{ font-size: 18px; color: var(--ink-2); font-weight: 600; display: block; margin-top: 4px; }
+  .qm-result .qm-res-stars{ font-size: 28px; letter-spacing: 4px; margin: 10px 0; }
+  .qm-result .qm-res-msg{ font-size: 16px; font-weight: 800; color: var(--ink); }
+  .qm-result .qm-res-time{ font-size: 12px; font-weight: 700; color: var(--muted); margin-top: 4px; margin-bottom: 18px; }
+  .qm-result .qm-res-actions{ display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .qm-res-btn{
+    padding: 11px 20px; border-radius: 999px;
+    font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 14px;
+    border: 2px solid var(--card-border);
+    box-shadow: 0 3px 0 var(--card-border);
+    cursor: pointer;
+    transition: all .15s var(--ease-pop);
+  }
+  .qm-res-btn.again{ background: var(--sky); color: #fff; }
+  .qm-res-btn.next{ background: var(--green); color: #fff; }
+  .qm-res-btn:hover{ transform: translateY(-2px); box-shadow: 0 5px 0 var(--card-border); }
+
+  /* Footer */
+  .foot{
+    margin-top: 44px;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .foot-note,
+  .foot-privacy{
+    background: var(--card);
+    border: 2px solid var(--card-border);
+    border-radius: 18px;
+    box-shadow: 0 3px 0 var(--card-border);
+    padding: 14px 18px;
+    text-align: center;
+    max-width: 680px;
+    font-weight: 700; font-size: 13px;
+    color: var(--ink-2); line-height: 1.55;
+  }
+  .foot-note strong{ color: var(--coral); }
+  .foot-privacy{
+    padding: 18px 20px;
+    text-align: left;
+    font-size: 13px;
+    background: color-mix(in oklab, var(--green), transparent 92%);
+    border-color: color-mix(in oklab, var(--green), transparent 55%);
+  }
+  .foot-privacy .fp-title{
+    font-family: var(--display); font-weight: 700;
+    font-size: 16px; color: var(--green);
+    margin-bottom: 10px;
+  }
+  .foot-privacy .fp-intro{
+    font-size: 12.5px; font-weight: 700; color: var(--ink-2);
+    line-height: 1.6;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    background: color-mix(in oklab, var(--coral), transparent 92%);
+    border: 1.5px dashed color-mix(in oklab, var(--coral), transparent 55%);
+    border-radius: 14px;
+  }
+  .foot-privacy .fp-intro strong{ color: var(--coral); font-weight: 900; }
+  .foot-privacy ul.fp-list{
+    list-style: none; padding: 0; margin: 0 0 10px;
+  }
+  .foot-privacy ul.fp-list li{
+    padding: 6px 0 6px 22px;
+    position: relative;
+    line-height: 1.55;
+    font-size: 12.5px;
+    color: var(--ink-2);
+    font-weight: 600;
+  }
+  .foot-privacy ul.fp-list li::before{
+    content:'✓';
+    position: absolute; left: 0; top: 6px;
+    color: var(--green); font-weight: 900;
+  }
+  .foot-privacy ul.fp-list li strong{ color: var(--ink); font-weight: 800; }
+  .foot-privacy .fp-foot{
+    font-size: 12px; font-weight: 700; color: var(--muted);
+    padding-top: 10px; border-top: 1.5px dashed color-mix(in oklab, var(--green), transparent 60%);
+    line-height: 1.5;
+  }
+  .foot a{ color: var(--coral); font-weight: 900; text-decoration: none; }
 </style>
-</head>
+<!-- Google Site Verification -->
+<meta name="google-site-verification" content="FF1bt2TevSgPyyhc0vnLzLsP_LBu6DVZkcFvF5XNaGY" />
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TG9F3RCK');</script>
+<!-- End Google Tag Manager -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2FXRX383SG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2FXRX383SG');
+</script></head>
 <body>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5BNNVFL" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<canvas id="confetti-canvas"></canvas>
 
-<div class="wrapper">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5BNNVFL"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
-  <div class="header">
-    <span class="crown">👑</span>
-    <h1>Vivaan's <span>Quiz Challenge!</span></h1>
-    <p>Mathematics Buzzz • Chapter-wise • Beginner &amp; Pro Levels</p>
+<main class="page">
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-logo">🎯</div>
+      <div class="brand-lines">
+        <div class="l1">Mathemagics</div>
+        <div class="l2" id="brandSub">Grade 2 · For Kids Love</div>
+      </div>
+    </div>
+    <div class="hud">
+      <button id="userChip" class="chip user" type="button">
+        <span class="dot"></span>
+        <span id="userChipName">Set up your name</span>
+        <span class="chip-caret">▾</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Grade selector -->
+  <nav class="grade-bar" id="gradeBar" aria-label="Choose your grade"></nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">✨ Let's learn, let's play!</div>
+    <h1>Let's have some fun, with <span class="spark">Mathemagics</span></h1>
+    <p class="sub" id="heroSub">Quiz aligned to a standard Grade 2 student.</p>
+  </section>
+
+  <!-- Master Scoreboard -->
+  <section class="scoreboard" id="scoreboard">
+    <div class="sb-head">
+      <div class="sb-title">🏆 My Scoreboard</div>
+      <button class="sb-reset" id="sbReset" type="button">Reset</button>
+    </div>
+    <div class="sb-stats">
+      <div class="sb-stat"><div class="num" id="sbSets">0</div><div class="lbl">Sets Done</div></div>
+      <div class="sb-stat"><div class="num" id="sbCorrect">0</div><div class="lbl">Correct</div></div>
+      <div class="sb-stat"><div class="num" id="sbTotal">0</div><div class="lbl">Questions</div></div>
+      <div class="sb-stat"><div class="num" id="sbPct">0%</div><div class="lbl">Overall</div></div>
+    </div>
+    <div class="sb-progress"><div class="sb-progress-fill" id="sbFill"></div></div>
+    <div class="sb-empty" id="sbEmpty">Start your first quiz to see your stats! 🚀</div>
+  </section>
+
+  <!-- Mathematics -->
+  <div class="section-head" id="chapterSection">
+    <h2><span class="lead">🔢</span><span id="mathHead">Mathematics · 11 chapters</span></h2>
+  </div>
+  <div class="chapter-grid" id="chapterGrid"></div>
+
+  <!-- More Subjects (below Maths chapters, launching soon) -->
+  <div class="section-head" style="margin-top:40px;">
+    <h2><span class="lead">📚</span>More Subjects</h2>
+  </div>
+  <div class="subjects-grid">
+    <div class="subj-card"><div class="subj-emoji">🔤</div><div class="subj-name">Hindi</div><div class="subj-tag">Launching Soon</div></div>
+    <div class="subj-card"><div class="subj-emoji">📖</div><div class="subj-name">English</div><div class="subj-tag">Launching Soon</div></div>
+    <div class="subj-card"><div class="subj-emoji">🌿</div><div class="subj-name">EVS / Science</div><div class="subj-tag">Launching Soon</div></div>
+    <div class="subj-card"><div class="subj-emoji">🌍</div><div class="subj-name">GK</div><div class="subj-tag">Launching Soon</div></div>
   </div>
 
-  <!-- Subject Tabs -->
-  <div class="subject-tabs" id="subjectTabs">
-    <button class="sub-tab active" data-sub="math" onclick="switchSubject('math')">🔢 Math</button>
-    <button class="sub-tab" data-sub="english" onclick="switchSubject('english')">📖 English</button>
-    <button class="sub-tab" data-sub="evs" onclick="switchSubject('evs')">🌿 EVS</button>
-    <button class="sub-tab" data-sub="gk" onclick="switchSubject('gk')">🌍 GK</button>
-  </div>
-
-  <!-- Chapter Selector -->
-  <div class="chapter-section">
-    <label>Select Chapter</label>
-    <div class="chapter-pills" id="chapterPills"></div>
-  </div>
-
-  <!-- Level Toggle -->
-  <div class="level-section">
-    <button class="level-btn beginner active" id="btnBeginner" onclick="switchLevel('beginner')">⭐ Beginner</button>
-    <button class="level-btn pro" id="btnPro" onclick="switchLevel('pro')">🔥 Pro</button>
-  </div>
-
-  <!-- Set Tabs -->
-  <div class="set-tabs" id="setTabs"></div>
-
-  <!-- Timer -->
-  <div class="timer-bar">
-    <div class="timer-display">⏱ <span id="timerDisplay">0:00</span></div>
-  </div>
-
-  <div class="page-layout">
-    <div class="progress-sidebar" id="progressSidebar"></div>
-
-    <div class="quiz-area">
-      <div class="quiz-card">
-        <div class="card-top">
-          <div class="card-top-left">
-            <div class="chapter-title" id="cardChapterTitle"></div>
-            <div class="set-label" id="cardSetLabel"></div>
-          </div>
-          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
-            <div class="live-score">✅ <span id="liveScore">0</span> / <span id="totalQs">10</span></div>
-            <div class="level-badge beginner" id="levelBadge">⭐ Beginner</div>
-          </div>
+  <!-- Quiz modal (for non-Grade-2 chapters that have quiz data) -->
+  <div class="quiz-modal" id="quizModal" role="dialog" aria-modal="true" aria-label="Quiz">
+    <div class="qm-ov" data-close="1"></div>
+    <div class="qm-box">
+      <button class="qm-close" id="qmClose" type="button" aria-label="Close">✕</button>
+      <div class="qm-head">
+        <div class="qm-head-emoji" id="qmHeadEmoji">🔢</div>
+        <div class="qm-head-lines">
+          <div class="qm-ch-tag" id="qmChTag">Grade · Chapter</div>
+          <div class="qm-title" id="qmTitle">Chapter title</div>
         </div>
-        <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+      </div>
 
-        <div id="quizBody">
-          <div class="topic-tag" id="topicTag"></div>
-          <div class="q-counter" id="qCounter">Question 1</div>
-          <div class="question-text" id="questionText"></div>
-          <div class="options" id="optionsGrid"></div>
+      <div class="qm-levels">
+        <button class="qm-level-btn active" data-level="beginner" type="button">⭐ Beginner</button>
+        <button class="qm-level-btn" data-level="pro" type="button">🔥 Pro</button>
+      </div>
 
-          <!-- Character panel always visible -->
-          <div class="char-panel" id="charPanel">
-            <div class="char-avatar" id="charAvatar"></div>
-            <div class="char-info">
-              <div class="char-name" id="charName"></div>
-              <div class="char-emotion neutral-em" id="charEmotion">Waiting for your answer...</div>
-              <div class="char-msg" id="charMsg">Give it your best shot! 💪</div>
-            </div>
-          </div>
+      <div class="qm-sets" id="qmSets"></div>
 
-          <div class="feedback" id="feedback"></div>
-          <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next Question →</button>
-        </div>
+      <div class="qm-meta">
+        <div>⏱ <span id="qmTimer">0:00</span></div>
+        <div>Q <span id="qmQnum">1</span>/<span id="qmQtot">10</span></div>
+        <div>✅ <span id="qmScore">0</span></div>
+      </div>
+      <div class="qm-progress"><div class="qm-progress-fill" id="qmFill"></div></div>
 
-        <div class="result-screen" id="resultScreen">
-          <span class="result-char" id="resChar"></span>
-          <span class="result-trophy" id="resTrophy"></span>
-          <div class="result-score">
-            <span id="resScore">0</span><br>
-            <span class="sub">out of <span id="resTotalQ">10</span></span>
-          </div>
-          <div class="result-stars" id="resStars"></div>
-          <div class="result-msg" id="resMsg"></div>
-          <div class="result-time" id="resTime"></div>
+      <div id="qmPlay">
+        <div class="qm-topic" id="qmTopic"></div>
+        <div class="qm-qnum" id="qmQCounter">Question 1</div>
+        <div class="qm-q" id="qmQ"></div>
+        <div class="qm-opts" id="qmOpts"></div>
+        <div class="qm-char">
+          <div class="qm-char-face" id="qmCharFace">🐻</div>
           <div>
-            <button class="restart-btn" onclick="restartSet()">🔄 Try Again</button>
-            <button class="next-set-btn" id="nextSetBtn" onclick="goNextSet()">Next Set →</button>
+            <div class="qm-char-name" id="qmCharName">Bear</div>
+            <div class="qm-char-msg" id="qmCharMsg">Give it your best shot! 💪</div>
           </div>
+        </div>
+        <div class="qm-feedback" id="qmFeedback"></div>
+        <button class="qm-next" id="qmNext" type="button">Next Question →</button>
+      </div>
+
+      <div class="qm-result" id="qmResult">
+        <span class="qm-res-emoji" id="qmResEmoji">🏆</span>
+        <div class="qm-res-score"><span id="qmResScore">0</span><span class="sub">out of <span id="qmResTotal">10</span></span></div>
+        <div class="qm-res-stars" id="qmResStars">⭐⭐⭐</div>
+        <div class="qm-res-msg" id="qmResMsg">Great job!</div>
+        <div class="qm-res-time" id="qmResTime">Time: 0m 0s</div>
+        <div class="qm-res-actions">
+          <button class="qm-res-btn again" id="qmTryAgain" type="button">🔄 Try Again</button>
+          <button class="qm-res-btn next" id="qmNextSet" type="button">Next Set →</button>
         </div>
       </div>
     </div>
   </div>
 
-</div>
+  <!-- Profile picker modal -->
+  <div class="modal-ov" id="profileModal" role="dialog" aria-modal="true" aria-label="Pick your profile">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div class="modal-emo">👦</div>
+        <div>
+          <div class="modal-title">Who's playing?</div>
+          <div class="modal-sub">Pick a name so your scores stay on this device only.</div>
+        </div>
+      </div>
 
-<!-- Floating Scoreboard Button -->
-<button class="scoreboard-fab" onclick="openScoreboard()">🏆 Scores</button>
+      <div class="profile-existing" id="profileExisting" style="display:none;">
+        <div class="modal-label">Existing profiles on this device</div>
+        <div class="profile-pills" id="profilePills"></div>
+      </div>
 
-<!-- Scoreboard Modal -->
-<div class="modal-overlay" id="scoreModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeScoreboard()">✕</button>
-    <div class="modal-title">🏆 My Scores</div>
-    <div class="modal-filters" id="modalFilters"></div>
-    <div id="modalScoreList"></div>
+      <div class="modal-label">New name (or type over to add a new one)</div>
+      <form id="profileForm" class="profile-form">
+        <input id="profileInput" type="text" autocomplete="off" spellcheck="false" maxlength="20" placeholder="Your first name" required>
+        <button type="submit" class="profile-go">Start ▶</button>
+      </form>
+      <div class="profile-note">
+        Nothing is sent anywhere. Names live only inside this browser on this phone/tablet/laptop.
+      </div>
+    </div>
   </div>
-</div>
+
+  <!-- Footer -->
+  <footer class="foot">
+    <div class="foot-note">
+      Designed by <a href="https://goyalvikas.com">Goyal Vikas</a> · Only for learning purpose · <strong>For Kids Love</strong>
+    </div>
+
+    <div class="foot-privacy">
+      <div class="fp-title">🔒 Simple Privacy Policy</div>
+      <div class="fp-intro">
+        I am <strong>Goyal Vikas</strong>. I designed this quiz for my son and I'm sharing it just for learning purposes.
+        There is no company, no product, no monetisation behind this page, just a dad trying to make practice fun for kids.
+      </div>
+      <ul class="fp-list">
+        <li><strong>No sign-up, no login.</strong> Just pick a first name so scores don't mix up on a shared phone. No passwords, no email, no phone number is ever asked.</li>
+        <li><strong>Nothing leaves your device.</strong> Your answers, your name and your scores all stay in <em>localStorage</em> inside this browser. No database, no server, no cloud sync, no backup anywhere.</li>
+        <li><strong>Who can see your scores?</strong> Only whoever uses this browser on this device. Not the teacher, not the parent on another phone, not me, not anyone.</li>
+        <li><strong>Analytics.</strong> We use Google Tag Manager for anonymous, aggregated page-view counts only, it records things like "someone in India opened Chapter 3", never your name or answers.</li>
+        <li><strong>Deleting your data.</strong> Tap <em>Reset</em> on the scoreboard to wipe scores, or clear browser data in Settings. There is no "delete my account" form because there is no account.</li>
+        <li><strong>Built for kids.</strong> Designed for kids across NCERT Grades 1 to 10. No ads, no trackers beyond the analytics above, no links off to social media.</li>
+      </ul>
+      <div class="fp-foot">
+        Questions? Reach out on <a href="https://goyalvikas.com">goyalvikas.com</a>. Made with ❤️ out of love for our kids, not for money, not for data.
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<!-- Quiz content for Grades 1, 3-10 (Ch 1 only for now) -->
+<script src="/vivaan-quiz-data.js"></script>
 
 <script>
-// ═══════════════════════════════════════════════════════
-// QUESTION DATA
-// Format: { q:"question", o:["CORRECT","w1","w2","w3"], a:0, topic:"topic label" }
-// o[0] is always the correct answer; shuffled before display.
-// ═══════════════════════════════════════════════════════
+  // ═══════════════════════════════════════════════════════════════
+  // GRADE-BASED CHAPTER DATA
+  // Grade 2: existing live chapters (each links to its per-chapter quiz page).
+  // Other grades: NCERT chapter listings, shown as "Coming Soon" cards.
+  // ═══════════════════════════════════════════════════════════════
 
-const CHAPTERS = {
+  // Grade 2 — EXACT match to live deployment (11 chapters, each links to /vivaan/math-chN.html)
+  const GRADE2_CHAPTERS = [
+    { n:1,  t:'Numbers & Numeration', d:'Number names, place value, abacus & more',            e:'🔢', color:'sky',    toon:'🐻',  toonName:'Bear',      toonLine:"Let's count honey jars!",        href:'/vivaan/math-ch1.html' },
+    { n:2,  t:'Addition',              d:'Carrying over, multi-digit sums & word problems',    e:'➕', color:'coral',  toon:'👧',  toonName:'Masha',     toonLine:'Add up my apples 🍎',           href:'/vivaan/math-ch2.html' },
+    { n:3,  t:'Subtraction',           d:'Borrowing, regrouping & difference problems',        e:'➖', color:'yellow', toon:'🦁',  toonName:'Simba',     toonLine:"Roar! Let's find what's missing!", href:'/vivaan/math-ch3.html' },
+    { n:4,  t:'Multiplication',        d:'Times tables 2–10, arrays & repeated addition',      e:'✖️', color:'grape',  toon:'🕷️', toonName:'Spidermen', toonLine:'Multiply my super power!',       href:'/vivaan/math-ch4.html' },
+    { n:5,  t:'Division',              d:'Equal sharing, grouping & division facts',           e:'➗', color:'green',  toon:'🐱',  toonName:'Tom',       toonLine:'Share the stripes equally 🐾',   href:'/vivaan/math-ch5.html' },
+    { n:6,  t:'Fractions',             d:'Halves, quarters, thirds & comparing fractions',     e:'🍕', color:'peach',  toon:'🐭',  toonName:'Jerry',     toonLine:'Slice the cheese into parts!',    href:'/vivaan/math-ch6.html' },
+    { n:7,  t:'Length',                d:'cm, metres, comparing & unit conversion',            e:'📏', color:'sky',    toon:'🦊',  toonName:'Zootopia',  toonLine:'How tall can you measure?',      href:'/vivaan/math-ch7.html' },
+    { n:8,  t:'Weight',                d:'Grams, kilograms, scales & word problems',           e:'⚖️', color:'coral',  toon:'🐧',  toonName:'Penguin',   toonLine:'Guess who weighs more!',         href:'/vivaan/math-ch8.html' },
+    { n:9,  t:'Capacity',              d:'Millilitres, litres & container comparisons',        e:'🥤', color:'yellow', toon:'🐷',  toonName:'Peppa',     toonLine:"Pour it, don't spill it!",       href:'/vivaan/math-ch9.html' },
+    { n:10, t:'Time & Calendar',       d:"Clocks, o'clock, half past, days & months",          e:'⏰', color:'grape',  toon:'🦖',  toonName:'George',    toonLine:"Tick-tock, what's the time?",    href:'/vivaan/math-ch10.html' },
+    { n:11, t:'Money',                 d:'Indian coins & notes, adding money & change',        e:'💰', color:'green',  toon:'🐼',  toonName:'Panda',     toonLine:"Let's go to the market!",        href:'/vivaan/math-ch11.html' },
+  ];
 
-  math: [
-    {
-      id: 'ch1',
-      title: 'Numbers & Numeration',
-      short: 'Ch 1',
-      sets: {
+  // Toons cycled across NCERT chapters for other grades
+  const TOON_POOL = [
+    {toon:'🐻',  toonName:'Bear',     toonLine:"Let's count honey jars!"},
+    {toon:'👧',  toonName:'Masha',    toonLine:'Apples for the apples!'},
+    {toon:'🦁',  toonName:'Simba',    toonLine:"Roar! Let's get started!"},
+    {toon:'🕷️', toonName:'Spidey',   toonLine:'Use your super power!'},
+    {toon:'🐱',  toonName:'Tom',      toonLine:'Share the stripes 🐾'},
+    {toon:'🐭',  toonName:'Jerry',    toonLine:'Slice the cheese!'},
+    {toon:'🦊',  toonName:'Foxy',     toonLine:'Sneaky puzzles ahead!'},
+    {toon:'🐧',  toonName:'Penguin',  toonLine:'Waddle into this!'},
+    {toon:'🐷',  toonName:'Peppa',    toonLine:'Snort! Puddle time!'},
+    {toon:'🦖',  toonName:'George',   toonLine:"Dino-mite question!"},
+    {toon:'🐼',  toonName:'Panda',    toonLine:"Let's bamboo-this!"},
+    {toon:'🦄',  toonName:'Unicorn',  toonLine:'Magical maths!'},
+    {toon:'🐰',  toonName:'Bunny',    toonLine:'Hop to the answer!'},
+    {toon:'🐨',  toonName:'Koala',    toonLine:'Climb this problem!'},
+    {toon:'🐵',  toonName:'Monkey',   toonLine:"Let's banana-split!"},
+    {toon:'🐶',  toonName:'Doggo',    toonLine:"Woof! Let's go!"},
+  ];
+  const COLOR_CYCLE = ['sky','coral','yellow','grape','green','peach'];
 
-        beginner: [
+  // NCERT chapter titles (English medium, mathematics) for grades 1, 3–10.
+  // Each [title, description, emoji].
+  const NCERT_LISTS = {
+    1: [
+      ['Shapes and Space',          'Circles, squares, rolling & sliding shapes',           '🔷'],
+      ['Numbers from 1 to 9',       'Counting, writing & recognising digits',              '🔢'],
+      ['Addition',                  'Adding up to 9, simple combinations',                  '➕'],
+      ['Subtraction',               'Taking away & finding differences',                    '➖'],
+      ['Numbers from 10 to 20',     'Teen numbers & counting further',                      '🔟'],
+      ['Time',                      'Day, night, morning, evening',                         '⏰'],
+      ['Measurement',               'Long, short, tall, heavy, light',                      '📏'],
+      ['Numbers from 21 to 50',     'Counting to 50',                                       '🧮'],
+      ['Data Handling',             'Picture graphs & sorting',                             '📊'],
+      ['Patterns',                  'Shape & number patterns',                              '🔁'],
+      ['Numbers',                   'Numbers up to 99',                                     '💯'],
+      ['Money',                     'Coins & rupees',                                       '💰'],
+      ['How Many?',                 'Counting groups & totals',                             '🎯'],
+    ],
+    3: [
+      ['Where to Look From',        'Views from top, side & front; mirror images',          '👁️'],
+      ['Fun with Numbers',          'Number names & place value',                           '🔢'],
+      ['Give and Take',             'Addition & subtraction word problems',                 '🤝'],
+      ['Long and Short',            'Measurement of length',                                '📏'],
+      ['Shapes and Designs',        '2D shapes, tiles & patterns',                          '🔶'],
+      ['Fun with Give and Take',    'More add/subtract practice',                           '➕'],
+      ['Time Goes On',              'Clocks, days & months',                                '🕰️'],
+      ['Who is Heavier?',           'Weight comparisons',                                   '⚖️'],
+      ['How Many Times?',           'Multiplication basics',                                '✖️'],
+      ['Play with Patterns',        'Number & shape patterns',                              '🎨'],
+      ['Jugs and Mugs',             'Capacity & volume',                                    '🥤'],
+      ['Can We Share?',             'Equal sharing & division',                             '🍪'],
+      ['Smart Charts',              'Data handling',                                        '📊'],
+      ['Rupees and Paise',          'Money & making change',                                '💸'],
+    ],
+    4: [
+      ['Building with Bricks',      'Cuboid shapes & wall patterns',                        '🧱'],
+      ['Long and Short',            'Lengths in cm and m',                                  '📏'],
+      ['A Trip to Bhopal',          'Real-life number problems',                            '🚂'],
+      ['Tick-Tick-Tick',            'Time, clocks & schedules',                             '⏰'],
+      ['The Way The World Looks',   'Views, maps & directions',                             '🗺️'],
+      ['The Junk Seller',           'Money, profit & simple economics',                     '♻️'],
+      ['Jugs and Mugs',             'Litres, millilitres & capacity',                       '🥛'],
+      ['Carts and Wheels',          'Circles, radius & symmetry',                           '🎡'],
+      ['Halves and Quarters',       'Fractions basics',                                     '🍕'],
+      ['Play with Patterns',        'Number & geometric patterns',                          '🧩'],
+      ['Tables and Shares',         'Multiplication & division',                            '✖️'],
+      ['How Heavy? How Light?',     'Weight, grams & kilograms',                            '⚖️'],
+      ['Fields and Fences',         'Area & perimeter',                                     '🌾'],
+      ['Smart Charts',              'Data handling & graphs',                               '📊'],
+    ],
+    5: [
+      ['The Fish Tale',             'Large numbers & comparisons',                          '🐟'],
+      ['Shapes and Angles',         'Types of angles',                                      '📐'],
+      ['How Many Squares?',         'Area & counting squares',                              '⬛'],
+      ['Parts and Wholes',          'Fractions',                                            '🍰'],
+      ['Does it Look the Same?',    'Symmetry & tiling',                                    '🔄'],
+      ["Be My Multiple, I'll be Your Factor",'Factors & multiples',                         '🔢'],
+      ['Can You See the Pattern?',  'Number patterns',                                      '🔁'],
+      ['Mapping Your Way',          'Maps & scale',                                         '🗺️'],
+      ['Boxes and Sketches',        'Nets & 3D sketches',                                   '📦'],
+      ['Tenths and Hundredths',     'Decimals',                                             '🔟'],
+      ['Area and Its Boundary',     'Area & perimeter',                                     '📐'],
+      ['Smart Charts',              'Data handling',                                        '📊'],
+      ['Ways to Multiply and Divide','Multi-digit × and ÷',                                 '✖️'],
+      ['How Big? How Heavy?',       'Volume & weight',                                      '⚖️'],
+    ],
+    6: [
+      ['Patterns in Mathematics',   'Number & visual patterns',                             '🔁'],
+      ['Lines and Angles',          'Types of lines & angles',                              '📐'],
+      ['Number Play',               'Fun with numbers',                                     '🎲'],
+      ['Data Handling & Presentation','Bar graphs & pictographs',                           '📊'],
+      ['Prime Time',                'Primes, composites & factors',                         '🧮'],
+      ['Perimeter and Area',        'Boundary & space',                                     '📏'],
+      ['Fractions',                 'Operations on fractions',                              '🍕'],
+      ['Playing with Constructions','Geometric constructions',                              '✏️'],
+      ['Symmetry',                  'Lines & rotational symmetry',                          '🔄'],
+      ['The Other Side of Zero',    'Integers & negative numbers',                          '➖'],
+    ],
+    7: [
+      ['Large Numbers Around Us',       'Lakhs, crores, Indian system',                     '🌏'],
+      ['Arithmetic Expressions',        'Operations & brackets',                            '🧮'],
+      ['A Peek Beyond the Point',       'Decimal numbers',                                  '🎯'],
+      ['Expressions using Letter-Numbers','Introduction to algebra',                        '🔤'],
+      ['Parallel and Intersecting Lines','Line properties & angles',                        '📐'],
+      ['Number Play',                   'Tricky number puzzles',                            '🎲'],
+      ['A Tale of Three Intersecting Lines','Triangles',                                    '🔺'],
+      ['Working with Fractions',        'Operations on fractions',                          '🍰'],
+    ],
+    8: [
+      ['Rational Numbers',              'Positive, negative & fractions',                   '➗'],
+      ['Linear Equations in One Variable','Solving simple equations',                       '⚖️'],
+      ['Understanding Quadrilaterals',  '4-sided figures',                                  '🔶'],
+      ['Practical Geometry',            'Construct quadrilaterals',                         '✏️'],
+      ['Data Handling',                 'Bar graphs & pie charts',                          '📊'],
+      ['Squares and Square Roots',      'Perfect squares & roots',                          '√'],
+      ['Cubes and Cube Roots',          'Perfect cubes & roots',                            '∛'],
+      ['Comparing Quantities',          'Percent, profit/loss, interest',                   '💹'],
+      ['Algebraic Expressions & Identities','Identities & operations',                      '🧮'],
+      ['Visualising Solid Shapes',      'Views of solids',                                  '📦'],
+      ['Mensuration',                   'Area & volume',                                    '📐'],
+      ['Exponents and Powers',          'Laws of exponents',                                '⚡'],
+      ['Direct and Inverse Proportions','Ratios & scaling',                                 '⚖️'],
+      ['Factorisation',                 'Breaking into factors',                            '🧩'],
+      ['Introduction to Graphs',        'Plotting points',                                  '📈'],
+      ['Playing with Numbers',          'Divisibility rules',                               '🔢'],
+    ],
+    9: [
+      ['Number Systems',                'Rationals & irrationals',                          '🔢'],
+      ['Polynomials',                   'Degree & types',                                   '📈'],
+      ['Coordinate Geometry',           'Cartesian plane',                                  '📊'],
+      ['Linear Equations in Two Variables','Graphing equations',                            '📉'],
+      ["Introduction to Euclid's Geometry",'Axioms & postulates',                           '📐'],
+      ['Lines and Angles',              'Angle relationships',                              '↗️'],
+      ['Triangles',                     'Congruence',                                       '🔺'],
+      ['Quadrilaterals',                'Parallelograms, rhombus',                          '🔶'],
+      ['Circles',                       'Chords & arcs',                                    '⭕'],
+      ["Heron's Formula",               'Triangle area',                                    '△'],
+      ['Surface Areas and Volumes',     '3D measurements',                                  '📦'],
+      ['Statistics',                    'Mean, median, mode',                               '📊'],
+    ],
+    10: [
+      ['Real Numbers',                  'HCF, LCM & proofs',                                '🔢'],
+      ['Polynomials',                   'Zeroes & division',                                '📈'],
+      ['Pair of Linear Equations in 2 Var','Two-variable systems',                          '⚖️'],
+      ['Quadratic Equations',           'Roots & formulas',                                 '🎯'],
+      ['Arithmetic Progressions',       'Nth terms & sums',                                 '➕'],
+      ['Triangles',                     'Similarity',                                       '🔺'],
+      ['Coordinate Geometry',           'Distance & section',                               '📍'],
+      ['Introduction to Trigonometry',  'sin, cos, tan',                                    '📐'],
+      ['Some Applications of Trigonometry','Heights & distances',                           '🗼'],
+      ['Circles',                       'Tangents',                                         '⭕'],
+      ['Areas Related to Circles',      'Sectors & segments',                               '🥧'],
+      ['Surface Areas and Volumes',     'Cones, spheres',                                   '📦'],
+      ['Statistics',                    'Mean, median, mode',                               '📊'],
+      ['Probability',                   'Chance & events',                                  '🎲'],
+    ],
+  };
 
-          // ── Beginner Set 1: Number Names, H/T/O, Abacus basics ──────
-          [
-            {topic:"Number Names", q:"What is the number name for 235?", o:["Two hundred and thirty-five","Two hundred and fifty-three","Twenty-three five","Two hundred fifty"], a:0},
-            {topic:"Number Names", q:"Which number means 'Four hundred and twelve'?", o:["412","421","142","241"], a:0},
-            {topic:"Number Names", q:"Write in digits: 'Seven hundred and nine'", o:["709","790","970","907"], a:0},
-            {topic:"Hundreds Tens Ones", q:"In 367, the digit in the HUNDREDS place is?", o:["3","6","7","36"], a:0},
-            {topic:"Hundreds Tens Ones", q:"In 845, how many TENS are there?", o:["4","8","5","84"], a:0},
-            {topic:"Hundreds Tens Ones", q:"In 129, how many ONES are there?", o:["9","1","2","12"], a:0},
-            {topic:"Hundreds Tens Ones", q:"5 hundreds + 0 tens + 9 ones = ?", o:["509","590","59","905"], a:0},
-            {topic:"Abacus", q:"On an abacus: Hundreds=2, Tens=5, Ones=1. What number?", o:["251","215","512","125"], a:0},
-            {topic:"Abacus", q:"On an abacus: Hundreds=4, Tens=0, Ones=7. What number?", o:["407","470","47","740"], a:0},
-            {topic:"Expansion", q:"300 + 50 + 6 = ?", o:["356","365","536","305"], a:0},
-            {topic:"Expansion", q:"Expand 472 correctly:", o:["400 + 70 + 2","40 + 7 + 2","4 + 7 + 2","400 + 7 + 2"], a:0},
-            {topic:"Place Value", q:"What is the place value of 6 in 563?", o:["60","6","600","56"], a:0}
-          ],
-
-          // ── Beginner Set 2: Comparison, Ordering, Odd/Even ──────────
-          [
-            {topic:"Comparison", q:"Which is GREATER: 234 or 243?", o:["243","234","Both equal","Cannot say"], a:0},
-            {topic:"Comparison", q:"Which is SMALLER: 652 or 625?", o:["625","652","Both equal","Cannot say"], a:0},
-            {topic:"Comparison", q:"Fill in: 400 ___ 399", o:["> (greater than)","< (less than)","= (equal to)","≥"], a:0},
-            {topic:"Comparison", q:"Which is greatest: 500, 050, 005?", o:["500","50","5","All equal"], a:0},
-            {topic:"Ascending Order", q:"Arrange in ASCENDING order: 301, 103, 130", o:["103, 130, 301","301, 130, 103","130, 103, 301","103, 301, 130"], a:0},
-            {topic:"Descending Order", q:"Arrange in DESCENDING order: 542, 524, 425", o:["542, 524, 425","425, 524, 542","524, 425, 542","542, 425, 524"], a:0},
-            {topic:"Odd & Even", q:"Is 46 an ODD or EVEN number?", o:["Even","Odd","Both","Neither"], a:0},
-            {topic:"Odd & Even", q:"Is 73 an ODD or EVEN number?", o:["Odd","Even","Both","Neither"], a:0},
-            {topic:"Odd & Even", q:"Is 100 an ODD or EVEN number?", o:["Even","Odd","Both","Neither"], a:0},
-            {topic:"Odd & Even", q:"Which number is ODD?", o:["35","42","66","80"], a:0},
-            {topic:"Odd & Even", q:"Which number is EVEN?", o:["48","37","51","93"], a:0},
-            {topic:"Number Names", q:"Write in digits: 'Eight hundred and fifty'", o:["850","805","580","508"], a:0}
-          ],
-
-          // ── Beginner Set 3: Before/After/Between, Place Value, Abacus ──
-          [
-            {topic:"Before After Between", q:"What comes BEFORE 301?", o:["300","302","299","310"], a:0},
-            {topic:"Before After Between", q:"What comes AFTER 498?", o:["499","497","500","489"], a:0},
-            {topic:"Before After Between", q:"What comes BETWEEN 219 and 221?", o:["220","218","222","219"], a:0},
-            {topic:"Before After Between", q:"What comes BEFORE 500?", o:["499","501","498","500"], a:0},
-            {topic:"Before After Between", q:"What comes AFTER 799?", o:["800","798","801","799"], a:0},
-            {topic:"Abacus", q:"On an abacus: Hundreds=6, Tens=0, Ones=0. What number?", o:["600","60","6","660"], a:0},
-            {topic:"Abacus", q:"On an abacus: Hundreds=3, Tens=3, Ones=3. What number?", o:["333","33","3","303"], a:0},
-            {topic:"Place Value", q:"What is the place value of 5 in 507?", o:["500","5","50","570"], a:0},
-            {topic:"Place Value", q:"What is the place value of 9 in 296?", o:["90","9","900","29"], a:0},
-            {topic:"Expansion", q:"Which expanded form equals 408?", o:["400 + 0 + 8","40 + 8","400 + 8","4 + 0 + 8"], a:0},
-            {topic:"Expansion", q:"700 + 20 + 0 = ?", o:["720","702","270","72"], a:0},
-            {topic:"Hundreds Tens Ones", q:"Which number has 4 hundreds, 1 ten, 6 ones?", o:["416","461","641","146"], a:0}
-          ],
-
-          // ── Beginner Set 4: Mixed Review of All Topics ───────────────
-          [
-            {topic:"Hundreds Tens Ones", q:"In 748, which digit is in the TENS place?", o:["4","7","8","14"], a:0},
-            {topic:"Expansion", q:"200 + 30 + 1 = ?", o:["231","213","321","123"], a:0},
-            {topic:"Abacus", q:"On an abacus: Hundreds=7, Tens=2, Ones=0. What number?", o:["720","702","72","270"], a:0},
-            {topic:"Comparison", q:"Which is the LARGEST: 456, 654, 546?", o:["654","546","456","All same"], a:0},
-            {topic:"Ascending Order", q:"Which is the SMALLEST: 312, 123, 213?", o:["123","312","213","All same"], a:0},
-            {topic:"Number Names", q:"What is the number name for 800?", o:["Eight hundred","Eighty","Eight thousand","Eight hundred zero"], a:0},
-            {topic:"Odd & Even", q:"Is 254 odd or even?", o:["Even","Odd","Both","Neither"], a:0},
-            {topic:"Odd & Even", q:"Is 387 odd or even?", o:["Odd","Even","Both","Neither"], a:0},
-            {topic:"Before After Between", q:"What comes BETWEEN 500 and 502?", o:["501","503","499","500"], a:0},
-            {topic:"Descending Order", q:"Arrange DESCENDING: 234, 432, 342, 243", o:["432, 342, 243, 234","234, 243, 342, 432","342, 432, 243, 234","243, 342, 234, 432"], a:0},
-            {topic:"Place Value", q:"What is the place value of 0 in 304?", o:["0","3","4","30"], a:0},
-            {topic:"Hundreds Tens Ones", q:"9 hundreds + 9 tens + 9 ones = ?", o:["999","99","9","909"], a:0}
-          ]
-
-        ], // end beginner
-
-        pro: [
-
-          // ── Pro Set 1: Face Value vs Place Value, Advanced Names ─────
-          [
-            {topic:"Place Value", q:"What is the FACE VALUE of 7 in 472?", o:["7","70","700","47"], a:0},
-            {topic:"Place Value", q:"What is the PLACE VALUE of 7 in 472?", o:["70","7","700","720"], a:0},
-            {topic:"Place Value", q:"In which number is 4 in the HUNDREDS place?", o:["456","645","564","546"], a:0},
-            {topic:"Place Value", q:"In 328, what is the DIFFERENCE between the place value and face value of 2?", o:["18","20","2","22"], a:0},
-            {topic:"Place Value", q:"How many TENS make 5 hundreds?", o:["50","5","500","100"], a:0},
-            {topic:"Place Value", q:"How many ONES are there in 3 tens?", o:["30","3","300","10"], a:0},
-            {topic:"Place Value", q:"Which digit has the SAME face value and place value in 123?", o:["3","1","2","0"], a:0},
-            {topic:"Place Value", q:"The place value of the middle 9 in 999 is?", o:["90","9","900","99"], a:0},
-            {topic:"Number Names", q:"'Six hundred and two' — how many TENS does it have?", o:["0","6","2","60"], a:0},
-            {topic:"Hundreds Tens Ones", q:"A number has 4 hundreds, 12 tens and 5 ones. What is it?", o:["525","425","515","245"], a:0},
-            {topic:"Ascending Order", q:"What is the LARGEST 3-digit number?", o:["999","998","990","9999"], a:0},
-            {topic:"Ascending Order", q:"What is the SMALLEST 3-digit number?", o:["100","101","110","99"], a:0}
-          ],
-
-          // ── Pro Set 2: Tricky Expansion & Abacus Carry-Over ──────────
-          [
-            {topic:"Expansion", q:"? + 30 + 7 = 537. Find '?'", o:["500","50","5","5000"], a:0},
-            {topic:"Expansion", q:"400 + ? + 9 = 459. Find '?'", o:["50","5","500","15"], a:0},
-            {topic:"Expansion", q:"600 + 70 + ? = 674. Find '?'", o:["4","40","400","14"], a:0},
-            {topic:"Expansion", q:"Which number when fully expanded gives: 3 hundreds + 12 tens + 5 ones?", o:["425","3125","315","435"], a:0},
-            {topic:"Abacus", q:"On an abacus: Hundreds=4, Tens=10, Ones=5. After carrying over, what number is shown?", o:["505","4105","415","455"], a:0},
-            {topic:"Expansion", q:"Expand 708 correctly:", o:["700 + 0 + 8","70 + 8","700 + 8","7 + 0 + 8"], a:0},
-            {topic:"Expansion", q:"A number has digit sum of 9. Its hundreds = 4, ones = 2. What is it?", o:["432","423","342","243"], a:0},
-            {topic:"Abacus", q:"We add 1 bead to the TENS rod of 199 on an abacus. What number is shown?", o:["209","200","199","210"], a:0},
-            {topic:"Expansion", q:"4 × 100 + 2 × 10 + 8 × 1 = ?", o:["428","482","248","824"], a:0},
-            {topic:"Hundreds Tens Ones", q:"A number has 8 ones, 3 tens, 5 hundreds. What is it?", o:["538","358","835","583"], a:0},
-            {topic:"Place Value", q:"What is the sum of all PLACE VALUES in 321?", o:["321","123","6","12"], a:0},
-            {topic:"Abacus", q:"On an abacus: Hundreds=0, Tens=5, Ones=0. What number?", o:["50","500","5","505"], a:0}
-          ],
-
-          // ── Pro Set 3: Comparison, Patterns & Range Puzzles ──────────
-          [
-            {topic:"Comparison", q:"How many 3-digit numbers are there in total?", o:["900","100","999","890"], a:0},
-            {topic:"Comparison", q:"What is the largest 3-digit ODD number?", o:["999","997","998","989"], a:0},
-            {topic:"Comparison", q:"What is the largest 3-digit EVEN number?", o:["998","999","990","988"], a:0},
-            {topic:"Ascending Order", q:"Using digits 1, 2, 3 once each — what is the LARGEST 3-digit number?", o:["321","312","231","123"], a:0},
-            {topic:"Ascending Order", q:"Using digits 4, 0, 8 once each — what is the SMALLEST 3-digit number? (Cannot start with 0)", o:["408","048","480","804"], a:0},
-            {topic:"Odd & Even", q:"How many ODD numbers are between 100 and 110? (not including 100 or 110)", o:["5","4","6","3"], a:0},
-            {topic:"Odd & Even", q:"How many EVEN numbers are between 200 and 210? (not including 200 or 210)", o:["4","5","6","3"], a:0},
-            {topic:"Before After Between", q:"A number is 100 LESS than 500. What is it?", o:["400","600","490","501"], a:0},
-            {topic:"Before After Between", q:"A number is 10 MORE than 390. What is it?", o:["400","380","300","391"], a:0},
-            {topic:"Ascending Order", q:"Counting by 2s from 100: 100, 102, 104... What is the 5th number?", o:["108","110","106","112"], a:0},
-            {topic:"Ascending Order", q:"Which of these is in ASCENDING order?", o:["125, 152, 215, 251","251, 215, 152, 125","152, 125, 215, 251","125, 251, 152, 215"], a:0},
-            {topic:"Comparison", q:"Which number is just BEFORE the smallest 3-digit number?", o:["99","100","101","98"], a:0}
-          ],
-
-          // ── Pro Set 4: Word Problems & Construct-a-Number ────────────
-          [
-            {topic:"Hundreds Tens Ones", q:"Riya has 3 hundreds, 4 tens, and 2 ones worth of stickers. How many stickers?", o:["342","324","423","432"], a:0},
-            {topic:"Hundreds Tens Ones", q:"In a 3-digit number, tens=5, ones=3, hundreds is TWICE the ones digit. What is the number?", o:["653","563","635","365"], a:0},
-            {topic:"Before After Between", q:"I am the number just BEFORE the smallest 3-digit number. Who am I?", o:["99","100","101","98"], a:0},
-            {topic:"Before After Between", q:"I am the number just AFTER the largest 3-digit number. Who am I?", o:["1000","998","999","100"], a:0},
-            {topic:"Place Value", q:"The HUNDREDS digit of 762 is added to the ONES digit of 319. What do we get?", o:["16","9","13","10"], a:0},
-            {topic:"Descending Order", q:"Arrange DESCENDING and find the middle number: 148, 481, 418", o:["418","481","148","148"], a:0},
-            {topic:"Odd & Even", q:"Count numbers with a 5 in the TENS place: between 100 and 200", o:["10","9","5","20"], a:0},
-            {topic:"Comparison", q:"Which pair has the SAME hundreds digit?", o:["456 and 489","123 and 234","567 and 678","100 and 200"], a:0},
-            {topic:"Expansion", q:"My hundreds = ones digit + 3. My tens = 0. My ones = 2. What am I?", o:["502","302","320","250"], a:0},
-            {topic:"Comparison", q:"Difference between the LARGEST and SMALLEST 3-digit number is?", o:["899","900","898","1000"], a:0},
-            {topic:"Odd & Even", q:"Which is both GREATER than 450 AND LESS than 460 AND is EVEN?", o:["452","451","459","461"], a:0},
-            {topic:"Number Names", q:"The number 'Six hundred and zero' in digits, and is it ODD or EVEN?", o:["600 — Even","600 — Odd","060 — Even","006 — Odd"], a:0}
-          ]
-
-        ] // end pro
-
-      } // end sets
-    } // end ch1
-    // Future chapters will be added here
-  ], // end math
-
-  english: [], // coming soon
-  evs: [],     // coming soon
-  gk: []       // coming soon
-
-}; // end CHAPTERS
-
-// ─── CHARACTERS ────────────────────────────────────────────────
-const CHARS=[
-  {name:"Paddington Bear",emoji:"🐻",happyMsgs:["Paw-some! 🐻🎉","Honey-sweet correct! 🍯","Un-bear-ably smart!"],sadMsgs:["Even bears slip! 🐾","Shake it off, champ!","Next one — paws crossed!"]},
-  {name:"Jerry Mouse",emoji:"🐭",happyMsgs:["Squeaky genius! 🐭✨","Jerry approves! 🧀","You outsmarted everyone!"],sadMsgs:["Jerry says try again!","Even I get chased! 🐭","Cheese will come! 🧀"]},
-  {name:"Tom Cat",emoji:"🐱",happyMsgs:["Purr-fect! 🐱🎊","Tom is impressed! ✨","Meow-nificent!"],sadMsgs:["Hiss! Close one! 😾","Tom says: read again!","Land on all fours! 🐱"]},
-  {name:"Masha",emoji:"👧",happyMsgs:["Masha shouts YES! 👧🎉","Smart as Masha!","Dancing time! 💃"],sadMsgs:["Masha says: don't worry!","Try again — Masha believes!","We all make mistakes! 👧"]},
-  {name:"Simba",emoji:"🦁",happyMsgs:["ROAR! Correct! 🦁👑","Pride Lands cheer for you!","Remember who you are! 🌟"],sadMsgs:["Even Simba learns! 🦁","Hakuna Matata — next one!","Keep going, future king!"]},
-  {name:"Super Vivaan",emoji:"🦸",happyMsgs:["SUPERHERO move! 🦸⚡","Vivaan saves the day!","Cape ON, brain BLAZING! 🌟"],sadMsgs:["Even heroes have off days!","Power UP and retry! 🦸","You've got this, hero! ⚡"]}
-];
-
-const SUBJECT_LABELS={math:"🔢 Math",english:"📖 English",evs:"🌿 EVS",gk:"🌍 GK"};
-const COMING_SOON_MSG="More chapters and subjects coming soon! 🚀";
-
-// ─── STATE ─────────────────────────────────────────────────────
-let currentSubject='math';
-let currentChapterIdx=0;
-let currentLevel='beginner';
-let currentSetIdx=0;
-let currentQ=0;
-let score=0;
-let answered=false;
-let questionResults=[];
-let currentChar=null;
-let timerInterval=null;
-let timerSeconds=0;
-let modalSubject='math';
-let modalLevel='beginner';
-
-// ─── UTILS ─────────────────────────────────────────────────────
-function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function rand(arr){return arr[Math.floor(Math.random()*arr.length)];}
-function scoreKey(sub,chIdx,level,setIdx){return`vivaan_v4_${sub}_ch${chIdx}_${level}_set${setIdx}`;}
-
-// ─── TIMER ─────────────────────────────────────────────────────
-function startTimer(){
-  clearInterval(timerInterval);timerSeconds=0;updateTimerDisplay();
-  timerInterval=setInterval(()=>{timerSeconds++;updateTimerDisplay();},1000);
-}
-function stopTimer(){clearInterval(timerInterval);}
-function updateTimerDisplay(){
-  const m=Math.floor(timerSeconds/60),s=timerSeconds%60;
-  document.getElementById('timerDisplay').textContent=`${m}:${s.toString().padStart(2,'0')}`;
-}
-
-// ─── GET CURRENT QUESTIONS ─────────────────────────────────────
-function getCurrentQuestions(){
-  const ch=CHAPTERS[currentSubject][currentChapterIdx];
-  if(!ch)return[];
-  return ch.sets[currentLevel][currentSetIdx]||[];
-}
-
-// ─── SUBJECT SWITCH ─────────────────────────────────────────────
-function switchSubject(sub){
-  currentSubject=sub;
-  document.querySelectorAll('.sub-tab').forEach(t=>t.classList.toggle('active',t.dataset.sub===sub));
-  currentChapterIdx=0;currentSetIdx=0;
-  buildChapterPills();
-  buildSetTabs();
-  startQuiz();
-}
-
-// ─── LEVEL SWITCH ──────────────────────────────────────────────
-function switchLevel(level){
-  currentLevel=level;
-  document.getElementById('btnBeginner').classList.toggle('active',level==='beginner');
-  document.getElementById('btnPro').classList.toggle('active',level==='pro');
-  const badge=document.getElementById('levelBadge');
-  badge.className='level-badge '+level;
-  badge.textContent=level==='beginner'?'⭐ Beginner':'🔥 Pro';
-  currentSetIdx=0;
-  buildSetTabs();
-  startQuiz();
-}
-
-// ─── CHAPTER PILLS ─────────────────────────────────────────────
-function buildChapterPills(){
-  const el=document.getElementById('chapterPills');
-  el.innerHTML='';
-  const chapters=CHAPTERS[currentSubject];
-  if(!chapters||chapters.length===0){
-    el.innerHTML=`<div style="font-size:13px;color:#8884b0;text-align:center;padding:8px">${COMING_SOON_MSG}</div>`;
-    return;
-  }
-  chapters.forEach((ch,i)=>{
-    const btn=document.createElement('button');
-    btn.className='ch-pill'+(i===currentChapterIdx?' active':'');
-    btn.innerHTML=`<span class="ch-num">${ch.short}</span>${ch.title}`;
-    btn.onclick=()=>{currentChapterIdx=i;currentSetIdx=0;buildChapterPills();buildSetTabs();startQuiz();};
-    el.appendChild(btn);
-  });
-  // Placeholder for future chapters (show as coming soon)
-  if(currentSubject==='math'){
-    const comingSoon=[
-      {short:'Ch 2',title:'Addition'},
-      {short:'Ch 3',title:'Subtraction'},
-      {short:'Ch 4',title:'Multiplication'},
-      {short:'Ch 5',title:'Division'}
-    ];
-    comingSoon.forEach(ch=>{
-      const btn=document.createElement('button');
-      btn.className='ch-pill soon';
-      btn.innerHTML=`<span class="ch-num">${ch.short}</span>${ch.title}<span class="soon-tag">Soon</span>`;
-      btn.disabled=true;
-      el.appendChild(btn);
+  // Build chapter list for any non-Grade-2 grade from its NCERT list
+  function buildNcertChapters(grade){
+    const list = NCERT_LISTS[grade] || [];
+    return list.map(([t,d,e], i) => {
+      const toon = TOON_POOL[i % TOON_POOL.length];
+      return {
+        n: i+1, t, d, e,
+        color: COLOR_CYCLE[i % COLOR_CYCLE.length],
+        toon: toon.toon, toonName: toon.toonName, toonLine: toon.toonLine,
+        href: null,   // no per-chapter page yet
+        soon: true,
+      };
     });
   }
-}
 
-// ─── SET TABS ──────────────────────────────────────────────────
-function buildSetTabs(){
-  const el=document.getElementById('setTabs');
-  el.innerHTML='';
-  const ch=CHAPTERS[currentSubject][currentChapterIdx];
-  if(!ch)return;
-  const sets=ch.sets[currentLevel];
-  sets.forEach((s,i)=>{
-    const key=scoreKey(currentSubject,currentChapterIdx,currentLevel,i);
-    const saved=localStorage.getItem(key);
-    const btn=document.createElement('button');
-    btn.className='set-tab'+(i===currentSetIdx?' active':'')+(saved?' done':'');
-    btn.textContent=`Set ${i+1}${saved?(' ✓'):''}`;
-    btn.onclick=()=>{currentSetIdx=i;buildSetTabs();startQuiz();};
-    el.appendChild(btn);
-  });
-}
+  const GRADES = {
+    1:  buildNcertChapters(1),
+    2:  GRADE2_CHAPTERS,
+    3:  buildNcertChapters(3),
+    4:  buildNcertChapters(4),
+    5:  buildNcertChapters(5),
+    6:  buildNcertChapters(6),
+    7:  buildNcertChapters(7),
+    8:  buildNcertChapters(8),
+    9:  buildNcertChapters(9),
+    10: buildNcertChapters(10),
+  };
 
-// ─── START QUIZ ────────────────────────────────────────────────
-function startQuiz(){
-  currentQ=0;score=0;answered=false;
-  const qs=getCurrentQuestions();
-  questionResults=new Array(qs.length).fill(null);
-  currentChar=CHARS[Math.floor(Math.random()*CHARS.length)];
-  document.getElementById('resultScreen').classList.remove('show');
-  document.getElementById('quizBody').style.display='block';
-  document.getElementById('totalQs').textContent=qs.length;
-  document.getElementById('resTotalQ').textContent=qs.length;
-  const ch=CHAPTERS[currentSubject][currentChapterIdx];
-  document.getElementById('cardChapterTitle').textContent=ch?`${ch.short}: ${ch.title}`:'';
-  document.getElementById('cardSetLabel').textContent=`${currentLevel==='beginner'?'⭐ Beginner':'🔥 Pro'} · Set ${currentSetIdx+1} of ${ch?ch.sets[currentLevel].length:0}`;
-  buildSidebar(qs.length);
-  renderQuestion();
-  startTimer();
-  document.getElementById('liveScore').textContent='0';
-  document.getElementById('progressBar').style.width='0%';
-  setCharNeutral();
-  // Show/hide next-set button
-  const ch2=CHAPTERS[currentSubject][currentChapterIdx];
-  const hasNext=ch2&&(currentSetIdx<ch2.sets[currentLevel].length-1);
-  document.getElementById('nextSetBtn').style.display=hasNext?'':'none';
-}
+  const COLOR_VAR = { coral:'--coral', yellow:'--yellow', green:'--green', sky:'--sky', grape:'--grape', peach:'--peach' };
 
-// ─── SIDEBAR ───────────────────────────────────────────────────
-function buildSidebar(total){
-  const el=document.getElementById('progressSidebar');
-  el.innerHTML='';
-  for(let i=0;i<total;i++){
-    const b=document.createElement('div');
-    b.className='q-block'+(i===0?' current':'');
-    b.id=`qb${i}`;b.textContent=i+1;
-    el.appendChild(b);
+  // Does this grade/chapter have inline quiz data? (Grades 1, 3-10, Ch 1 only for now)
+  function hasQuizData(grade, chNum){
+    return !!(window.QUIZ_DATA && QUIZ_DATA[grade] && QUIZ_DATA[grade][chNum]);
   }
-}
-function updateSidebar(){
-  const total=getCurrentQuestions().length;
-  for(let i=0;i<total;i++){
-    const b=document.getElementById(`qb${i}`);if(!b)continue;
-    b.className='q-block';
-    if(questionResults[i]==='correct')b.classList.add('correct');
-    else if(questionResults[i]==='wrong')b.classList.add('wrong');
-    else if(i===currentQ)b.classList.add('current');
+
+  // ─── Profiles ──
+  // Score key shape:
+  //   Grade 2:  vivaan_<user>_chN_<level>_set<X>         (legacy, matches existing pages)
+  //   Others :  vivaan_<user>_g<grade>_chN_<level>_set<X>
+  const USER_STORE_KEY = 'vivaan_user';
+  const GRADE_STORE_KEY = 'vivaan_grade';
+  function userSlug(name){ return (name||'').toLowerCase().trim().replace(/[^a-z0-9]/g,''); }
+  function prettyName(name){ return (name||'').trim().replace(/\b\w/g, c => c.toUpperCase()); }
+  function getUser(){ return (localStorage.getItem(USER_STORE_KEY) || '').trim(); }
+  function setUser(name){
+    const clean = prettyName(name);
+    if (!clean) return;
+    localStorage.setItem(USER_STORE_KEY, clean);
+    renderUserChip();
+    renderScoreboard();
   }
-}
-
-// ─── RENDER QUESTION ───────────────────────────────────────────
-function renderQuestion(){
-  const qs=getCurrentQuestions();
-  const q=qs[currentQ];
-  answered=false;
-  const total=qs.length;
-  document.getElementById('qCounter').textContent=`Question ${currentQ+1} of ${total}`;
-  document.getElementById('questionText').textContent=q.q;
-  document.getElementById('topicTag').textContent=q.topic||'';
-  document.getElementById('feedback').className='feedback';
-  document.getElementById('nextBtn').className='next-btn';
-  updateSidebar();
-
-  const correct=q.o[q.a];
-  const shuffled=shuffle(q.o);
-  const correctIdx=shuffled.indexOf(correct);
-
-  const grid=document.getElementById('optionsGrid');
-  grid.innerHTML='';
-  shuffled.forEach((opt,i)=>{
-    const btn=document.createElement('button');
-    btn.className='opt-btn';
-    btn.textContent=opt;
-    btn.onclick=()=>answer(btn,i===correctIdx,shuffled,correctIdx);
-    grid.appendChild(btn);
-  });
-
-  setCharNeutral();
-}
-
-// ─── ANSWER ────────────────────────────────────────────────────
-function answer(btn,isCorrect,shuffled,correctIdx){
-  if(answered)return;
-  answered=true;
-  const btns=document.querySelectorAll('.opt-btn');
-  btns.forEach(b=>b.disabled=true);
-  btns[correctIdx].classList.add('correct');
-  const fb=document.getElementById('feedback');
-  const qs=getCurrentQuestions();
-  const total=qs.length;
-  if(isCorrect){
-    btn.classList.add('correct');
-    score++;
-    questionResults[currentQ]='correct';
-    fb.className='feedback correct-fb show';
-    fb.textContent='✅ Correct! Brilliant!';
-    setCharHappy();
-  } else {
-    btn.classList.add('wrong');
-    questionResults[currentQ]='wrong';
-    fb.className='feedback wrong-fb show';
-    fb.textContent=`❌ Oops! Answer: ${shuffled[correctIdx]}`;
-    setCharSad();
+  function listProfiles(){
+    const set = new Set();
+    for (let i=0;i<localStorage.length;i++){
+      const k = localStorage.key(i);
+      if (!k || !k.startsWith('vivaan_') || k === USER_STORE_KEY || k === GRADE_STORE_KEY) continue;
+      // Match both legacy (grade 2) and new (other grades) score keys
+      const m = k.match(/^vivaan_([a-z0-9]+)_(?:g\d+_)?ch\d+_(beginner|pro)_set\d+$/);
+      if (m) set.add(m[1]);
+    }
+    const me = userSlug(getUser());
+    if (me) set.add(me);
+    return [...set].sort();
   }
-  document.getElementById('liveScore').textContent=score;
-  document.getElementById('progressBar').style.width=`${((currentQ+1)/total)*100}%`;
-  updateSidebar();
-  document.getElementById('nextBtn').className='next-btn show';
-}
-
-// ─── CHARACTER ─────────────────────────────────────────────────
-function setCharNeutral(){
-  document.getElementById('charAvatar').textContent=currentChar.emoji;
-  document.getElementById('charAvatar').className='char-avatar';
-  document.getElementById('charName').textContent=currentChar.name;
-  document.getElementById('charEmotion').className='char-emotion neutral-em';
-  document.getElementById('charEmotion').textContent='Waiting for your answer...';
-  document.getElementById('charMsg').textContent='Give it your best shot! 💪';
-}
-function setCharHappy(){
-  const av=document.getElementById('charAvatar');
-  av.textContent=currentChar.emoji;av.className='char-avatar pop';
-  document.getElementById('charEmotion').className='char-emotion correct-em';
-  document.getElementById('charEmotion').textContent='🎉 Amazing!';
-  document.getElementById('charMsg').textContent=rand(currentChar.happyMsgs);
-}
-function setCharSad(){
-  const av=document.getElementById('charAvatar');
-  av.textContent=currentChar.emoji;av.className='char-avatar shake';
-  document.getElementById('charEmotion').className='char-emotion wrong-em';
-  document.getElementById('charEmotion').textContent='😔 Oh no...';
-  document.getElementById('charMsg').textContent=rand(currentChar.sadMsgs);
-}
-
-// ─── NEXT QUESTION ─────────────────────────────────────────────
-function nextQuestion(){
-  const total=getCurrentQuestions().length;
-  if(currentQ<total-1){currentQ++;renderQuestion();}
-  else showResult();
-}
-
-// ─── RESULT ────────────────────────────────────────────────────
-function showResult(){
-  stopTimer();
-  const total=getCurrentQuestions().length;
-  const pct=Math.round((score/total)*100);
-  const key=scoreKey(currentSubject,currentChapterIdx,currentLevel,currentSetIdx);
-  localStorage.setItem(key,JSON.stringify({score,total,pct,time:timerSeconds}));
-  buildSetTabs();
-
-  document.getElementById('quizBody').style.display='none';
-  const rs=document.getElementById('resultScreen');rs.classList.add('show');
-  document.getElementById('resChar').textContent=currentChar.emoji;
-  document.getElementById('resTrophy').textContent=pct>=90?'🏆':pct>=70?'🥈':'🥉';
-  document.getElementById('resScore').textContent=score;
-  const stars=pct>=90?'⭐⭐⭐':pct>=70?'⭐⭐':'⭐';
-  document.getElementById('resStars').textContent=stars;
-  const min=Math.floor(timerSeconds/60),sec=timerSeconds%60;
-  document.getElementById('resTime').textContent=`Time: ${min}m ${sec}s`;
-  document.getElementById('resMsg').textContent=
-    pct>=90?`GENIUS! ${currentChar.name} is in awe! 🌟`:
-    pct>=70?`Great job! ${currentChar.name} is proud! 🎉`:
-    `Keep practising! ${currentChar.name} believes in you! 💪`;
-  if(pct>=90)launchConfetti();
-}
-
-function restartSet(){
-  document.getElementById('resultScreen').classList.remove('show');
-  document.getElementById('quizBody').style.display='block';
-  startQuiz();
-}
-function goNextSet(){
-  currentSetIdx++;
-  buildSetTabs();
-  startQuiz();
-}
-
-// ─── SCOREBOARD ────────────────────────────────────────────────
-function openScoreboard(){
-  modalSubject=currentSubject;modalLevel=currentLevel;
-  renderModalFilters();
-  renderModalScores();
-  document.getElementById('scoreModal').classList.add('show');
-}
-function closeScoreboard(){document.getElementById('scoreModal').classList.remove('show');}
-
-function renderModalFilters(){
-  const f=document.getElementById('modalFilters');
-  f.innerHTML='';
-  ['math','english','evs','gk'].forEach(s=>{
-    const b=document.createElement('button');
-    b.className='modal-filter-btn'+(s===modalSubject?' active':'');
-    b.textContent=SUBJECT_LABELS[s];
-    b.onclick=()=>{modalSubject=s;renderModalFilters();renderModalScores();};
-    f.appendChild(b);
-  });
-  ['beginner','pro'].forEach(l=>{
-    const b=document.createElement('button');
-    b.className='modal-filter-btn'+(l===modalLevel?' active':'');
-    b.textContent=l==='beginner'?'⭐ Beginner':'🔥 Pro';
-    b.style.borderColor=l==='beginner'?'rgba(79,195,247,.4)':'rgba(255,94,94,.4)';
-    if(l===modalLevel)b.style.background=l==='beginner'?'var(--beg)':'var(--red)';
-    b.onclick=()=>{modalLevel=l;renderModalFilters();renderModalScores();};
-    f.appendChild(b);
-  });
-}
-
-function renderModalScores(){
-  const list=document.getElementById('modalScoreList');
-  list.innerHTML='';
-  const chapters=CHAPTERS[modalSubject];
-  if(!chapters||chapters.length===0){
-    list.innerHTML=`<div class="modal-empty">${COMING_SOON_MSG}</div>`;return;
+  function deleteProfile(slug){
+    const keys = [];
+    for (let i=0;i<localStorage.length;i++){
+      const k = localStorage.key(i);
+      if (k && k.startsWith(`vivaan_${slug}_`)) keys.push(k);
+    }
+    keys.forEach(k => localStorage.removeItem(k));
+    if (userSlug(getUser()) === slug) localStorage.removeItem(USER_STORE_KEY);
   }
-  let found=false;
-  chapters.forEach((ch,chIdx)=>{
-    const sets=ch.sets[modalLevel];
-    const savedSets=sets.map((_,si)=>{
-      const key=scoreKey(modalSubject,chIdx,modalLevel,si);
-      const raw=localStorage.getItem(key);
-      return raw?JSON.parse(raw):null;
-    }).filter(Boolean);
-    if(savedSets.length===0)return;
-    found=true;
-    const header=document.createElement('div');
-    header.className='modal-chapter-header';
-    header.textContent=`${ch.short}: ${ch.title}`;
-    list.appendChild(header);
-    sets.forEach((_,si)=>{
-      const key=scoreKey(modalSubject,chIdx,modalLevel,si);
-      const raw=localStorage.getItem(key);
-      if(!raw)return;
-      const data=JSON.parse(raw);
-      const stars=data.pct>=90?'⭐⭐⭐':data.pct>=70?'⭐⭐':'⭐';
-      const row=document.createElement('div');
-      row.className='score-row'+(data.pct>=90?' perfect':'');
-      const min=Math.floor(data.time/60),sec=data.time%60;
-      row.innerHTML=`<div class="sr-info"><div class="sr-label">Set ${si+1}</div><div class="sr-sub">${min}m ${sec}s</div></div><div class="sr-right"><div class="sr-score">${data.score}/${data.total}</div><div class="sr-stars">${stars}</div></div>`;
-      list.appendChild(row);
+
+  // ─── Grade state ──
+  // Returns 0 when no grade is chosen yet — user has to pick one first.
+  function getGrade(){
+    const raw = parseInt(localStorage.getItem(GRADE_STORE_KEY)||'', 10);
+    if (raw>=1 && raw<=10) return raw;
+    return 0;
+  }
+  function setGrade(g){
+    if (!(g>=1 && g<=10)) return;
+    localStorage.setItem(GRADE_STORE_KEY, String(g));
+    renderAll();
+    // Smooth scroll to chapters once a grade is selected
+    const target = document.getElementById('chapterSection');
+    if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  // ─── Scoreboard (scoped to current user + current grade) ──
+  function scorePrefixFor(slug, grade){
+    return grade===2
+      ? `vivaan_${slug}_`          // legacy shape, used by existing Grade 2 chapter pages
+      : `vivaan_${slug}_g${grade}_`;
+  }
+  function matchesChapterKey(key, prefix, grade){
+    if (!key.startsWith(prefix)) return false;
+    const rest = key.slice(prefix.length);
+    if (grade===2){
+      // Grade 2 keys are chN_level_setX directly. But other-grade keys share the
+      // `vivaan_<slug>_` root too, so explicitly reject those here.
+      if (/^g\d+_/.test(rest)) return false;
+      return /^ch\d+_(beginner|pro)_set\d+$/.test(rest);
+    }
+    return /^ch\d+_(beginner|pro)_set\d+$/.test(rest);
+  }
+  function collectScores(){
+    const slug = userSlug(getUser()) || 'default';
+    const grade = getGrade();
+    const prefix = scorePrefixFor(slug, grade);
+    let sets=0, correct=0, total=0;
+    const byCh = {};
+    for (let i=0;i<localStorage.length;i++){
+      const k = localStorage.key(i);
+      if (!k || !matchesChapterKey(k, prefix, grade)) continue;
+      try {
+        const d = JSON.parse(localStorage.getItem(k));
+        if (!d || typeof d.score!=='number' || typeof d.tq!=='number') continue;
+        sets++;
+        correct += d.score;
+        total += d.tq;
+        const rest = k.slice(prefix.length);
+        const m = rest.match(/^(ch\d+)_(beginner|pro)_set(\d+)$/);
+        if (m){
+          const ch = m[1];
+          byCh[ch] = byCh[ch] || {sets:0,correct:0,total:0};
+          byCh[ch].sets++;
+          byCh[ch].correct += d.score;
+          byCh[ch].total += d.tq;
+        }
+      } catch(e){}
+    }
+    return {sets,correct,total,byCh};
+  }
+
+  function renderGradeBar(){
+    const bar = document.getElementById('gradeBar');
+    const cur = getGrade();
+    bar.innerHTML = '';
+    for (let g=1; g<=10; g++){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'grade-tab' + (g===cur ? ' active' : '');
+      btn.innerHTML = `<span class="g-num">${g}</span><span class="g-label">Grade</span>`;
+      btn.addEventListener('click', () => setGrade(g));
+      bar.appendChild(btn);
+    }
+  }
+
+  function renderChapters(scoreBy){
+    const grid = document.getElementById('chapterGrid');
+    const grade = getGrade();
+    if (!grade){
+      grid.innerHTML = `
+        <div class="pick-grade-card" style="grid-column:1/-1;">
+          <div class="pg-emo">🎓</div>
+          <div class="pg-title">Pick your grade to begin!</div>
+          <div class="pg-sub">Tap any grade above ↑ to see the chapters and start your quiz.</div>
+        </div>`;
+      return;
+    }
+    const chapters = GRADES[grade] || [];
+    grid.innerHTML = chapters.map(c => {
+      const cvar = `var(${COLOR_VAR[c.color]||'--coral'})`;
+      const s = scoreBy[`ch${c.n}`];
+      // A chapter is playable if: Grade 2 (external href) OR we have inline quiz data
+      const playable = !c.soon || hasQuizData(grade, c.n);
+      const scoreHtml = (s && s.total)
+        ? `<div class="ch-score"><span class="done">✓ ${s.sets} set${s.sets!==1?'s':''}</span> · ${Math.round(s.correct/s.total*100)}%</div>`
+        : `<div class="ch-score">${playable ? 'Not played yet' : 'Coming soon'}</div>`;
+      const playLabel = playable ? '▶ Play Now' : '🚧 Coming Soon';
+      const soonBadge = playable ? '' : `<span class="soon-badge">Soon</span>`;
+      const className = 'chapter' + (playable ? '' : ' soon');
+      // Use <a href> for Grade 2 (external pages); <button> for inline quizzes; <div> for soon
+      let openTag, closeTag;
+      if (!playable){
+        openTag = `<div class="${className}" style="--accent-ch:${cvar};" role="group" aria-label="Coming soon">`;
+        closeTag = '</div>';
+      } else if (grade === 2 && c.href){
+        openTag = `<a class="${className}" style="--accent-ch:${cvar};" href="${c.href}">`;
+        closeTag = '</a>';
+      } else {
+        openTag = `<button type="button" class="${className}" style="--accent-ch:${cvar};text-align:left;" data-quiz-grade="${grade}" data-quiz-ch="${c.n}">`;
+        closeTag = '</button>';
+      }
+      return `
+        ${openTag}
+          ${soonBadge}
+          <div class="chapter-head">
+            <div><div class="ch-tag">Chapter ${c.n}</div></div>
+            <div class="ch-emoji">${c.e}</div>
+          </div>
+          <div>
+            <h3>${c.t}</h3>
+            <p class="desc">${c.d}</p>
+          </div>
+          <div class="toon">
+            <div class="toon-face">${c.toon}</div>
+            <div>
+              <div class="toon-name">${c.toonName}</div>
+              <div class="toon-line">${c.toonLine}</div>
+            </div>
+          </div>
+          <div class="ch-footer">
+            ${scoreHtml}
+            <span class="play-btn">${playLabel}</span>
+          </div>
+        ${closeTag}
+      `;
+    }).join('');
+
+    // Wire up clicks on non-Grade-2 playable chapters
+    grid.querySelectorAll('[data-quiz-grade]').forEach(el => {
+      el.addEventListener('click', () => {
+        const g = parseInt(el.dataset.quizGrade, 10);
+        const n = parseInt(el.dataset.quizCh, 10);
+        openQuiz(g, n);
+      });
     });
-  });
-  if(!found)list.innerHTML='<div class="modal-empty">No scores yet — start quizzing! 🚀</div>';
-}
-
-// ─── CONFETTI ──────────────────────────────────────────────────
-function launchConfetti(){
-  const canvas=document.getElementById('confetti-canvas');
-  const ctx=canvas.getContext('2d');
-  canvas.width=window.innerWidth;canvas.height=window.innerHeight;
-  const pieces=Array.from({length:120},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height-canvas.height,r:Math.random()*6+3,c:`hsl(${Math.random()*360},90%,60%)`,vx:(Math.random()-.5)*4,vy:Math.random()*5+2,a:Math.random()*360}));
-  let frames=0;
-  function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    pieces.forEach(p=>{
-      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a*Math.PI/180);
-      ctx.fillStyle=p.c;ctx.fillRect(-p.r,-p.r/2,p.r*2,p.r);
-      ctx.restore();
-      p.x+=p.vx;p.y+=p.vy;p.a+=3;
-      if(p.y>canvas.height){p.y=-10;p.x=Math.random()*canvas.width;}
-    });
-    if(frames++<200)requestAnimationFrame(draw);
-    else ctx.clearRect(0,0,canvas.width,canvas.height);
   }
-  draw();
-}
 
-// ─── INIT ──────────────────────────────────────────────────────
-document.getElementById('scoreModal').addEventListener('click',function(e){if(e.target===this)closeScoreboard();});
-buildChapterPills();
-buildSetTabs();
-startQuiz();
+  function renderScoreboard(){
+    const grade = getGrade();
+    const s = collectScores();
+    document.getElementById('sbSets').textContent = s.sets;
+    document.getElementById('sbCorrect').textContent = s.correct;
+    document.getElementById('sbTotal').textContent = s.total;
+    const pct = s.total ? Math.round(s.correct/s.total*100) : 0;
+    document.getElementById('sbPct').textContent = pct+'%';
+    document.getElementById('sbFill').style.width = pct+'%';
+    const empty = document.getElementById('sbEmpty');
+    if (s.sets){
+      empty.style.display = 'none';
+    } else {
+      empty.style.display = 'block';
+      empty.textContent = grade===2
+        ? 'Start your first quiz to see your stats! 🚀'
+        : `Grade ${grade} quizzes are coming soon — pick a chapter to preview! 🚧`;
+    }
+    renderChapters(s.byCh);
+  }
+
+  function renderHero(){
+    const grade = getGrade();
+    const chapters = GRADES[grade] || [];
+    const brandSub = document.getElementById('brandSub');
+    const heroSub  = document.getElementById('heroSub');
+    const mathHead = document.getElementById('mathHead');
+    const sb = document.getElementById('scoreboard');
+    if (!grade){
+      brandSub.textContent = 'NCERT Grades 1 to 10 · For Kids Love';
+      heroSub.textContent  = 'Pick your grade to begin your Mathemagics journey! 🎓';
+      mathHead.textContent = 'Choose a grade';
+      if (sb) sb.style.display = 'none';
+    } else {
+      brandSub.textContent = `Grade ${grade} · For Kids Love`;
+      heroSub.textContent  = grade===2
+        ? 'Quiz aligned to a standard Grade 2 student.'
+        : `NCERT-aligned maths quiz for Grade ${grade}.`;
+      mathHead.textContent = `Mathematics · ${chapters.length} chapters`;
+      if (sb) sb.style.display = '';
+    }
+  }
+
+  function renderAll(){
+    renderGradeBar();
+    renderHero();
+    renderScoreboard();
+  }
+
+  document.getElementById('sbReset').addEventListener('click', function(){
+    const name = getUser() || 'this profile';
+    const grade = getGrade();
+    if (!confirm(`Reset Grade ${grade} scores for "${name}"? This cannot be undone.`)) return;
+    const slug = userSlug(getUser()) || 'default';
+    const prefix = scorePrefixFor(slug, grade);
+    const keys = [];
+    for (let i=0;i<localStorage.length;i++){
+      const k = localStorage.key(i);
+      if (k && matchesChapterKey(k, prefix, grade)) keys.push(k);
+    }
+    keys.forEach(k => localStorage.removeItem(k));
+    renderScoreboard();
+  });
+
+  // ─── User chip + modal wiring ──
+  function renderUserChip(){
+    const name = getUser();
+    document.getElementById('userChipName').textContent = name ? `👤 ${name}` : 'Set up your name';
+  }
+  function openProfileModal(){
+    renderProfileModalList();
+    document.getElementById('profileModal').classList.add('show');
+    setTimeout(() => document.getElementById('profileInput').focus(), 60);
+  }
+  function closeProfileModal(){
+    document.getElementById('profileModal').classList.remove('show');
+  }
+  function renderProfileModalList(){
+    const profs = listProfiles();
+    const wrap  = document.getElementById('profileExisting');
+    const pills = document.getElementById('profilePills');
+    if (!profs.length){ wrap.style.display = 'none'; return; }
+    wrap.style.display = '';
+    const me = userSlug(getUser());
+    pills.innerHTML = profs.map(slug => `
+      <button type="button" class="profile-pill${slug===me?' active':''}" data-slug="${slug}">
+        ${slug.charAt(0).toUpperCase()+slug.slice(1)}
+        <span class="rm" data-slug="${slug}" title="Delete this profile">✕</span>
+      </button>
+    `).join('');
+    pills.querySelectorAll('.profile-pill').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        if (e.target.classList.contains('rm')){
+          const slug = e.target.dataset.slug;
+          if (confirm(`Delete profile "${slug}" and all its scores? This cannot be undone.`)){
+            deleteProfile(slug);
+            renderProfileModalList();
+            renderUserChip();
+            renderScoreboard();
+          }
+          return;
+        }
+        const slug = btn.dataset.slug;
+        setUser(slug.charAt(0).toUpperCase()+slug.slice(1));
+        closeProfileModal();
+      });
+    });
+  }
+  document.getElementById('userChip').addEventListener('click', openProfileModal);
+  document.getElementById('profileForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const v = document.getElementById('profileInput').value.trim();
+    if (!v) return;
+    setUser(v);
+    document.getElementById('profileInput').value = '';
+    closeProfileModal();
+  });
+  document.getElementById('profileModal').addEventListener('click', function(e){
+    if (e.target === this) closeProfileModal();
+  });
+
+  // ═══════════════════════════════════════════════════════════════
+  // INLINE QUIZ RUNNER (for grades 1, 3-10)
+  // ═══════════════════════════════════════════════════════════════
+  const CHAR_POOL = [
+    {e:'🐻', n:'Bear',    happy:["Paw-some! 🍯","Honey-sweet!","Bear-illiant!"],            sad:["Even bears slip!","Shake it off!","Pawsitive next one!"]},
+    {e:'🐭', n:'Jerry',   happy:["Squeaky genius! 🧀","Jerry approves!","Outsmarted Tom!"],   sad:["Jerry says try again!","Cheese will come!","Tom almost got me too!"]},
+    {e:'🐱', n:'Tom',     happy:["Purr-fect! 🐱","Meow-nificent!","Cat-tastic!"],            sad:["Hiss! So close!","Land on all fours!","Next time, Jerry!"]},
+    {e:'👧', n:'Masha',   happy:["Masha shouts YES!","Smart like Masha!","Dancing time! 💃"], sad:["Don't worry, try again!","Masha believes in you!","Everyone makes mistakes!"]},
+    {e:'🦁', n:'Simba',   happy:["ROAR! Correct! 👑","Pride of Pride Lands!","Remember who you are!"], sad:["Even Simba learns!","Hakuna Matata!","Keep going, future king!"]},
+    {e:'🐼', n:'Panda',   happy:["Panda-monium! 🎉","Bamboo-tiful!","Paws-itively right!"],   sad:["Paws for thought!","Try again, panda cub!","Keep munching bamboo!"]},
+    {e:'🦖', n:'George',  happy:["Dino-mite!","Tyranno-RIGHT!","Jurassic genius!"],          sad:["Even dinos slip!","Roar back next time!","Stomp and try again!"]},
+    {e:'🦄', n:'Uni',     happy:["Magical! ✨","Sparkles everywhere!","Pure unicorn power!"], sad:["Rainbow retry!","Magic takes practice!","Believe, try again!"]},
+    {e:'🐰', n:'Bunny',   happy:["Hop-tastic!","Carrot-spot on!","Bunny brilliant!"],        sad:["Hop it again!","Next carrot is yours!","Bunny believes in you!"]},
+    {e:'🐧', n:'Penguin', happy:["Waddle-wow!","Cool as ice!","Flippin' fantastic!"],        sad:["Slide right back up!","Cool down, try again!","Next one, buddy!"]},
+  ];
+
+  const QUIZ = {
+    open:false, grade:0, ch:0, level:'beginner', setIdx:0,
+    qIdx:0, score:0, answered:false, results:[], char:null,
+    timer:0, timerInt:null, qs:null,
+  };
+
+  function scoreKeyQ(slug, grade, ch, level, setIdx){
+    return `vivaan_${slug}_g${grade}_ch${ch}_${level}_set${setIdx}`;
+  }
+
+  function openQuiz(grade, ch){
+    const data = window.QUIZ_DATA && QUIZ_DATA[grade] && QUIZ_DATA[grade][ch];
+    if (!data) return;
+    QUIZ.open = true; QUIZ.grade = grade; QUIZ.ch = ch;
+    QUIZ.level = 'beginner'; QUIZ.setIdx = 0;
+    QUIZ.char = CHAR_POOL[Math.floor(Math.random()*CHAR_POOL.length)];
+    // Header
+    const chapter = (GRADES[grade]||[]).find(x => x.n===ch) || {};
+    const accent = `var(${COLOR_VAR[chapter.color]||'--coral'})`;
+    document.getElementById('quizModal').style.setProperty('--qm-accent', accent);
+    const box = document.querySelector('#quizModal .qm-box');
+    if (box) box.style.setProperty('--qm-accent', accent);
+    document.getElementById('qmHeadEmoji').textContent = chapter.e || '🔢';
+    document.getElementById('qmHeadEmoji').style.background = `color-mix(in oklab, ${accent}, transparent 82%)`;
+    document.getElementById('qmChTag').textContent = `Grade ${grade} · Chapter ${ch}`;
+    document.getElementById('qmChTag').style.color = accent;
+    document.getElementById('qmTitle').textContent = data.title || chapter.t || '';
+    document.getElementById('quizModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+    renderQuizLevelBtns();
+    buildSetTabs();
+    startSet();
+  }
+
+  function closeQuiz(){
+    QUIZ.open = false;
+    clearInterval(QUIZ.timerInt); QUIZ.timerInt = null;
+    document.getElementById('quizModal').classList.remove('show');
+    document.body.style.overflow = '';
+    renderScoreboard(); // refresh dashboard stats
+  }
+
+  function renderQuizLevelBtns(){
+    document.querySelectorAll('#quizModal .qm-level-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.level === QUIZ.level);
+      // Clone to reset listeners cleanly
+      b.onclick = () => { if (QUIZ.level !== b.dataset.level){ QUIZ.level = b.dataset.level; QUIZ.setIdx = 0; buildSetTabs(); startSet(); } };
+    });
+  }
+
+  function buildSetTabs(){
+    const wrap = document.getElementById('qmSets');
+    wrap.innerHTML = '';
+    const sets = getQuizSets();
+    const slug = userSlug(getUser()) || 'default';
+    sets.forEach((_, i) => {
+      const key = scoreKeyQ(slug, QUIZ.grade, QUIZ.ch, QUIZ.level, i);
+      const done = !!localStorage.getItem(key);
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'qm-set-btn' + (i === QUIZ.setIdx ? ' active' : '') + (done ? ' done' : '');
+      btn.textContent = `Set ${i+1}${done ? ' ✓' : ''}`;
+      btn.onclick = () => { QUIZ.setIdx = i; buildSetTabs(); startSet(); };
+      wrap.appendChild(btn);
+    });
+  }
+
+  function getQuizSets(){
+    const d = QUIZ_DATA[QUIZ.grade] && QUIZ_DATA[QUIZ.grade][QUIZ.ch];
+    return (d && d[QUIZ.level]) || [];
+  }
+
+  function startSet(){
+    QUIZ.qs = (getQuizSets()[QUIZ.setIdx]) || [];
+    QUIZ.qIdx = 0; QUIZ.score = 0; QUIZ.answered = false;
+    QUIZ.results = new Array(QUIZ.qs.length).fill(null);
+    document.getElementById('qmResult').classList.remove('show');
+    document.getElementById('qmPlay').style.display = 'block';
+    document.getElementById('qmQtot').textContent = QUIZ.qs.length;
+    document.getElementById('qmResTotal').textContent = QUIZ.qs.length;
+    document.getElementById('qmScore').textContent = '0';
+    document.getElementById('qmFill').style.width = '0%';
+    startQuizTimer();
+    renderQ();
+  }
+
+  function startQuizTimer(){
+    clearInterval(QUIZ.timerInt);
+    QUIZ.timer = 0; updateQuizTimer();
+    QUIZ.timerInt = setInterval(() => { QUIZ.timer++; updateQuizTimer(); }, 1000);
+  }
+  function updateQuizTimer(){
+    const m = Math.floor(QUIZ.timer/60), s = QUIZ.timer % 60;
+    const el = document.getElementById('qmTimer');
+    if (el) el.textContent = `${m}:${String(s).padStart(2,'0')}`;
+  }
+
+  function renderQ(){
+    const qs = QUIZ.qs;
+    const q = qs[QUIZ.qIdx];
+    QUIZ.answered = false;
+    document.getElementById('qmQCounter').textContent = `Question ${QUIZ.qIdx + 1} of ${qs.length}`;
+    document.getElementById('qmQ').textContent = q.q;
+    document.getElementById('qmQnum').textContent = QUIZ.qIdx + 1;
+    document.getElementById('qmTopic').textContent = q.t || '';
+    document.getElementById('qmTopic').style.display = q.t ? '' : 'none';
+    document.getElementById('qmFeedback').className = 'qm-feedback';
+    document.getElementById('qmNext').className = 'qm-next';
+    // Reset character
+    setCharNeutral();
+    // Build shuffled options
+    const correct = q.o[q.a];
+    const opts = [...q.o];
+    for (let i = opts.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [opts[i], opts[j]] = [opts[j], opts[i]];
+    }
+    const correctIdx = opts.indexOf(correct);
+    const wrap = document.getElementById('qmOpts');
+    wrap.innerHTML = '';
+    opts.forEach((opt, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'qm-opt';
+      b.textContent = opt;
+      b.onclick = () => answerQ(b, i === correctIdx, opts, correctIdx);
+      wrap.appendChild(b);
+    });
+  }
+
+  function answerQ(btn, isCorrect, shuffled, correctIdx){
+    if (QUIZ.answered) return;
+    QUIZ.answered = true;
+    const all = document.querySelectorAll('#qmOpts .qm-opt');
+    all.forEach(b => b.disabled = true);
+    all[correctIdx].classList.add('correct');
+    const fb = document.getElementById('qmFeedback');
+    if (isCorrect){
+      btn.classList.add('correct');
+      QUIZ.score++;
+      QUIZ.results[QUIZ.qIdx] = 'correct';
+      fb.className = 'qm-feedback good show';
+      fb.textContent = '✅ Correct! Brilliant!';
+      setCharHappy();
+    } else {
+      btn.classList.add('wrong');
+      QUIZ.results[QUIZ.qIdx] = 'wrong';
+      fb.className = 'qm-feedback bad show';
+      fb.textContent = `❌ Oops! Answer: ${shuffled[correctIdx]}`;
+      setCharSad();
+    }
+    document.getElementById('qmScore').textContent = QUIZ.score;
+    document.getElementById('qmFill').style.width = `${((QUIZ.qIdx + 1) / QUIZ.qs.length) * 100}%`;
+    document.getElementById('qmNext').className = 'qm-next show';
+    document.getElementById('qmNext').textContent = (QUIZ.qIdx === QUIZ.qs.length - 1) ? 'See Result 🏆' : 'Next Question →';
+  }
+
+  function setCharNeutral(){
+    const face = document.getElementById('qmCharFace');
+    face.textContent = QUIZ.char.e; face.className = 'qm-char-face';
+    document.getElementById('qmCharName').textContent = QUIZ.char.n;
+    document.getElementById('qmCharMsg').textContent = 'Give it your best shot! 💪';
+  }
+  function setCharHappy(){
+    const face = document.getElementById('qmCharFace');
+    face.textContent = QUIZ.char.e; face.className = 'qm-char-face pop';
+    document.getElementById('qmCharMsg').textContent = QUIZ.char.happy[Math.floor(Math.random()*QUIZ.char.happy.length)];
+  }
+  function setCharSad(){
+    const face = document.getElementById('qmCharFace');
+    face.textContent = QUIZ.char.e; face.className = 'qm-char-face shake';
+    document.getElementById('qmCharMsg').textContent = QUIZ.char.sad[Math.floor(Math.random()*QUIZ.char.sad.length)];
+  }
+
+  function nextQ(){
+    if (QUIZ.qIdx < QUIZ.qs.length - 1){ QUIZ.qIdx++; renderQ(); }
+    else showQuizResult();
+  }
+  function showQuizResult(){
+    clearInterval(QUIZ.timerInt); QUIZ.timerInt = null;
+    const total = QUIZ.qs.length;
+    const score = QUIZ.score;
+    const pct = Math.round(score / total * 100);
+    const slug = userSlug(getUser()) || 'default';
+    const key = scoreKeyQ(slug, QUIZ.grade, QUIZ.ch, QUIZ.level, QUIZ.setIdx);
+    localStorage.setItem(key, JSON.stringify({score, tq: total, pct, t: QUIZ.timer}));
+    buildSetTabs();
+    document.getElementById('qmPlay').style.display = 'none';
+    document.getElementById('qmResult').classList.add('show');
+    document.getElementById('qmResEmoji').textContent = pct >= 90 ? '🏆' : pct >= 70 ? '🥈' : '🥉';
+    document.getElementById('qmResScore').textContent = score;
+    document.getElementById('qmResTotal').textContent = total;
+    document.getElementById('qmResStars').textContent = pct >= 90 ? '⭐⭐⭐' : pct >= 70 ? '⭐⭐' : '⭐';
+    document.getElementById('qmResMsg').textContent =
+      pct >= 90 ? `GENIUS! ${QUIZ.char.n} is in awe! 🌟`
+      : pct >= 70 ? `Great job! ${QUIZ.char.n} is proud! 🎉`
+      : `Keep practising! ${QUIZ.char.n} believes in you! 💪`;
+    const m = Math.floor(QUIZ.timer/60), s = QUIZ.timer % 60;
+    document.getElementById('qmResTime').textContent = `Time: ${m}m ${s}s`;
+    const sets = getQuizSets();
+    const hasNext = QUIZ.setIdx < sets.length - 1;
+    document.getElementById('qmNextSet').style.display = hasNext ? '' : 'none';
+  }
+
+  // Quiz modal event bindings (once)
+  (function bindQuizModal(){
+    const close = () => closeQuiz();
+    document.getElementById('qmClose').addEventListener('click', close);
+    document.querySelector('#quizModal .qm-ov').addEventListener('click', close);
+    document.getElementById('qmNext').addEventListener('click', nextQ);
+    document.getElementById('qmTryAgain').addEventListener('click', () => startSet());
+    document.getElementById('qmNextSet').addEventListener('click', () => {
+      const sets = getQuizSets();
+      if (QUIZ.setIdx < sets.length - 1){
+        QUIZ.setIdx++; buildSetTabs(); startSet();
+      }
+    });
+    // Escape closes quiz
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && QUIZ.open) closeQuiz();
+    });
+  })();
+
+  // URL hash can preselect a grade: /vivaan#g5
+  (function(){
+    const m = (location.hash||'').match(/g(\d{1,2})/i);
+    if (m){ const g = parseInt(m[1],10); if (g>=1 && g<=10) localStorage.setItem(GRADE_STORE_KEY, String(g)); }
+  })();
+
+  // First-visit prompt
+  renderUserChip();
+  if (!getUser()) openProfileModal();
+  renderAll();
+  window.addEventListener('focus', renderScoreboard);
+
+  // Register the service worker so the app still works offline
+  // and can be added to the home screen via the browser's own menu.
+  if ('serviceWorker' in navigator){
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/vivaan/sw.js').catch(()=>{});
+    });
+  }
 </script>
-</body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TG9F3RCK"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) --></body>
 </html>
