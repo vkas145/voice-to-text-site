@@ -1,0 +1,67 @@
+{
+  "card_abandonment_naukri": {
+    "name": "Card Abandonment Recovery — Naukri.com",
+    "short_name": "Card Abandonment — Naukri",
+    "description": "QA framework for outbound recovery calls to users who abandoned a paid plan in cart on naukri.com/buyonline.",
+    "fatal_parameters": [
+      { "id": "F1", "name": "Misselling", "definition": "Agent promises features, quantity, or benefits not included in the actual plan." },
+      { "id": "F2", "name": "Unauthorised price commitment", "definition": "Agent offers discount or add-on beyond approved matrix." },
+      { "id": "F3", "name": "Policy misrepresentation", "definition": "Incorrect claims on refund, GST, validity, auto-renewal." },
+      { "id": "F4", "name": "Data privacy breach", "definition": "Requests OTP/password/CVV, or shares another customer's info." },
+      { "id": "F5", "name": "Abusive or unprofessional conduct", "definition": "Raised voice, derogatory language, argues with customer." },
+      { "id": "F6", "name": "Call abandonment by agent", "definition": "Agent disconnects without closure while customer is engaged." }
+    ],
+    "non_fatal_parameters": [
+      { "id": "P1",  "name": "Opening and purpose statement",     "weight": 5 },
+      { "id": "P2",  "name": "Cart context acknowledgment",       "weight": 10 },
+      { "id": "P3",  "name": "Abandonment reason discovery",      "weight": 20 },
+      { "id": "P4",  "name": "Product knowledge and plan fitment","weight": 15 },
+      { "id": "P5",  "name": "Objection handling",                "weight": 15 },
+      { "id": "P6",  "name": "Payment assistance",                "weight": 10 },
+      { "id": "P7",  "name": "Urgency and value anchoring",       "weight": 5 },
+      { "id": "P8",  "name": "Tone, pace and language match",     "weight": 5 },
+      { "id": "P9",  "name": "Hold and dead-air management",      "weight": 5 },
+      { "id": "P10", "name": "Closure and next step",             "weight": 10 }
+    ],
+    "abandonment_reasons": [
+      { "code": "AR-01", "name": "Price shock",                       "base_recovery_pct": 22 },
+      { "code": "AR-02", "name": "Needs approval from senior",        "base_recovery_pct": 14 },
+      { "code": "AR-03", "name": "Comparing with competitor",         "base_recovery_pct": 18 },
+      { "code": "AR-04", "name": "Payment failure on site",           "base_recovery_pct": 55 },
+      { "code": "AR-05", "name": "GST or invoice clarity",            "base_recovery_pct": 48 },
+      { "code": "AR-06", "name": "Wrong plan or plan confusion",      "base_recovery_pct": 40 },
+      { "code": "AR-07", "name": "Wants demo first",                  "base_recovery_pct": 20 },
+      { "code": "AR-08", "name": "Budget not approved this quarter",  "base_recovery_pct": 6 },
+      { "code": "AR-09", "name": "Accidental add-to-cart",            "base_recovery_pct": 3 },
+      { "code": "AR-10", "name": "Already purchased elsewhere",       "base_recovery_pct": 2 }
+    ],
+    "outcome_codes": [
+      { "code": "OC-01", "name": "Paid on call" },
+      { "code": "OC-02", "name": "Payment link sent" },
+      { "code": "OC-03", "name": "Callback scheduled" },
+      { "code": "OC-04", "name": "Demo scheduled" },
+      { "code": "OC-05", "name": "Moved to nurture" },
+      { "code": "OC-06", "name": "Lost — competitive" },
+      { "code": "OC-07", "name": "Lost — no interest" },
+      { "code": "OC-08", "name": "Not reachable / wrong number" },
+      { "code": "OC-09", "name": "Escalation logged" }
+    ],
+    "rebuttal_categories": [
+      { "code": "discount_offer",     "name": "Discount offered" },
+      { "code": "roi_framing",        "name": "ROI / value framing" },
+      { "code": "feature_comparison", "name": "Feature vs competitor" },
+      { "code": "payment_help",       "name": "Payment assistance" },
+      { "code": "followup_scheduled", "name": "Follow-up scheduled" },
+      { "code": "demo_scheduled",     "name": "Demo scheduled" },
+      { "code": "none_attempted",     "name": "No rebuttal attempted" },
+      { "code": "other",              "name": "Other" }
+    ],
+    "quality_multipliers": {
+      "excellent":      1.0,
+      "good":           0.85,
+      "average":        0.60,
+      "needs_coaching": 0.30,
+      "fatal":          0.0
+    }
+  }
+}

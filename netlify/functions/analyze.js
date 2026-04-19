@@ -73,6 +73,51 @@ exports.handler = async function (event) {
       return json(200, { scored });
     }
 
+    // Campaign-specific structured scoring (card abandonment recovery, etc.)
+    if (params.mode === 'score-campaign') {
+      const raw = event.isBase64Encoded
+        ? Buffer.from(event.body, 'base64').toString('utf8')
+        : (event.body || '');
+      let payload;
+      try { payload = JSON.parse(raw); }
+      catch { return json(400, { error: 'Invalid JSON body for score-campaign mode.' }); }
+
+      const transcript = (payload.transcript || '').toString();
+      const rubric = payload.rubric;
+      const cartValue = payload.cart_value;
+      const hours = payload.hours_since_abandonment;
+      const filename = payload.filename || 'call.mp3';
+
+      if (transcript.length < 30) return json(400, { error: 'Transcript too short to score.' });
+      if (!rubric || typeof rubric !== 'object') return json(400, { error: 'Missing or invalid campaign rubric.' });
+
+      const sys = buildCampaignSystemPrompt(rubric);
+      const user = buildCampaignUserPrompt({ transcript, rubric, cartValue, hours, filename });
+
+      const resp = await openai.chat.completions.create({
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: sys },
+          { role: 'user',   content: user },
+        ],
+        max_tokens: 2400,
+        response_format: { type: 'json_object' },
+        temperature: 0.2,
+      });
+
+      let scored;
+      try { scored = JSON.parse(resp.choices[0].message.content); }
+      catch { return json(500, { error: 'Campaign scoring model returned invalid JSON.' }); }
+
+      // Recompute revenue_at_risk_calc server-side so it always matches cart value + grade
+      const effectiveCart = (typeof cartValue === 'number' && cartValue > 0)
+        ? cartValue
+        : (typeof scored.cart_value_mentioned_in_call === 'number' ? scored.cart_value_mentioned_in_call : null);
+      scored.revenue_at_risk_calc = recomputeRevenue(scored, rubric, effectiveCart);
+
+      return json(200, { scored });
+    }
+
     // Text-only summarization mode (used after multi-chunk transcription)
     if (params.mode === 'summarize') {
       const text = event.isBase64Encoded
@@ -263,4 +308,124 @@ function toIsoCode(lang) {
   const code = lang.length <= 3 ? lang.toLowerCase() : (LANG_NAME_TO_ISO[lang.toLowerCase()] || null);
   // Only return the code if Whisper actually accepts it as a language param
   return (code && WHISPER_SUPPORTED.has(code)) ? code : null;
+}
+
+// ===== Campaign-scoring helpers =====
+
+function buildCampaignSystemPrompt(rubric) {
+  return `You are a senior QA auditor at a BPO. You are auditing an outbound tele-sales call made on behalf of ${rubric.name.includes('Naukri') ? 'Naukri.com' : 'the client'} to a customer who abandoned a paid plan in their cart on naukri.com/buyonline. The call may be in Hindi, English, or Hinglish.
+
+You must identify speakers from conversational context — the agent is the one pitching, rebutting objections, and trying to close; the customer is the one objecting, asking questions, or hesitating. Never confuse the two.
+
+RUBRIC (scoring framework):
+
+Non-fatal parameters (weighted, 0-10 each, total weight = 100):
+${rubric.non_fatal_parameters.map(p => `  ${p.id} (${p.weight}%) ${p.name}`).join('\n')}
+
+Fatal parameters (ANY one violation = overall score 0, grade "fatal"):
+${rubric.fatal_parameters.map(f => `  ${f.id} ${f.name}: ${f.definition}`).join('\n')}
+
+Abandonment reason codes (pick the ONE that best matches why the customer abandoned):
+${rubric.abandonment_reasons.map(r => `  ${r.code} ${r.name} (baseline recovery ${r.base_recovery_pct}%)`).join('\n')}
+
+Outcome codes (pick ONE):
+${rubric.outcome_codes.map(o => `  ${o.code} ${o.name}`).join('\n')}
+
+Agent rebuttal categories (pick ONE that best describes the agent's primary response to the objection):
+${rubric.rebuttal_categories.map(c => `  ${c.code} — ${c.name}`).join('\n')}
+
+Rebuttal-to-reason matching guidance (rebuttal_matched_reason should be FALSE when the agent misreads the customer's actual blocker). Examples of mismatch:
+  - Customer has a PAYMENT FAILURE (AR-04) but agent pitches features or offers a discount
+  - Customer has PRICE SHOCK (AR-01) and agent pushes feature comparison without addressing value
+  - Customer wants a DEMO FIRST (AR-07) and agent just offers a discount
+  - Customer is COMPARING COMPETITORS (AR-03) and agent offers a discount instead of ROI/value framing or feature_comparison
+  - Customer needs APPROVAL FROM SENIOR (AR-02) and agent tries to close now instead of scheduling followup
+  - Customer has already PURCHASED ELSEWHERE (AR-10) and agent keeps pitching
+Matches (rebuttal_matched_reason TRUE): payment_help for AR-04, followup_scheduled for AR-02, demo_scheduled for AR-07, roi_framing or feature_comparison for AR-01/AR-03.
+
+SCORING RULES:
+  - Any fatal violation => weighted_score_out_of_100 = 0, grade = "fatal", quality_multiplier = 0.
+  - Grade bands by weighted score: 90-100 "excellent", 75-89 "good", 60-74 "average", below 60 "needs_coaching".
+  - Quality multipliers: excellent 1.0, good 0.85, average 0.60, needs_coaching 0.30, fatal 0.0.
+  - Every deduction must cite a concrete evidence quote from the transcript (or an explicit "not present" observation).
+  - Quote 'winning_lines' verbatim from strong agent moves; quote 'losing_lines' verbatim from weak moments.
+
+OUTPUT: Return ONLY the JSON object below. No prose, no markdown fences.
+
+{
+  "call_id": "string (use the provided filename)",
+  "duration_seconds": number or null,
+  "language": "hindi | english | hinglish | other",
+  "fatal_violations": [
+    { "id": "F1..F6", "evidence_quote": "verbatim from transcript", "timestamp_approx": "m:ss or null" }
+  ],
+  "non_fatal_scores": {
+    "P1":  { "score_0_to_10": number, "evidence": "quote or observation" },
+    "P2":  { "score_0_to_10": number, "evidence": "quote or observation" },
+    "P3":  { "score_0_to_10": number, "evidence": "quote or observation" },
+    "P4":  { "score_0_to_10": number, "evidence": "quote or observation" },
+    "P5":  { "score_0_to_10": number, "evidence": "quote or observation" },
+    "P6":  { "score_0_to_10": number, "evidence": "quote or observation" },
+    "P7":  { "score_0_to_10": number, "evidence": "quote or observation" },
+    "P8":  { "score_0_to_10": number, "evidence": "quote or observation" },
+    "P9":  { "score_0_to_10": number, "evidence": "quote or observation" },
+    "P10": { "score_0_to_10": number, "evidence": "quote or observation" }
+  },
+  "weighted_score_out_of_100": number,
+  "grade": "excellent | good | average | needs_coaching | fatal",
+  "abandonment_reason_code": "AR-01..AR-10",
+  "abandonment_reason_evidence": "verbatim from transcript showing why this was picked",
+  "agent_rebuttal_category": "one of the rebuttal_category codes above",
+  "rebuttal_matched_reason": true | false,
+  "rebuttal_match_comment": "one sentence explanation",
+  "outcome_code": "OC-01..OC-09",
+  "cart_value_mentioned_in_call": number or null,
+  "revenue_at_risk_calc": {
+    "cart_value": number or null,
+    "base_recovery_pct": number,
+    "quality_multiplier": number,
+    "quality_adjusted_recovery_value": number
+  },
+  "top_3_coaching_points": ["string", "string", "string"],
+  "benchmark_phrases": {
+    "winning_lines": ["verbatim agent quote", "verbatim agent quote"],
+    "losing_lines":  ["verbatim agent quote", "verbatim agent quote"]
+  },
+  "ai_summary": "3-5 sentence narrative for the QA reviewer"
+}`;
+}
+
+function buildCampaignUserPrompt({ transcript, rubric, cartValue, hours, filename }) {
+  const cartLine = (typeof cartValue === 'number' && cartValue > 0)
+    ? `₹${cartValue}`
+    : 'unknown — try to extract from transcript if mentioned';
+  const hoursLine = (typeof hours === 'number' && hours > 0)
+    ? `${hours} hours`
+    : 'unknown';
+  return `CALL METADATA:
+  - Filename / call_id: ${filename}
+  - Cart value (INR): ${cartLine}
+  - Hours since abandonment: ${hoursLine}
+
+TRANSCRIPT:
+${transcript.slice(0, 14000)}`;
+}
+
+function recomputeRevenue(scored, rubric, cartValue) {
+  const grade = scored.grade || 'needs_coaching';
+  const multiplier = rubric.quality_multipliers[grade] != null
+    ? rubric.quality_multipliers[grade]
+    : 0.30;
+  const ar = (rubric.abandonment_reasons || []).find(r => r.code === scored.abandonment_reason_code);
+  const basePct = ar ? ar.base_recovery_pct : 0;
+  const cart = (typeof cartValue === 'number' && cartValue > 0) ? cartValue : null;
+  const adjusted = (cart != null)
+    ? Math.round(cart * (basePct / 100) * multiplier)
+    : 0;
+  return {
+    cart_value: cart,
+    base_recovery_pct: basePct,
+    quality_multiplier: multiplier,
+    quality_adjusted_recovery_value: adjusted,
+  };
 }

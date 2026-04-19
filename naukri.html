@@ -271,6 +271,295 @@
     table th:nth-child(2), table td:nth-child(2) { display:none; }
     .card { padding:24px 20px; }
   }
+
+  /* ===== Campaign-mode additions ===== */
+
+  /* Campaign selector */
+  .campaign-select-wrap { margin-bottom:20px; }
+  .campaign-select-wrap label {
+    display:block; font-size:13px; font-weight:700; color:var(--ink);
+    text-transform:uppercase; letter-spacing:.6px; margin-bottom:8px;
+  }
+  select.campaign-select {
+    width:100%; font-family:inherit; font-size:14px; padding:12px 14px;
+    border:1px solid var(--line); border-radius:10px; background:#fff; color:var(--ink);
+    appearance:none; cursor:pointer;
+    background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%236366f1' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 14px center; padding-right:40px;
+  }
+  select.campaign-select:focus { outline:none; border-color:var(--primary); }
+
+  /* Campaign info banner */
+  .campaign-banner {
+    background:linear-gradient(135deg,#eef2ff,#f5f3ff);
+    border:1px solid var(--line-soft); border-radius:12px;
+    padding:14px 18px; font-size:13px; color:var(--ink-soft);
+    display:flex; align-items:center; gap:14px; margin-bottom:20px;
+  }
+  .campaign-banner .banner-icon {
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    color:#fff; width:36px; height:36px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+  }
+  .campaign-banner a { font-weight:700; white-space:nowrap; }
+
+  /* Campaign rubric preview */
+  .rubric-preview { margin-top:8px; }
+  .rubric-preview h4 {
+    font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.6px;
+    color:var(--ink); margin-bottom:10px; margin-top:18px;
+  }
+  .rubric-preview h4.fatal-header { color:var(--danger); }
+  .param-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+  .param-chip {
+    background:var(--bg-alt); border:1px solid var(--line); border-radius:8px;
+    padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:10px;
+    font-size:12px;
+  }
+  .param-chip .pid {
+    background:var(--primary); color:#fff; font-weight:800; font-size:10px;
+    padding:2px 7px; border-radius:5px; letter-spacing:.4px;
+  }
+  .param-chip .pname { flex:1; color:var(--ink); font-weight:500; }
+  .param-chip .pwt { color:var(--muted); font-weight:700; font-size:11px; }
+
+  .fatal-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .fatal-chip {
+    background:#fef2f2; border:1px solid #fecaca; border-left:3px solid var(--danger);
+    border-radius:8px; padding:10px 12px; font-size:12px;
+  }
+  .fatal-chip .fid { font-weight:800; color:var(--danger); font-size:11px; margin-right:6px; }
+  .fatal-chip .fname { font-weight:700; color:var(--ink); }
+  .fatal-chip .fdef { color:var(--body); font-size:11.5px; margin-top:3px; line-height:1.5; }
+
+  /* Cart value per file row (campaign mode) */
+  .file-row.campaign-mode { flex-wrap:wrap; }
+  .file-row .cart-input, .file-row .hours-input {
+    font-family:inherit; font-size:12px; padding:5px 8px;
+    border:1px solid var(--line); border-radius:6px; background:#fff; color:var(--ink);
+    width:90px;
+  }
+  .file-row .cart-input { width:110px; }
+  .file-row .hours-input { width:70px; }
+  .file-row .cart-input:focus, .file-row .hours-input:focus { outline:none; border-color:var(--primary); }
+
+  /* Campaign-mode global warnings */
+  .mode-warning {
+    font-size:12px; color:var(--body); background:#fef9c3; border:1px solid #fde68a;
+    border-radius:8px; padding:8px 12px; margin-top:8px;
+  }
+
+  /* ===== Campaign dashboard modules ===== */
+
+  .mod-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; gap:12px; flex-wrap:wrap; }
+  .mod-head h3 { font-size:17px; font-weight:800; color:var(--ink); letter-spacing:-.3px; }
+  .mod-head .mod-tag {
+    font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:1.1px;
+    padding:3px 8px; border-radius:5px;
+    background:var(--bg-deep); color:var(--primary);
+  }
+
+  /* Module C — Revenue at Risk (the money slide) */
+  .revenue-at-risk {
+    background:linear-gradient(135deg,#faf5ff 0%,#eef2ff 100%);
+    border:1px solid var(--line-soft); border-radius:16px;
+    padding:28px; margin-bottom:20px; position:relative; overflow:hidden;
+  }
+  .revenue-at-risk::before {
+    content:''; position:absolute; top:-40px; right:-40px; width:180px; height:180px;
+    background:radial-gradient(circle, rgba(139,92,246,.12) 0%, transparent 70%);
+  }
+  .revenue-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; position:relative; }
+  .rev-stat {
+    background:#fff; border:1px solid var(--line); border-radius:12px; padding:20px 18px;
+  }
+  .rev-stat .rev-label {
+    font-size:10.5px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:1.3px; margin-bottom:10px;
+  }
+  .rev-stat .rev-num {
+    font-size:30px; font-weight:800; letter-spacing:-1px; color:var(--ink); line-height:1;
+    font-variant-numeric:tabular-nums;
+  }
+  .rev-stat.attempted .rev-num { color:var(--ink); }
+  .rev-stat.recoverable .rev-num {
+    background:linear-gradient(135deg,var(--success),#16a34a);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .rev-stat.actual .rev-num {
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  }
+  .rev-stat .rev-sub { font-size:12px; color:var(--muted); margin-top:8px; line-height:1.5; }
+  .rev-gap {
+    margin-top:20px; padding:16px 20px; background:#fef2f2; border:1px solid #fecaca;
+    border-left:4px solid var(--danger); border-radius:10px; position:relative;
+    display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  }
+  .rev-gap-label { font-size:13px; font-weight:700; color:#991b1b; }
+  .rev-gap-num {
+    font-size:26px; font-weight:800; letter-spacing:-.8px; color:var(--danger);
+    font-variant-numeric:tabular-nums; margin-left:auto;
+  }
+  .rev-waterfall { margin-top:18px; position:relative; }
+  .rev-waterfall .wf-label { font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.8px; margin-bottom:6px; }
+  .rev-waterfall .wf-bar { height:24px; background:#e2e8f0; border-radius:6px; overflow:hidden; display:flex; }
+  .rev-waterfall .wf-actual { background:linear-gradient(90deg,var(--primary),var(--accent)); }
+  .rev-waterfall .wf-gap { background:repeating-linear-gradient(45deg,#fecaca,#fecaca 8px,#fee2e2 8px,#fee2e2 16px); }
+  .rev-unknown-note { font-size:11.5px; color:var(--muted); margin-top:12px; }
+
+  /* Module D — Fatal Violations */
+  .fatal-section {
+    background:var(--card); border:2px solid var(--danger); border-radius:14px;
+    padding:24px; margin-bottom:20px;
+  }
+  .fatal-section h3 {
+    color:var(--danger); display:flex; align-items:center; gap:10px;
+    font-size:17px; font-weight:800;
+  }
+  .fatal-section h3::before { content:'⚠'; }
+  .fatal-empty {
+    background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px; padding:20px;
+    text-align:center; color:#166534; font-weight:600; font-size:14px; margin-top:10px;
+  }
+  .fatal-empty::before { content:'✓  '; color:var(--success); font-weight:800; }
+  .fatal-table { margin-top:12px; }
+  .fatal-table th, .fatal-table td { padding:10px 10px; }
+  .fatal-table .fcode {
+    background:var(--danger); color:#fff; font-weight:800; font-size:11px;
+    padding:3px 8px; border-radius:5px; letter-spacing:.4px; white-space:nowrap;
+  }
+  .fatal-table .fquote {
+    color:var(--body); font-style:italic; font-size:12.5px;
+    border-left:2px solid var(--danger); padding-left:10px; max-width:460px;
+  }
+
+  /* Module A — Reason Mix */
+  .reason-mix .reason-list { display:flex; flex-direction:column; gap:10px; }
+  .reason-bar-row { display:flex; align-items:center; gap:12px; font-size:13px; }
+  .reason-bar-row .rcode {
+    background:var(--primary); color:#fff; font-weight:800; font-size:10.5px;
+    padding:3px 8px; border-radius:5px; letter-spacing:.4px; width:52px; text-align:center;
+  }
+  .reason-bar-row .rname { color:var(--ink); font-weight:600; min-width:180px; flex:0 0 auto; }
+  .reason-bar-row .rbar-wrap { flex:1; height:20px; background:var(--bg-alt); border-radius:5px; overflow:hidden; position:relative; }
+  .reason-bar-row .rbar-fill {
+    height:100%; background:linear-gradient(90deg,var(--primary),var(--accent));
+    transition:width .6s; border-radius:5px;
+  }
+  .reason-bar-row .rcount { color:var(--body); font-weight:700; width:60px; text-align:right; font-size:12px; }
+  .reason-mix-summary {
+    margin-top:18px; display:grid; grid-template-columns:1fr 1fr; gap:14px;
+  }
+  .reason-mix-summary .mix-card {
+    background:var(--bg-alt); border:1px solid var(--line); border-radius:10px; padding:14px 16px;
+  }
+  .reason-mix-summary .mix-card .mix-label {
+    font-size:10.5px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:1.1px; margin-bottom:6px;
+  }
+  .reason-mix-summary .mix-card .mix-val { font-size:15px; font-weight:700; color:var(--ink); }
+  .reason-mix-summary .mix-card .mix-sub { font-size:12px; color:var(--muted); margin-top:3px; }
+
+  /* Module B — Response Matrix */
+  .matrix-wrap { overflow-x:auto; padding-bottom:4px; }
+  table.matrix-table { font-size:12px; }
+  table.matrix-table th, table.matrix-table td {
+    padding:8px 10px; border:1px solid var(--line); text-align:center;
+  }
+  table.matrix-table thead th {
+    background:var(--bg-alt); font-weight:700; font-size:11px;
+    text-transform:uppercase; letter-spacing:.5px;
+  }
+  table.matrix-table .row-label {
+    background:var(--bg-alt); font-weight:700; text-align:left; white-space:nowrap; color:var(--ink);
+  }
+  table.matrix-table .mx-cell {
+    font-weight:800; font-size:13px; min-width:70px;
+  }
+  table.matrix-table .mx-match-full { background:#dcfce7; color:#166534; }
+  table.matrix-table .mx-match-part { background:#fef3c7; color:#92400e; }
+  table.matrix-table .mx-mismatch { background:#fee2e2; color:#991b1b; }
+  table.matrix-table .mx-empty { color:var(--muted); font-weight:500; }
+  .matrix-insight {
+    margin-top:16px; padding:14px 18px; background:#fef2f2; border:1px solid #fecaca;
+    border-left:4px solid var(--danger); border-radius:10px; font-size:13px; color:#7f1d1d;
+  }
+  .matrix-insight strong { color:var(--danger); }
+  .matrix-insight.good { background:#f0fdf4; border-color:#bbf7d0; border-left-color:var(--success); color:#14532d; }
+  .matrix-insight.good strong { color:var(--success); }
+
+  /* Module E — Winning / Losing Phrases */
+  .phrases-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .phrases-col {
+    background:var(--card); border:1px solid var(--line); border-radius:12px; padding:18px;
+  }
+  .phrases-col.winning { border-top:4px solid var(--success); }
+  .phrases-col.losing { border-top:4px solid var(--danger); }
+  .phrases-col h4 {
+    font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:1.1px; margin-bottom:12px;
+  }
+  .phrases-col.winning h4 { color:var(--success); }
+  .phrases-col.losing h4 { color:var(--danger); }
+  .phrases-col ol { list-style:none; padding:0; counter-reset:phr; }
+  .phrases-col ol li {
+    counter-increment:phr; padding:10px 0 10px 34px; position:relative; font-size:13px;
+    color:var(--ink-soft); line-height:1.55; border-bottom:1px solid var(--line);
+  }
+  .phrases-col ol li:last-child { border-bottom:none; }
+  .phrases-col ol li::before {
+    content:counter(phr); position:absolute; left:0; top:10px;
+    width:22px; height:22px; border-radius:5px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:800; color:#fff;
+  }
+  .phrases-col.winning ol li::before { background:var(--success); }
+  .phrases-col.losing ol li::before { background:var(--danger); }
+
+  /* Campaign-mode table additions */
+  .pill.fatal { background:#fee2e2; color:#991b1b; }
+  .ar-badge, .oc-badge {
+    display:inline-block; padding:2px 7px; border-radius:5px; font-size:10.5px;
+    font-weight:800; letter-spacing:.3px; margin-right:6px; white-space:nowrap;
+  }
+  .ar-badge { background:#e0e7ff; color:#4338ca; }
+  .oc-badge { background:#ecfdf5; color:#047857; }
+  .oc-badge.lost { background:#fef2f2; color:#991b1b; }
+  .fatal-dot {
+    display:inline-block; width:10px; height:10px; border-radius:50%;
+    background:var(--danger); box-shadow:0 0 0 3px rgba(239,68,68,.15);
+  }
+
+  /* Drawer enrichment */
+  .drill .kpi-row {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin-bottom:14px;
+  }
+  .drill .kpi-row .kpi-mini {
+    background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 12px;
+  }
+  .drill .kpi-row .kpi-mini .lbl { font-size:10px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:.9px; margin-bottom:4px; }
+  .drill .kpi-row .kpi-mini .val { font-size:14px; font-weight:700; color:var(--ink); }
+  .drill .coaching { margin-bottom:14px; }
+  .drill .coaching h4 { color:var(--primary); font-size:13px; margin-bottom:8px; }
+  .drill .coaching ol { padding-left:20px; font-size:13px; color:var(--body); }
+  .drill .coaching ol li { margin-bottom:5px; }
+
+  /* Print (Save-as-PDF) styles */
+  @media print {
+    @page { margin: 14mm; }
+    body { background:#fff; font-size:11.5px; }
+    nav, footer, .page-head, .wizard > .container > .card:not(.card-dashboard) { display:none !important; }
+    .container { max-width:100%; padding:0; }
+    .dashboard { display:block !important; }
+    .card { box-shadow:none; border:1px solid var(--line); page-break-inside:avoid; }
+    .download-btns, .btn-run, .btn-secondary, .drill, input[type=file] { display:none !important; }
+    .panel, .revenue-at-risk, .fatal-section, .reason-mix, .matrix-wrap, .phrases-grid { page-break-inside:avoid; }
+    .revenue-at-risk { page-break-after:avoid; }
+    .kpi-grid { page-break-after:avoid; }
+    h1, h2, h3, h4 { color:#000 !important; }
+    .rev-stat .rev-num { -webkit-text-fill-color: initial !important; background:none !important; color:var(--ink) !important; }
+    .kpi .num { -webkit-text-fill-color: initial !important; background:none !important; color:var(--ink) !important; }
+    tbody tr { cursor:default; }
+    .progress { display:none !important; }
+  }
 </style>
 </head>
 <body>
@@ -324,21 +613,49 @@
       </div>
     </div>
 
-    <!-- STEP 2: WHAT TO TEST -->
+    <!-- STEP 2: QUALITY GUIDELINES -->
     <div class="card" id="step2Card">
       <div class="step-head">
         <div class="step-num">2</div>
-        <h2>What do you want to test?</h2>
+        <h2>Quality guidelines</h2>
       </div>
-      <p class="step-sub">Describe what you want to evaluate in these calls. Your input is used alongside 3 standard quality parameters (Communication, Process Adherence, Outcome) to score each call.</p>
+      <p class="step-sub">Pick a campaign template for a structured, revenue-linked audit, or describe your own criteria.</p>
 
-      <textarea class="criteria-box" id="userCriteria" placeholder="Examples:
+      <div class="campaign-select-wrap">
+        <label for="campaignSelect">Campaign template (optional)</label>
+        <select id="campaignSelect" class="campaign-select">
+          <option value="">Generic tele-sales audit (current default)</option>
+          <option value="card_abandonment_naukri">Card Abandonment Recovery — Naukri.com / buyonline</option>
+        </select>
+      </div>
+
+      <!-- Default (generic) criteria UI -->
+      <div id="defaultCriteria">
+        <textarea class="criteria-box" id="userCriteria" placeholder="Examples:
 - Are agents mentioning the correct salary range for the job posting?
 - Is the agent confirming the candidate's notice period and current CTC?
 - Does the agent explain the interview process clearly?
 - Are agents pushing irrelevant job openings?
 - Is the agent handling candidate objections about relocation?"></textarea>
-      <div class="criteria-hint">Your criteria will be scored alongside 3 standard quality parameters: Communication, Process Adherence, and Outcome.</div>
+        <div class="criteria-hint">Your criteria will be scored alongside 3 standard quality parameters: Communication, Process Adherence, and Outcome.</div>
+      </div>
+
+      <!-- Campaign-mode rubric preview (hidden by default) -->
+      <div id="campaignCriteria" style="display:none;">
+        <div class="campaign-banner">
+          <div class="banner-icon">📊</div>
+          <div>
+            Your calls will be audited against the <strong>3i-style QA framework</strong> for outbound card-abandonment recovery.
+            &nbsp;<a href="/assets/Call_Quality_Guidelines_BoloAurLikho.docx" download>Download framework →</a>
+          </div>
+        </div>
+
+        <div class="rubric-preview" id="rubricPreview"></div>
+
+        <div class="mode-warning">
+          For each call you can enter the cart value (INR) and hours since abandonment in Step 1. Leave blank to let the AI extract cart value from the transcript.
+        </div>
+      </div>
     </div>
 
     <!-- STEP 3: RUN -->
@@ -369,6 +686,7 @@
       <div class="dash-head">
         <h2>Audit Dashboard</h2>
         <div class="download-btns">
+          <button class="btn-secondary" id="dlPrint">Print / Save as PDF</button>
           <button class="btn-secondary" id="dlJson">Download JSON</button>
           <button class="btn-secondary" id="dlCsv">Download CSV</button>
         </div>
@@ -376,18 +694,32 @@
 
       <div class="kpi-grid" id="kpiGrid"></div>
 
-      <!-- OVERALL REMARKS (rendered first) -->
+      <!-- CAMPAIGN-ONLY MODULES (shown when a campaign template is active) -->
+      <div id="campaignModules" style="display:none;">
+        <!-- Module C: Revenue at Risk (the money slide) -->
+        <div class="revenue-at-risk" id="modC"></div>
+        <!-- Module D: Fatal Violations -->
+        <div class="fatal-section" id="modD"></div>
+        <!-- Module A: Abandonment Reason Mix -->
+        <div class="panel reason-mix" id="modA"></div>
+        <!-- Module B: Agent Response vs. Reason Matrix -->
+        <div class="panel" id="modB"></div>
+        <!-- Module E: Winning vs Losing Phrases -->
+        <div class="panel" id="modE"></div>
+      </div>
+
+      <!-- OVERALL REMARKS (default mode only) -->
       <div class="overall-remarks" id="overallRemarks"></div>
 
       <div class="panel">
-        <h3>Quality parameters (averages)</h3>
+        <h3 id="paramsTitle">Quality parameters (averages)</h3>
         <div class="param-bars" id="paramBars"></div>
       </div>
 
       <div class="panel">
         <h3>Call-level audit</h3>
         <table id="callTable">
-          <thead>
+          <thead id="callThead">
             <tr>
               <th>#</th>
               <th>File</th>
@@ -417,7 +749,7 @@
   const MAX_FILE_BYTES = 4 * 1024 * 1024;
   const ENDPOINT = '/.netlify/functions/analyze';
 
-  // 3 consolidated standard quality parameters
+  // 3 consolidated standard quality parameters (generic mode)
   const STANDARD_PARAMS = [
     { name:'Communication', category:'standard', description:'Greeting, tone, empathy, active listening, and professional language throughout the call.' },
     { name:'Process Adherence', category:'standard', description:'Agent followed the required call flow, asked the right questions, provided correct information, and did not skip mandatory steps.' },
@@ -426,6 +758,9 @@
 
   let files = [];
   let results = [];
+  let campaignConfig = null;    // loaded from /config/campaign-rubrics.json
+  let activeCampaignId = '';    // '' = generic mode
+  let lastRunCampaignId = '';   // captured when Run is clicked; dashboard uses this
 
   // ===== DOM REFS =====
   const $ = id => document.getElementById(id);
@@ -440,6 +775,62 @@
   const progressLog = $('progressLog');
   const dashboard = $('dashboard');
   const userCriteria = $('userCriteria');
+  const campaignSelect = $('campaignSelect');
+  const defaultCriteria = $('defaultCriteria');
+  const campaignCriteria = $('campaignCriteria');
+  const rubricPreview = $('rubricPreview');
+  const campaignModules = $('campaignModules');
+
+  // ===== CAMPAIGN CONFIG LOADER =====
+  async function loadCampaignConfig() {
+    try {
+      const resp = await fetch('/config/campaign-rubrics.json');
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      campaignConfig = await resp.json();
+    } catch (e) {
+      console.warn('Could not load campaign config:', e.message);
+      campaignConfig = {};
+    }
+  }
+  loadCampaignConfig();
+
+  function currentRubric() {
+    return (activeCampaignId && campaignConfig && campaignConfig[activeCampaignId]) || null;
+  }
+
+  // Render the rubric preview (10 params + 6 fatals) in Step 2 when campaign is active
+  function renderRubricPreview() {
+    const r = currentRubric();
+    if (!r) { rubricPreview.innerHTML = ''; return; }
+    const totalWt = r.non_fatal_parameters.reduce((s,p) => s + (p.weight||0), 0);
+    rubricPreview.innerHTML = `
+      <h4>10 non-fatal parameters · weighted out of ${totalWt}</h4>
+      <div class="param-grid">
+        ${r.non_fatal_parameters.map(p => `
+          <div class="param-chip">
+            <span class="pid">${esc(p.id)}</span>
+            <span class="pname">${esc(p.name)}</span>
+            <span class="pwt">${p.weight}%</span>
+          </div>`).join('')}
+      </div>
+      <h4 class="fatal-header">6 fatal parameters — any one violation scores the call 0</h4>
+      <div class="fatal-grid">
+        ${r.fatal_parameters.map(f => `
+          <div class="fatal-chip">
+            <span class="fid">${esc(f.id)}</span><span class="fname">${esc(f.name)}</span>
+            <div class="fdef">${esc(f.definition)}</div>
+          </div>`).join('')}
+      </div>`;
+  }
+
+  campaignSelect.addEventListener('change', e => {
+    activeCampaignId = e.target.value || '';
+    const campaignMode = !!activeCampaignId;
+    defaultCriteria.style.display = campaignMode ? 'none' : 'block';
+    campaignCriteria.style.display = campaignMode ? 'block' : 'none';
+    if (campaignMode) renderRubricPreview();
+    renderFileList();   // re-render file rows with cart/hours inputs toggled
+  });
 
   // ===== FILE UPLOAD =====
   dropzone.addEventListener('click', e => { e.preventDefault(); fileInput.click(); });
@@ -489,17 +880,34 @@
       return;
     }
     fileList.classList.add('has-files');
+    const campaignMode = !!activeCampaignId;
     files.forEach((f, i) => {
       const row = document.createElement('div');
-      row.className = 'file-row';
+      row.className = 'file-row' + (campaignMode ? ' campaign-mode' : '');
+      const cartVal = (typeof f.cartValue === 'number' && f.cartValue > 0) ? f.cartValue : '';
+      const hrsVal  = (typeof f.hoursSinceAbandonment === 'number' && f.hoursSinceAbandonment > 0) ? f.hoursSinceAbandonment : '';
       row.innerHTML = `
         <span class="name">${esc(f.name)}</span>
         <span class="meta">${(f.durationSec/60).toFixed(1)} min &middot; ${f.sizeMB.toFixed(1)} MB</span>
+        ${campaignMode ? `
+          <input type="number" class="cart-input" data-i="${i}" placeholder="Cart ₹" min="0" step="1" value="${cartVal}" title="Cart value in INR (optional — AI will try to extract from transcript if blank)" />
+          <input type="number" class="hours-input" data-i="${i}" placeholder="Hrs" min="0" step="1" value="${hrsVal}" title="Hours since abandonment (optional)" />
+        ` : ''}
         <button type="button" class="remove" data-i="${i}">&times;</button>`;
       fileList.appendChild(row);
     });
     fileList.querySelectorAll('.remove').forEach(b => b.addEventListener('click', e => {
       files.splice(+e.target.dataset.i, 1); renderFileList();
+    }));
+    fileList.querySelectorAll('.cart-input').forEach(inp => inp.addEventListener('input', e => {
+      const idx = +e.target.dataset.i;
+      const v = parseFloat(e.target.value);
+      files[idx].cartValue = Number.isFinite(v) && v > 0 ? v : null;
+    }));
+    fileList.querySelectorAll('.hours-input').forEach(inp => inp.addEventListener('input', e => {
+      const idx = +e.target.dataset.i;
+      const v = parseFloat(e.target.value);
+      files[idx].hoursSinceAbandonment = Number.isFinite(v) && v > 0 ? v : null;
     }));
     const totalSec = files.reduce((s,f) => s + (f.durationSec||0), 0);
     const totalMB = files.reduce((s,f) => s + f.sizeMB, 0);
@@ -534,14 +942,19 @@
     progress.classList.remove('active'); progressLog.innerHTML = '';
     setProgress(0, 'Processing...');
     dashboard.classList.remove('active');
+    campaignModules.style.display = 'none';
   });
 
   // ===== RUN =====
   runBtn.addEventListener('click', runAudit);
 
   async function runAudit() {
+    const campaignMode = !!activeCampaignId;
+    lastRunCampaignId = activeCampaignId;
+    const campRubric = currentRubric();
     const rubric = buildRubric();
-    if (rubric.length === 0) { alert('No quality parameters found.'); return; }
+    if (!campaignMode && rubric.length === 0) { alert('No quality parameters found.'); return; }
+    if (campaignMode && !campRubric) { alert('Campaign rubric could not be loaded. Refresh the page.'); return; }
 
     runBtn.disabled = true; resetBtn.disabled = true;
     progress.classList.add('active'); progressLog.innerHTML = '';
@@ -550,7 +963,7 @@
     results = [];
 
     const total = files.length;
-    const totalSteps = total * 2 + 1; // +1 for overall remarks generation
+    const totalSteps = total * 2 + (campaignMode ? 0 : 1); // no team-remarks step in campaign mode
     let done = 0;
 
     for (let i = 0; i < total; i++) {
@@ -558,15 +971,36 @@
       setProgress((done / totalSteps) * 100, `Transcribing ${i+1} of ${total}...`);
       log(`[${i+1}/${total}] Transcribing ${f.name}...`);
       try {
-        const tx = await transcribeFile(f.file);
+        // Campaign mode: keep source language so Hindi/Hinglish quotes are preserved for benchmark phrases
+        const tx = await transcribeFile(f.file, { translate: !campaignMode });
         done++;
         setProgress((done / totalSteps) * 100, `Scoring ${i+1} of ${total}...`);
         log(`[${i+1}/${total}] Transcribed (${tx.wordCount || 0} words). Scoring...`, 'ok');
-        const sc = await scoreTranscript(tx.text, rubric);
+        let sc;
+        if (campaignMode) {
+          sc = await scoreTranscriptCampaign({
+            transcript: tx.text,
+            rubric: campRubric,
+            cartValue: f.cartValue,
+            hoursSinceAbandonment: f.hoursSinceAbandonment,
+            filename: f.name,
+          });
+          const overall = sc.weighted_score_out_of_100 != null ? sc.weighted_score_out_of_100.toFixed(0) : '?';
+          log(`[${i+1}/${total}] Scored: ${overall}/100 · ${sc.grade || '-'}`, 'ok');
+        } else {
+          sc = await scoreTranscript(tx.text, rubric);
+          log(`[${i+1}/${total}] Scored: ${sc.overallScore?.toFixed(1) || '?'}/10`, 'ok');
+        }
         done++;
-        log(`[${i+1}/${total}] Scored: ${sc.overallScore?.toFixed(1) || '?'}/10`, 'ok');
         const dur = safeDuration(tx.duration) || safeDuration(f.durationSec) || 0;
-        results.push({ filename:f.name, durationSec:dur, transcript:tx.text, scored:sc });
+        results.push({
+          filename: f.name,
+          durationSec: dur,
+          transcript: tx.text,
+          scored: sc,
+          userCartValue: f.cartValue ?? null,
+          userHours: f.hoursSinceAbandonment ?? null,
+        });
       } catch (err) {
         done += 2;
         log(`[${i+1}/${total}] ${f.name}: ${err.message}`, 'err');
@@ -575,23 +1009,25 @@
       setProgress((done / totalSteps) * 100);
     }
 
-    // Generate overall team remarks
-    setProgress((done / totalSteps) * 100, 'Generating overall remarks...');
-    log('Generating overall team remarks...');
     let overallRemarks = null;
-    try {
-      overallRemarks = await generateOverallRemarks(results, rubric);
-      done++;
-      log('Overall remarks ready.', 'ok');
-    } catch (e) {
-      done++;
-      log('Could not generate overall remarks: ' + e.message, 'err');
+    if (!campaignMode) {
+      setProgress((done / totalSteps) * 100, 'Generating overall remarks...');
+      log('Generating overall team remarks...');
+      try {
+        overallRemarks = await generateOverallRemarks(results, rubric);
+        done++;
+        log('Overall remarks ready.', 'ok');
+      } catch (e) {
+        done++;
+        log('Could not generate overall remarks: ' + e.message, 'err');
+      }
     }
 
     setProgress(100, 'Done');
     runBtn.disabled = false; resetBtn.disabled = false;
     log(`Done. ${results.filter(r => !r.error).length}/${total} calls audited.`, 'ok');
-    renderDashboard(rubric, overallRemarks);
+    if (campaignMode) renderDashboardCampaign(campRubric);
+    else renderDashboard(rubric, overallRemarks);
   }
 
   // ===== API CALLS =====
@@ -614,9 +1050,10 @@
     }
   }
 
-  async function transcribeFile(file) {
+  async function transcribeFile(file, opts = {}) {
+    const translate = opts.translate !== false; // default true for backward compatibility
     const b64 = await fileToBase64(file);
-    const url = `${ENDPOINT}?filename=${encodeURIComponent(file.name)}&summary=false&translate=true`;
+    const url = `${ENDPOINT}?filename=${encodeURIComponent(file.name)}&summary=false&translate=${translate ? 'true' : 'false'}`;
     let resp;
     try { resp = await fetch(url, { method:'POST', headers:{ 'Content-Type':'text/plain' }, body:b64 }); }
     catch (e) { throw new Error(`Network error: ${e.message}`); }
@@ -624,6 +1061,26 @@
     if (!resp.ok) throw new Error(data.error || `HTTP ${resp.status}`);
     if (!data.text || data.text.length < 20) throw new Error('Empty transcript. Audio may be silent.');
     return data;
+  }
+
+  async function scoreTranscriptCampaign({ transcript, rubric, cartValue, hoursSinceAbandonment, filename }) {
+    let resp;
+    try {
+      resp = await fetch(`${ENDPOINT}?mode=score-campaign`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          transcript,
+          rubric,
+          cart_value: (typeof cartValue === 'number' && cartValue > 0) ? cartValue : null,
+          hours_since_abandonment: (typeof hoursSinceAbandonment === 'number' && hoursSinceAbandonment > 0) ? hoursSinceAbandonment : null,
+          filename,
+        }),
+      });
+    } catch (e) { throw new Error(`Network error: ${e.message}`); }
+    const data = await parseResponse(resp);
+    if (!resp.ok) throw new Error(data.error || `HTTP ${resp.status}`);
+    return data.scored;
   }
 
   async function scoreTranscript(transcript, rubric) {
@@ -706,8 +1163,15 @@ Be specific. Reference actual patterns you see across calls. Do not be generic.`
     progressLog.scrollTop = progressLog.scrollHeight;
   }
 
-  // ===== DASHBOARD =====
+  // ===== DASHBOARD (GENERIC MODE) =====
   function renderDashboard(rubric, overallRemarks) {
+    // Hide campaign modules, restore generic layout
+    campaignModules.style.display = 'none';
+    $('paramsTitle').textContent = 'Quality parameters (averages)';
+    $('callThead').innerHTML = `<tr>
+      <th>#</th><th>File</th><th>Duration</th><th>Score</th><th>Outcome</th><th>Sentiment</th>
+    </tr>`;
+
     const ok = results.filter(r => !r.error && r.scored);
     if (ok.length === 0) {
       dashboard.classList.add('active');
@@ -838,11 +1302,495 @@ Be specific. Reference actual patterns you see across calls. Do not be generic.`
     drill.scrollIntoView({ behavior:'smooth', block:'nearest' });
   }
 
+  // ===== DASHBOARD (CAMPAIGN MODE) =====
+  function renderDashboardCampaign(rubric) {
+    campaignModules.style.display = 'block';
+    $('overallRemarks').innerHTML = '';
+    $('paramsTitle').textContent = 'Parameter averages (P1–P10)';
+
+    const ok = results.filter(r => !r.error && r.scored);
+    if (ok.length === 0) {
+      dashboard.classList.add('active');
+      $('kpiGrid').innerHTML = '<div class="kpi"><div class="num">0</div><div class="label">No calls audited</div></div>';
+      campaignModules.style.display = 'none';
+      $('paramBars').innerHTML = '<div style="color:var(--muted);font-size:13px">No data.</div>';
+      $('callTbody').innerHTML = '';
+      return;
+    }
+
+    // --- Aggregation pass ---
+    const reasonByCode = Object.fromEntries((rubric.abandonment_reasons || []).map(r => [r.code, r]));
+    const outcomeByCode = Object.fromEntries((rubric.outcome_codes || []).map(o => [o.code, o]));
+    const rebuttalByCode = Object.fromEntries((rubric.rebuttal_categories || []).map(c => [c.code, c]));
+
+    const totalCalls = ok.length;
+    const fatalCount = ok.filter(r => (r.scored.fatal_violations || []).length > 0).length;
+    const teamAvg = ok.reduce((s,r) => s + (r.scored.weighted_score_out_of_100 || 0), 0) / totalCalls;
+
+    // Revenue numbers
+    let totalCart = 0, totalRecoverable = 0, totalAdjusted = 0, missingCartCount = 0;
+    ok.forEach(r => {
+      const calc = r.scored.revenue_at_risk_calc || {};
+      const cart = calc.cart_value;
+      if (typeof cart !== 'number' || cart <= 0) { missingCartCount++; return; }
+      const basePct = calc.base_recovery_pct || 0;
+      const mult = calc.quality_multiplier != null ? calc.quality_multiplier : 0;
+      totalCart += cart;
+      totalRecoverable += cart * (basePct / 100);
+      totalAdjusted += cart * (basePct / 100) * mult;
+    });
+    const revGap = Math.max(0, totalRecoverable - totalAdjusted);
+
+    // ---- KPI strip ----
+    $('kpiGrid').innerHTML = `
+      <div class="kpi"><div class="num">${totalCalls}</div><div class="label">Calls Audited</div></div>
+      <div class="kpi"><div class="num">${teamAvg.toFixed(0)}</div><div class="label">Team Score /100</div></div>
+      <div class="kpi"><div class="num" style="color:var(--danger);-webkit-text-fill-color:var(--danger);background:none;">${fatalCount}</div><div class="label">Fatal Violations</div></div>
+      <div class="kpi"><div class="num">${fmtINR(totalAdjusted)}</div><div class="label">Quality-Adj Recovery</div></div>
+    `;
+
+    // ---- Module C: Revenue at Risk (the money slide) ----
+    renderModuleC({ totalCart, totalRecoverable, totalAdjusted, revGap, missingCartCount, totalCalls });
+
+    // ---- Module D: Fatal Violations ----
+    renderModuleD(ok, rubric);
+
+    // ---- Module A: Reason Mix ----
+    renderModuleA(ok, rubric, reasonByCode);
+
+    // ---- Module B: Response vs Reason Matrix ----
+    renderModuleB(ok, rubric, reasonByCode, rebuttalByCode);
+
+    // ---- Module E: Winning vs Losing Phrases ----
+    renderModuleE(ok);
+
+    // ---- P1–P10 parameter averages ----
+    const paramAvgs = (rubric.non_fatal_parameters || []).map(p => {
+      const scores = ok
+        .map(r => (r.scored.non_fatal_scores || {})[p.id]?.score_0_to_10)
+        .filter(x => typeof x === 'number');
+      const avg = scores.length ? scores.reduce((a,b) => a+b, 0) / scores.length : 0;
+      return { ...p, avg };
+    });
+    $('paramBars').innerHTML = paramAvgs.map(p => {
+      const cls = p.avg >= 7 ? 'good' : p.avg >= 5 ? 'mid' : 'bad';
+      return `
+        <div class="param-bar">
+          <div class="row">
+            <div class="name">${esc(p.id)} · ${esc(p.name)}<span class="cat">${p.weight}%</span></div>
+            <div class="score">${p.avg.toFixed(1)} / 10</div>
+          </div>
+          <div class="bar"><div class="bar-fill ${cls}" style="width:${p.avg*10}%"></div></div>
+        </div>`;
+    }).join('');
+
+    // ---- Per-call table (campaign columns) ----
+    $('callThead').innerHTML = `<tr>
+      <th>#</th><th>File</th><th>Dur</th><th>Score</th>
+      <th>Reason</th><th>Outcome</th><th>Cart ₹</th><th>Recovered ₹</th><th>Fatal</th>
+    </tr>`;
+    $('callTbody').innerHTML = results.map((r, i) => {
+      if (r.error) {
+        return `<tr><td>${i+1}</td><td>${esc(r.filename)}</td><td>${(r.durationSec/60).toFixed(1)}m</td><td colspan="6" style="color:var(--danger)">Failed: ${esc(r.error)}</td></tr>`;
+      }
+      const s = r.scored;
+      const ws = s.weighted_score_out_of_100 != null ? s.weighted_score_out_of_100 : 0;
+      const isFatal = (s.fatal_violations || []).length > 0;
+      const scoreCls = isFatal ? 'fatal' : (ws >= 75 ? 'good' : ws >= 60 ? 'mid' : 'bad');
+      const ar = reasonByCode[s.abandonment_reason_code];
+      const oc = outcomeByCode[s.outcome_code];
+      const lostOutcome = /lost|not reachable/i.test(oc?.name || '');
+      const calc = s.revenue_at_risk_calc || {};
+      const cartDisp = (typeof calc.cart_value === 'number' && calc.cart_value > 0) ? fmtINR(calc.cart_value) : '—';
+      const recDisp = fmtINR(calc.quality_adjusted_recovery_value || 0);
+      return `
+        <tr data-i="${i}">
+          <td>${i+1}</td>
+          <td>${esc(r.filename)}</td>
+          <td>${(r.durationSec/60).toFixed(1)}m</td>
+          <td><span class="pill ${scoreCls}">${isFatal ? 'FATAL' : ws.toFixed(0)}</span></td>
+          <td>${ar ? `<span class="ar-badge">${esc(ar.code)}</span> ${esc(ar.name)}` : '—'}</td>
+          <td>${oc ? `<span class="oc-badge ${lostOutcome ? 'lost' : ''}">${esc(oc.code)}</span> ${esc(oc.name)}` : '—'}</td>
+          <td>${cartDisp}</td>
+          <td>${recDisp}</td>
+          <td style="text-align:center;">${isFatal ? '<span class="fatal-dot" title="Fatal violation"></span>' : ''}</td>
+        </tr>`;
+    }).join('');
+
+    $('callTbody').querySelectorAll('tr[data-i]').forEach(tr => {
+      tr.addEventListener('click', () => showDrillCampaign(+tr.dataset.i, rubric));
+    });
+
+    dashboard.classList.add('active');
+    dashboard.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  // ---- Module C: Revenue at Risk ----
+  function renderModuleC({ totalCart, totalRecoverable, totalAdjusted, revGap, missingCartCount, totalCalls }) {
+    const gapPct = totalRecoverable > 0 ? (revGap / totalRecoverable) * 100 : 0;
+    const actualPct = totalRecoverable > 0 ? (totalAdjusted / totalRecoverable) * 100 : 0;
+    $('modC').innerHTML = `
+      <div class="mod-head">
+        <h3>💰 Revenue at Risk</h3>
+        <span class="mod-tag">The money slide</span>
+      </div>
+      <div class="revenue-stats">
+        <div class="rev-stat attempted">
+          <div class="rev-label">Total Cart Value Attempted</div>
+          <div class="rev-num">${fmtINR(totalCart)}</div>
+          <div class="rev-sub">Sum of cart values across ${totalCalls - missingCartCount} calls with a known cart value.</div>
+        </div>
+        <div class="rev-stat recoverable">
+          <div class="rev-label">Recoverable at Perfect Quality</div>
+          <div class="rev-num">${fmtINR(totalRecoverable)}</div>
+          <div class="rev-sub">Cart × reason-specific base recovery %. Ceiling if every agent were excellent.</div>
+        </div>
+        <div class="rev-stat actual">
+          <div class="rev-label">Quality-Adjusted Recovery</div>
+          <div class="rev-num">${fmtINR(totalAdjusted)}</div>
+          <div class="rev-sub">Recoverable × per-call quality multiplier. What this batch is actually worth.</div>
+        </div>
+      </div>
+      <div class="rev-gap">
+        <span class="rev-gap-label">Revenue cost of poor quality handling this batch</span>
+        <span class="rev-gap-num">${fmtINR(revGap)}</span>
+      </div>
+      <div class="rev-waterfall">
+        <div class="wf-label">Actual recovery ${actualPct.toFixed(0)}% of ceiling · Gap ${gapPct.toFixed(0)}%</div>
+        <div class="wf-bar">
+          <div class="wf-actual" style="width:${actualPct}%"></div>
+          <div class="wf-gap" style="width:${100 - actualPct}%"></div>
+        </div>
+      </div>
+      ${missingCartCount > 0 ? `<div class="rev-unknown-note">⚠ Cart value unknown for ${missingCartCount} of ${totalCalls} calls — those are excluded from the totals above. Add cart values in Step 1 for a full picture.</div>` : ''}
+    `;
+  }
+
+  // ---- Module D: Fatal Violations ----
+  function renderModuleD(ok, rubric) {
+    const fatalByName = Object.fromEntries((rubric.fatal_parameters || []).map(f => [f.id, f.name]));
+    const rows = [];
+    results.forEach((r, i) => {
+      if (r.error || !r.scored) return;
+      (r.scored.fatal_violations || []).forEach(v => {
+        rows.push({
+          callNum: i + 1,
+          filename: r.filename,
+          fcode: v.id,
+          fname: fatalByName[v.id] || '',
+          ts: v.timestamp_approx || '',
+          quote: v.evidence_quote || '',
+        });
+      });
+    });
+
+    if (rows.length === 0) {
+      $('modD').innerHTML = `
+        <div class="mod-head"><h3>Fatal Violations</h3><span class="mod-tag">Compliance</span></div>
+        <div class="fatal-empty">No fatal violations detected in this batch.</div>`;
+      return;
+    }
+
+    $('modD').innerHTML = `
+      <div class="mod-head"><h3>Fatal Violations</h3><span class="mod-tag">Compliance</span></div>
+      <table class="fatal-table">
+        <thead><tr><th>Call #</th><th>File</th><th>Code</th><th>Violation</th><th>Timestamp</th><th>Evidence</th></tr></thead>
+        <tbody>
+          ${rows.map(r => `
+            <tr>
+              <td>${r.callNum}</td>
+              <td>${esc(r.filename)}</td>
+              <td><span class="fcode">${esc(r.fcode)}</span></td>
+              <td>${esc(r.fname)}</td>
+              <td>${esc(r.ts || '—')}</td>
+              <td class="fquote">${esc(r.quote)}</td>
+            </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  // ---- Module A: Abandonment Reason Mix ----
+  function renderModuleA(ok, rubric, reasonByCode) {
+    const counts = {};
+    ok.forEach(r => {
+      const c = r.scored.abandonment_reason_code;
+      if (c) counts[c] = (counts[c] || 0) + 1;
+    });
+    const rows = Object.entries(counts)
+      .map(([code, n]) => {
+        const ar = reasonByCode[code];
+        return { code, name: ar?.name || code, base: ar?.base_recovery_pct || 0, n };
+      })
+      .sort((a, b) => b.n - a.n);
+
+    if (rows.length === 0) {
+      $('modA').innerHTML = '<div class="mod-head"><h3>Abandonment Reason Mix</h3></div><div style="font-size:13px;color:var(--muted)">No reason data available.</div>';
+      return;
+    }
+    const total = rows.reduce((s, r) => s + r.n, 0);
+    const maxN = Math.max(...rows.map(r => r.n));
+    const mostCommon = rows[0];
+    const bestRecovery = [...rows].sort((a, b) => b.base - a.base)[0];
+
+    $('modA').innerHTML = `
+      <div class="mod-head">
+        <h3>📊 Abandonment Reason Mix</h3>
+        <span class="mod-tag">${total} call${total === 1 ? '' : 's'}</span>
+      </div>
+      <div class="reason-list">
+        ${rows.map(r => {
+          const pct = (r.n / total) * 100;
+          const widthPct = (r.n / maxN) * 100;
+          return `
+            <div class="reason-bar-row">
+              <span class="rcode">${esc(r.code)}</span>
+              <span class="rname">${esc(r.name)}</span>
+              <div class="rbar-wrap"><div class="rbar-fill" style="width:${widthPct}%"></div></div>
+              <span class="rcount">${r.n} · ${pct.toFixed(0)}%</span>
+            </div>`;
+        }).join('')}
+      </div>
+      <div class="reason-mix-summary">
+        <div class="mix-card">
+          <div class="mix-label">Most common reason</div>
+          <div class="mix-val">${esc(mostCommon.code)} · ${esc(mostCommon.name)}</div>
+          <div class="mix-sub">${mostCommon.n} of ${total} calls · baseline recovery ${mostCommon.base}%</div>
+        </div>
+        <div class="mix-card">
+          <div class="mix-label">Highest-recovery reason in this batch</div>
+          <div class="mix-val">${esc(bestRecovery.code)} · ${esc(bestRecovery.name)}</div>
+          <div class="mix-sub">Baseline recovery ${bestRecovery.base}% · appears in ${bestRecovery.n} call${bestRecovery.n === 1 ? '' : 's'}</div>
+        </div>
+      </div>`;
+  }
+
+  // ---- Module B: Agent Response vs Reason Matrix ----
+  function renderModuleB(ok, rubric, reasonByCode, rebuttalByCode) {
+    // Collect reasons and rebuttals that actually appear in this batch
+    const reasonsPresent = Array.from(new Set(ok.map(r => r.scored.abandonment_reason_code).filter(Boolean)));
+    const rebuttalsPresent = Array.from(new Set(ok.map(r => r.scored.agent_rebuttal_category).filter(Boolean)));
+
+    // Cells: { 'AR-xx|rebuttal': { count, matches, mismatches } }
+    const cells = {};
+    ok.forEach(r => {
+      const ar = r.scored.abandonment_reason_code;
+      const rb = r.scored.agent_rebuttal_category;
+      if (!ar || !rb) return;
+      const key = ar + '|' + rb;
+      if (!cells[key]) cells[key] = { count: 0, matches: 0 };
+      cells[key].count++;
+      if (r.scored.rebuttal_matched_reason === true) cells[key].matches++;
+    });
+
+    const totalWithBoth = ok.filter(r => r.scored.abandonment_reason_code && r.scored.agent_rebuttal_category).length;
+    const mismatchedCalls = ok.filter(r => r.scored.rebuttal_matched_reason === false).length;
+    const mismatchPct = totalWithBoth > 0 ? (mismatchedCalls / totalWithBoth) * 100 : 0;
+
+    // Find top mismatch pair
+    let topMismatch = null;
+    ok.forEach(r => {
+      if (r.scored.rebuttal_matched_reason !== false) return;
+      const key = r.scored.abandonment_reason_code + '|' + r.scored.agent_rebuttal_category;
+      if (!topMismatch) topMismatch = { key, count: 0 };
+      // recount using cells
+    });
+    // Simpler: find the most common mismatched pair
+    const mismatchPairs = {};
+    ok.forEach(r => {
+      if (r.scored.rebuttal_matched_reason === false && r.scored.abandonment_reason_code && r.scored.agent_rebuttal_category) {
+        const k = r.scored.abandonment_reason_code + '|' + r.scored.agent_rebuttal_category;
+        mismatchPairs[k] = (mismatchPairs[k] || 0) + 1;
+      }
+    });
+    let topMismatchText = '';
+    const mismatchEntries = Object.entries(mismatchPairs).sort((a, b) => b[1] - a[1]);
+    if (mismatchEntries.length > 0) {
+      const [key, n] = mismatchEntries[0];
+      const [arC, rbC] = key.split('|');
+      const arName = reasonByCode[arC]?.name || arC;
+      const rbName = rebuttalByCode[rbC]?.name || rbC;
+      topMismatchText = `Top mismatch: <strong>${esc(arName)}</strong> met with <strong>${esc(rbName)}</strong> in ${n} call${n === 1 ? '' : 's'}.`;
+    }
+
+    if (reasonsPresent.length === 0 || rebuttalsPresent.length === 0) {
+      $('modB').innerHTML = `
+        <div class="mod-head"><h3>Agent Response vs Reason Matrix</h3></div>
+        <div style="font-size:13px;color:var(--muted)">Need at least one call with both a reason code and a rebuttal category to render the matrix.</div>`;
+      return;
+    }
+
+    $('modB').innerHTML = `
+      <div class="mod-head">
+        <h3>🎯 Agent Response vs Reason Matrix</h3>
+        <span class="mod-tag">Rebuttal quality</span>
+      </div>
+      <div class="matrix-wrap">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th></th>
+              ${rebuttalsPresent.map(rb => `<th>${esc(rebuttalByCode[rb]?.name || rb)}</th>`).join('')}
+            </tr>
+          </thead>
+          <tbody>
+            ${reasonsPresent.map(ar => `
+              <tr>
+                <td class="row-label"><span class="ar-badge">${esc(ar)}</span>${esc(reasonByCode[ar]?.name || ar)}</td>
+                ${rebuttalsPresent.map(rb => {
+                  const cell = cells[ar + '|' + rb];
+                  if (!cell) return `<td class="mx-cell mx-empty">·</td>`;
+                  const matchPct = cell.matches / cell.count;
+                  const cls = matchPct >= 1 ? 'mx-match-full' : (matchPct >= 0.5 ? 'mx-match-part' : 'mx-mismatch');
+                  return `<td class="mx-cell ${cls}" title="${cell.matches} of ${cell.count} matched">${cell.count}</td>`;
+                }).join('')}
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div class="matrix-insight ${mismatchPct < 25 ? 'good' : ''}">
+        In <strong>${mismatchPct.toFixed(0)}%</strong> of calls, the agent's rebuttal did <strong>${mismatchPct < 25 ? 'match' : 'not match'}</strong> the customer's actual reason${mismatchedCalls > 0 ? ` (${mismatchedCalls} of ${totalWithBoth} calls)` : ''}. ${topMismatchText}
+      </div>`;
+  }
+
+  // ---- Module E: Winning vs Losing Phrases ----
+  function renderModuleE(ok) {
+    const winCalls = ok.filter(r => (r.scored.weighted_score_out_of_100 || 0) >= 75);
+    const loseCalls = ok.filter(r => (r.scored.weighted_score_out_of_100 || 0) < 60);
+
+    const collect = (calls, field) => {
+      const seen = new Set();
+      const out = [];
+      calls.forEach(r => (r.scored.benchmark_phrases?.[field] || []).forEach(line => {
+        const s = (line || '').trim();
+        if (!s || s.length < 6) return;
+        const key = s.toLowerCase().slice(0, 80);
+        if (seen.has(key)) return;
+        seen.add(key);
+        out.push(s);
+      }));
+      return out.slice(0, 5);
+    };
+    const winning = collect(winCalls, 'winning_lines');
+    const losing = collect(loseCalls, 'losing_lines');
+
+    $('modE').innerHTML = `
+      <div class="mod-head">
+        <h3>🗣️ Winning vs Losing Phrases</h3>
+        <span class="mod-tag">Coaching</span>
+      </div>
+      <div class="phrases-grid">
+        <div class="phrases-col winning">
+          <h4>Winning lines · from calls scoring ≥ 75</h4>
+          ${winning.length > 0
+            ? `<ol>${winning.map(l => `<li>${esc(l)}</li>`).join('')}</ol>`
+            : '<div style="font-size:13px;color:var(--muted)">No calls scored ≥ 75 — once your team has a few strong calls, the best phrases will surface here.</div>'}
+        </div>
+        <div class="phrases-col losing">
+          <h4>Losing lines · from calls scoring &lt; 60</h4>
+          ${losing.length > 0
+            ? `<ol>${losing.map(l => `<li>${esc(l)}</li>`).join('')}</ol>`
+            : '<div style="font-size:13px;color:var(--muted)">No calls scored below 60 in this batch. 🎉</div>'}
+        </div>
+      </div>`;
+  }
+
+  // ---- Campaign drawer ----
+  function showDrillCampaign(i, rubric) {
+    const r = results[i];
+    if (!r || !r.scored) return;
+    const s = r.scored;
+    const reasonByCode = Object.fromEntries((rubric.abandonment_reasons || []).map(x => [x.code, x]));
+    const outcomeByCode = Object.fromEntries((rubric.outcome_codes || []).map(x => [x.code, x]));
+    const rebuttalByCode = Object.fromEntries((rubric.rebuttal_categories || []).map(x => [x.code, x]));
+    const nonFatalParams = rubric.non_fatal_parameters || [];
+    const ws = s.weighted_score_out_of_100 != null ? s.weighted_score_out_of_100 : 0;
+    const isFatal = (s.fatal_violations || []).length > 0;
+    const ar = reasonByCode[s.abandonment_reason_code];
+    const oc = outcomeByCode[s.outcome_code];
+    const rb = rebuttalByCode[s.agent_rebuttal_category];
+    const calc = s.revenue_at_risk_calc || {};
+    const drill = $('drill');
+    drill.innerHTML = `
+      <h4>${esc(r.filename)} · ${isFatal ? '<span style="color:var(--danger);">FATAL</span>' : (ws.toFixed(0) + '/100')} · ${esc(s.grade || '')}</h4>
+      <div class="kpi-row">
+        <div class="kpi-mini"><div class="lbl">Reason</div><div class="val">${ar ? `${esc(ar.code)} · ${esc(ar.name)}` : '—'}</div></div>
+        <div class="kpi-mini"><div class="lbl">Rebuttal</div><div class="val">${rb ? esc(rb.name) : '—'}</div></div>
+        <div class="kpi-mini"><div class="lbl">Matched?</div><div class="val" style="color:${s.rebuttal_matched_reason ? 'var(--success)' : 'var(--danger)'};">${s.rebuttal_matched_reason ? 'Yes' : 'No'}</div></div>
+        <div class="kpi-mini"><div class="lbl">Outcome</div><div class="val">${oc ? `${esc(oc.code)} · ${esc(oc.name)}` : '—'}</div></div>
+        <div class="kpi-mini"><div class="lbl">Cart</div><div class="val">${typeof calc.cart_value === 'number' && calc.cart_value > 0 ? fmtINR(calc.cart_value) : '—'}</div></div>
+        <div class="kpi-mini"><div class="lbl">Recovered (quality-adj.)</div><div class="val">${fmtINR(calc.quality_adjusted_recovery_value || 0)}</div></div>
+      </div>
+
+      <div class="summary-text">${esc(s.ai_summary || '')}</div>
+
+      ${s.rebuttal_match_comment ? `<div style="font-size:13px;color:var(--body);margin-bottom:14px;"><strong>Rebuttal analysis:</strong> ${esc(s.rebuttal_match_comment)}</div>` : ''}
+
+      ${isFatal ? `
+        <div style="margin-bottom:14px;padding:12px 14px;background:#fef2f2;border:1px solid #fecaca;border-left:4px solid var(--danger);border-radius:8px;">
+          <h4 style="color:var(--danger);font-size:13px;margin-bottom:8px;">Fatal violation${s.fatal_violations.length > 1 ? 's' : ''}</h4>
+          <ul style="padding-left:18px;font-size:13px;color:var(--body);">
+            ${s.fatal_violations.map(v => `<li><strong>${esc(v.id)}</strong> — <em>"${esc(v.evidence_quote || '')}"</em> ${v.timestamp_approx ? `<span style="color:var(--muted);">(${esc(v.timestamp_approx)})</span>` : ''}</li>`).join('')}
+          </ul>
+        </div>` : ''}
+
+      ${(s.top_3_coaching_points && s.top_3_coaching_points.length > 0) ? `
+        <div class="coaching">
+          <h4>Top 3 coaching points</h4>
+          <ol>${s.top_3_coaching_points.map(p => `<li>${esc(p)}</li>`).join('')}</ol>
+        </div>` : ''}
+
+      <div class="lists" style="margin-bottom:16px;">
+        <div>
+          <h4 style="font-size:13px;color:var(--success);">Winning lines</h4>
+          <ul>${(s.benchmark_phrases?.winning_lines || []).map(x => `<li>"${esc(x)}"</li>`).join('') || '<li style="color:var(--muted);">None called out</li>'}</ul>
+        </div>
+        <div>
+          <h4 style="font-size:13px;color:var(--danger);">Losing lines</h4>
+          <ul>${(s.benchmark_phrases?.losing_lines || []).map(x => `<li>"${esc(x)}"</li>`).join('') || '<li style="color:var(--muted);">None called out</li>'}</ul>
+        </div>
+      </div>
+
+      <h4 style="font-size:13px;">Per-parameter scores (P1–P10)</h4>
+      <div class="crit-list">
+        ${nonFatalParams.map(p => {
+          const cell = (s.non_fatal_scores || {})[p.id];
+          const sc = cell?.score_0_to_10 ?? 0;
+          const cls = sc >= 7 ? 'good' : sc >= 5 ? 'mid' : 'bad';
+          return `
+            <div class="crit-row">
+              <div>
+                <div class="crit-name">${esc(p.id)} · ${esc(p.name)} <span style="color:var(--muted);font-size:11px;">(${p.weight}%)</span></div>
+                <div class="crit-rationale">${esc(cell?.evidence || '')}</div>
+              </div>
+              <span class="pill ${cls}">${sc.toFixed(1)}</span>
+            </div>`;
+        }).join('')}
+      </div>
+
+      <h4 style="font-size:13px;">Transcript</h4>
+      <div class="transcript">${esc(r.transcript || '')}</div>
+    `;
+    drill.classList.add('active');
+    drill.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }
+
   // ===== DOWNLOADS =====
+  $('dlPrint').addEventListener('click', () => { window.print(); });
+
   $('dlJson').addEventListener('click', () => {
-    triggerDl(new Blob([JSON.stringify(results, null, 2)], { type:'application/json' }), 'naukri-audit-results.json');
+    const payload = {
+      exported_at: new Date().toISOString(),
+      campaign_id: lastRunCampaignId || null,
+      campaign_name: lastRunCampaignId && campaignConfig?.[lastRunCampaignId]?.name || null,
+      results,
+    };
+    triggerDl(new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' }),
+      lastRunCampaignId ? 'naukri-campaign-audit.json' : 'naukri-audit-results.json');
   });
+
   $('dlCsv').addEventListener('click', () => {
+    if (lastRunCampaignId) { exportCsvCampaign(); return; }
+    // Generic CSV (unchanged)
     const rows = [['#','filename','duration_min','overall_score','outcome','sentiment','summary']];
     results.forEach((r, i) => {
       if (r.error) {
@@ -865,6 +1813,80 @@ Be specific. Reference actual patterns you see across calls. Do not be generic.`
     triggerDl(new Blob([rows.map(r => r.map(csvCell).join(',')).join('\n')], { type:'text/csv' }), 'naukri-audit-results.csv');
   });
 
+  function exportCsvCampaign() {
+    const rubric = campaignConfig?.[lastRunCampaignId];
+    if (!rubric) return;
+    const params = rubric.non_fatal_parameters || [];
+    const header = [
+      '#','filename','duration_min','weighted_score_100','grade','language',
+      'reason_code','reason_name','rebuttal_category','rebuttal_matched_reason','rebuttal_comment',
+      'outcome_code','outcome_name',
+      'cart_value_inr','base_recovery_pct','quality_multiplier','quality_adjusted_recovery_inr',
+      'fatal_count','fatal_codes','fatal_evidence',
+      'top_coaching_1','top_coaching_2','top_coaching_3',
+      'winning_line_1','winning_line_2','losing_line_1','losing_line_2',
+      'ai_summary',
+      ...params.map(p => `${p.id}_score`),
+      ...params.map(p => `${p.id}_evidence`),
+    ];
+    const reasonByCode = Object.fromEntries((rubric.abandonment_reasons || []).map(r => [r.code, r]));
+    const outcomeByCode = Object.fromEntries((rubric.outcome_codes || []).map(o => [o.code, o]));
+    const rows = [header];
+    results.forEach((r, i) => {
+      if (r.error) {
+        const row = [i+1, r.filename, (r.durationSec/60).toFixed(1)];
+        while (row.length < header.length) row.push('');
+        row[header.length - 1] = `ERROR: ${r.error}`;
+        rows.push(row);
+        return;
+      }
+      const s = r.scored;
+      const calc = s.revenue_at_risk_calc || {};
+      const fv = s.fatal_violations || [];
+      const ar = reasonByCode[s.abandonment_reason_code];
+      const oc = outcomeByCode[s.outcome_code];
+      const bp = s.benchmark_phrases || {};
+      const coaching = s.top_3_coaching_points || [];
+      const winning = bp.winning_lines || [];
+      const losing = bp.losing_lines || [];
+      const baseRow = [
+        i+1, r.filename, (r.durationSec/60).toFixed(1),
+        s.weighted_score_out_of_100 ?? '',
+        s.grade || '',
+        s.language || '',
+        s.abandonment_reason_code || '',
+        ar?.name || '',
+        s.agent_rebuttal_category || '',
+        s.rebuttal_matched_reason === true ? 'yes' : (s.rebuttal_matched_reason === false ? 'no' : ''),
+        s.rebuttal_match_comment || '',
+        s.outcome_code || '',
+        oc?.name || '',
+        calc.cart_value ?? '',
+        calc.base_recovery_pct ?? '',
+        calc.quality_multiplier ?? '',
+        calc.quality_adjusted_recovery_value ?? '',
+        fv.length,
+        fv.map(v => v.id).join('|'),
+        fv.map(v => (v.evidence_quote || '').replace(/\n/g,' ')).join(' || '),
+        coaching[0] || '', coaching[1] || '', coaching[2] || '',
+        winning[0] || '', winning[1] || '',
+        losing[0] || '', losing[1] || '',
+        (s.ai_summary || '').replace(/\n/g,' '),
+      ];
+      params.forEach(p => {
+        baseRow.push((s.non_fatal_scores?.[p.id]?.score_0_to_10) ?? '');
+      });
+      params.forEach(p => {
+        baseRow.push((s.non_fatal_scores?.[p.id]?.evidence || '').replace(/\n/g,' '));
+      });
+      rows.push(baseRow);
+    });
+    triggerDl(
+      new Blob([rows.map(r => r.map(csvCell).join(',')).join('\n')], { type:'text/csv' }),
+      'naukri-campaign-audit.csv'
+    );
+  }
+
   function csvCell(v) { const s = (v == null ? '' : String(v)); return /[",\n]/.test(s) ? `"${s.replace(/"/g,'""')}"` : s; }
   function triggerDl(blob, name) {
     const a = document.createElement('a');
@@ -876,6 +1898,13 @@ Be specific. Reference actual patterns you see across calls. Do not be generic.`
   function avg(arr) { return arr.length ? arr.reduce((a,b) => a+b, 0) / arr.length : 0; }
   function safeDuration(d) { const n = Number(d); return (Number.isFinite(n) && n > 0) ? n : 0; }
   function esc(s) { return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function fmtINR(n) {
+    const v = Math.round(Number(n) || 0);
+    if (v >= 10000000) return '₹' + (v / 10000000).toFixed(2) + ' Cr';
+    if (v >= 100000)   return '₹' + (v / 100000).toFixed(2) + ' L';
+    if (v >= 1000)     return '₹' + v.toLocaleString('en-IN');
+    return '₹' + v;
+  }
 </script>
 
 </body>
