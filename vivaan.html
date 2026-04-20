@@ -139,40 +139,106 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   button.chip:hover{ transform: translateY(-2px); box-shadow: 0 5px 0 var(--card-border); }
   .chip.user .chip-caret{ opacity: .5; margin-left: 2px; font-size: 10px; }
+  .chip.user #userChipName{
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    max-width: 160px;
+  }
 
-  /* Grade selector */
+  /* Compact topbar on small screens so the brand + user chip don't crowd */
+  @media (max-width: 600px){
+    .topbar{ margin-bottom: 14px; gap: 8px; }
+    .brand{ gap: 8px; }
+    .brand-logo{
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      font-size: 18px;
+    }
+    .brand-lines .l1{ font-size: 15px; }
+    .brand-lines .l2{ font-size: 11px; }
+    .chip{ padding: 6px 10px; font-size: 11.5px; }
+    .chip .dot{ width: 7px; height: 7px; }
+    .chip.user #userChipName{ max-width: 90px; }
+  }
+
+  /* Grade selector — 2 rows × 5 columns, each a playful rainbow pill */
+  .grade-section{
+    margin: 16px auto 40px;
+    max-width: 860px;
+  }
+  .grade-section .grade-heading{
+    font-family: var(--display); font-weight: 700;
+    font-size: 20px; letter-spacing: -0.01em;
+    color: var(--ink);
+    text-align: center;
+    margin-bottom: 18px;
+  }
   .grade-bar{
-    display:flex; gap:8px; flex-wrap:wrap; justify-content:center;
-    padding: 10px;
-    margin: 6px auto 22px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    padding: 20px;
     background: var(--card);
-    border: 2px solid var(--card-border);
-    border-radius: 22px;
-    box-shadow: 0 4px 0 var(--card-border);
-    max-width: 900px;
+    border: 2.5px solid var(--card-border);
+    border-radius: 28px;
+    box-shadow: 0 6px 0 var(--card-border);
   }
   .grade-tab{
-    min-width: 64px;
-    padding: 8px 12px 10px;
-    border-radius: 14px;
-    background: transparent;
-    border: 2px solid transparent;
+    padding: 18px 6px 20px;
+    border-radius: 18px;
+    background: color-mix(in oklab, var(--g-color, var(--coral)), transparent 88%);
+    border: 2.5px solid color-mix(in oklab, var(--g-color, var(--coral)), transparent 55%);
     font-family: var(--display);
     font-weight: 600;
-    color: var(--ink-2);
-    display: flex; flex-direction: column; align-items: center; gap: 2px;
-    transition: all .15s var(--ease-pop);
+    color: var(--g-color, var(--ink));
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    transition: all .18s var(--ease-pop);
     cursor: pointer;
+    position: relative;
   }
-  .grade-tab:hover:not(.active){ background: rgba(0,0,0,0.04); color: var(--ink); transform: translateY(-1px); }
+  /* Rainbow accent cycle across the 10 grades */
+  .grade-tab:nth-child(1){ --g-color: var(--coral); }
+  .grade-tab:nth-child(2){ --g-color: var(--peach); }
+  .grade-tab:nth-child(3){ --g-color: var(--yellow); }
+  .grade-tab:nth-child(4){ --g-color: var(--green); }
+  .grade-tab:nth-child(5){ --g-color: var(--sky); }
+  .grade-tab:nth-child(6){ --g-color: var(--grape); }
+  .grade-tab:nth-child(7){ --g-color: var(--coral); }
+  .grade-tab:nth-child(8){ --g-color: var(--yellow); }
+  .grade-tab:nth-child(9){ --g-color: var(--green); }
+  .grade-tab:nth-child(10){ --g-color: var(--sky); }
+  .grade-tab:hover:not(.active){
+    transform: translateY(-3px);
+    box-shadow: 0 5px 0 color-mix(in oklab, var(--g-color), var(--card-border) 30%);
+    background: color-mix(in oklab, var(--g-color), transparent 78%);
+  }
   .grade-tab.active{
-    background: var(--coral);
+    background: var(--g-color);
     color: #FFF;
     border-color: var(--card-border);
-    box-shadow: 0 3px 0 var(--card-border);
+    box-shadow: 0 5px 0 var(--card-border);
+    transform: translateY(-2px);
   }
-  .grade-tab .g-num{ font-size: 19px; font-weight: 700; line-height: 1; }
-  .grade-tab .g-label{ font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; opacity: .75; }
+  .grade-tab .g-num{
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    font-family: var(--display);
+  }
+  .grade-tab .g-label{
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    opacity: .9;
+  }
+  @media (max-width: 600px){
+    .grade-section{ margin: 10px auto 28px; }
+    .grade-section .grade-heading{ font-size: 16px; margin-bottom: 12px; }
+    .grade-bar{ gap: 8px; padding: 12px; border-radius: 22px; }
+    .grade-tab{ padding: 12px 4px 14px; border-radius: 14px; }
+    .grade-tab .g-num{ font-size: 22px; }
+    .grade-tab .g-label{ font-size: 9px; letter-spacing: .05em; }
+  }
 
   /* Profile modal */
   .modal-ov{
@@ -266,27 +332,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 
 
-  /* Hero */
+  /* Hero — plenty of breathing room on both sides of the headline */
   .hero{
     text-align:center;
-    padding: 14px 16px 10px;
+    padding: 48px 20px 32px;
     position: relative;
   }
   .hero-badge{
     display:inline-flex; align-items:center; gap:8px;
-    padding: 7px 16px; border-radius: var(--radius-pill);
+    padding: 8px 18px; border-radius: var(--radius-pill);
     background: var(--card); border: 2px solid var(--card-border);
     font-weight: 800; font-size: 13px; color: var(--ink);
     box-shadow: 0 3px 0 var(--card-border);
-    margin-bottom: 22px;
+    margin-bottom: 26px;
   }
   .hero h1{
     font-family: var(--display);
-    font-size: clamp(32px, 6vw, 56px);
+    font-size: clamp(32px, 6vw, 58px);
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.05;
-    margin: 0 0 14px;
+    margin: 0 0 18px;
     color: var(--ink);
   }
   .hero h1 .spark{
@@ -297,10 +363,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   @keyframes wiggle{ 0%,100%{transform:rotate(-8deg)} 50%{transform:rotate(10deg) scale(1.1)} }
 
+  /* Sub-headline deliberately small so the hero headline carries the weight */
   .hero p.sub{
-    font-size: 17px; color: var(--ink-2);
-    max-width: 580px; margin: 0 auto;
-    font-weight: 600; line-height: 1.5;
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: .01em;
   }
 
   /* Scoreboard */
@@ -393,6 +464,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border: 2px solid var(--card-border);
     box-shadow: 0 3px 0 var(--card-border);
   }
+  /* "Change grade" / home button inside the section head */
+  .back-to-grades{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    background: var(--card);
+    border: 2px solid var(--card-border);
+    box-shadow: 0 3px 0 var(--card-border);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all .15s var(--ease-pop);
+    white-space: nowrap;
+  }
+  .back-to-grades:hover{
+    background: var(--coral);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 var(--card-border);
+  }
+  /* Brand is clickable too */
+  .brand{ cursor: pointer; }
+  .brand:hover .brand-logo{ transform: rotate(4deg) scale(1.05); }
+  .brand-logo{ transition: transform .15s var(--ease-pop); }
 
   /* Chapter grid */
   .chapter-grid{
@@ -445,16 +544,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     background: var(--accent-ch, var(--accent));
   }
 
+  /* Coming Soon: clearly faded so the playable chapters pop */
   .chapter.soon{
-    opacity: .82;
+    opacity: .55;
+    filter: grayscale(0.45);
     border-style: dashed;
+    background: color-mix(in oklab, var(--card), var(--ink-2) 6%);
   }
   .chapter.soon:hover{
+    opacity: .7;
+    filter: grayscale(0.25);
     transform: translateY(-2px);
     box-shadow: 0 7px 0 var(--card-border);
   }
+  .chapter.soon::after{
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 40%, rgba(43,27,74,0.06) 100%);
+    pointer-events: none;
+    border-radius: var(--radius-card);
+  }
   .chapter.soon .play-btn{
-    background: var(--card);
+    background: color-mix(in oklab, var(--card), var(--ink-2) 10%);
     color: var(--ink-2);
     border-color: var(--card-border);
     cursor: default;
@@ -462,11 +573,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .chapter.soon:hover .play-btn{ transform: none; box-shadow: 0 3px 0 var(--card-border); }
   .soon-badge{
     position: absolute; top: 12px; right: 12px;
-    font-size: 9.5px; font-weight: 900; letter-spacing: .05em;
+    z-index: 2;
+    font-size: 10px; font-weight: 900; letter-spacing: .06em;
     background: var(--yellow); color: var(--ink);
-    padding: 3px 9px; border-radius: 999px;
+    padding: 4px 11px; border-radius: 999px;
     border: 1.5px solid var(--card-border);
     text-transform: uppercase;
+    box-shadow: 0 2px 0 var(--card-border);
   }
 
   .chapter-head{
@@ -638,20 +751,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     position: relative;
     max-width: 760px;
     margin: 20px auto;
-    height: calc(100vh - 40px);
+    max-height: calc(100vh - 40px);
     background: var(--card);
     border: 2.5px solid var(--card-border);
     border-radius: var(--radius-card);
     box-shadow: 0 6px 0 var(--card-border);
-    padding: 18px 20px 22px;
+    padding: 20px 24px 22px;
     overflow-y: auto;
     animation: modalPop .35s var(--ease-pop);
   }
   @media (max-width: 720px){
-    .quiz-modal .qm-box{ margin: 0; height: 100vh; border-radius: 0; border: none; }
+    .quiz-modal .qm-box{
+      margin: 0;
+      width: 100%;
+      max-height: 100vh;
+      max-height: 100dvh;        /* dynamic viewport — excludes mobile browser chrome */
+      min-height: auto;
+      height: 100vh;
+      height: 100dvh;
+      border-radius: 0;
+      border: none;
+      padding: 16px 16px 80px;   /* generous bottom room so Next button clears safe area */
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
   }
-  .qm-close{
-    position: absolute; top: 14px; right: 14px;
+  .qm-close, .qm-music{
+    position: absolute; top: 14px;
     width: 36px; height: 36px; border-radius: 50%;
     background: var(--card); color: var(--ink);
     border: 2px solid var(--card-border);
@@ -660,7 +787,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     display: grid; place-items: center; cursor: pointer;
     transition: all .15s var(--ease-pop);
   }
+  .qm-close{ right: 14px; }
+  .qm-music{ right: 58px; }
   .qm-close:hover{ background: var(--coral); color: #fff; transform: translateY(-1px); }
+  .qm-music:hover{ background: var(--sky); color: #fff; transform: translateY(-1px); }
+  .qm-music.off{ opacity: .5; background: color-mix(in oklab, var(--card-border), transparent 85%); }
   .qm-head{ display: flex; align-items: center; gap: 12px; padding-right: 46px; margin-bottom: 12px; }
   .qm-head-emoji{
     width: 46px; height: 46px; flex: 0 0 46px;
@@ -699,35 +830,61 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .qm-level-btn.active[data-level="beginner"]{ background: var(--sky); color: #fff; box-shadow: 0 2px 0 var(--card-border); }
   .qm-level-btn.active[data-level="pro"]{ background: var(--coral); color: #fff; box-shadow: 0 2px 0 var(--card-border); }
 
-  .qm-sets{ display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  /* Set tabs — centered row of equal-size pills */
+  .qm-sets{
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
   .qm-set-btn{
-    padding: 6px 12px; border-radius: 999px;
-    background: var(--card); color: var(--ink-2);
+    flex: 0 0 auto;
+    min-width: 82px;
+    padding: 9px 14px;
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--ink-2);
     border: 2px solid var(--card-border);
-    font-weight: 800; font-size: 12px;
+    font-weight: 800;
+    font-size: 13px;
     font-family: 'Nunito', sans-serif;
     transition: all .15s var(--ease-pop);
+    text-align: center;
   }
-  .qm-set-btn.active{ background: var(--yellow); color: var(--ink); box-shadow: 0 2px 0 var(--card-border); }
+  .qm-set-btn:hover:not(.active){ transform: translateY(-1px); box-shadow: 0 3px 0 var(--card-border); }
+  .qm-set-btn.active{ background: var(--yellow); color: var(--ink); box-shadow: 0 3px 0 var(--card-border); }
   .qm-set-btn.done{ border-color: var(--green); color: var(--green); }
   .qm-set-btn.done.active{ background: var(--green); color: #fff; }
 
+  /* Meta row — 3 evenly-spaced chips in a unified container (mirrors .qm-levels) */
   .qm-meta{
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 8px; margin-bottom: 8px; flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+    padding: 6px;
+    background: color-mix(in oklab, var(--card-border), transparent 95%);
+    border: 2px solid var(--card-border);
+    border-radius: 14px;
   }
   .qm-meta > div{
     background: var(--card);
     border: 1.5px solid var(--card-border);
-    border-radius: 999px;
-    padding: 4px 12px;
-    font-size: 12px; font-weight: 800;
+    border-radius: 10px;
+    padding: 9px 10px;
+    font-size: 13px;
+    font-weight: 800;
     color: var(--ink);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .qm-progress{
-    height: 8px; margin-bottom: 12px;
+    height: 10px; margin-bottom: 14px;
     background: color-mix(in oklab, var(--card-border), transparent 92%);
-    border: 1.5px solid var(--card-border);
+    border: 2px solid var(--card-border);
     border-radius: 999px; overflow: hidden;
   }
   .qm-progress-fill{
@@ -738,34 +895,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   .qm-topic{
     display: inline-block;
-    font-size: 11px; font-weight: 900; letter-spacing: .06em;
+    font-size: 12px; font-weight: 900; letter-spacing: .06em;
     text-transform: uppercase;
     color: var(--grape);
     background: color-mix(in oklab, var(--grape), transparent 88%);
     border: 1.5px solid color-mix(in oklab, var(--grape), transparent 55%);
-    padding: 3px 10px; border-radius: 999px;
-    margin-bottom: 8px;
+    padding: 4px 12px; border-radius: 999px;
+    margin-bottom: 10px;
   }
   .qm-qnum{
-    font-size: 11px; font-weight: 800; color: var(--muted);
+    font-size: 12px; font-weight: 800; color: var(--muted);
     text-transform: uppercase; letter-spacing: .06em;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
   .qm-q{
     font-family: var(--display); font-weight: 600;
-    font-size: 20px; color: var(--ink); line-height: 1.3;
-    margin-bottom: 14px; min-height: 40px;
+    font-size: clamp(20px, 4.2vw, 28px);
+    color: var(--ink); line-height: 1.25;
+    margin-bottom: 18px;
+    /* no min-height — lets content hug naturally, removes bottom whitespace */
   }
 
-  .qm-opts{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .qm-opts{ display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
   .qm-opt{
     background: var(--card); color: var(--ink);
-    border: 2px solid var(--card-border);
+    border: 2.5px solid var(--card-border);
     box-shadow: 0 3px 0 var(--card-border);
-    border-radius: 14px;
-    padding: 12px 10px; text-align: left;
+    border-radius: 16px;
+    padding: 16px 14px; text-align: left;
     font-family: 'Nunito', sans-serif;
-    font-weight: 800; font-size: 14px;
+    font-weight: 800; font-size: clamp(15px, 2.4vw, 17px);
     cursor: pointer; transition: all .15s var(--ease-pop);
     line-height: 1.3;
   }
@@ -779,7 +938,132 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border-color: var(--coral); color: var(--coral);
   }
   .qm-opt:disabled{ cursor: default; }
-  @media (max-width: 500px){ .qm-opts{ grid-template-columns: 1fr; } }
+  @media (max-width: 500px){ .qm-opts-mcq{ grid-template-columns: 1fr; } }
+
+  /* ── True/False: two big colour-tinted buttons, centred text ── */
+  .qm-opts-tf{ grid-template-columns: 1fr 1fr; }
+  .qm-opt.qm-tf{ text-align: center; font-size: clamp(18px, 3vw, 22px); padding: 22px 14px; }
+  .qm-opt.tf-true{
+    background: color-mix(in oklab, var(--green), transparent 85%);
+    border-color: color-mix(in oklab, var(--green), transparent 30%);
+    color: var(--green);
+  }
+  .qm-opt.tf-false{
+    background: color-mix(in oklab, var(--coral), transparent 85%);
+    border-color: color-mix(in oklab, var(--coral), transparent 30%);
+    color: var(--coral);
+  }
+  .qm-opt.qm-tf.correct{ background: var(--green); color: #fff; border-color: var(--card-border); }
+  .qm-opt.qm-tf.wrong{ background: var(--coral); color: #fff; border-color: var(--card-border); }
+
+  /* ── Tap-all-that-apply: wrap-pill grid + Check button ── */
+  .qm-opts-tapall{ display: block; }
+  .qm-tapall-grid{
+    display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;
+  }
+  .qm-opt.qm-tapall-pill{
+    flex: 1 1 auto;
+    min-width: 120px;
+    padding: 12px 16px;
+    text-align: center;
+    border-radius: 999px;
+    font-size: clamp(14px, 2.2vw, 16px);
+  }
+  .qm-opt.qm-tapall-pill.picked{
+    background: var(--sky);
+    color: #fff;
+    border-color: var(--card-border);
+    box-shadow: 0 3px 0 var(--card-border), 0 0 0 3px color-mix(in oklab, var(--sky), transparent 70%);
+  }
+  .qm-opt.qm-tapall-pill.correct-missed{
+    background: color-mix(in oklab, var(--yellow), transparent 70%);
+    border-color: var(--yellow);
+    color: var(--ink);
+    outline: 2px dashed var(--yellow); outline-offset: 2px;
+  }
+
+  /* Shared "check / submit" big CTA used by tapall / enterval / fillin */
+  .qm-check{
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 999px;
+    background: var(--sky);
+    color: #fff;
+    border: 2px solid var(--card-border);
+    box-shadow: 0 3px 0 var(--card-border);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all .15s var(--ease-pop);
+  }
+  .qm-check:hover:not(:disabled){ transform: translateY(-2px); box-shadow: 0 5px 0 var(--card-border); }
+  .qm-check:disabled{ opacity: .6; cursor: default; }
+  .qm-check.nudge, .qm-enterval-input.nudge{ animation: qmNudge .4s ease; }
+  @keyframes qmNudge{
+    0%,100%{ transform: translateX(0); }
+    25%{ transform: translateX(-6px); }
+    75%{ transform: translateX(6px); }
+  }
+
+  /* ── Enter-Value: number input + submit row ── */
+  .qm-opts-enterval{ display: block; }
+  .qm-enterval-row{
+    display: flex; gap: 10px; margin-bottom: 14px;
+    align-items: stretch;
+  }
+  .qm-enterval-input{
+    flex: 1;
+    padding: 14px 18px;
+    border-radius: 16px;
+    background: var(--card);
+    border: 2.5px solid var(--card-border);
+    box-shadow: 0 3px 0 var(--card-border);
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(20px, 4vw, 26px);
+    color: var(--ink);
+    text-align: center;
+    -moz-appearance: textfield;
+  }
+  .qm-enterval-input::-webkit-outer-spin-button,
+  .qm-enterval-input::-webkit-inner-spin-button{ -webkit-appearance: none; margin: 0; }
+  .qm-enterval-input:focus{ outline: none; border-color: var(--coral); }
+  .qm-enterval-input.correct{
+    background: color-mix(in oklab, var(--green), transparent 80%);
+    border-color: var(--green); color: var(--green);
+  }
+  .qm-enterval-input.wrong{
+    background: color-mix(in oklab, var(--coral), transparent 80%);
+    border-color: var(--coral); color: var(--coral);
+  }
+  .qm-opts-enterval .qm-check{ flex: 0 0 auto; width: auto; padding: 14px 20px; }
+  @media (max-width: 500px){
+    .qm-enterval-row{ flex-direction: column; }
+    .qm-opts-enterval .qm-check{ width: 100%; }
+  }
+
+  /* ── Fill-in-the-blank: inline <input>s inside question text ── */
+  .qm-opts-fillin{ display: block; }
+  .qm-q-frag{ white-space: pre-wrap; }
+  .qm-fillin-input{
+    display: inline-block;
+    margin: 0 4px;
+    padding: 4px 10px;
+    min-width: 60px;
+    border: none;
+    border-bottom: 3px solid var(--card-border);
+    background: color-mix(in oklab, var(--yellow), transparent 85%);
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: inherit;
+    color: var(--ink);
+    text-align: center;
+    border-radius: 6px 6px 0 0;
+  }
+  .qm-fillin-input:focus{ outline: none; border-bottom-color: var(--coral); background: color-mix(in oklab, var(--coral), transparent 88%); }
+  .qm-fillin-input.correct{ background: color-mix(in oklab, var(--green), transparent 70%); border-bottom-color: var(--green); color: var(--green); }
+  .qm-fillin-input.wrong{ background: color-mix(in oklab, var(--coral), transparent 70%); border-bottom-color: var(--coral); color: var(--coral); }
 
   .qm-char{
     display: flex; align-items: center; gap: 12px;
@@ -969,14 +1253,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </header>
 
-  <!-- Grade selector -->
-  <nav class="grade-bar" id="gradeBar" aria-label="Choose your grade"></nav>
-
   <!-- Hero -->
   <section class="hero">
     <div class="hero-badge">✨ Let's learn, let's play!</div>
     <h1>Let's have some fun, with <span class="spark">Mathemagics</span></h1>
     <p class="sub" id="heroSub">Quiz aligned to a standard Grade 2 student.</p>
+  </section>
+
+  <!-- Grade selector (below hero so it's the primary call-to-action) -->
+  <section class="grade-section" aria-label="Choose your grade">
+    <div class="grade-heading">Pick your grade 🎓</div>
+    <nav class="grade-bar" id="gradeBar"></nav>
   </section>
 
   <!-- Master Scoreboard -->
@@ -998,6 +1285,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- Mathematics -->
   <div class="section-head" id="chapterSection">
     <h2><span class="lead">🔢</span><span id="mathHead">Mathematics · 11 chapters</span></h2>
+    <button type="button" class="back-to-grades" id="backToGrades" style="display:none;" aria-label="Back to grade picker">🏠 Change grade</button>
   </div>
   <div class="chapter-grid" id="chapterGrid"></div>
 
@@ -1016,6 +1304,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="quiz-modal" id="quizModal" role="dialog" aria-modal="true" aria-label="Quiz">
     <div class="qm-ov" data-close="1"></div>
     <div class="qm-box">
+      <button class="qm-music" id="qmMusic" type="button" aria-label="Toggle background music" title="Toggle music">🎵</button>
       <button class="qm-close" id="qmClose" type="button" aria-label="Close">✕</button>
       <div class="qm-head">
         <div class="qm-head-emoji" id="qmHeadEmoji">🔢</div>
@@ -1052,7 +1341,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
         </div>
         <div class="qm-feedback" id="qmFeedback"></div>
-        <button class="qm-next" id="qmNext" type="button">Next Question →</button>
+        <button class="qm-next" id="qmNext" type="button" onclick="if(window.qmAdvance)qmAdvance();">Next Question →</button>
       </div>
 
       <div class="qm-result" id="qmResult">
@@ -1062,8 +1351,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="qm-res-msg" id="qmResMsg">Great job!</div>
         <div class="qm-res-time" id="qmResTime">Time: 0m 0s</div>
         <div class="qm-res-actions">
-          <button class="qm-res-btn again" id="qmTryAgain" type="button">🔄 Try Again</button>
-          <button class="qm-res-btn next" id="qmNextSet" type="button">Next Set →</button>
+          <button class="qm-res-btn again" id="qmTryAgain" type="button" onclick="if(window.qmTryAgain)qmTryAgain();">🔄 Try Again</button>
+          <button class="qm-res-btn next" id="qmNextSet" type="button" onclick="if(window.qmNextSet)qmNextSet();">Next Set →</button>
         </div>
       </div>
     </div>
@@ -1142,7 +1431,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     { n:4,  t:'Multiplication',        d:'Times tables 2–10, arrays & repeated addition',      e:'✖️', color:'grape',  toon:'🕷️', toonName:'Spidermen', toonLine:'Multiply my super power!',       href:'/vivaan/math-ch4.html' },
     { n:5,  t:'Division',              d:'Equal sharing, grouping & division facts',           e:'➗', color:'green',  toon:'🐱',  toonName:'Tom',       toonLine:'Share the stripes equally 🐾',   href:'/vivaan/math-ch5.html' },
     { n:6,  t:'Fractions',             d:'Halves, quarters, thirds & comparing fractions',     e:'🍕', color:'peach',  toon:'🐭',  toonName:'Jerry',     toonLine:'Slice the cheese into parts!',    href:'/vivaan/math-ch6.html' },
-    { n:7,  t:'Length',                d:'cm, metres, comparing & unit conversion',            e:'📏', color:'sky',    toon:'🦊',  toonName:'Zootopia',  toonLine:'How tall can you measure?',      href:'/vivaan/math-ch7.html' },
+    { n:7,  t:'Length',                d:'cm, metres, comparing & unit conversion',            e:'📏', color:'sky',    toon:'🦸',  toonName:'Super Ishaan', toonLine:'How tall can you measure?',      href:'/vivaan/math-ch7.html' },
     { n:8,  t:'Weight',                d:'Grams, kilograms, scales & word problems',           e:'⚖️', color:'coral',  toon:'🐧',  toonName:'Penguin',   toonLine:'Guess who weighs more!',         href:'/vivaan/math-ch8.html' },
     { n:9,  t:'Capacity',              d:'Millilitres, litres & container comparisons',        e:'🥤', color:'yellow', toon:'🐷',  toonName:'Peppa',     toonLine:"Pour it, don't spill it!",       href:'/vivaan/math-ch9.html' },
     { n:10, t:'Time & Calendar',       d:"Clocks, o'clock, half past, days & months",          e:'⏰', color:'grape',  toon:'🦖',  toonName:'George',    toonLine:"Tick-tock, what's the time?",    href:'/vivaan/math-ch10.html' },
@@ -1157,7 +1446,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {toon:'🕷️', toonName:'Spidey',   toonLine:'Use your super power!'},
     {toon:'🐱',  toonName:'Tom',      toonLine:'Share the stripes 🐾'},
     {toon:'🐭',  toonName:'Jerry',    toonLine:'Slice the cheese!'},
-    {toon:'🦊',  toonName:'Foxy',     toonLine:'Sneaky puzzles ahead!'},
+    {toon:'🦸',  toonName:'Super Ishaan', toonLine:'Powers on, brain blazing!'},
     {toon:'🐧',  toonName:'Penguin',  toonLine:'Waddle into this!'},
     {toon:'🐷',  toonName:'Peppa',    toonLine:'Snort! Puddle time!'},
     {toon:'🦖',  toonName:'George',   toonLine:"Dino-mite question!"},
@@ -1397,6 +1686,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const target = document.getElementById('chapterSection');
     if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
   }
+  function clearGrade(){
+    localStorage.removeItem(GRADE_STORE_KEY);
+    renderAll();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
 
   // ─── Scoreboard (scoped to current user + current grade) ──
   function scorePrefixFor(slug, grade){
@@ -1558,11 +1852,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const heroSub  = document.getElementById('heroSub');
     const mathHead = document.getElementById('mathHead');
     const sb = document.getElementById('scoreboard');
+    const backBtn = document.getElementById('backToGrades');
     if (!grade){
       brandSub.textContent = 'NCERT Grades 1 to 10 · For Kids Love';
       heroSub.textContent  = 'Pick your grade to begin your Mathemagics journey! 🎓';
       mathHead.textContent = 'Choose a grade';
       if (sb) sb.style.display = 'none';
+      if (backBtn) backBtn.style.display = 'none';
     } else {
       brandSub.textContent = `Grade ${grade} · For Kids Love`;
       heroSub.textContent  = grade===2
@@ -1570,6 +1866,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         : `NCERT-aligned maths quiz for Grade ${grade}.`;
       mathHead.textContent = `Mathematics · ${chapters.length} chapters`;
       if (sb) sb.style.display = '';
+      if (backBtn) backBtn.style.display = '';
     }
   }
 
@@ -1673,6 +1970,124 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     timer:0, timerInt:null, qs:null,
   };
 
+  // ─── Background music (Web Audio, grade-band themed) ──────────
+  // No audio files — melodies are synthesised live with oscillators.
+  // 4 grade bands, each a distinct vibe, looped quietly behind the quiz.
+  const MUSIC_STORE_KEY = 'vivaan_music';
+  // note indexes are MIDI numbers; -1 is a rest.
+  const MUSIC_PATTERNS = {
+    kids:    { bpm:112, voice:'triangle', name:'Happy Skip',
+               notes:[72,76,79,76, 77,76,72,-1, 76,79,76,72, 67,72,76,-1] },
+    primary: { bpm:96,  voice:'triangle', name:'Adventure Hop',
+               notes:[67,71,74,79, 78,74,71,67, 69,72,76,79, 76,72,67,-1] },
+    middle:  { bpm:78,  voice:'sine',     name:'Thoughtful Drift',
+               notes:[57,60,64,67, 69,67,64,60, 57,60,64,67, 64,60,57,-1] },
+    senior:  { bpm:66,  voice:'sine',     name:'Focus Loop',
+               notes:[50,53,57,60, 62,60,57,53, 50,53,57,60, 57,53,50,-1] }
+  };
+  // Soft bass pulse (root note) to give the loop body.
+  const MUSIC_BASS = {
+    kids:    [48,-1,55,-1,48,-1,55,-1, 48,-1,55,-1,43,-1,48,-1],
+    primary: [43,-1,50,-1,43,-1,50,-1, 45,-1,52,-1,50,-1,43,-1],
+    middle:  [45,-1,52,-1,45,-1,52,-1, 45,-1,52,-1,52,-1,45,-1],
+    senior:  [38,-1,45,-1,38,-1,45,-1, 38,-1,45,-1,45,-1,38,-1]
+  };
+  function musicBandForGrade(g){
+    if (g <= 2) return 'kids';
+    if (g <= 5) return 'primary';
+    if (g <= 8) return 'middle';
+    return 'senior';
+  }
+  const MUSIC = { ctx:null, master:null, on: null, active:false, tickHandle:null, nextTime:0, patternKey:null };
+  function musicPref(){
+    const v = localStorage.getItem(MUSIC_STORE_KEY);
+    return v === null ? true : v === '1';
+  }
+  function setMusicPref(on){ localStorage.setItem(MUSIC_STORE_KEY, on ? '1' : '0'); }
+  function ensureAudio(){
+    if (MUSIC.ctx) return true;
+    try {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) return false;
+      MUSIC.ctx = new Ctx();
+      MUSIC.master = MUSIC.ctx.createGain();
+      MUSIC.master.gain.value = 0.09;  // gentle — easy to ignore
+      MUSIC.master.connect(MUSIC.ctx.destination);
+      return true;
+    } catch(e){ return false; }
+  }
+  function midiHz(m){ return 440 * Math.pow(2, (m - 69) / 12); }
+  function scheduleTone(freq, start, dur, voice, gainPeak){
+    const osc = MUSIC.ctx.createOscillator();
+    const g = MUSIC.ctx.createGain();
+    osc.type = voice;
+    osc.frequency.setValueAtTime(freq, start);
+    const peak = gainPeak != null ? gainPeak : 0.35;
+    g.gain.setValueAtTime(0, start);
+    g.gain.linearRampToValueAtTime(peak, start + Math.min(0.04, dur * 0.3));
+    g.gain.setValueAtTime(peak, start + dur * 0.6);
+    g.gain.linearRampToValueAtTime(0, start + dur);
+    osc.connect(g);
+    g.connect(MUSIC.master);
+    osc.start(start);
+    osc.stop(start + dur + 0.05);
+  }
+  function startMusic(grade){
+    if (!musicPref()) return;
+    if (!ensureAudio()) return;
+    if (MUSIC.ctx.state === 'suspended') MUSIC.ctx.resume().catch(()=>{});
+    const band = musicBandForGrade(grade);
+    MUSIC.patternKey = band;
+    MUSIC.active = true;
+    MUSIC.nextTime = MUSIC.ctx.currentTime + 0.1;
+    const pat = MUSIC_PATTERNS[band];
+    const bass = MUSIC_BASS[band] || [];
+    const beatDur = 60 / pat.bpm;
+    let idx = 0;
+    const tick = () => {
+      if (!MUSIC.active) return;
+      // Schedule ~2 seconds ahead
+      while (MUSIC.nextTime < MUSIC.ctx.currentTime + 2.0){
+        const mel = pat.notes[idx % pat.notes.length];
+        if (mel >= 0) scheduleTone(midiHz(mel), MUSIC.nextTime, beatDur * 0.92, pat.voice, 0.35);
+        const ba = bass[idx % bass.length];
+        if (ba >= 0) scheduleTone(midiHz(ba), MUSIC.nextTime, beatDur * 1.6, 'sine', 0.22);
+        idx++;
+        MUSIC.nextTime += beatDur;
+      }
+      MUSIC.tickHandle = setTimeout(tick, 250);
+    };
+    tick();
+  }
+  function stopMusic(fast){
+    MUSIC.active = false;
+    if (MUSIC.tickHandle){ clearTimeout(MUSIC.tickHandle); MUSIC.tickHandle = null; }
+    // Smooth fade of the master gain so already-scheduled tails don't click
+    if (MUSIC.master && MUSIC.ctx){
+      const t = MUSIC.ctx.currentTime;
+      const cur = MUSIC.master.gain.value;
+      const fadeDur = fast ? 0.1 : 0.4;
+      try {
+        MUSIC.master.gain.cancelScheduledValues(t);
+        MUSIC.master.gain.setValueAtTime(cur, t);
+        MUSIC.master.gain.linearRampToValueAtTime(0, t + fadeDur);
+        // Reset master volume after fade so future playback is audible again.
+        setTimeout(() => { if (MUSIC.master) MUSIC.master.gain.setValueAtTime(0.09, MUSIC.ctx.currentTime); }, fadeDur * 1000 + 50);
+      } catch(e){}
+    }
+  }
+  function updateMusicBtn(){
+    const btn = document.getElementById('qmMusic');
+    if (!btn) return;
+    const on = musicPref();
+    btn.textContent = on ? '🎵' : '🔇';
+    btn.classList.toggle('off', !on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.title = on
+      ? 'Music on (' + (MUSIC_PATTERNS[musicBandForGrade(QUIZ.grade||2)] || {}).name + ')'
+      : 'Music off — tap to play';
+  }
+
   function scoreKeyQ(slug, grade, ch, level, setIdx){
     return `vivaan_${slug}_g${grade}_ch${ch}_${level}_set${setIdx}`;
   }
@@ -1699,6 +2114,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     renderQuizLevelBtns();
     buildSetTabs();
     startSet();
+    updateMusicBtn();
+    startMusic(grade);
   }
 
   function closeQuiz(){
@@ -1706,14 +2123,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     clearInterval(QUIZ.timerInt); QUIZ.timerInt = null;
     document.getElementById('quizModal').classList.remove('show');
     document.body.style.overflow = '';
+    stopMusic();
     renderScoreboard(); // refresh dashboard stats
   }
 
   function renderQuizLevelBtns(){
     document.querySelectorAll('#quizModal .qm-level-btn').forEach(b => {
       b.classList.toggle('active', b.dataset.level === QUIZ.level);
-      // Clone to reset listeners cleanly
-      b.onclick = () => { if (QUIZ.level !== b.dataset.level){ QUIZ.level = b.dataset.level; QUIZ.setIdx = 0; buildSetTabs(); startSet(); } };
+      b.onclick = () => {
+        if (QUIZ.level === b.dataset.level) return;
+        QUIZ.level = b.dataset.level;
+        QUIZ.setIdx = 0;
+        renderQuizLevelBtns();  // refresh active state visually
+        buildSetTabs();
+        startSet();
+      };
     });
   }
 
@@ -1764,20 +2188,60 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (el) el.textContent = `${m}:${String(s).padStart(2,'0')}`;
   }
 
+  // ─── Question rendering: dispatch by q.type ─────────────────────
+  // Supported types: 'mcq' (default), 'tf', 'tapall', 'enterval', 'fillin'
   function renderQ(){
     const qs = QUIZ.qs;
     const q = qs[QUIZ.qIdx];
     QUIZ.answered = false;
     document.getElementById('qmQCounter').textContent = `Question ${QUIZ.qIdx + 1} of ${qs.length}`;
-    document.getElementById('qmQ').textContent = q.q;
     document.getElementById('qmQnum').textContent = QUIZ.qIdx + 1;
     document.getElementById('qmTopic').textContent = q.t || '';
     document.getElementById('qmTopic').style.display = q.t ? '' : 'none';
     document.getElementById('qmFeedback').className = 'qm-feedback';
     document.getElementById('qmNext').className = 'qm-next';
-    // Reset character
     setCharNeutral();
-    // Build shuffled options
+
+    const qText = document.getElementById('qmQ');
+    const wrap = document.getElementById('qmOpts');
+    wrap.innerHTML = '';
+    wrap.className = 'qm-opts';
+
+    const type = q.type || 'mcq';
+    wrap.classList.add('qm-opts-' + type);
+    if (type === 'mcq')        { qText.textContent = q.q; renderMCQ(q, wrap); }
+    else if (type === 'tf')    { qText.textContent = q.q; renderTF(q, wrap); }
+    else if (type === 'tapall'){ qText.textContent = q.q; renderTapAll(q, wrap); }
+    else if (type === 'enterval'){ qText.textContent = q.q; renderEnterVal(q, wrap); }
+    else if (type === 'fillin'){ renderFillIn(q, qText, wrap); }
+    else { qText.textContent = q.q; renderMCQ(q, wrap); }  // unknown → MCQ fallback
+  }
+
+  // Central "lock in the answer" call shared by every type.
+  function finishAnswer(isCorrect, correctText){
+    if (QUIZ.answered) return;
+    QUIZ.answered = true;
+    const fb = document.getElementById('qmFeedback');
+    if (isCorrect){
+      QUIZ.score++;
+      QUIZ.results[QUIZ.qIdx] = 'correct';
+      fb.className = 'qm-feedback good show';
+      fb.textContent = '✅ Correct! Brilliant!';
+      setCharHappy();
+    } else {
+      QUIZ.results[QUIZ.qIdx] = 'wrong';
+      fb.className = 'qm-feedback bad show';
+      fb.textContent = '❌ Oops! Answer: ' + correctText;
+      setCharSad();
+    }
+    document.getElementById('qmScore').textContent = QUIZ.score;
+    document.getElementById('qmFill').style.width = (((QUIZ.qIdx + 1) / QUIZ.qs.length) * 100) + '%';
+    document.getElementById('qmNext').className = 'qm-next show';
+    document.getElementById('qmNext').textContent = (QUIZ.qIdx === QUIZ.qs.length - 1) ? 'See Result 🏆' : 'Next Question →';
+  }
+
+  // MCQ — classic 4-option grid (schema unchanged: {q, o:[correct,w,w,w], a:0})
+  function renderMCQ(q, wrap){
     const correct = q.o[q.a];
     const opts = [...q.o];
     for (let i = opts.length - 1; i > 0; i--){
@@ -1785,43 +2249,177 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       [opts[i], opts[j]] = [opts[j], opts[i]];
     }
     const correctIdx = opts.indexOf(correct);
-    const wrap = document.getElementById('qmOpts');
-    wrap.innerHTML = '';
     opts.forEach((opt, i) => {
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'qm-opt';
       b.textContent = opt;
-      b.onclick = () => answerQ(b, i === correctIdx, opts, correctIdx);
+      b.onclick = () => {
+        if (QUIZ.answered) return;
+        const all = wrap.querySelectorAll('.qm-opt');
+        all.forEach(x => x.disabled = true);
+        all[correctIdx].classList.add('correct');
+        if (i !== correctIdx) b.classList.add('wrong');
+        finishAnswer(i === correctIdx, correct);
+      };
       wrap.appendChild(b);
     });
   }
 
-  function answerQ(btn, isCorrect, shuffled, correctIdx){
-    if (QUIZ.answered) return;
-    QUIZ.answered = true;
-    const all = document.querySelectorAll('#qmOpts .qm-opt');
-    all.forEach(b => b.disabled = true);
-    all[correctIdx].classList.add('correct');
-    const fb = document.getElementById('qmFeedback');
-    if (isCorrect){
-      btn.classList.add('correct');
-      QUIZ.score++;
-      QUIZ.results[QUIZ.qIdx] = 'correct';
-      fb.className = 'qm-feedback good show';
-      fb.textContent = '✅ Correct! Brilliant!';
-      setCharHappy();
-    } else {
-      btn.classList.add('wrong');
-      QUIZ.results[QUIZ.qIdx] = 'wrong';
-      fb.className = 'qm-feedback bad show';
-      fb.textContent = `❌ Oops! Answer: ${shuffled[correctIdx]}`;
-      setCharSad();
+  // True/False — two big buttons. Schema: {type:'tf', q, a: true|false}
+  function renderTF(q, wrap){
+    [
+      {label:'✓ True',  val:true},
+      {label:'✗ False', val:false}
+    ].forEach(c => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'qm-opt qm-tf ' + (c.val ? 'tf-true' : 'tf-false');
+      b.textContent = c.label;
+      b.onclick = () => {
+        if (QUIZ.answered) return;
+        const all = wrap.querySelectorAll('.qm-opt');
+        all.forEach(x => x.disabled = true);
+        const correctCls = q.a ? 'tf-true' : 'tf-false';
+        const correctBtn = [...all].find(x => x.classList.contains(correctCls));
+        if (correctBtn) correctBtn.classList.add('correct');
+        if (c.val !== q.a) b.classList.add('wrong');
+        finishAnswer(c.val === q.a, q.a ? 'True' : 'False');
+      };
+      wrap.appendChild(b);
+    });
+  }
+
+  // Tap-all-that-apply — multi-select pills + Check button.
+  // Schema: {type:'tapall', q, pool:[items], correct:[subset of pool]}
+  function renderTapAll(q, wrap){
+    const pool = [...q.pool];
+    for (let i = pool.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
     }
-    document.getElementById('qmScore').textContent = QUIZ.score;
-    document.getElementById('qmFill').style.width = `${((QUIZ.qIdx + 1) / QUIZ.qs.length) * 100}%`;
-    document.getElementById('qmNext').className = 'qm-next show';
-    document.getElementById('qmNext').textContent = (QUIZ.qIdx === QUIZ.qs.length - 1) ? 'See Result 🏆' : 'Next Question →';
+    const selected = new Set();
+    const pills = [];
+    const pillGrid = document.createElement('div');
+    pillGrid.className = 'qm-tapall-grid';
+    pool.forEach(item => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'qm-opt qm-tapall-pill';
+      b.textContent = item;
+      b.onclick = () => {
+        if (QUIZ.answered) return;
+        if (selected.has(item)) { selected.delete(item); b.classList.remove('picked'); }
+        else { selected.add(item); b.classList.add('picked'); }
+      };
+      pills.push(b);
+      pillGrid.appendChild(b);
+    });
+    wrap.appendChild(pillGrid);
+    const checkBtn = document.createElement('button');
+    checkBtn.type = 'button';
+    checkBtn.className = 'qm-check';
+    checkBtn.textContent = '✓ Check my picks';
+    checkBtn.onclick = () => {
+      if (QUIZ.answered) return;
+      if (selected.size === 0){ checkBtn.classList.add('nudge'); setTimeout(() => checkBtn.classList.remove('nudge'), 400); return; }
+      const correctSet = new Set(q.correct);
+      pills.forEach(b => {
+        b.disabled = true;
+        const isC = correctSet.has(b.textContent);
+        const picked = b.classList.contains('picked');
+        if (isC && picked) b.classList.add('correct');
+        else if (isC && !picked) b.classList.add('correct-missed');
+        else if (!isC && picked) b.classList.add('wrong');
+      });
+      checkBtn.disabled = true;
+      // fully correct iff selected exactly matches correctSet
+      let ok = selected.size === correctSet.size;
+      if (ok) for (const x of selected) if (!correctSet.has(x)){ ok = false; break; }
+      finishAnswer(ok, q.correct.join(', '));
+    };
+    wrap.appendChild(checkBtn);
+  }
+
+  // Enter-Value — numeric input + Submit. Schema: {type:'enterval', q, a:number, tol?:number}
+  function renderEnterVal(q, wrap){
+    const row = document.createElement('div');
+    row.className = 'qm-enterval-row';
+    const input = document.createElement('input');
+    input.type = 'number';
+    input.inputMode = 'decimal';
+    input.step = 'any';
+    input.className = 'qm-enterval-input';
+    input.placeholder = 'Your answer';
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'qm-check';
+    btn.textContent = '✓ Submit';
+    const submit = () => {
+      if (QUIZ.answered) return;
+      const v = parseFloat(input.value);
+      if (isNaN(v)){ input.classList.add('nudge'); setTimeout(() => input.classList.remove('nudge'), 400); return; }
+      const tol = typeof q.tol === 'number' ? q.tol : 0;
+      const ok = Math.abs(v - q.a) <= tol;
+      input.disabled = true;
+      btn.disabled = true;
+      input.classList.add(ok ? 'correct' : 'wrong');
+      finishAnswer(ok, String(q.a));
+    };
+    btn.onclick = submit;
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter'){ e.preventDefault(); submit(); } });
+    row.appendChild(input);
+    row.appendChild(btn);
+    wrap.appendChild(row);
+    setTimeout(() => input.focus(), 80);
+  }
+
+  // Fill-in — inline blank(s) in the question text. Schema:
+  //   {type:'fillin', q:'... ___ ... ___ ...', blanks:['ans1','ans2']}
+  // Single-blank questions just have one '___' and one-element blanks.
+  function renderFillIn(q, qText, wrap){
+    qText.innerHTML = '';
+    const parts = String(q.q).split('___');
+    const inputs = [];
+    parts.forEach((p, i) => {
+      const span = document.createElement('span');
+      span.className = 'qm-q-frag';
+      span.textContent = p;
+      qText.appendChild(span);
+      if (i < parts.length - 1){
+        const inp = document.createElement('input');
+        inp.type = 'text';
+        inp.autocomplete = 'off';
+        inp.className = 'qm-fillin-input';
+        const ans = String((q.blanks || [])[i] || '');
+        inp.size = Math.max(5, ans.length + 2);
+        inputs.push(inp);
+        qText.appendChild(inp);
+      }
+    });
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'qm-check';
+    btn.textContent = '✓ Submit';
+    const norm = (s) => String(s||'').trim().toLowerCase().replace(/\s+/g,' ');
+    const submit = () => {
+      if (QUIZ.answered) return;
+      if (inputs.some(i => !i.value.trim())){ btn.classList.add('nudge'); setTimeout(() => btn.classList.remove('nudge'), 400); return; }
+      let ok = true;
+      inputs.forEach((inp, i) => {
+        inp.disabled = true;
+        const exp = norm((q.blanks || [])[i]);
+        const got = norm(inp.value);
+        if (got === exp) inp.classList.add('correct');
+        else { inp.classList.add('wrong'); ok = false; }
+      });
+      btn.disabled = true;
+      finishAnswer(ok, (q.blanks || []).join(' | '));
+    };
+    btn.onclick = submit;
+    inputs.forEach(inp => inp.addEventListener('keydown', (e) => { if (e.key === 'Enter'){ e.preventDefault(); submit(); } }));
+    wrap.appendChild(btn);
+    if (inputs.length) setTimeout(() => inputs[0].focus(), 80);
   }
 
   function setCharNeutral(){
@@ -1842,9 +2440,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }
 
   function nextQ(){
+    if (!QUIZ.open || !Array.isArray(QUIZ.qs) || QUIZ.qs.length === 0) return;
+    // Only advance after the user has answered — prevents a stray click
+    // before selecting an option from doing nothing silently.
+    if (!QUIZ.answered) return;
     if (QUIZ.qIdx < QUIZ.qs.length - 1){ QUIZ.qIdx++; renderQ(); }
     else showQuizResult();
   }
+  // Expose a global advance function so the inline onclick on the Next
+  // button always has a handler to call, even if addEventListener wiring
+  // was somehow skipped (load order, extension interference, etc.).
+  window.qmAdvance = nextQ;
   function showQuizResult(){
     clearInterval(QUIZ.timerInt); QUIZ.timerInt = null;
     const total = QUIZ.qs.length;
@@ -1871,23 +2477,65 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     document.getElementById('qmNextSet').style.display = hasNext ? '' : 'none';
   }
 
-  // Quiz modal event bindings (once)
+  // Quiz modal event bindings — also assigned as inline onclick props so
+  // the handlers are robust even if an extension or load-order issue
+  // strips addEventListener bindings.
   (function bindQuizModal(){
     const close = () => closeQuiz();
-    document.getElementById('qmClose').addEventListener('click', close);
-    document.querySelector('#quizModal .qm-ov').addEventListener('click', close);
-    document.getElementById('qmNext').addEventListener('click', nextQ);
-    document.getElementById('qmTryAgain').addEventListener('click', () => startSet());
-    document.getElementById('qmNextSet').addEventListener('click', () => {
+    const tryAgain = () => startSet();
+    const nextSet = () => {
       const sets = getQuizSets();
       if (QUIZ.setIdx < sets.length - 1){
         QUIZ.setIdx++; buildSetTabs(); startSet();
       }
-    });
+    };
+    const byId = (id) => document.getElementById(id);
+
+    // Direct onclick assignments (belt & suspenders alongside inline html)
+    byId('qmClose').onclick = close;
+    byId('qmNext').onclick = nextQ;
+    byId('qmTryAgain').onclick = tryAgain;
+    byId('qmNextSet').onclick = nextSet;
+    document.querySelector('#quizModal .qm-ov').onclick = close;
+
+    // Music toggle — click flips the preference, starts/stops playback
+    const musicBtn = byId('qmMusic');
+    if (musicBtn) musicBtn.onclick = () => {
+      const on = !musicPref();
+      setMusicPref(on);
+      if (on && QUIZ.open) startMusic(QUIZ.grade);
+      else stopMusic(true);
+      updateMusicBtn();
+    };
+
+    // Globals for any inline html fallbacks. Names deliberately differ
+    // from button ids (qmTryAgain, qmNextSet) so the browser's implicit
+    // "id → window property" shadowing doesn't steal the handler.
+    window.qmAdvance = nextQ;
+    window.qmDismiss = close;
+    window.qmRestart = tryAgain;
+    window.qmAdvanceSet = nextSet;
+
     // Escape closes quiz
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && QUIZ.open) closeQuiz();
     });
+  })();
+
+  // "Change grade" button + clickable brand both return to the grade picker
+  (function bindHomeControls(){
+    const btn = document.getElementById('backToGrades');
+    if (btn) btn.addEventListener('click', clearGrade);
+    const brand = document.querySelector('.brand');
+    if (brand){
+      brand.setAttribute('role', 'button');
+      brand.setAttribute('tabindex', '0');
+      brand.setAttribute('aria-label', 'Back to home');
+      brand.addEventListener('click', clearGrade);
+      brand.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); clearGrade(); }
+      });
+    }
   })();
 
   // URL hash can preselect a grade: /vivaan#g5
