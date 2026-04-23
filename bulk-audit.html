@@ -432,113 +432,12 @@
       </div>
     </div>
 
-    <!-- STEP 1: UPLOAD -->
-    <div class="card">
-      <div class="step-head">
-        <div class="step-num">1</div>
-        <h2>Upload call recordings</h2>
-      </div>
-      <p class="step-sub">Any language in, English analytics out. We transcribe and translate every call in your browser session. Nothing is stored on our servers.</p>
-
-      <div class="dropzone" id="dropzone" role="button" tabindex="0">
-        <div class="dropzone-icon">🎙️</div>
-        <div class="dropzone-title">Drop audio files here or click to browse</div>
-        <div class="dropzone-hint">Select <strong>multiple files at once</strong>. MP3 recommended for best results.</div>
-      </div>
-      <input type="file" id="fileInput" multiple accept="audio/*,.mp3,.wav,.m4a,.ogg,.webm,.flac">
-
-      <div class="limits-line">
-        <span>Up to 10 files</span>
-        <span>60 minutes total</span>
-        <span>Max 4 MB per file</span>
-        <span>MP3, WAV, M4A, OGG, WEBM, FLAC</span>
-      </div>
-
-      <div class="file-list" id="fileList"></div>
-      <div class="file-summary" id="fileSummary" style="display:none;">
-        <span><strong id="countN">0</strong> files</span>
-        <span><strong id="totalMin">0</strong> min total</span>
-        <span><strong id="totalSize">0</strong> MB</span>
-      </div>
-    </div>
-
-    <!-- STEP 2: GUIDELINES -->
-    <div class="card">
-      <div class="step-head">
-        <div class="step-num">2</div>
-        <h2>Quality guidelines</h2>
-      </div>
-      <p class="step-sub">Standard parameters are applied by default. Add custom criteria for product, price, or process rules specific to your team.</p>
-
-      <div class="rubric-block">
-        <h3>Standard parameters</h3>
-        <div class="standard-grid" id="standardGrid"></div>
-      </div>
-
-      <div class="rubric-block">
-        <h3>Custom parameters (optional)</h3>
-        <div class="custom-list" id="customList"></div>
-        <button type="button" class="add-row-btn" id="addCustomBtn">+ Add custom parameter</button>
-      </div>
-    </div>
-
-    <!-- STEP 3: RUN -->
-    <div class="card">
-      <div class="step-head">
-        <div class="step-num">3</div>
-        <h2>Run the audit</h2>
-      </div>
-      <p class="step-sub">We transcribe each call, score it against your guidelines, then build the dashboard. Roughly 30-60 seconds per call.</p>
-
-      <div class="run-bar">
-        <button class="btn-run" id="runBtn" disabled>Run audit →</button>
-        <button class="btn-secondary" id="resetBtn">Reset</button>
-      </div>
-
-      <div class="progress" id="progress">
-        <div class="progress-top">
-          <div class="progress-label"><div class="pulse-dot"></div> <span id="progressStatus">Processing your recordings...</span></div>
-          <div class="progress-pct" id="progressPct">0%</div>
-        </div>
-        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        <div class="progress-log" id="progressLog"></div>
-      </div>
-    </div>
-
-    <!-- DASHBOARD -->
-    <div class="dashboard" id="dashboard">
-      <div class="dash-head">
-        <h2>Audit Dashboard</h2>
-        <div class="download-btns">
-          <button class="btn-secondary" id="dlJson">Download JSON</button>
-          <button class="btn-secondary" id="dlCsv">Download CSV</button>
-        </div>
-      </div>
-
-      <div class="kpi-grid" id="kpiGrid"></div>
-
-      <div class="panel">
-        <h3>Quality parameter averages</h3>
-        <div class="param-bars" id="paramBars"></div>
-      </div>
-
-      <div class="panel">
-        <h3>Per-call audit</h3>
-        <table id="callTable">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>File</th>
-              <th>Duration</th>
-              <th>Score</th>
-              <th>Outcome</th>
-              <th>Sentiment</th>
-            </tr>
-          </thead>
-          <tbody id="callTbody"></tbody>
-        </table>
-        <div class="drill" id="drill"></div>
-      </div>
+    <!-- SERVICE PAUSED NOTICE (bulk audit temporarily offline) -->
+    <div class="service-paused" role="status" aria-live="polite" style="text-align:center;padding:56px 28px;background:linear-gradient(135deg,#fff7ed 0%,#fef3c7 100%);border:2px dashed #f59e0b;border-radius:20px;max-width:720px;margin:40px auto">
+      <div aria-hidden="true" style="font-size:56px;line-height:1;margin-bottom:16px">⏸️</div>
+      <h2 style="margin:0 0 12px;font-size:26px;font-weight:700;color:#92400e;letter-spacing:-0.01em">Bulk audit is paused</h2>
+      <p style="margin:0 auto 18px;max-width:500px;font-size:15px;line-height:1.6;color:#78350f;font-weight:500">We have temporarily taken the AI call audit and transcription tools offline. <strong>Services will be available soon</strong> — thank you for your patience.</p>
+      <p style="margin:0 auto;max-width:500px;font-size:13px;line-height:1.55;color:#92400e;font-weight:500">For urgent audits or custom requests, reach out to Vikas Goyal directly using the contact details above.</p>
     </div>
 
   </div>

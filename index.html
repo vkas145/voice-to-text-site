@@ -424,110 +424,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="main-layout">
     <div class="card">
 
-      <!-- TABS -->
-      <div class="input-tabs">
-        <div class="input-tab active" id="tabUpload" onclick="switchInput('upload')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-          Upload Audio
-        </div>
-        <div class="input-tab" id="tabRecord" onclick="switchInput('record')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
-          Record Audio
-        </div>
+      <!-- SERVICE PAUSED NOTICE (transcription & audit temporarily offline) -->
+      <div class="service-paused" role="status" aria-live="polite" style="text-align:center;padding:48px 24px 40px;background:linear-gradient(135deg,#fff7ed 0%,#fef3c7 100%);border:2px dashed #f59e0b;border-radius:16px">
+        <div aria-hidden="true" style="font-size:48px;line-height:1;margin-bottom:14px">⏸️</div>
+        <h2 style="margin:0 0 10px;font-size:22px;font-weight:700;color:#92400e;letter-spacing:-0.01em">Transcription &amp; audit services are paused</h2>
+        <p style="margin:0 auto;max-width:460px;font-size:14px;line-height:1.55;color:#78350f;font-weight:500">We've temporarily taken our AI call audit and audio transcription tools offline. <strong>Services will be available soon</strong> — thank you for your patience.</p>
       </div>
-
-      <!-- UPLOAD ZONE -->
-      <div class="upload-zone" id="dropZone">
-        <input type="file" id="audioFile" accept=".mp3,.mpeg,.wav,.m4a,.ogg,.webm,.flac" onchange="onFileChange(this)">
-        <div class="upload-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
-            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
-          </svg>
-        </div>
-        <div class="upload-title">Drop your audio file here or click to browse</div>
-        <div class="upload-sub">MP3, WAV, M4A, OGG, WEBM, FLAC · Max 20 minutes</div>
-      </div>
-
-      <!-- FILE INFO -->
-      <div class="file-info-row" id="fileInfoRow">
-        <div class="file-tag">
-          <div class="file-dot"></div>
-          <span class="file-name" id="fileName">audio.mp3</span>
-        </div>
-        <span class="file-size" id="fileSize"></span>
-      </div>
-
-      <!-- RECORD ZONE -->
-      <div class="record-zone" id="recordZone">
-        <button class="record-btn" id="recordBtn" onclick="toggleRecord()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round">
-            <rect x="9" y="2" width="6" height="12" rx="3"/>
-            <path d="M19 10v1a7 7 0 0 1-14 0v-1"/>
-            <line x1="12" y1="19" x2="12" y2="22"/>
-            <line x1="8" y1="22" x2="16" y2="22"/>
-          </svg>
-        </button>
-        <div class="record-status" id="recordStatus">Tap to start recording</div>
-        <div class="record-time" id="recordTime">0:00</div>
-        <div class="record-hint" id="recordHint">Your audio is processed privately</div>
-        <div class="record-actions" id="recordActions">
-          <button class="btn-rec-action btn-rec-discard" onclick="discardRecording()">✕ Discard</button>
-          <button class="btn-rec-action btn-rec-use" onclick="useRecording()">✓ Use Recording</button>
-        </div>
-      </div>
-
-      <!-- LANGUAGE -->
-      <div class="lang-row">
-        <span class="lang-label">Language</span>
-        <select class="lang-select" id="langSelect">
-          <option value="auto">Auto-detect</option>
-          <option value="hi">Hindi</option>
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
-          <option value="fr">French</option>
-          <option value="de">German</option>
-          <option value="zh">Chinese</option>
-          <option value="ar">Arabic</option>
-          <option value="pt">Portuguese</option>
-          <option value="ru">Russian</option>
-          <option value="ja">Japanese</option>
-          <option value="ko">Korean</option>
-          <option value="bn">Bengali</option>
-          <option value="ur">Urdu</option>
-          <option value="ta">Tamil</option>
-          <option value="te">Telugu</option>
-          <option value="mr">Marathi</option>
-          <option value="pa">Punjabi</option>
-        </select>
-      </div>
-
-      <!-- OPTIONS -->
-      <div class="options-grid">
-        <div class="opt-card" id="optTimestamps" onclick="toggleOpt('optTimestamps')">
-          <div class="opt-toggle"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></div>
-          <div><div class="opt-label">Timestamps</div><div class="opt-sub">Show [MM:SS] markers</div></div>
-        </div>
-        <div class="opt-card" id="optSummary" onclick="toggleOpt('optSummary')">
-          <div class="opt-toggle"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></div>
-          <div><div class="opt-label">AI Summary</div><div class="opt-sub">Key points extracted</div></div>
-        </div>
-        <div class="opt-card" id="optSentiment" onclick="toggleOpt('optSentiment')">
-          <div class="opt-toggle"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1.5 6 4.5 9 10.5 3"/></svg></div>
-          <div><div class="opt-label">Sentiment</div><div class="opt-sub">Tone &amp; emotion analysis</div></div>
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <button class="btn-transcribe" id="transcribeBtn" onclick="upload()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="9" y="2" width="6" height="12" rx="3"/>
-          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-          <line x1="12" y1="19" x2="12" y2="23"/>
-          <line x1="8" y1="23" x2="16" y2="23"/>
-        </svg>
-        Transcribe Now
-      </button>
 
       <!-- PROGRESS -->
       <div class="progress-wrap" id="progressWrap">
